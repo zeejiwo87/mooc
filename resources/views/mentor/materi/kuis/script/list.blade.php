@@ -1,0 +1,87 @@
+<script defer>
+    function load_kuis_table() {
+        $.fn.dataTable.ext.errMode = 'none';
+        const table = $('#kuis_table').DataTable({
+            dom: 'lBfrtip',
+            stateSave: true,
+            stateDuration: -1,
+            pageLength: 10,
+            lengthMenu: [
+                [10, 15, 20, 25],
+                [10, 15, 20, 25]
+            ],
+            buttons: [
+                {
+                extend: 'excel',
+                action: newexportaction,
+                className: 'btn btn-sm btn-dark rounded-2',
+            },
+            ],
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            searchHighlight: true,
+            ajax: {
+                url: '{{ route('mentor.materi.kuis.list', ['id' => $id]) }}',
+                cache: false,
+            },
+            order: [
+                [1, 'asc']
+            ],
+            ordering:false,
+            columns: [
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'judul',
+                    name: 'judul'
+                },
+                {
+                    data: 'tipe',
+                    name: 'tipe'
+                },
+                {
+                    data: 'durasi_menit',
+                    name: 'durasi_menit'
+                },
+                {
+                    data: 'nilai_lulus',
+                    name: 'nilai_lulus'
+                },
+                {
+                    data: 'aktif',
+                    name: 'aktif'
+                },
+            ],
+        });
+
+        table.on('draw', function () {
+            try {
+                const info = table.page.info();
+                $('#kuis_total').text(info.recordsTotal ?? 0);
+            } catch (e) {
+                console.error('Error updating kuis total:', e);
+            }
+        });
+
+        const performOptimizedSearch = _.debounce(function (query) {
+            try {
+                if (query.length >= 3 || query.length === 0) {
+                    table.search(query).draw();
+                }
+            } catch (error) {
+                console.error('Error during search:', error);
+            }
+        }, 1000);
+
+        $('#kuis_table_filter input').unbind().on('input', function () {
+            performOptimizedSearch($(this).val());
+        });
+    }
+
+    load_kuis_table();
+</script>
