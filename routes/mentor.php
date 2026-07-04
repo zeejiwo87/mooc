@@ -21,9 +21,11 @@ use App\Http\Controllers\Mentor\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('auth/profile', [ProfileController::class, 'index'])
-->name('profile');
+    ->name('profile');
+
 Route::post('auth/profile', [ProfileController::class, 'update'])
-->name('profile');
+    ->name('profile.update');
+
 Route::prefix('kelas')->group(function () {
     Route::prefix('kelas')->group(function () {
         Route::get('/', [KelasController::class, 'index'])
@@ -41,6 +43,7 @@ Route::prefix('kelas')->group(function () {
         Route::post('update/{id}', [KelasController::class, 'update'])
             ->name('kelas.kelas.update');
     });
+
     Route::prefix('kelas_tag')->group(function () {
         Route::get('/{id}', [KelasPivotTagController::class, 'index'])
             ->name('kelas.kelas_tag.index');
@@ -262,6 +265,7 @@ Route::prefix('api')->group(function () {
         Route::get('mentor', [KelasMentorController::class, 'api'])
             ->name('api.kelas.mentor');
     });
+
     Route::prefix('pendaftaran')->group(function () {
         Route::get('kelas', [KelasController::class, 'api'])
             ->name('api.pendaftaran.kelas');
