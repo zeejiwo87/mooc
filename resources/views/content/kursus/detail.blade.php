@@ -610,68 +610,152 @@
         }
 
 
-        .neo-preview-modal {
-            z-index: 20000 !important;
-            pointer-events: none;
-            padding-top: 82px !important;
-            padding-bottom: 18px !important;
+        .neo-preview-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 2147483646 !important;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 14px 16px !important;
+            background: rgba(17, 24, 39, .58);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: auto !important;
         }
 
-        .modal-backdrop {
-            z-index: 19990 !important;
+        .neo-preview-overlay.is-open {
+            display: flex !important;
         }
 
-        .modal-backdrop.show {
-            opacity: .54;
-        }
-
-        .neo-preview-modal .modal-dialog {
-            width: min(980px, calc(100% - 24px));
-            max-width: 980px;
-            max-height: calc(100dvh - 108px);
-            margin: 0 auto 18px !important;
-            pointer-events: auto;
-        }
-
-        .neo-preview-modal .modal-dialog-centered {
-            min-height: auto !important;
-            align-items: flex-start !important;
-        }
-
-        .neo-preview-modal-content {
-            max-height: calc(100dvh - 108px);
+        body.neo-preview-open {
             overflow: hidden !important;
-            pointer-events: auto;
         }
 
-        .neo-preview-modal .modal-header {
-            flex: 0 0 auto;
-            position: sticky;
-            top: 0;
-            z-index: 3;
-            background: var(--neo-bg);
-        }
-
-        .neo-preview-modal .btn-close {
+        .neo-preview-dialog {
             position: relative;
-            z-index: 4;
-            pointer-events: auto;
+            z-index: 2147483647 !important;
+            width: min(740px, calc(100vw - 32px));
+            max-height: calc(100dvh - 28px);
+            margin: 0 auto !important;
+            pointer-events: auto !important;
         }
 
-        .neo-preview-modal-body {
-            overflow-y: auto !important;
-            max-height: calc(100dvh - 170px);
-            pointer-events: auto;
+        .neo-preview-card {
+            width: 100%;
+            max-height: calc(100dvh - 28px);
+            overflow: hidden;
+            border-radius: 22px;
+            background: var(--neo-bg);
+            box-shadow:
+                18px 18px 42px rgba(0, 0, 0, .38),
+                -8px -8px 20px rgba(255, 255, 255, .16);
+            position: relative;
+            z-index: 2147483647 !important;
         }
 
-        .neo-preview-modal-body .ratio {
-            min-height: 240px;
+        .neo-preview-header {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(120, 113, 108, .16);
+            background: var(--neo-bg);
+            position: relative;
+            z-index: 2147483647 !important;
         }
 
-        .neo-preview-modal iframe {
+        .neo-preview-title {
+            font-size: .92rem;
+            font-weight: 900;
+            color: var(--neo-text);
+            margin: 0;
+            line-height: 1.35;
+            padding-right: 8px;
+            max-width: calc(100% - 54px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .neo-preview-body {
+            padding: 10px;
+            max-height: calc(100dvh - 78px);
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .neo-preview-body .ratio {
+            min-height: 220px;
+            max-height: calc(100dvh - 98px);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #111827;
+        }
+
+        .neo-preview-body iframe {
             width: 100%;
             height: 100%;
+            position: relative;
+            z-index: 1;
             pointer-events: auto;
+            border: 0;
+        }
+
+        .neo-preview-close,
+        .neo-preview-floating-close {
+            border: 0 !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            color: var(--neo-text) !important;
+            background: var(--neo-bg) !important;
+            box-shadow:
+                6px 6px 14px rgba(120, 113, 108, .22),
+                -6px -6px 14px rgba(255, 255, 255, .72) !important;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+        }
+
+        .neo-preview-close {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 13px;
+            position: relative;
+            z-index: 2147483647 !important;
+        }
+
+        .neo-preview-floating-close {
+            position: fixed !important;
+            top: 12px !important;
+            right: 14px !important;
+            z-index: 2147483647 !important;
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            font-size: 1.05rem;
+        }
+
+        .neo-preview-close:hover,
+        .neo-preview-floating-close:hover {
+            color: var(--neo-primary) !important;
+            transform: translateY(-1px);
+        }
+
+        body .modal-backdrop,
+        .modal-backdrop {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         #overview,
@@ -883,28 +967,44 @@
 
 
         @media (max-width: 767.98px) {
-            .neo-preview-modal {
-                padding-top: 10px !important;
-                padding-bottom: 10px !important;
+            .neo-preview-overlay {
+                padding: 12px 10px !important;
             }
 
-            .neo-preview-modal .modal-dialog {
-                width: calc(100% - 16px);
-                max-height: calc(100dvh - 20px);
-                margin: 0 auto !important;
+            .neo-preview-dialog {
+                width: min(680px, calc(100vw - 20px));
+                max-height: calc(100dvh - 24px);
             }
 
-            .neo-preview-modal-content {
-                max-height: calc(100dvh - 20px);
+            .neo-preview-card {
+                max-height: calc(100dvh - 24px);
+                border-radius: 20px;
             }
 
-            .neo-preview-modal-body {
-                max-height: calc(100dvh - 82px);
-                padding: 10px !important;
+            .neo-preview-header {
+                min-height: 48px;
+                padding: 11px 12px;
             }
 
-            .neo-preview-modal-body .ratio {
-                min-height: 210px;
+            .neo-preview-title {
+                font-size: .86rem;
+            }
+
+            .neo-preview-body {
+                max-height: calc(100dvh - 72px);
+                padding: 8px;
+            }
+
+            .neo-preview-body .ratio {
+                min-height: 190px;
+                border-radius: 16px;
+            }
+
+            .neo-preview-floating-close {
+                top: 10px !important;
+                right: 10px !important;
+                width: 42px;
+                height: 42px;
             }
         }
 
@@ -1118,8 +1218,8 @@
 
                                 @if ($videoIntro)
                                     <div class="preview-overlay">
-                                        <button type="button" class="preview-play-btn" data-bs-toggle="modal"
-                                            data-bs-target="#previewModal" data-video="{{ $videoIntro }}">
+                                        <button type="button" class="preview-play-btn js-preview-trigger"
+                                            data-video="{{ $videoIntro }}">
                                             <i class="bi bi-play-fill fs-4"></i>
                                         </button>
                                     </div>
@@ -1140,8 +1240,8 @@
                                 </a>
 
                                 @if ($videoIntro)
-                                    <button class="btn btn-outline-custom w-100 mb-3" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#previewModal" data-video="{{ $videoIntro }}">
+                                    <button class="btn btn-outline-custom w-100 mb-3 js-preview-trigger" type="button"
+                                        data-video="{{ $videoIntro }}">
                                         <i class="bi bi-play-btn me-1"></i>Lihat Preview
                                     </button>
                                 @endif
@@ -1395,10 +1495,8 @@
 
                                                                                         @if ($isPreviewVideo)
                                                                                             <button type="button"
-                                                                                                class="preview-badge ms-1"
+                                                                                                class="preview-badge ms-1 js-preview-trigger"
                                                                                                 style="cursor: pointer;"
-                                                                                                data-bs-toggle="modal"
-                                                                                                data-bs-target="#previewModal"
                                                                                                 data-video="{{ $materiEmbed }}">
                                                                                                 <i class="bi bi-play-fill"></i>Preview
                                                                                             </button>
@@ -1577,19 +1675,24 @@
             </div>
         </div>
 
-        <div class="modal fade neo-preview-modal" id="previewModal" tabindex="-1"
-            aria-labelledby="previewModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content neo-preview-modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold" id="previewModalLabel" style="font-size: 1rem;">
+        <div class="neo-preview-overlay" id="neoPreviewOverlay" aria-hidden="true">
+            <button type="button" class="neo-preview-floating-close" id="neoPreviewFloatingClose" aria-label="Tutup preview">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <div class="neo-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="neoPreviewTitle">
+                <div class="neo-preview-card">
+                    <div class="neo-preview-header">
+                        <h5 class="neo-preview-title" id="neoPreviewTitle">
                             Preview: {{ $kelas->judul }}
                         </h5>
 
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                        <button type="button" class="neo-preview-close" id="neoPreviewClose" aria-label="Tutup preview">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
                     </div>
 
-                    <div class="modal-body neo-preview-modal-body">
+                    <div class="neo-preview-body">
                         <div class="ratio ratio-16x9">
                             <iframe id="previewModalIframe" src="" title="Preview Kursus" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1605,60 +1708,99 @@
 @section('javascript')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const previewModal = document.getElementById('previewModal');
+            const previewOverlay = document.getElementById('neoPreviewOverlay');
             const iframe = document.getElementById('previewModalIframe');
+            const previewTriggers = document.querySelectorAll('.js-preview-trigger');
+            const closeButtons = document.querySelectorAll('#neoPreviewClose, #neoPreviewFloatingClose');
 
-            if (previewModal && iframe) {
-                if (previewModal.parentElement !== document.body) {
-                    document.body.appendChild(previewModal);
+            if (previewOverlay && previewOverlay.parentElement !== document.body) {
+                document.body.appendChild(previewOverlay);
+            }
+
+            const removeBootstrapBackdrop = function() {
+                document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+                    backdrop.remove();
+                });
+
+                document.body.classList.remove('modal-open');
+                document.body.style.removeProperty('padding-right');
+            };
+
+            const buildAutoplayUrl = function(url) {
+                if (!url) {
+                    return '';
                 }
 
-                const buildAutoplayUrl = function(url) {
-                    if (!url) {
-                        return '';
-                    }
+                const separator = url.includes('?') ? '&' : '?';
 
-                    const separator = url.includes('?') ? '&' : '?';
+                if (url.indexOf('youtube.com/embed') !== -1 && url.indexOf('autoplay=1') === -1) {
+                    return url + separator + 'autoplay=1';
+                }
 
-                    if (url.indexOf('youtube.com/embed') !== -1 && url.indexOf('autoplay=1') === -1) {
-                        return url + separator + 'autoplay=1';
-                    }
+                return url;
+            };
 
-                    return url;
-                };
+            const openPreview = function(videoUrl) {
+                if (!previewOverlay || !iframe || !videoUrl) {
+                    return;
+                }
 
-                previewModal.addEventListener('show.bs.modal', function(event) {
-                    const trigger = event.relatedTarget;
+                removeBootstrapBackdrop();
 
-                    if (!trigger) {
-                        return;
-                    }
+                iframe.src = buildAutoplayUrl(videoUrl);
+                previewOverlay.style.display = 'flex';
+                previewOverlay.classList.add('is-open');
+                previewOverlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('neo-preview-open');
+            };
 
-                    const videoUrl = buildAutoplayUrl(trigger.getAttribute('data-video'));
+            const closePreview = function() {
+                if (!previewOverlay || !iframe) {
+                    return;
+                }
 
-                    if (!videoUrl) {
-                        return;
-                    }
+                iframe.src = '';
+                previewOverlay.classList.remove('is-open');
+                previewOverlay.style.display = 'none';
+                previewOverlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('neo-preview-open');
+                removeBootstrapBackdrop();
+            };
 
-                    iframe.src = videoUrl;
+            previewTriggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    openPreview(this.getAttribute('data-video'));
                 });
+            });
 
-                previewModal.addEventListener('hide.bs.modal', function() {
-                    iframe.src = '';
+            closeButtons.forEach(function(button) {
+                ['pointerdown', 'touchstart', 'click'].forEach(function(eventName) {
+                    button.addEventListener(eventName, function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        closePreview();
+                    }, { passive: false });
                 });
+            });
 
-                previewModal.addEventListener('hidden.bs.modal', function() {
-                    iframe.src = '';
-
-                    document.body.classList.remove('modal-open');
-                    document.body.style.removeProperty('overflow');
-                    document.body.style.removeProperty('padding-right');
-
-                    document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
-                        backdrop.remove();
-                    });
+            if (previewOverlay) {
+                previewOverlay.addEventListener('click', function(event) {
+                    if (event.target === previewOverlay) {
+                        closePreview();
+                    }
                 });
             }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closePreview();
+                }
+            });
+
+            removeBootstrapBackdrop();
 
             const navLinks = document.querySelectorAll('.nav-course-sections .nav-link');
             const sections = document.querySelectorAll('#overview, #curriculum, #instructor');

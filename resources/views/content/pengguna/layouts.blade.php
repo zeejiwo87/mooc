@@ -491,6 +491,18 @@
         $profil = $user->foto_profil
             ? route('view-file', ['folder' => 'profil', 'filename' => $user->foto_profil])
             : asset('assets/media/avatars/blank.png');
+
+        $kelasBelumSelesai = \App\Models\Pendaftaran::query()
+            ->where('id_pengguna', $user->id_pengguna)
+            ->where('status', 'aktif')
+            ->orderByRaw('terakhir_akses IS NULL')
+            ->orderByDesc('terakhir_akses')
+            ->orderByDesc('terdaftar_pada')
+            ->first();
+
+        $lanjutkanBelajarUrl = $kelasBelumSelesai
+            ? route('pengguna.course_playing', \App\Support\IdCipher::encode($kelasBelumSelesai->id_pendaftaran))
+            : route('pengguna.kelas_saya');
     @endphp
 
     <div class="pengguna-wrapper d-flex flex-column flex-lg-row">
@@ -524,10 +536,10 @@
                 </div>
 
                 <div class="pengguna-header-actions">
-                    <a href="{{ route('pengguna.kelas_saya') }}"
+                    <a href="{{ $lanjutkanBelajarUrl }}"
                         class="pengguna-btn-neo pengguna-btn-neo-primary pengguna-welcome-trigger">
                         <i class="bi bi-play-circle"></i>
-                        <span>Kelas Saya</span>
+                        <span>Lanjutkan Belajar</span>
                     </a>
 
                     <a href="{{ route('pengguna.profil') }}"

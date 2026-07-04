@@ -89,6 +89,13 @@
             font-size: 1.45rem;
         }
 
+        .neo-page-icon i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
         .neo-card {
             border: 0 !important;
             border-radius: 24px;
@@ -540,7 +547,7 @@
                     </div>
 
                     <div class="neo-page-icon">
-                        <i class="bi bi-person-workspace"></i>
+                        <i class="bi bi-people-fill"></i>
                     </div>
                 </div>
 

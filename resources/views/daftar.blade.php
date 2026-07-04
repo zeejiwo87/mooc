@@ -245,6 +245,13 @@
             flex-shrink: 0;
         }
 
+        .neo-feature-icon i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
         .neo-feature-title {
             color: var(--neo-text);
             font-weight: 800;
@@ -621,6 +628,7 @@
                 left: 18px;
             }
 
+            .neo-back-floating.neo-back-link,
             .neo-back-floating .neo-back-link {
                 min-height: 42px;
                 background: var(--neo-surface);
@@ -896,6 +904,7 @@
         }
 
         @media (max-width: 420px) {
+            .neo-back-floating.neo-back-link,
             .neo-back-floating .neo-back-link {
                 min-height: 40px;
                 padding: 0 14px;
@@ -1019,7 +1028,7 @@
 
                             <div class="neo-feature-item">
                                 <div class="neo-feature-icon">
-                                    <i class="bi bi-graph-up-arrow fs-2"></i>
+                                    <i class="bi bi-bar-chart-fill fs-2"></i>
                                 </div>
                                 <div>
                                     <div class="neo-feature-title">Progress Tracking</div>

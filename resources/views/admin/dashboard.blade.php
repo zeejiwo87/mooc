@@ -598,7 +598,7 @@
                         </div>
 
                         <div class="neo-stat-icon">
-                            <i class="bi bi-person-workspace"></i>
+                            <i class="bi bi-person-check-fill"></i>
                         </div>
                     </div>
 

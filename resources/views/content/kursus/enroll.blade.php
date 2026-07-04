@@ -218,6 +218,14 @@
                 -4px -4px 10px var(--neo-light);
         }
 
+        .neo-summary-icon i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            font-size: 1.15rem;
+        }
+
         .neo-summary-item span:last-child {
             color: var(--neo-text);
             font-weight: 700;
@@ -403,14 +411,14 @@
 
                                     <div class="neo-summary-item">
                                         <span class="neo-summary-icon">
-                                            <i class="bi bi-person-video3"></i>
+                                            <i class="bi bi-person-check-fill"></i>
                                         </span>
                                         <span>Dipandu oleh mentor utama kelas</span>
                                     </div>
 
                                     <div class="neo-summary-item">
                                         <span class="neo-summary-icon">
-                                            <i class="bi bi-infinity"></i>
+                                            <i class="bi bi-clock-fill"></i>
                                         </span>
                                         <span>Akses pembelajaran tersedia kapan saja</span>
                                     </div>

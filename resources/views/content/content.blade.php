@@ -319,6 +319,72 @@
             border-radius: 18px;
         }
 
+
+        #kelas-baru .neo-course-cover {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+        }
+
+        #kelas-baru .neo-course-cover img {
+            border-radius: 0 !important;
+        }
+
+        #kelas-baru .neo-course-cover-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(180deg, rgba(17, 24, 39, 0.18) 0%, rgba(17, 24, 39, 0.05) 42%, rgba(17, 24, 39, 0.58) 100%),
+                radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.24) 100%);
+            pointer-events: none;
+        }
+
+        #kelas-baru .neo-course-cover .position-absolute {
+            z-index: 3;
+        }
+
+        #kelas-baru .neo-course-badge,
+        #kelas-baru .neo-level-badge,
+        #kelas-baru .neo-course-cover .badge {
+            border: 0 !important;
+            border-radius: 999px !important;
+            background: rgba(236, 235, 234, 0.94) !important;
+            color: var(--neo-primary) !important;
+            font-weight: 800 !important;
+            text-shadow: none !important;
+            box-shadow:
+                4px 4px 10px rgba(17, 24, 39, 0.22),
+                -4px -4px 10px rgba(255, 255, 255, 0.20) !important;
+            backdrop-filter: blur(12px);
+        }
+
+        #kelas-baru .neo-level-badge {
+            color: var(--neo-text) !important;
+        }
+
+        #kelas-baru .neo-course-badge i,
+        #kelas-baru .neo-level-badge i,
+        #kelas-baru .neo-course-cover .badge i {
+            color: inherit !important;
+        }
+
+        #kelas-baru .neo-play-btn {
+            width: 54px;
+            height: 54px;
+            border: 0 !important;
+            border-radius: 50% !important;
+            background: rgba(236, 235, 234, 0.95) !important;
+            color: var(--neo-primary) !important;
+            box-shadow:
+                8px 8px 18px rgba(0, 0, 0, 0.30),
+                -5px -5px 12px rgba(255, 255, 255, 0.22) !important;
+        }
+
+        #kelas-baru .neo-play-btn i {
+            color: inherit !important;
+        }
+
         .category-neo-card {
             min-height: 100%;
             color: inherit;
