@@ -738,7 +738,7 @@
 
                             <div class="neo-feature-item">
                                 <div class="neo-feature-icon">
-                                    <i class="bi bi-graph-up-arrow fs-2"></i>
+                                    <i class="bi bi-bar-chart-fill fs-2"></i>
                                 </div>
                                 <div>
                                     <div class="neo-feature-title">Progress Tracking</div>
