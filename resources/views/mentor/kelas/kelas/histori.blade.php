@@ -704,6 +704,66 @@
             padding: 8px;
             background: #ffffff;
             box-shadow: 0 16px 36px rgba(15, 23, 42, .14);
+            z-index: 2147483647 !important;
+        }
+
+        /* =====================================================
+           FIX DROPDOWN AKSI BUILDER
+           Penyebab dropdown ketutup: parent card/bagian punya overflow hidden.
+           Solusi: area builder dibuat overflow-visible + parent dropdown yang
+           sedang terbuka diangkat z-index-nya.
+        ====================================================== */
+        .kelas-detail-card,
+        .kelas-detail-card .content-body,
+        #kelola-isi-kelas,
+        #kelola-isi-kelas.builder-card,
+        #kelola-isi-kelas .builder-header,
+        #kelola-isi-kelas .bagian-list,
+        #kelola-isi-kelas .bagian-card,
+        #kelola-isi-kelas .bagian-header,
+        #kelola-isi-kelas .materi-list,
+        #kelola-isi-kelas .materi-item,
+        #kelola-isi-kelas .materi-main-row,
+        #kelola-isi-kelas .kuis-list,
+        #kelola-isi-kelas .kuis-item,
+        #kelola-isi-kelas .kuis-top-row,
+        #kelola-isi-kelas .soal-list,
+        #kelola-isi-kelas .soal-item,
+        #kelola-isi-kelas .soal-top-row,
+        #kelola-isi-kelas .jawaban-list,
+        #kelola-isi-kelas .jawaban-item,
+        #kelola-isi-kelas .jawaban-row,
+        #kelola-isi-kelas .action-row {
+            overflow: visible !important;
+        }
+
+        #kelola-isi-kelas .builder-action-dropdown {
+            position: relative;
+            z-index: 50;
+        }
+
+        #kelola-isi-kelas .builder-action-dropdown .dropdown-toggle {
+            position: relative;
+            z-index: 60;
+        }
+
+        #kelola-isi-kelas .builder-action-dropdown .dropdown-menu {
+            position: absolute;
+            z-index: 2147483647 !important;
+        }
+
+        #kelola-isi-kelas .builder-action-dropdown .dropdown-menu.show {
+            z-index: 2147483647 !important;
+        }
+
+        #kelola-isi-kelas .builder-dropdown-open {
+            position: relative !important;
+            z-index: 2147483000 !important;
+            overflow: visible !important;
+        }
+
+        #kelola-isi-kelas .builder-dropdown-open .dropdown-menu {
+            z-index: 2147483647 !important;
         }
 
         .builder-action-dropdown .dropdown-item {
@@ -1154,7 +1214,7 @@
                     </div>
                 </div>
 
-                <div class="neo-card">
+                <div class="neo-card kelas-detail-card">
                     <div class="tabs-card">
                         <div class="tabs-scroll">
                             <ul class="neo-tabs">
@@ -3367,6 +3427,48 @@ Penjelasan: HTML digunakan untuk membuat struktur halaman web."></textarea>
                 Swal.close();
                 ErrorHandler.handleError(error);
             });
+        });
+
+        function quickLiftBuilderDropdownStack($dropdown, enabled) {
+            const stackSelector = [
+                '.builder-action-dropdown',
+                '.action-row',
+                '.bagian-card',
+                '.bagian-header',
+                '.materi-list',
+                '.materi-item',
+                '.materi-main-row',
+                '.kuis-list',
+                '.kuis-item',
+                '.kuis-top-row',
+                '.soal-list',
+                '.soal-item',
+                '.soal-top-row',
+                '.jawaban-list',
+                '.jawaban-item',
+                '.jawaban-row',
+                '.builder-card',
+                '.kelas-detail-card',
+                '.content-body'
+            ].join(', ');
+
+            const $targets = $dropdown.add($dropdown.parents(stackSelector));
+
+            if (enabled) {
+                $('#kelola-isi-kelas .builder-dropdown-open').removeClass('builder-dropdown-open');
+                $targets.addClass('builder-dropdown-open');
+                return;
+            }
+
+            $targets.removeClass('builder-dropdown-open');
+        }
+
+        $(document).on('show.bs.dropdown', '#kelola-isi-kelas .builder-action-dropdown', function () {
+            quickLiftBuilderDropdownStack($(this), true);
+        });
+
+        $(document).on('hidden.bs.dropdown', '#kelola-isi-kelas .builder-action-dropdown', function () {
+            quickLiftBuilderDropdownStack($(this), false);
         });
 
         $(function () {
