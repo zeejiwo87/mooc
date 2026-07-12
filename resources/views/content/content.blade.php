@@ -3,40 +3,12 @@
 @section('css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
-        }
-
-        .content,
-        #kt_content,
-        #kt_post,
-        #kt_content_container {
-            background: transparent !important;
-        }
-
-        .neo-home-wrapper {
-            position: relative;
-            padding-top: 18px;
-            margin-bottom: 3rem;
-        }
-
-        .course-card,
-        .card-fade-in {
-            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-        }
-
-        .course-card:hover,
-        .card-fade-in:hover {
-            transform: translateY(-4px);
+            --mooc-soft-blue: #eaf5ff;
+            --mooc-soft-indigo: #eef2ff;
+            --mooc-soft-yellow: #fff7df;
+            --mooc-border: #e5e7eb;
+            --mooc-dark: #0f172a;
+            --mooc-muted: #64748b;
         }
 
         @keyframes fadeIn {
@@ -59,153 +31,73 @@
             min-height: 120px;
         }
 
+        .course-card {
+            border: 1px solid rgba(226, 232, 240, 0.95) !important;
+            border-radius: 1.35rem !important;
+            overflow: hidden;
+            background: #ffffff;
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 110, 253, 0.30) !important;
+            box-shadow: 0 22px 55px rgba(15, 23, 42, .10);
+        }
+
         .modal-content {
             border: 0;
-            border-radius: 24px;
+            border-radius: 1.35rem;
             overflow: hidden;
-            background: var(--neo-surface);
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light);
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.22);
         }
 
         .modal-header {
-            border-bottom: 1px solid rgba(120, 113, 108, 0.14);
-            padding: 0.9rem 1rem;
-            background: var(--neo-surface);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 1.25rem;
+            background: #ffffff;
         }
 
-        .modal-body {
-            background: var(--neo-surface);
+        .modal-title {
+            font-weight: 800;
+            color: var(--mooc-dark);
         }
 
-        .btn-close {
-            border-radius: 12px;
-            background-color: var(--neo-surface);
-            box-shadow:
-                4px 4px 9px var(--neo-dark-soft),
-                -4px -4px 9px var(--neo-light);
-            opacity: 1;
-        }
-
-        .neo-section-card,
-        .hero-card,
-        .category-neo-card,
-        .cta-neo-card {
-            background: var(--neo-surface) !important;
-            border: 0 !important;
-            border-radius: 28px !important;
-            box-shadow:
-                10px 10px 24px var(--neo-dark),
-                -10px -10px 24px var(--neo-light) !important;
-        }
-
-        .separator.separator-dashed {
-            border-color: rgba(120, 113, 108, 0.22) !important;
-        }
-
-        .btn.btn-primary,
-        .btn.btn-light-primary,
-        .btn.btn-dark {
-            border-radius: 14px;
-            border: 0;
-            transition: 0.2s ease;
-        }
-
-        .btn.btn-primary {
-            background: var(--neo-primary) !important;
-            color: #ffffff !important;
-            box-shadow:
-                5px 5px 12px rgba(120, 113, 108, 0.24),
-                -5px -5px 12px rgba(255, 255, 255, 0.68);
-        }
-
-        .btn.btn-primary:hover,
-        .btn.btn-primary:focus {
-            background: var(--neo-primary-dark) !important;
-            transform: translateY(-1px);
-        }
-
-        .btn.btn-light-primary {
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
-            box-shadow:
-                5px 5px 12px var(--neo-dark-soft),
-                -5px -5px 12px var(--neo-light);
-        }
-
-        .btn.btn-light-primary:hover,
-        .btn.btn-light-primary:focus {
-            color: var(--neo-primary-dark) !important;
-            transform: translateY(-1px);
-        }
-
-        .btn.btn-dark {
-            background: #1f2937 !important;
-            color: #ffffff !important;
-            box-shadow:
-                5px 5px 12px rgba(120, 113, 108, 0.24),
-                -5px -5px 12px rgba(255, 255, 255, 0.68);
-        }
-
-        .btn.btn-dark:hover,
-        .btn.btn-dark:focus {
-            background: #111827 !important;
-            transform: translateY(-1px);
-        }
-
-        .btn.btn-light,
-        .btn.btn-sm.btn-light {
-            background: var(--neo-surface) !important;
-            color: var(--neo-text) !important;
-            border: 0 !important;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
-        }
-
-        .btn.btn-light:hover,
-        .btn.btn-sm.btn-light:hover {
-            color: var(--neo-primary) !important;
-            transform: translateY(-1px);
-        }
-
-        .text-primary,
-        .text-info,
-        .text-success {
-            color: var(--neo-primary) !important;
-        }
-
+        /* =========================
+           HERO SECTION CUSTOM
+        ==========================*/
         .hero-card {
+            background:
+                linear-gradient(135deg, rgba(234, 245, 255, 0.96) 0%, rgba(238, 242, 255, 0.98) 48%, rgba(255, 247, 223, 0.90) 100%);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.08);
             position: relative;
             overflow: hidden;
-            margin-top: 0;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 42%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.12), transparent 48%),
-                var(--neo-surface) !important;
         }
 
         .hero-card::before {
             content: "";
             position: absolute;
-            width: 260px;
-            height: 260px;
+            width: 340px;
+            height: 340px;
             border-radius: 50%;
-            top: -100px;
-            right: -110px;
-            background: radial-gradient(circle, rgba(0, 158, 247, 0.14), transparent 66%);
+            top: -130px;
+            right: -120px;
+            background:
+                radial-gradient(circle, rgba(13, 110, 253, 0.20), rgba(13, 110, 253, 0.04) 58%, transparent 70%);
             pointer-events: none;
         }
 
         .hero-card::after {
             content: "";
             position: absolute;
-            width: 320px;
-            height: 320px;
+            width: 360px;
+            height: 360px;
             border-radius: 50%;
-            background: radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.7), transparent 62%);
-            bottom: -150px;
+            background:
+                radial-gradient(circle, rgba(244, 163, 7, 0.22), rgba(244, 163, 7, 0.05) 58%, transparent 70%);
+            bottom: -160px;
             left: -150px;
             pointer-events: none;
         }
@@ -215,34 +107,73 @@
             z-index: 1;
         }
 
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .55rem .9rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
+            color: var(--mooc-dark);
+        }
+
+        .hero-kicker-dot {
+            width: .55rem;
+            height: .55rem;
+            border-radius: 999px;
+            background: var(--bs-primary);
+            box-shadow: 0 0 0 .35rem rgba(13, 110, 253, .12);
+        }
+
         .hero-heading {
-            letter-spacing: 0.01em;
+            letter-spacing: -0.035em;
         }
 
         .hero-subtext {
-            max-width: 640px;
+            max-width: 650px;
+            line-height: 1.75;
+        }
+
+        .hero-highlight-card {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 1.15rem;
+            padding: .85rem 1rem;
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+        }
+
+        .hero-highlight-icon {
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: .9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            flex: 0 0 auto;
         }
 
         .hero-search {
-            border-radius: 999px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
-            padding: .35rem .5rem .35rem .75rem;
-            overflow: hidden;
+            border-radius: 1.15rem;
+            background-color: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            padding: .45rem;
         }
 
         .hero-search .input-group-text {
             background: transparent;
             border: 0;
+            padding-left: 1rem;
         }
 
         .hero-search .form-control {
             border: 0;
             background: transparent;
             box-shadow: none !important;
-            color: var(--neo-text);
+            color: var(--mooc-dark);
         }
 
         .hero-search .form-control::placeholder {
@@ -254,342 +185,263 @@
         }
 
         .hero-search .btn {
-            border-radius: 999px;
+            border-radius: .95rem;
+            min-height: 46px;
         }
 
         .hero-quick-label {
-            font-size: .85rem;
-            letter-spacing: .06em;
+            font-size: .82rem;
+            letter-spacing: .07em;
             text-transform: uppercase;
         }
 
-        .hero-pill {
-            border-radius: 999px;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light);
+        .hero-quick-btn {
+            border-radius: 999px !important;
+            border: 1px solid rgba(226, 232, 240, 0.9) !important;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
         }
 
-        .hero-pill small {
-            font-size: .7rem;
-        }
-
-        .hero-card img {
-            filter: drop-shadow(10px 14px 18px rgba(120, 113, 108, 0.18));
-        }
-
-        .neo-section-heading {
-            padding: 22px 24px;
-            border-radius: 24px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px rgba(120, 113, 108, 0.12),
-                inset -4px -4px 10px rgba(255, 255, 255, 0.75);
-        }
-
-        .neo-section-heading h2 {
-            margin-bottom: 0.4rem;
-        }
-
-        #kelas-baru .card,
-        #kelas-baru .course-card {
-            background: var(--neo-surface) !important;
-            border: 0 !important;
-            border-radius: 24px !important;
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light) !important;
-            overflow: hidden;
-        }
-
-        #kelas-baru .card:hover,
-        #kelas-baru .course-card:hover {
-            box-shadow:
-                11px 11px 24px var(--neo-dark),
-                -11px -11px 24px var(--neo-light) !important;
-        }
-
-        #kelas-baru .card .card-body,
-        #kelas-baru .course-card .card-body {
-            background: transparent !important;
-        }
-
-        #kelas-baru img {
-            border-radius: 18px;
-        }
-
-
-        #kelas-baru .neo-course-cover {
+        .hero-feature-area {
             position: relative;
-            border-radius: 22px;
-            overflow: hidden;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        #kelas-baru .neo-course-cover img {
-            border-radius: 0 !important;
-        }
-
-        #kelas-baru .neo-course-cover-overlay {
+        .hero-feature-area::before {
+            content: "";
             position: absolute;
-            inset: 0;
-            z-index: 1;
-            background:
-                linear-gradient(180deg, rgba(17, 24, 39, 0.18) 0%, rgba(17, 24, 39, 0.05) 42%, rgba(17, 24, 39, 0.58) 100%),
-                radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.24) 100%);
+            width: 330px;
+            height: 330px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(13, 110, 253, 0.12), transparent 68%);
+            top: 5px;
+            right: 20px;
             pointer-events: none;
         }
 
-        #kelas-baru .neo-course-cover .position-absolute {
-            z-index: 3;
+        .hero-feature-stack {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
         }
 
-        #kelas-baru .neo-course-badge,
-        #kelas-baru .neo-level-badge,
-        #kelas-baru .neo-course-cover .badge {
-            border: 0 !important;
+        .hero-feature-pill {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: fit-content;
+            min-width: 310px;
+            padding: 1.08rem 1.45rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.96);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(14px);
+        }
+
+        .hero-feature-pill:nth-child(2) {
+            margin-left: 2.8rem;
+        }
+
+        .hero-feature-pill:nth-child(3) {
+            margin-left: 1rem;
+        }
+
+        .hero-feature-dot {
+            width: .62rem;
+            height: .62rem;
+            border-radius: .15rem;
+            border: 1.5px solid var(--bs-primary);
+            background: rgba(255, 255, 255, 0.85);
+            flex: 0 0 auto;
+        }
+
+        .hero-feature-text {
+            font-size: .96rem;
+            font-weight: 700;
+            color: #334155;
+            white-space: nowrap;
+        }
+
+        .section-panel {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 1.75rem;
+            padding: 2rem;
+            box-shadow: 0 16px 50px rgba(15, 23, 42, 0.045);
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .35rem .75rem;
+            border-radius: 999px;
+            background: var(--mooc-soft-blue);
+            color: var(--bs-primary);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: .85rem;
+        }
+
+        .section-title {
+            letter-spacing: -0.025em;
+        }
+
+        .section-action {
             border-radius: 999px !important;
-            background: rgba(236, 235, 234, 0.94) !important;
-            color: var(--neo-primary) !important;
-            font-weight: 800 !important;
-            text-shadow: none !important;
-            box-shadow:
-                4px 4px 10px rgba(17, 24, 39, 0.22),
-                -4px -4px 10px rgba(255, 255, 255, 0.20) !important;
-            backdrop-filter: blur(12px);
+            padding-inline: 1.1rem;
         }
 
-        #kelas-baru .neo-level-badge {
-            color: var(--neo-text) !important;
+        .mooc-separator {
+            height: 1px;
+            border: 0;
+            background:
+                linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.35), transparent);
+            margin: 3.5rem 0;
         }
 
-        #kelas-baru .neo-course-badge i,
-        #kelas-baru .neo-level-badge i,
-        #kelas-baru .neo-course-cover .badge i {
-            color: inherit !important;
+        .category-card {
+            border-radius: 1.4rem;
+            border: 1px solid rgba(226, 232, 240, 0.96);
+            background:
+                linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            box-shadow: 0 14px 38px rgba(15, 23, 42, 0.045);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+            overflow: hidden;
+            position: relative;
         }
 
-        #kelas-baru .neo-play-btn {
-            width: 54px;
-            height: 54px;
-            border: 0 !important;
-            border-radius: 50% !important;
-            background: rgba(236, 235, 234, 0.95) !important;
-            color: var(--neo-primary) !important;
-            box-shadow:
-                8px 8px 18px rgba(0, 0, 0, 0.30),
-                -5px -5px 12px rgba(255, 255, 255, 0.22) !important;
+        .category-card::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 999px;
+            background: rgba(13, 110, 253, 0.08);
+            top: -55px;
+            right: -42px;
+            transition: transform .18s ease, background .18s ease;
         }
 
-        #kelas-baru .neo-play-btn i {
-            color: inherit !important;
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 110, 253, 0.30);
+            background: #ffffff;
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.10);
         }
 
-        .category-neo-card {
-            min-height: 100%;
-            color: inherit;
-            transition: transform .18s ease, box-shadow .18s ease;
+        .category-card:hover::before {
+            transform: scale(1.15);
+            background: rgba(13, 110, 253, 0.13);
         }
 
-        .category-neo-card:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                11px 11px 24px var(--neo-dark),
-                -11px -11px 24px var(--neo-light) !important;
-        }
-
-        .category-neo-card .card-body {
-            background: transparent;
-        }
-
-        .category-neo-card h5 {
-            color: var(--neo-text) !important;
-        }
-
-        .category-neo-card p {
-            color: var(--neo-muted) !important;
-        }
-
-        .category-neo-card .category-arrow {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
+        .category-icon {
+            width: 2.7rem;
+            height: 2.7rem;
+            border-radius: 1rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--neo-surface);
-            box-shadow:
-                4px 4px 9px var(--neo-dark-soft),
-                -4px -4px 9px var(--neo-light);
-        }
-
-        .alert.alert-primary {
-            border: 0;
-            border-radius: 22px;
-            background: var(--neo-surface) !important;
-            color: var(--neo-text);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
-        }
-
-        .cta-neo-card {
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.74), transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.12), transparent 46%),
-                var(--neo-surface) !important;
-        }
-
-        .cta-neo-card::before {
-            content: "";
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            right: -120px;
-            top: -100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 158, 247, 0.12), transparent 65%);
-            pointer-events: none;
-        }
-
-        .cta-neo-card .card-body {
+            background: var(--mooc-soft-blue);
+            color: var(--bs-primary);
             position: relative;
             z-index: 1;
         }
 
+        .category-arrow {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--mooc-soft-blue);
+            transition: transform .18s ease, background .18s ease;
+        }
+
+        .category-card:hover .category-arrow {
+            transform: translateX(3px);
+            background: rgba(13, 110, 253, 0.14);
+        }
+
+        .empty-category-state {
+            border: 1px dashed rgba(13, 110, 253, 0.35);
+            border-radius: 1.35rem;
+            background: linear-gradient(135deg, #f8fbff, #eef6ff);
+        }
+
         @media (max-width: 991.98px) {
-            .neo-home-wrapper {
-                padding-top: 16px;
-            }
-
-            .hero-card,
-            .neo-section-card,
-            .cta-neo-card {
-                border-radius: 24px !important;
-                box-shadow:
-                    8px 8px 18px var(--neo-dark-soft),
-                    -8px -8px 18px var(--neo-light) !important;
-            }
-
-            .hero-card .card-body,
-            .cta-neo-card .card-body {
-                padding: 2rem !important;
+            .hero-card {
+                border-radius: 1.6rem;
+                box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
             }
 
             .hero-card::before,
-            .hero-card::after,
-            .cta-neo-card::before {
-                opacity: 0.75;
+            .hero-card::after {
+                opacity: 0.65;
             }
 
-            .hero-search {
-                border-radius: 22px;
-                padding: .65rem;
-            }
-
-            .hero-search .input-group-text {
-                padding-left: .75rem;
-            }
-
-            .hero-search .btn {
-                border-radius: 16px;
-            }
-
-            .neo-section-heading {
-                padding: 20px;
-                border-radius: 22px;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .hero-card .card-body,
-            .cta-neo-card .card-body {
-                padding: 1.5rem !important;
-            }
-
-            .hero-heading {
-                font-size: 2rem !important;
-            }
-
-            .hero-subtext {
-                font-size: 1rem !important;
-            }
-
-            .hero-search {
-                display: flex;
-                flex-wrap: wrap;
-                gap: .35rem;
-            }
-
-            .hero-search .input-group-text {
-                width: 42px;
-                justify-content: center;
-                padding: 0;
-            }
-
-            .hero-search .form-control {
-                min-width: 0;
-                flex: 1 1 calc(100% - 48px);
-            }
-
-            .hero-search .btn {
-                width: 100%;
-                margin-top: .25rem;
-                min-height: 44px;
-            }
-
-            .neo-section-heading {
-                display: block !important;
-            }
-
-            .neo-section-heading .btn {
-                width: 100%;
+            .hero-feature-area {
+                min-height: auto;
+                justify-content: flex-start;
                 margin-top: 1rem;
             }
 
-            #kategori .col-6 {
-                width: 100%;
+            .hero-feature-stack {
+                max-width: 100%;
             }
 
-            .cta-neo-card .btn {
+            .hero-feature-pill,
+            .hero-feature-pill:nth-child(2),
+            .hero-feature-pill:nth-child(3) {
                 width: 100%;
+                min-width: 0;
+                margin-left: 0;
+            }
+
+            .hero-feature-text {
+                white-space: normal;
+            }
+
+            .section-panel {
+                border-radius: 1.45rem;
+                padding: 1.5rem;
             }
         }
 
         @media (max-width: 575.98px) {
-            .neo-home-wrapper {
-                padding-top: 12px;
-                margin-bottom: 2rem !important;
+            .hero-card {
+                border-radius: 1.35rem;
             }
 
-            .hero-card,
-            .cta-neo-card,
-            .category-neo-card {
-                border-radius: 20px !important;
-            }
-
-            .hero-heading {
-                font-size: 1.75rem !important;
-            }
-
-            .hero-card .card-body,
-            .cta-neo-card .card-body {
-                padding: 1.25rem !important;
+            .hero-card .card-body {
+                padding: 2rem !important;
             }
 
             .hero-search {
-                box-shadow:
-                    inset 4px 4px 10px var(--neo-inset-dark),
-                    inset -4px -4px 10px var(--neo-inset-light);
+                border-radius: 1rem;
+                box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
             }
 
-            .hero-quick-label {
-                width: 100%;
+            .hero-search .btn {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
             }
 
-            .category-neo-card .card-body {
+            .section-panel {
+                padding: 1.25rem;
+            }
+
+            .category-card .card-body {
                 padding: 1.25rem !important;
             }
         }
@@ -597,7 +449,7 @@
 @endsection
 
 @section('content')
-    <div class="mb-10 mb-xl-15 neo-home-wrapper">
+    <div class="mb-10 mb-xl-15 mooc-page-shell">
 
         {{-- HERO SECTION --}}
         <div class="card hero-card border-0 mb-10 mb-lg-15">
@@ -605,33 +457,47 @@
                 <div class="row g-10 align-items-center">
                     <div class="col-lg-7">
                         {{-- Heading --}}
-                        <h1 class="fw-bolder mb-4 fs-2x fs-lg-1x lh-sm hero-heading text-gray-900">
+                        <h1 class="fw-bolder mb-5 fs-2x fs-lg-1x lh-sm hero-heading text-gray-900">
                             Belajar Tanpa Batas,<br>
-                            <span class="fw-bold opacity-75 text-primary">Kapan Saja, Di Mana Saja</span>
+                            <span class="fw-bold text-primary">Kapan Saja, Di Mana Saja</span>
                         </h1>
 
                         {{-- Sub copy --}}
-                        <p class="fs-5 fw-semibold text-gray-600 mb-6 hero-subtext">
+                        <p class="fs-5 fw-semibold text-gray-600 mb-7 hero-subtext">
                             Platform pembelajaran daring dengan akses ke materi berkualitas,
                             sistem penilaian otomatis, dan sertifikat digital yang diakui.
                         </p>
 
                         {{-- Highlight info bar --}}
-                        <div class="d-flex flex-wrap align-items-center gap-4 mb-7">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle-fill fs-3 me-2 text-success"></i>
-                                <span class="fw-semibold text-gray-700">Akses kapan saja</span>
+                        <div class="row g-4 mb-7">
+                            <div class="col-sm-6">
+                                <div class="hero-highlight-card d-flex align-items-center h-100">
+                                    <span class="hero-highlight-icon me-3">
+                                        <i class="bi bi-check-circle-fill fs-3 text-success"></i>
+                                    </span>
+                                    <div>
+                                        <div class="fw-bolder text-gray-900">Akses Fleksibel</div>
+                                        <div class="fs-8 text-gray-600">Belajar kapan saja</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-shield-check fs-3 me-2 text-info"></i>
-                                <span class="fw-semibold text-gray-700">Sertifikat resmi kampus</span>
+                            <div class="col-sm-6">
+                                <div class="hero-highlight-card d-flex align-items-center h-100">
+                                    <span class="hero-highlight-icon me-3">
+                                        <i class="bi bi-shield-check fs-3 text-info"></i>
+                                    </span>
+                                    <div>
+                                        <div class="fw-bolder text-gray-900">Sertifikat Resmi</div>
+                                        <div class="fs-8 text-gray-600">Diakui oleh kampus</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         {{-- Search Form --}}
                         <form action="{{ route('kursus.index') }}" method="GET" class="mb-7">
                             <div class="input-group input-group-lg hero-search">
-                                <span class="input-group-text ps-0">
+                                <span class="input-group-text">
                                     <i class="bi bi-search fs-3 text-gray-500"></i>
                                 </span>
                                 <input type="text" name="q"
@@ -642,48 +508,44 @@
                                     <i class="bi bi-arrow-right-circle fs-3 ms-sm-2"></i>
                                 </button>
                             </div>
-                            <div class="form-text text-gray-500 mt-2">
+                            <div class="form-text text-gray-500 mt-3 ps-1">
                                 Tips: coba ketik nama mata kuliah, dosen, atau topik yang ingin kamu kuasai.
                             </div>
                         </form>
 
                         {{-- Quick Links --}}
-                        <div class="d-flex flex-wrap gap-3 align-items-center mb-8">
+                        <div class="d-flex flex-wrap gap-3 align-items-center">
                             <span class="text-gray-700 fw-semibold d-flex align-items-center hero-quick-label">
                                 <i class="bi bi-lightning-charge-fill text-warning fs-3 me-2"></i>
                                 Mulai cepat:
                             </span>
-                            <a href="#kategori" class="btn btn-sm btn-light btn-active-light-primary fw-bold rounded-pill">
+                            <a href="#kategori" class="btn btn-sm btn-light btn-active-light-primary fw-bold hero-quick-btn">
                                 <i class="bi bi-grid-3x3-gap me-1"></i> Kategori
                             </a>
-                            <a href="#kelas-baru" class="btn btn-sm btn-primary btn-active-primary fw-bold rounded-pill">
+                            <a href="#kelas-baru" class="btn btn-sm btn-primary btn-active-primary fw-bold hero-quick-btn">
                                 <i class="bi bi-fire me-1"></i> Kelas baru
                             </a>
                         </div>
                     </div>
 
-                    {{-- Hero Badges --}}
-                    <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
-                        <div class="d-flex flex-column align-items-start gap-4">
-                            <div class="d-inline-flex align-items-center px-5 py-4 rounded-pill hero-pill">
-                                <i class="bi bi-check-circle-fill fs-3 me-3 text-primary"></i>
-                                <span class="fw-semibold small text-gray-800">
-                                    Lanjutkan belajar kapan pun kamu mau
-                                </span>
-                            </div>
+                    {{-- Hero Right Text List --}}
+                    <div class="col-lg-5">
+                        <div class="hero-feature-area">
+                            <div class="hero-feature-stack">
+                                <div class="hero-feature-pill">
+                                    <span class="hero-feature-dot"></span>
+                                    <span class="hero-feature-text">Lanjutkan belajar kapan pun kamu mau</span>
+                                </div>
 
-                            <div class="d-inline-flex align-items-center px-5 py-4 rounded-pill hero-pill">
-                                <i class="bi bi-check-circle-fill fs-3 me-3 text-primary"></i>
-                                <span class="fw-semibold small text-gray-800">
-                                    Progres belajar tersimpan otomatis
-                                </span>
-                            </div>
+                                <div class="hero-feature-pill">
+                                    <span class="hero-feature-dot"></span>
+                                    <span class="hero-feature-text">Progres belajar tersimpan otomatis</span>
+                                </div>
 
-                            <div class="d-inline-flex align-items-center px-5 py-4 rounded-pill hero-pill">
-                                <i class="bi bi-check-circle-fill fs-3 me-3 text-primary"></i>
-                                <span class="fw-semibold small text-gray-800">
-                                    Sertifikat digital siap diunduh
-                                </span>
+                                <div class="hero-feature-pill">
+                                    <span class="hero-feature-dot"></span>
+                                    <span class="hero-feature-text">Sertifikat digital siap diunduh</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -692,15 +554,19 @@
         </div>
 
         {{-- KELAS BARU --}}
-        <div id="kelas-baru" class="mb-10 mb-lg-15">
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-5 mb-8 neo-section-heading">
+        <div id="kelas-baru" class="section-panel mb-10 mb-lg-15">
+            <div class="d-flex flex-wrap align-items-end justify-content-between gap-5 mb-8">
                 <div>
-                    <h2 class="fs-2x fw-bolder text-gray-900 mb-2">Kelas Terbaru</h2>
+                    <div class="section-eyebrow">
+                        <i class="bi bi-stars"></i>
+                        Kelas pilihan
+                    </div>
+                    <h2 class="fs-2x fw-bolder text-gray-900 mb-2 section-title">Kelas Terbaru</h2>
                     <p class="fs-6 text-gray-600 mb-0 mw-500px">
                         Rekomendasi kelas yang sedang banyak diikuti oleh mahasiswa dan dosen Universitas Nurul Jadid.
                     </p>
                 </div>
-                <a href="{{ route('kursus.index') }}" class="btn btn-primary btn-sm fw-bold">
+                <a href="{{ route('kursus.index') }}" class="btn btn-primary btn-sm fw-bold section-action">
                     Lihat semua kelas
                     <i class="bi bi-arrow-right ms-2"></i>
                 </a>
@@ -712,18 +578,22 @@
         </div>
 
         {{-- SEPARATOR --}}
-        <div class="separator separator-dashed my-10 my-lg-15"></div>
+        <div class="mooc-separator"></div>
 
         {{-- KATEGORI --}}
-        <div id="kategori" class="mb-10 mb-lg-15">
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-5 mb-8 neo-section-heading">
+        <div id="kategori" class="section-panel mb-10 mb-lg-15">
+            <div class="d-flex flex-wrap align-items-end justify-content-between gap-5 mb-8">
                 <div>
-                    <h2 class="fs-2x fw-bolder text-gray-900 mb-2">Jelajahi Kategori</h2>
+                    <div class="section-eyebrow">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        Jalur belajar
+                    </div>
+                    <h2 class="fs-2x fw-bolder text-gray-900 mb-2 section-title">Jelajahi Kategori</h2>
                     <p class="fs-6 text-gray-600 mb-0 mw-500px">
                         Pilih jalur belajar yang sesuai dengan minat dan program studimu.
                     </p>
                 </div>
-                <a href="#" class="btn btn-light-primary btn-sm fw-bold">
+                <a href="#" class="btn btn-light-primary btn-sm fw-bold section-action">
                     Lihat semua kategori
                     <i class="bi bi-arrow-right-short ms-1"></i>
                 </a>
@@ -733,18 +603,23 @@
                 @forelse($categories as $category)
                     <div class="col-6 col-md-4 col-xl-3">
                         <a href="{{ route('kursus.index', ['filter_kategori' => $category->id_kategori]) }}"
-                            class="card h-100 text-decoration-none card-fade-in category-neo-card">
-                            <div class="card-body p-6 d-flex flex-column">
-                                <div class="mb-3">
-                                    <h5 class="fs-5 fw-bold text-gray-900 mb-1">
+                            class="card category-card h-100 text-decoration-none card-fade-in">
+                            <div class="card-body p-6 d-flex flex-column position-relative">
+                                <div class="category-icon mb-4">
+                                    <i class="bi bi-journal-bookmark-fill fs-3"></i>
+                                </div>
+
+                                <div class="mb-4 position-relative">
+                                    <h5 class="fs-5 fw-bolder text-gray-900 mb-2">
                                         {{ $category->nama }}
                                     </h5>
-                                    <p class="fs-7 text-gray-600 mb-0">
+                                    <p class="fs-7 text-gray-600 mb-0 lh-lg">
                                         {{ Str::limit($category->deskripsi ?? 'Jelajahi berbagai kelas dalam kategori ini.', 60) }}
                                     </p>
                                 </div>
-                                <div class="mt-auto d-flex align-items-center justify-content-between pt-2">
-                                    <span class="text-primary fw-semibold fs-8 text-uppercase">
+
+                                <div class="mt-auto d-flex align-items-center justify-content-between pt-2 position-relative">
+                                    <span class="text-primary fw-bold fs-8 text-uppercase">
                                         Lihat kelas
                                     </span>
                                     <span class="category-arrow">
@@ -756,11 +631,15 @@
                     </div>
                 @empty
                     <div class="col-12">
-                        <div class="alert alert-primary d-flex align-items-center p-5">
-                            <i class="bi bi-info-circle fs-2x me-4"></i>
+                        <div class="empty-category-state d-flex align-items-center p-6">
+                            <div class="symbol symbol-50px me-4">
+                                <div class="symbol-label bg-light-primary">
+                                    <i class="bi bi-info-circle fs-2x text-primary"></i>
+                                </div>
+                            </div>
                             <div class="d-flex flex-column">
-                                <h4 class="mb-1">Belum Ada Kategori</h4>
-                                <span>Kategori kelas akan tersedia segera. Nantikan pembaruan berikutnya.</span>
+                                <h4 class="mb-1 fw-bolder text-gray-900">Belum Ada Kategori</h4>
+                                <span class="text-gray-600">Kategori kelas akan tersedia segera. Nantikan pembaruan berikutnya.</span>
                             </div>
                         </div>
                     </div>
@@ -769,52 +648,7 @@
         </div>
 
         {{-- SEPARATOR --}}
-        <div class="separator separator-dashed my-10 my-lg-15"></div>
-
-        {{-- CTA SECTION --}}
-        <div class="card border-0 shadow-sm rounded-3 card-fade-in cta-neo-card">
-            <div class="card-body p-8 p-lg-12">
-                <div class="row g-8 align-items-center">
-                    <div class="col-lg-8">
-                        <h3 class="fs-2x fw-bolder text-gray-900 mb-4">
-                            Siap memulai perjalanan belajar di MOOC Universitas Nurul Jadid?
-                        </h3>
-                        <p class="fs-5 text-gray-700 mb-4 mw-700px">
-                            Daftar dan gabung bersama ribuan pembelajar lainnya.
-                            Bangun portofolio akademik dan profesionalmu melalui kelas dan sertifikat terbaik.
-                        </p>
-
-                        <div class="d-flex flex-wrap gap-4">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-bar-chart-line-fill fs-3 text-primary me-2"></i>
-                                <span class="fw-semibold text-gray-700">
-                                    Pantau progres belajar dengan dashboard pribadi.
-                                </span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-star-fill fs-3 text-warning me-2"></i>
-                                <span class="fw-semibold text-gray-700">
-                                    Kumpulkan sertifikat untuk CV dan portofolio.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                        <div class="d-flex flex-column flex-sm-row flex-lg-column gap-3 justify-content-lg-end">
-                            <a href="{{ route('daftar') }}" class="btn btn-primary btn-lg fw-bold">
-                                <i class="bi bi-person-plus fs-3 me-2"></i>
-                                Daftar Sekarang
-                            </a>
-                            <a href="{{ route('kursus.index') }}" class="btn btn-dark btn-lg fw-bold">
-                                <i class="bi bi-collection-play fs-3 me-2"></i>
-                                Jelajahi Kelas
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <div class="mooc-separator"></div>
     </div>
 
     {{-- MODAL PREVIEW KURSUS --}}

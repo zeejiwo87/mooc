@@ -20,7 +20,7 @@
                     extend: 'excel',
                     action: typeof newexportaction !== 'undefined' ? newexportaction : undefined,
                     className: 'btn btn-sm btn-dark rounded-2',
-                    text: '<i class="bi bi-file-earmark-excel me-1"></i> Export Excel'
+                    text: '<i class="bi bi-file-earmark-excel me-1"></i> Excel'
                 }
             ],
             processing: true,

@@ -16,17 +16,15 @@
 @section('css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --enroll-primary: #009ef7;
+            --enroll-primary-dark: #008bd8;
+            --enroll-primary-soft: #eaf6ff;
+            --enroll-bg: #f8fafc;
+            --enroll-surface: #ffffff;
+            --enroll-border: #e5e7eb;
+            --enroll-text: #111827;
+            --enroll-muted: #64748b;
+            --enroll-success: #10b981;
         }
 
         .content,
@@ -42,21 +40,20 @@
             align-items: center;
             justify-content: center;
             padding: 32px 0 56px;
-            position: relative;
+            background: var(--enroll-bg);
         }
 
         .neo-enroll-shell {
             width: min(100%, 980px);
             margin: 0 auto;
+            padding: 0 16px;
         }
 
         .neo-enroll-card {
-            border: 0 !important;
-            border-radius: 30px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light) !important;
+            border: 1px solid var(--enroll-border) !important;
+            border-radius: 1.5rem !important;
+            background: var(--enroll-surface) !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06) !important;
             overflow: hidden;
         }
 
@@ -75,10 +72,12 @@
             content: "";
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(180deg, rgba(17, 24, 39, 0.12) 0%, rgba(17, 24, 39, 0.18) 36%, rgba(17, 24, 39, 0.78) 100%),
-                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.18), transparent 42%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.24), transparent 48%);
+            background: linear-gradient(
+                180deg,
+                rgba(15, 23, 42, 0.10) 0%,
+                rgba(15, 23, 42, 0.22) 45%,
+                rgba(15, 23, 42, 0.72) 100%
+            );
             z-index: 1;
         }
 
@@ -95,12 +94,12 @@
             border-radius: 999px;
             padding: 8px 13px;
             margin-bottom: 14px;
-            background: rgba(231, 229, 228, 0.18);
+            background: rgba(255, 255, 255, 0.16);
             color: #ffffff;
             font-size: .78rem;
             font-weight: 800;
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
         }
 
         .neo-enroll-title {
@@ -110,7 +109,7 @@
             line-height: 1.15;
             letter-spacing: -0.04em;
             margin-bottom: 16px;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, .38);
+            text-shadow: 0 8px 24px rgba(0, 0, 0, .32);
         }
 
         .neo-enroll-meta {
@@ -126,16 +125,16 @@
             min-height: 34px;
             padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(231, 229, 228, 0.16);
-            color: rgba(255, 255, 255, .94);
+            background: rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, .95);
             font-size: .78rem;
             font-weight: 800;
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .16);
+            backdrop-filter: blur(10px);
         }
 
         .neo-enroll-pill i {
-            color: var(--neo-primary);
+            color: #ffffff;
         }
 
         .neo-enroll-side {
@@ -143,10 +142,7 @@
             padding: 34px;
             display: flex;
             align-items: center;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 44%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.12), transparent 50%),
-                var(--neo-surface);
+            background: #ffffff;
         }
 
         .neo-enroll-side-inner {
@@ -160,17 +156,15 @@
             border-radius: 999px;
             padding: 8px 13px;
             margin-bottom: 18px;
-            background: var(--neo-surface);
-            color: var(--neo-primary);
+            background: var(--enroll-primary-soft);
+            color: var(--enroll-primary);
             font-size: .78rem;
             font-weight: 800;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            border: 1px solid rgba(0, 158, 247, 0.12);
         }
 
         .neo-enroll-heading {
-            color: var(--neo-text);
+            color: var(--enroll-text);
             font-size: clamp(1.45rem, 2vw, 2rem);
             font-weight: 900;
             letter-spacing: -0.035em;
@@ -178,7 +172,7 @@
         }
 
         .neo-enroll-desc {
-            color: var(--neo-muted);
+            color: var(--enroll-muted);
             font-size: .98rem;
             line-height: 1.7;
             margin-bottom: 24px;
@@ -195,27 +189,22 @@
             align-items: center;
             gap: 13px;
             padding: 13px 14px;
-            border-radius: 18px;
-            background: var(--neo-surface);
-            color: var(--neo-text);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            border-radius: 1rem;
+            background: #ffffff;
+            color: var(--enroll-text);
+            border: 1px solid var(--enroll-border);
         }
 
         .neo-summary-icon {
             width: 38px;
             height: 38px;
-            border-radius: 14px;
+            border-radius: .85rem;
             flex: 0 0 auto;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--neo-surface);
-            color: var(--neo-primary);
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            background: var(--enroll-primary-soft);
+            color: var(--enroll-primary);
         }
 
         .neo-summary-icon i {
@@ -227,7 +216,7 @@
         }
 
         .neo-summary-item span:last-child {
-            color: var(--neo-text);
+            color: var(--enroll-text);
             font-weight: 700;
             font-size: .9rem;
         }
@@ -235,21 +224,19 @@
         .neo-confirm-btn {
             width: 100%;
             border: 0 !important;
-            border-radius: 18px !important;
+            border-radius: 1rem !important;
             min-height: 52px;
-            background: var(--neo-primary) !important;
+            background: var(--enroll-primary) !important;
             color: #ffffff !important;
             font-weight: 900 !important;
             font-size: .98rem;
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, 0.26),
-                -6px -6px 14px rgba(255, 255, 255, 0.72);
-            transition: .22s ease;
+            box-shadow: 0 14px 30px rgba(0, 158, 247, 0.22);
+            transition: .18s ease;
         }
 
         .neo-confirm-btn:hover,
         .neo-confirm-btn:focus {
-            background: var(--neo-primary-dark) !important;
+            background: var(--enroll-primary-dark) !important;
             color: #ffffff !important;
             transform: translateY(-1px);
         }
@@ -262,37 +249,35 @@
             width: 100%;
             margin-top: 14px;
             min-height: 46px;
-            border-radius: 16px;
-            background: var(--neo-surface);
-            color: var(--neo-muted);
+            border-radius: 1rem;
+            background: #ffffff;
+            color: var(--enroll-muted);
             font-weight: 800;
             text-decoration: none;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
-            transition: .2s ease;
+            border: 1px solid var(--enroll-border);
+            transition: .18s ease;
         }
 
         .neo-cancel-link:hover {
-            color: var(--neo-primary);
+            color: var(--enroll-primary);
+            background: var(--enroll-primary-soft);
+            border-color: rgba(0, 158, 247, 0.22);
             transform: translateY(-1px);
         }
 
         .neo-note-box {
             margin-top: 20px;
             padding: 14px 15px;
-            border-radius: 18px;
-            background: var(--neo-surface);
-            color: var(--neo-muted);
+            border-radius: 1rem;
+            background: #f8fafc;
+            color: var(--enroll-muted);
             font-size: .82rem;
             line-height: 1.6;
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            border: 1px solid var(--enroll-border);
         }
 
         .neo-note-box i {
-            color: var(--neo-primary);
+            color: var(--enroll-primary);
         }
 
         @media (max-width: 991.98px) {
@@ -301,7 +286,7 @@
             }
 
             .neo-enroll-card {
-                border-radius: 26px !important;
+                border-radius: 1.35rem !important;
             }
 
             .neo-enroll-cover {
@@ -319,6 +304,10 @@
                 padding-bottom: 36px;
             }
 
+            .neo-enroll-shell {
+                padding: 0 12px;
+            }
+
             .neo-enroll-cover {
                 min-height: 280px;
                 padding: 24px;
@@ -329,10 +318,16 @@
             }
 
             .neo-enroll-card {
-                border-radius: 22px !important;
-                box-shadow:
-                    8px 8px 18px var(--neo-dark-soft),
-                    -8px -8px 18px var(--neo-light) !important;
+                border-radius: 1.15rem !important;
+                box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06) !important;
+            }
+
+            .neo-enroll-title {
+                font-size: 1.45rem;
+            }
+
+            .neo-summary-item {
+                align-items: flex-start;
             }
         }
     </style>

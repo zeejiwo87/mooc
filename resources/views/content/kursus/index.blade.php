@@ -3,17 +3,13 @@
 @section('css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --mooc-primary: #009ef7;
+            --mooc-primary-soft: #eaf6ff;
+            --mooc-bg: #f8fafc;
+            --mooc-border: #e5e7eb;
+            --mooc-text: #111827;
+            --mooc-muted: #64748b;
+            --mooc-white: #ffffff;
         }
 
         .content,
@@ -29,26 +25,28 @@
             padding-bottom: 48px;
         }
 
+        /* =========================
+           GENERAL CARD
+        ========================== */
         .neo-card,
         .neo-filter-card,
         .neo-list-card,
-        .neo-help-card,
         .neo-page-hero {
-            border: 0 !important;
-            border-radius: 26px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                10px 10px 24px var(--neo-dark),
-                -10px -10px 24px var(--neo-light) !important;
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: 1.5rem !important;
+            background: var(--mooc-white) !important;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.05) !important;
             overflow: hidden;
         }
 
+        /* =========================
+           HERO
+        ========================== */
         .neo-page-hero {
             position: relative;
             background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 42%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.13), transparent 48%),
-                var(--neo-surface) !important;
+                radial-gradient(circle at 0% 0%, rgba(0, 158, 247, 0.10), transparent 40%),
+                linear-gradient(135deg, #ffffff 0%, #f2f9ff 100%) !important;
         }
 
         .neo-page-hero::before {
@@ -56,10 +54,10 @@
             position: absolute;
             width: 260px;
             height: 260px;
-            right: -120px;
+            right: -100px;
             top: -120px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 158, 247, 0.16), transparent 66%);
+            background: rgba(0, 158, 247, 0.10);
             pointer-events: none;
         }
 
@@ -68,6 +66,113 @@
             z-index: 1;
         }
 
+        .neo-page-hero h1 {
+            letter-spacing: -0.03em;
+            color: var(--mooc-text);
+        }
+
+        .neo-stat-pill {
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            color: var(--mooc-text);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        /* =========================
+           SEARCH
+        ========================== */
+        .neo-search-box {
+            border-radius: 1rem;
+            background: #ffffff;
+            border: 1px solid var(--mooc-border);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+            padding: .35rem;
+        }
+
+        .neo-search-box .input-group-text {
+            border: 0 !important;
+            background: transparent !important;
+            padding-left: 1rem;
+        }
+
+        .neo-search-box .form-control {
+            border: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .neo-search-box .form-control:focus {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        /* =========================
+           BUTTON
+        ========================== */
+        .btn.btn-primary {
+            border: 0 !important;
+            border-radius: .85rem !important;
+            background: var(--mooc-primary) !important;
+            color: #ffffff !important;
+            box-shadow: 0 10px 24px rgba(0, 158, 247, 0.22);
+            transition: .18s ease;
+        }
+
+        .btn.btn-primary:hover,
+        .btn.btn-primary:focus {
+            background: #008bd8 !important;
+            color: #ffffff !important;
+            transform: translateY(-1px);
+        }
+
+        .btn.btn-light-primary,
+        .btn.btn-light,
+        .btn.btn-sm.btn-light,
+        .neo-reset-btn {
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: .85rem !important;
+            background: #ffffff !important;
+            color: var(--mooc-primary) !important;
+            box-shadow: none !important;
+            transition: .18s ease;
+        }
+
+        .btn.btn-light-primary:hover,
+        .btn.btn-light:hover,
+        .btn.btn-sm.btn-light:hover,
+        .neo-reset-btn:hover {
+            background: var(--mooc-primary-soft) !important;
+            color: var(--mooc-primary) !important;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+        .form-control,
+        .form-select {
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: .85rem !important;
+            background: #ffffff !important;
+            color: var(--mooc-text) !important;
+            box-shadow: none !important;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: rgba(0, 158, 247, 0.45) !important;
+            box-shadow: 0 0 0 .2rem rgba(0, 158, 247, 0.10) !important;
+        }
+
+        .input-group-text {
+            border: 0 !important;
+            background: transparent !important;
+        }
+
+        /* =========================
+           FILTER SIDEBAR
+        ========================== */
         .neo-filter-sticky {
             position: sticky;
             top: 112px;
@@ -76,161 +181,85 @@
 
         .neo-filter-card .card-header,
         .neo-list-card .card-header {
-            border-bottom: 1px solid rgba(120, 113, 108, 0.14);
-            background: transparent;
+            border-bottom: 1px solid var(--mooc-border);
+            background: #ffffff;
         }
 
         .neo-filter-card .card-title,
         .neo-list-card .card-title {
-            color: var(--neo-text);
-            font-weight: 700;
-        }
-
-        .neo-reset-btn,
-        .btn.btn-light-primary,
-        .btn.btn-light,
-        .btn.btn-sm.btn-light {
-            border: 0 !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
-            border-radius: 14px !important;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
-            transition: 0.2s ease;
-        }
-
-        .neo-reset-btn:hover,
-        .btn.btn-light-primary:hover,
-        .btn.btn-light:hover,
-        .btn.btn-sm.btn-light:hover {
-            color: var(--neo-primary-dark) !important;
-            transform: translateY(-1px);
-        }
-
-        .btn.btn-primary {
-            background: var(--neo-primary) !important;
-            border: 0 !important;
-            color: #ffffff !important;
-            border-radius: 14px !important;
-            box-shadow:
-                5px 5px 12px rgba(120, 113, 108, 0.24),
-                -5px -5px 12px rgba(255, 255, 255, 0.68);
-            transition: 0.2s ease;
-        }
-
-        .btn.btn-primary:hover,
-        .btn.btn-primary:focus {
-            background: var(--neo-primary-dark) !important;
-            color: #ffffff !important;
-            transform: translateY(-1px);
-        }
-
-        .form-control,
-        .form-select {
-            border: 0 !important;
-            border-radius: 15px !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-text) !important;
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light) !important;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border: 0 !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light),
-                0 0 0 0.2rem rgba(0, 158, 247, 0.12) !important;
-        }
-
-        .input-group-text {
-            border: 0 !important;
-            background: transparent !important;
-        }
-
-        .neo-search-box {
-            border-radius: 18px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
-            padding: 0.35rem 0.5rem;
-        }
-
-        .neo-search-box .form-control {
-            box-shadow: none !important;
-            background: transparent !important;
+            color: var(--mooc-text);
+            font-weight: 800;
         }
 
         .btn-check + .btn {
-            border: 0 !important;
-            border-radius: 15px !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-text) !important;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
-            transition: 0.2s ease;
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: .85rem !important;
+            background: #ffffff !important;
+            color: var(--mooc-text) !important;
+            box-shadow: none !important;
+            transition: .18s ease;
         }
 
         .btn-check + .btn:hover {
-            color: var(--neo-primary) !important;
-            transform: translateY(-1px);
+            border-color: rgba(0, 158, 247, 0.35) !important;
+            background: var(--mooc-primary-soft) !important;
+            color: var(--mooc-primary) !important;
         }
 
         .btn-check:checked + .btn,
         .btn-check + .btn.active,
         .btn-check + .btn.btn-active-primary,
         .btn-check + .btn.btn-active-light-primary {
-            color: var(--neo-primary) !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light) !important;
+            border-color: rgba(0, 158, 247, 0.45) !important;
+            background: var(--mooc-primary-soft) !important;
+            color: var(--mooc-primary) !important;
         }
 
         .badge.badge-light-primary {
             border-radius: 999px;
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
-            box-shadow:
-                3px 3px 8px var(--neo-dark-soft),
-                -3px -3px 8px var(--neo-light);
+            background: var(--mooc-primary-soft) !important;
+            color: var(--mooc-primary) !important;
+            border: 1px solid rgba(0, 158, 247, 0.14);
         }
 
-        .neo-help-card {
-            position: relative;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.58), transparent 44%),
-                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.14), transparent 52%),
-                var(--neo-surface) !important;
-        }
-
+        /* =========================
+           HELP CARD
+        ========================== */
         .neo-help-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 1rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--neo-surface);
-            color: var(--neo-primary);
-            box-shadow:
-                6px 6px 14px var(--neo-dark-soft),
-                -6px -6px 14px var(--neo-light);
+            background: var(--mooc-primary-soft);
+            color: var(--mooc-primary);
         }
 
-        .neo-stat-pill {
-            border-radius: 999px;
-            background: var(--neo-surface);
-            color: var(--neo-text);
-            box-shadow:
-                5px 5px 12px var(--neo-dark-soft),
-                -5px -5px 12px var(--neo-light);
+        /* =========================
+           COURSE LIST CARD
+        ========================== */
+        #courses-container .card,
+        #courses-container .course-card,
+        .neo-course-card {
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: 1.25rem !important;
+            background: #ffffff !important;
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.055) !important;
+            overflow: hidden;
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+
+        #courses-container .card:hover,
+        #courses-container .course-card:hover,
+        .neo-course-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 158, 247, 0.28) !important;
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.09) !important;
+        }
+
+        #courses-container .card-body {
+            background: transparent !important;
         }
 
         .course-card,
@@ -243,28 +272,89 @@
             transform: translateY(-4px);
         }
 
-        #courses-container .card,
-        #courses-container .course-card {
-            border: 0 !important;
-            border-radius: 24px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light) !important;
+        .neo-course-cover {
+            border-radius: 1rem;
             overflow: hidden;
         }
 
-        #courses-container .card:hover,
-        #courses-container .course-card:hover {
-            box-shadow:
-                11px 11px 24px var(--neo-dark),
-                -11px -11px 24px var(--neo-light) !important;
+        .neo-course-cover-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.05) 45%, rgba(15, 23, 42, 0.45) 100%);
+            pointer-events: none;
         }
 
-        #courses-container .card-body {
-            background: transparent !important;
+        .neo-course-badge,
+        .neo-level-badge {
+            border: 0 !important;
+            border-radius: 999px !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            color: var(--mooc-primary) !important;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+            backdrop-filter: blur(10px);
         }
 
+        .neo-course-badge-soft {
+            color: var(--mooc-text) !important;
+        }
+
+        .course-preview-trigger .btn.btn-icon,
+        .neo-play-btn {
+            width: 52px;
+            height: 52px;
+            border: 0 !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: var(--mooc-primary) !important;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22) !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: .18s ease;
+        }
+
+        .course-preview-trigger .btn.btn-icon i,
+        .neo-play-btn i {
+            font-size: 2rem;
+            line-height: 1;
+            transform: translateX(2px);
+        }
+
+        .course-preview-trigger:hover .btn.btn-icon,
+        .neo-play-btn:hover {
+            transform: scale(1.06);
+            color: #ffffff !important;
+            background: var(--mooc-primary) !important;
+        }
+
+        .neo-mini-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #f8fafc;
+            color: var(--mooc-muted);
+            font-size: .72rem;
+            font-weight: 700;
+            border: 1px solid #edf2f7;
+        }
+
+        .neo-mini-info i {
+            color: var(--mooc-primary);
+        }
+
+        .course-title-link {
+            line-height: 1.35;
+        }
+
+        /* =========================
+           LOADING
+        ========================== */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -283,38 +373,40 @@
 
         #courses-loading {
             min-height: 180px;
-            border-radius: 22px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            border-radius: 1.25rem;
+            background: #ffffff;
+            border: 1px dashed rgba(0, 158, 247, 0.25);
         }
 
         .spinner-border {
-            color: var(--neo-primary);
+            color: var(--mooc-primary);
         }
 
+        /* =========================
+           PAGINATION
+        ========================== */
         #pagination-container .pagination {
             gap: 8px;
             flex-wrap: wrap;
         }
 
         #pagination-container .page-link {
-            border: 0 !important;
-            border-radius: 13px !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-text) !important;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            border: 1px solid var(--mooc-border) !important;
+            border-radius: .75rem !important;
+            background: #ffffff !important;
+            color: var(--mooc-text) !important;
+            box-shadow: none !important;
+        }
+
+        #pagination-container .page-link:hover {
+            background: var(--mooc-primary-soft) !important;
+            color: var(--mooc-primary) !important;
         }
 
         #pagination-container .page-item.active .page-link {
             color: #ffffff !important;
-            background: var(--neo-primary) !important;
-            box-shadow:
-                5px 5px 12px rgba(120, 113, 108, 0.24),
-                -5px -5px 12px rgba(255, 255, 255, 0.68);
+            background: var(--mooc-primary) !important;
+            border-color: var(--mooc-primary) !important;
         }
 
         #pagination-container .page-item.disabled .page-link {
@@ -324,115 +416,12 @@
         .text-primary,
         .text-info,
         .text-success {
-            color: var(--neo-primary) !important;
+            color: var(--mooc-primary) !important;
         }
 
-        .neo-course-card {
-            border: 0 !important;
-            border-radius: 26px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light) !important;
-            overflow: hidden;
-            transition: transform .22s ease, box-shadow .22s ease;
-        }
-
-        .neo-course-card:hover {
-            transform: translateY(-5px);
-            box-shadow:
-                12px 12px 26px var(--neo-dark),
-                -12px -12px 26px var(--neo-light) !important;
-        }
-
-        .neo-course-cover {
-            border-radius: 22px;
-            overflow: hidden;
-        }
-
-        .neo-course-cover-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background:
-                linear-gradient(180deg, rgba(17, 24, 39, 0.18) 0%, rgba(17, 24, 39, 0.05) 42%, rgba(17, 24, 39, 0.58) 100%),
-                radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.24) 100%);
-            pointer-events: none;
-        }
-
-        .neo-course-badge,
-        .neo-level-badge {
-            border: 0 !important;
-            border-radius: 999px !important;
-            background: rgba(231, 229, 228, 0.92) !important;
-            color: var(--neo-primary) !important;
-            font-weight: 800;
-            box-shadow:
-                4px 4px 10px rgba(17, 24, 39, 0.22),
-                -4px -4px 10px rgba(255, 255, 255, 0.20);
-            backdrop-filter: blur(12px);
-        }
-
-        .neo-course-badge-soft {
-            color: var(--neo-text) !important;
-        }
-
-        .course-preview-trigger .btn.btn-icon,
-        .neo-play-btn {
-            width: 54px;
-            height: 54px;
-            border: 0 !important;
-            border-radius: 50% !important;
-            background: rgba(231, 229, 228, 0.95) !important;
-            color: var(--neo-primary) !important;
-            box-shadow:
-                8px 8px 18px rgba(0, 0, 0, 0.30),
-                -5px -5px 12px rgba(255, 255, 255, 0.22) !important;
-            backdrop-filter: blur(14px);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: .22s ease;
-        }
-
-        .course-preview-trigger .btn.btn-icon i,
-        .neo-play-btn i {
-            font-size: 2.15rem;
-            line-height: 1;
-            transform: translateX(2px);
-        }
-
-        .course-preview-trigger:hover .btn.btn-icon,
-        .neo-play-btn:hover {
-            transform: scale(1.08);
-            color: #ffffff !important;
-            background: var(--neo-primary) !important;
-        }
-
-        .neo-mini-info {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            min-height: 30px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: var(--neo-surface);
-            color: var(--neo-muted);
-            font-size: .72rem;
-            font-weight: 700;
-            box-shadow:
-                inset 3px 3px 7px var(--neo-inset-dark),
-                inset -3px -3px 7px var(--neo-inset-light);
-        }
-
-        .neo-mini-info i {
-            color: var(--neo-primary);
-        }
-
-        .course-title-link {
-            line-height: 1.35;
-        }
-
+        /* =========================
+           PREVIEW MODAL
+        ========================== */
         .neo-preview-modal {
             z-index: 20000 !important;
         }
@@ -448,29 +437,27 @@
         }
 
         .neo-preview-modal .modal-dialog {
-            max-width: min(1120px, calc(100vw - 28px));
+            max-width: min(1080px, calc(100vw - 28px));
         }
 
         .neo-preview-modal .modal-content {
             position: relative;
             border: 0 !important;
-            border-radius: 30px !important;
+            border-radius: 1.5rem !important;
             overflow: hidden;
-            background: #111827 !important;
-            box-shadow:
-                18px 18px 42px rgba(17, 24, 39, 0.46),
-                -12px -12px 32px rgba(255, 255, 255, 0.15) !important;
+            background: #0f172a !important;
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.35) !important;
         }
 
         .neo-preview-shell {
             position: relative;
-            background: #111827;
+            background: #0f172a;
         }
 
         .neo-preview-hero {
             position: relative;
-            min-height: 560px;
-            background: #111827;
+            min-height: 540px;
+            background: #0f172a;
         }
 
         .neo-preview-video {
@@ -484,7 +471,7 @@
             position: absolute;
             inset: auto 0 0 0;
             height: 34%;
-            background: linear-gradient(180deg, transparent, rgba(17, 24, 39, 0.98));
+            background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.98));
             pointer-events: none;
             z-index: 2;
         }
@@ -493,7 +480,7 @@
             position: relative;
             z-index: 1;
             width: 100%;
-            height: 540px;
+            height: 520px;
             border: 0;
             display: block;
             background: #000;
@@ -504,37 +491,35 @@
             top: 18px;
             right: 18px;
             z-index: 6;
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border: 0 !important;
             border-radius: 50% !important;
-            background: rgba(231, 229, 228, 0.94) !important;
+            background: rgba(255, 255, 255, 0.94) !important;
             color: #111827 !important;
             opacity: 1 !important;
-            box-shadow:
-                7px 7px 18px rgba(0, 0, 0, 0.36),
-                -4px -4px 12px rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.24) !important;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: .2s ease;
+            transition: .18s ease;
         }
 
         .neo-preview-close:hover {
-            transform: scale(1.06);
-            background: var(--neo-primary) !important;
+            transform: scale(1.05);
+            background: var(--mooc-primary) !important;
             color: #ffffff !important;
         }
 
         .neo-preview-close i {
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             line-height: 1;
         }
 
         .neo-preview-info {
             position: relative;
             z-index: 4;
-            margin-top: -120px;
+            margin-top: -110px;
             padding: 0 28px 28px;
             color: #ffffff;
         }
@@ -542,12 +527,12 @@
         .neo-preview-title {
             max-width: 780px;
             color: #ffffff;
-            font-size: clamp(1.45rem, 2.6vw, 2.35rem);
+            font-size: clamp(1.45rem, 2.6vw, 2.25rem);
             font-weight: 900;
             letter-spacing: -0.04em;
             line-height: 1.12;
             margin-bottom: 14px;
-            text-shadow: 0 8px 28px rgba(0, 0, 0, .45);
+            text-shadow: 0 8px 24px rgba(0, 0, 0, .38);
         }
 
         .neo-preview-meta {
@@ -563,16 +548,16 @@
             gap: 7px;
             border-radius: 999px;
             padding: 8px 12px;
-            background: rgba(231, 229, 228, 0.13);
+            background: rgba(255, 255, 255, 0.12);
             color: rgba(255, 255, 255, .92);
             font-size: .78rem;
             font-weight: 800;
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, .10);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .12);
         }
 
         .neo-preview-pill i {
-            color: var(--neo-primary);
+            color: var(--mooc-primary);
         }
 
         .neo-preview-actions {
@@ -591,28 +576,28 @@
         }
 
         .neo-preview-detail-btn {
-            background: var(--neo-primary) !important;
+            background: var(--mooc-primary) !important;
             color: #ffffff !important;
         }
 
         .neo-preview-detail-btn:hover {
-            background: var(--neo-primary-dark) !important;
+            background: #008bd8 !important;
             color: #ffffff !important;
         }
 
         .neo-preview-close-btn {
-            background: rgba(231, 229, 228, 0.14) !important;
+            background: rgba(255, 255, 255, 0.14) !important;
             color: #ffffff !important;
             backdrop-filter: blur(12px);
         }
 
         .neo-preview-close-btn:hover {
-            background: rgba(231, 229, 228, 0.22) !important;
+            background: rgba(255, 255, 255, 0.22) !important;
             color: #ffffff !important;
         }
 
         .modal-backdrop.show {
-            opacity: .72;
+            opacity: .68;
             backdrop-filter: blur(6px);
         }
 
@@ -622,6 +607,9 @@
             pointer-events: none !important;
         }
 
+        /* =========================
+           RESPONSIVE
+        ========================== */
         @media (max-width: 991.98px) {
             .neo-kursus-page {
                 padding-top: 16px;
@@ -635,12 +623,8 @@
             .neo-card,
             .neo-filter-card,
             .neo-list-card,
-            .neo-help-card,
             .neo-page-hero {
-                border-radius: 22px !important;
-                box-shadow:
-                    8px 8px 18px var(--neo-dark-soft),
-                    -8px -8px 18px var(--neo-light) !important;
+                border-radius: 1.25rem !important;
             }
 
             .neo-page-hero .card-body,
@@ -745,7 +729,7 @@
             }
 
             .neo-preview-modal .modal-content {
-                border-radius: 24px !important;
+                border-radius: 1.25rem !important;
             }
 
             .neo-preview-video iframe {
@@ -967,23 +951,6 @@
                         </div>
                     </form>
 
-                    <div class="card neo-help-card">
-                        <div class="card-body text-center p-7">
-                            <div class="neo-help-icon mb-4">
-                                <i class="bi bi-lightbulb fs-2"></i>
-                            </div>
-
-                            <h5 class="fw-bolder text-gray-900 mb-2">Butuh Bantuan?</h5>
-
-                            <p class="text-gray-600 fs-7 mb-5">
-                                Gunakan filter untuk menemukan kursus yang paling sesuai dengan kebutuhan belajar kamu.
-                            </p>
-
-                            <button type="button" class="btn btn-sm btn-light-primary fw-bold">
-                                Panduan Belajar
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
 

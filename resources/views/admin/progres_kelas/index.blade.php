@@ -2,20 +2,29 @@
 
 @section('css')
     <style>
+        /* =========================================================
+           PROGRES KELAS - SIMPLE, FLAT, KONSISTEN
+           Visual only: route, variable Blade, dan JavaScript tidak diubah
+        ========================================================= */
+
         .progres-neo-page {
-            --neo-bg: #eef2f7;
-            --neo-surface: #eef2f7;
-            --neo-text: #1f2937;
-            --neo-muted: #64748b;
-            --neo-border: rgba(148, 163, 184, .22);
-            --neo-primary: #2563eb;
-            --neo-success: #16a34a;
-            --neo-warning: #d97706;
-            --neo-danger: #dc2626;
-            --neo-info: #0284c7;
-            --neo-shadow-dark: rgba(163, 177, 198, .38);
-            --neo-shadow-light: rgba(255, 255, 255, .86);
-            padding: 0 30px 30px;
+            --page-primary: #074366;
+            --page-primary-dark: #052f49;
+            --page-blue: #3b82f6;
+            --page-success: #10b981;
+            --page-success-dark: #059669;
+            --page-warning: #f59e0b;
+            --page-warning-dark: #d97706;
+            --page-danger: #ef4444;
+            --page-danger-dark: #dc2626;
+            --page-purple: #8b5cf6;
+            --page-text: #111827;
+            --page-muted: #64748b;
+            --page-border: #e5e7eb;
+            --page-soft: #f8fafc;
+            --page-white: #ffffff;
+            padding: 0 24px 28px;
+            color: var(--page-text);
         }
 
         .progres-neo-page .content {
@@ -23,272 +32,333 @@
             margin: 0 auto;
         }
 
-        .progres-neo-card,
-        .progres-neo-page .card {
-            border: 0 !important;
-            border-radius: 28px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                10px 10px 22px var(--neo-shadow-dark),
-                -10px -10px 22px var(--neo-shadow-light) !important;
-            overflow: hidden;
-        }
-
-        .progres-neo-page .card-header {
-            border-bottom: 1px solid var(--neo-border) !important;
-            background: var(--neo-surface) !important;
-            padding: 20px 24px !important;
-        }
-
-        .progres-neo-page .card-body {
-            background: var(--neo-surface) !important;
-        }
-
+        /* Header */
         .progres-neo-header {
-            padding: 24px;
-            border-radius: 28px;
-            background: var(--neo-surface);
-            box-shadow:
-                10px 10px 22px var(--neo-shadow-dark),
-                -10px -10px 22px var(--neo-shadow-light);
-            margin-bottom: 24px;
+            margin-bottom: 18px;
+            padding: 18px;
+            background: var(--page-white);
+            border: 1px solid #eef2f7;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
         }
 
         .progres-neo-title {
             margin: 0;
-            color: var(--neo-text);
-            font-size: 1.55rem;
-            line-height: 1.25;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 800;
         }
 
         .progres-neo-subtitle,
         .progres-neo-muted,
         .progres-neo-page .text-muted {
-            color: var(--neo-muted) !important;
-            font-weight: 650;
+            color: var(--page-muted) !important;
+            font-weight: 600;
         }
 
         .progres-neo-actions {
-            display: flex;
-            flex-wrap: wrap;
+            width: 440px;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
         }
 
-        .btn-neo,
-        .progres-neo-page .btn.btn-sm {
-            min-height: 40px;
+        .progres-neo-actions .btn,
+        .progres-neo-actions a.btn {
+            width: 100%;
+            min-width: 0;
+            white-space: nowrap;
+        }
+
+        /* Tombol utama halaman */
+        .progres-neo-page .btn,
+        .progres-neo-actions .btn {
+            min-height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 14px !important;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--neo-surface) !important;
-            font-size: .8rem;
+            gap: 7px;
+            padding: 8px 13px !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 13px;
             line-height: 1;
-            font-weight: 850;
+            font-weight: 700;
             text-decoration: none !important;
-            box-shadow:
-                5px 5px 12px rgba(163, 177, 198, .3),
-                -5px -5px 12px rgba(255, 255, 255, .78) !important;
-            transition: .18s ease;
+            transform: none !important;
         }
 
-        .btn-neo:hover,
-        .progres-neo-page .btn.btn-sm:hover {
-            color: #0f172a !important;
-            border-color: rgba(100, 116, 139, .34) !important;
-            transform: translateY(-1px);
-            box-shadow:
-                6px 6px 14px rgba(163, 177, 198, .34),
-                -6px -6px 14px rgba(255, 255, 255, .82) !important;
+        .progres-neo-page .btn i {
+            color: currentColor !important;
         }
 
-        .progres-neo-page .btn-primary,
-        .progres-neo-page .btn-success,
-        .progres-neo-page .btn-warning,
+        .progres-neo-page .btn-primary {
+            color: #ffffff !important;
+            background: var(--page-blue) !important;
+            border: 1px solid var(--page-blue) !important;
+        }
+
+        .progres-neo-page .btn-primary:hover {
+            color: #ffffff !important;
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+        }
+
+        .progres-neo-page .btn-success {
+            color: #ffffff !important;
+            background: var(--page-success) !important;
+            border: 1px solid var(--page-success) !important;
+        }
+
+        .progres-neo-page .btn-success:hover {
+            color: #ffffff !important;
+            background: var(--page-success-dark) !important;
+            border-color: var(--page-success-dark) !important;
+        }
+
+        .progres-neo-page .btn-warning {
+            color: #ffffff !important;
+            background: var(--page-warning) !important;
+            border: 1px solid var(--page-warning) !important;
+        }
+
+        .progres-neo-page .btn-warning:hover {
+            color: #ffffff !important;
+            background: var(--page-warning-dark) !important;
+            border-color: var(--page-warning-dark) !important;
+        }
+
         .progres-neo-page .btn-danger {
-            color: #334155 !important;
-            background: var(--neo-surface) !important;
+            color: #ffffff !important;
+            background: var(--page-danger) !important;
+            border: 1px solid var(--page-danger) !important;
         }
 
-        .progres-neo-page .btn-primary i,
-        .progres-neo-page .text-primary {
-            color: var(--neo-primary) !important;
+        .progres-neo-page .btn-danger:hover {
+            color: #ffffff !important;
+            background: var(--page-danger-dark) !important;
+            border-color: var(--page-danger-dark) !important;
         }
 
-        .progres-neo-page .btn-success i,
-        .progres-neo-page .text-success {
-            color: var(--neo-success) !important;
+        .progres-neo-page .btn:hover {
+            transform: translateY(-1px) !important;
+            filter: brightness(.98);
         }
 
-        .progres-neo-page .btn-warning i,
-        .progres-neo-page .text-warning {
-            color: var(--neo-warning) !important;
+        .progres-neo-page .btn:active {
+            transform: translateY(0) !important;
         }
 
-        .progres-neo-page .btn-danger i,
-        .progres-neo-page .text-danger {
-            color: var(--neo-danger) !important;
+        /* Card */
+        .progres-neo-card,
+        .progres-neo-page .card {
+            overflow: hidden;
+            background: var(--page-white) !important;
+            border: 1px solid #eef2f7 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06) !important;
         }
 
+        .progres-neo-page .card-header {
+            min-height: auto;
+            padding: 16px 18px !important;
+            background: var(--page-white) !important;
+            border-bottom: 1px solid #eef2f7 !important;
+        }
+
+        .progres-neo-page .card-body {
+            background: var(--page-white) !important;
+        }
+
+        .progres-neo-page .card h2,
+        .progres-neo-page .card h4,
+        .progres-neo-page .text-gray-900 {
+            color: var(--page-text) !important;
+        }
+
+        /* Badge */
         .badge-neo,
         .progres-neo-page .badge {
+            min-height: 28px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
-            min-height: 30px;
-            padding: 7px 12px !important;
-            border: 1px solid rgba(148, 163, 184, .18);
+            padding: 6px 10px !important;
+            color: #334155 !important;
+            background: var(--page-soft) !important;
+            border: 1px solid var(--page-border) !important;
             border-radius: 999px;
-            color: #475569 !important;
-            background: var(--neo-surface) !important;
-            font-size: .76rem;
+            box-shadow: none !important;
+            font-size: 12px;
             line-height: 1;
-            font-weight: 850;
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .24),
-                -4px -4px 9px rgba(255, 255, 255, .76);
+            font-weight: 700;
         }
 
         .progres-neo-page .badge-light-primary,
         .progres-neo-page .badge-light-info {
-            color: var(--neo-primary) !important;
+            color: #1d4ed8 !important;
+            background: #eff6ff !important;
+            border-color: #bfdbfe !important;
         }
 
         .progres-neo-page .badge-light-success {
-            color: var(--neo-success) !important;
+            color: #047857 !important;
+            background: #ecfdf5 !important;
+            border-color: #bbf7d0 !important;
         }
 
         .progres-neo-page .badge-light-warning {
-            color: var(--neo-warning) !important;
+            color: #92400e !important;
+            background: #fffbeb !important;
+            border-color: #fde68a !important;
         }
 
         .progres-neo-page .badge-light-danger {
-            color: var(--neo-danger) !important;
+            color: #b91c1c !important;
+            background: #fef2f2 !important;
+            border-color: #fecaca !important;
         }
 
         .progres-neo-page .badge-light-secondary,
         .progres-neo-page .badge-light-dark,
         .progres-neo-page .badge-light {
             color: #475569 !important;
+            background: var(--page-soft) !important;
+            border-color: var(--page-border) !important;
         }
 
+        /* Ringkasan detail */
         .summary-neo-box {
-            padding: 22px;
-            border-radius: 24px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 6px 6px 13px rgba(163, 177, 198, .24),
-                inset -6px -6px 13px rgba(255, 255, 255, .78);
+            padding: 18px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 12px;
+            box-shadow: none;
         }
 
         .summary-neo-percent {
-            color: var(--neo-primary);
-            font-size: 2.2rem;
+            color: var(--page-primary);
+            font-size: 34px;
             line-height: 1;
-            font-weight: 950;
+            font-weight: 800;
         }
 
         .info-neo-item {
+            min-height: 66px;
             display: flex;
             align-items: center;
-            gap: 13px;
-            min-height: 66px;
+            gap: 12px;
             padding: 13px 14px;
-            border-radius: 20px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .2),
-                inset -4px -4px 9px rgba(255, 255, 255, .78);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .neo-icon,
         .progres-neo-page .symbol-label {
-            width: 42px !important;
-            height: 42px !important;
-            min-width: 42px !important;
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            border-radius: 15px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                4px 4px 10px rgba(163, 177, 198, .28),
-                -4px -4px 10px rgba(255, 255, 255, .76) !important;
+            background: #ffffff !important;
+            border: 1px solid var(--page-border);
+            border-radius: 8px !important;
+            box-shadow: none !important;
         }
 
+        .progres-neo-page .text-primary {
+            color: var(--page-blue) !important;
+        }
+
+        .progres-neo-page .text-success {
+            color: var(--page-success) !important;
+        }
+
+        .progres-neo-page .text-warning {
+            color: var(--page-warning) !important;
+        }
+
+        .progres-neo-page .text-danger {
+            color: var(--page-danger) !important;
+        }
+
+        /* Progress bar */
         .progres,
         .progress-neo {
             width: 100%;
             height: 9px;
             overflow: hidden;
+            background: #e5e7eb;
             border-radius: 999px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 3px 3px 7px rgba(163, 177, 198, .34),
-                inset -3px -3px 7px rgba(255, 255, 255, .78);
+            box-shadow: none;
         }
 
         .progres-bar,
         .progress-neo-bar {
             height: 100%;
+            background: var(--page-blue);
             border-radius: 999px;
-            background: linear-gradient(90deg, #60a5fa, #2563eb);
             box-shadow: none;
         }
 
         .progres-neo-page .progres-bar.bg-success,
         .progres-neo-page .bg-success.progres-bar {
-            background: linear-gradient(90deg, #86efac, #16a34a) !important;
+            background: var(--page-success) !important;
         }
 
+        /* Tabel */
         .progres-neo-page .table-responsive {
-            border-radius: 0 0 28px 28px;
-            background: var(--neo-surface);
+            background: #ffffff;
+            border-radius: 0;
         }
 
         .progres-neo-page .table {
+            width: 100%;
             margin-bottom: 0 !important;
-            color: var(--neo-text);
+            color: var(--page-text);
             border-collapse: separate;
             border-spacing: 0;
         }
 
         .progres-neo-page .table thead,
         .progres-neo-page .table thead.bg-light {
-            background: var(--neo-surface) !important;
+            background: var(--page-soft) !important;
         }
 
         .progres-neo-page .table thead tr th {
-            padding-top: 16px !important;
-            padding-bottom: 16px !important;
-            color: #64748b !important;
-            background: var(--neo-surface) !important;
-            border-bottom: 1px solid var(--neo-border) !important;
-            font-size: .76rem;
-            font-weight: 900 !important;
+            padding: 13px 14px !important;
+            color: #475569 !important;
+            background: var(--page-soft) !important;
+            border-bottom: 1px solid var(--page-border) !important;
+            font-size: 12px !important;
+            font-weight: 800 !important;
             text-transform: uppercase;
-            letter-spacing: .035em;
-        }
-
-        .progres-neo-page .table tbody tr {
-            transition: .18s ease;
-        }
-
-        .progres-neo-page .table tbody tr:hover {
-            background: rgba(255, 255, 255, .28);
+            letter-spacing: .03em;
+            white-space: nowrap;
         }
 
         .progres-neo-page .table tbody td {
-            padding-top: 17px !important;
-            padding-bottom: 17px !important;
-            border-bottom: 1px solid rgba(148, 163, 184, .16) !important;
-            background: transparent !important;
+            padding: 13px 14px !important;
+            color: #334155 !important;
+            background: #ffffff !important;
+            border-bottom: 1px solid #eef2f7 !important;
+            vertical-align: middle;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progres-neo-page .table tbody tr:hover td {
+            background: #f8fafc !important;
+        }
+
+        .progres-neo-page .table tbody tr:last-child td {
+            border-bottom: 0 !important;
         }
 
         .materi-neo-icon {
@@ -298,44 +368,48 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 14px;
-            background: var(--neo-surface);
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .24),
-                -4px -4px 9px rgba(255, 255, 255, .76);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            box-shadow: none;
         }
 
+        /* Detail soal */
         .detail-soal-neo-button {
             min-height: 34px !important;
             padding: 8px 11px !important;
-            border-radius: 12px !important;
-            color: #475569 !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .22),
-                -4px -4px 9px rgba(255, 255, 255, .72) !important;
-            font-size: .72rem !important;
-            font-weight: 850 !important;
+            color: #ffffff !important;
+            background: var(--page-purple) !important;
+            border: 1px solid var(--page-purple) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+        }
+
+        .detail-soal-neo-button:hover {
+            color: #ffffff !important;
+            background: #7c3aed !important;
+            border-color: #7c3aed !important;
         }
 
         .jawaban-neo-panel {
             padding: 14px;
-            border: 0 !important;
-            border-radius: 18px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .2),
-                inset -4px -4px 9px rgba(255, 255, 255, .78);
+            background: var(--page-soft) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
         }
 
         .jawaban-neo-item {
             padding: 11px 12px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, .34);
+            background: #ffffff;
+            border: 1px solid #eef2f7;
+            border-radius: 8px;
         }
 
         .jawaban-neo-item + .jawaban-neo-item {
-            margin-top: 9px;
+            margin-top: 8px;
         }
 
         .progres-neo-empty {
@@ -343,69 +417,86 @@
             align-items: center;
             gap: 12px;
             padding: 18px 20px;
-            border: 0;
-            border-radius: 22px;
             color: #475569;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px rgba(163, 177, 198, .22),
-                inset -5px -5px 12px rgba(255, 255, 255, .78);
+            background: #ffffff;
+            border: 1px solid #eef2f7;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
             font-weight: 700;
         }
 
-        .progres-neo-page .swal2-popup {
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 24px !important;
-            background: #eef2f7 !important;
-            box-shadow:
-                12px 12px 28px rgba(15, 23, 42, .16),
-                -8px -8px 22px rgba(255, 255, 255, .7) !important;
+        /* SweetAlert */
+        .progres-neo-page .swal2-popup,
+        .swal2-popup {
+            color: var(--page-text) !important;
+            background: #ffffff !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
-        .swal2-popup {
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 24px !important;
-            background: #eef2f7 !important;
+        .swal2-title {
+            color: var(--page-text) !important;
+            font-weight: 800 !important;
+        }
+
+        .swal2-html-container,
+        .swal2-content {
+            color: var(--page-muted) !important;
+            font-weight: 600 !important;
         }
 
         .swal2-confirm,
         .swal2-cancel {
-            border-radius: 13px !important;
-            font-weight: 850 !important;
+            min-height: 40px;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-weight: 700 !important;
         }
 
         @media (max-width: 991.98px) {
             .progres-neo-page {
-                padding: 0 18px 24px;
+                padding: 0 16px 24px;
             }
 
             .progres-neo-header {
-                padding: 20px;
+                padding: 16px;
             }
 
             .progres-neo-actions {
                 width: 100%;
-            }
-
-            .progres-neo-actions .btn,
-            .progres-neo-actions a {
-                flex: 1 1 180px;
+                max-width: 440px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
         @media (max-width: 575.98px) {
-            .progres-neo-actions .btn,
-            .progres-neo-actions a {
-                width: 100%;
-                flex: 1 1 100%;
-            }
-
             .progres-neo-title {
-                font-size: 1.35rem;
+                font-size: 20px;
             }
 
             .summary-neo-percent {
-                font-size: 1.9rem;
+                font-size: 30px;
+            }
+
+            .progres-neo-actions {
+                width: 100%;
+                max-width: 100%;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .progres-neo-actions .btn,
+            .progres-neo-actions a.btn {
+                width: 100%;
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+                font-size: 12px;
+                white-space: normal;
+            }
+
+            .progres-neo-page .card-body {
+                padding: 16px !important;
             }
         }
     </style>

@@ -3,20 +3,20 @@
 @section('css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-success: #22c55e;
-            --neo-danger: #ef4444;
-            --neo-warning: #f59e0b;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --verify-primary: #009ef7;
+            --verify-primary-dark: #008bd8;
+            --verify-primary-soft: #eaf6ff;
+            --verify-success: #22c55e;
+            --verify-success-soft: #ecfdf5;
+            --verify-danger: #ef4444;
+            --verify-danger-soft: #fef2f2;
+            --verify-warning: #f59e0b;
+            --verify-bg: #f8fafc;
+            --verify-surface: #ffffff;
+            --verify-soft: #f1f5f9;
+            --verify-border: #e5e7eb;
+            --verify-text: #111827;
+            --verify-muted: #64748b;
         }
 
         .content,
@@ -30,6 +30,7 @@
             position: relative;
             padding-top: 18px;
             padding-bottom: 56px;
+            color: var(--verify-text);
         }
 
         .neo-verify-hero,
@@ -37,46 +38,22 @@
         .neo-info-card,
         .neo-share-card,
         .neo-help-card {
-            border: 0 !important;
-            border-radius: 28px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                10px 10px 24px var(--neo-dark),
-                -10px -10px 24px var(--neo-light) !important;
+            border: 1px solid var(--verify-border) !important;
+            border-radius: 22px !important;
+            background: var(--verify-surface) !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06) !important;
             overflow: hidden;
         }
 
         .neo-verify-hero {
             position: relative;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 42%),
-                radial-gradient(circle at 100% 0%, rgba(0, 158, 247, 0.16), transparent 48%),
-                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.12), transparent 46%),
-                var(--neo-surface) !important;
+            background: #ffffff !important;
         }
 
-        .neo-verify-hero::before {
-            content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            right: -140px;
-            top: -140px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 158, 247, 0.18), transparent 68%);
-            pointer-events: none;
-        }
-
+        .neo-verify-hero::before,
         .neo-verify-hero::after {
-            content: "";
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            left: -130px;
-            bottom: -130px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.12), transparent 66%);
-            pointer-events: none;
+            display: none !important;
+            content: none !important;
         }
 
         .neo-verify-hero .card-body {
@@ -89,50 +66,48 @@
             align-items: center;
             gap: 8px;
             border-radius: 999px;
-            padding: 9px 14px;
-            background: var(--neo-surface);
-            color: var(--neo-primary);
+            padding: 8px 13px;
+            background: var(--verify-primary-soft);
+            color: var(--verify-primary);
             font-size: .78rem;
             font-weight: 800;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            border: 1px solid rgba(0, 158, 247, 0.14);
         }
 
         .neo-status-panel {
-            border-radius: 24px;
-            padding: 22px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            border-radius: 18px;
+            padding: 20px;
+            background: var(--verify-bg);
+            border: 1px solid var(--verify-border);
         }
 
         .neo-status-icon {
-            width: 68px;
-            height: 68px;
-            border-radius: 22px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             flex: 0 0 auto;
-            background: var(--neo-surface);
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light);
+            background: #ffffff;
+            border: 1px solid var(--verify-border);
         }
 
         .neo-status-icon i {
-            font-size: 2.25rem;
+            font-size: 2rem;
             line-height: 1;
         }
 
         .neo-status-icon.valid {
-            color: var(--neo-success);
+            color: var(--verify-success);
+            background: var(--verify-success-soft);
+            border-color: rgba(34, 197, 94, 0.18);
         }
 
         .neo-status-icon.invalid {
-            color: var(--neo-danger);
+            color: var(--verify-danger);
+            background: var(--verify-danger-soft);
+            border-color: rgba(239, 68, 68, 0.18);
         }
 
         .neo-pill {
@@ -142,51 +117,51 @@
             min-height: 32px;
             padding: 7px 11px;
             border-radius: 999px;
-            background: var(--neo-surface);
-            color: var(--neo-muted);
+            background: #ffffff;
+            color: var(--verify-muted);
             font-size: .76rem;
             font-weight: 700;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            border: 1px solid var(--verify-border);
         }
 
         .neo-pill i {
-            color: var(--neo-primary);
+            color: var(--verify-primary);
         }
 
         .neo-pill-success {
             color: #15803d;
+            background: var(--verify-success-soft);
+            border-color: rgba(34, 197, 94, 0.18);
         }
 
         .neo-pill-success i {
-            color: var(--neo-success);
+            color: var(--verify-success);
         }
 
         .neo-pill-danger {
             color: #b91c1c;
+            background: var(--verify-danger-soft);
+            border-color: rgba(239, 68, 68, 0.18);
         }
 
         .neo-pill-danger i {
-            color: var(--neo-danger);
+            color: var(--verify-danger);
         }
 
         .neo-data-card {
             min-height: 118px;
-            border-radius: 22px;
+            border-radius: 18px;
             padding: 18px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            background: #ffffff;
+            border: 1px solid var(--verify-border);
         }
 
         .neo-data-label {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--neo-muted);
-            font-size: .76rem;
+            color: var(--verify-muted);
+            font-size: .74rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: .035em;
@@ -194,11 +169,11 @@
         }
 
         .neo-data-label i {
-            color: var(--neo-primary);
+            color: var(--verify-primary);
         }
 
         .neo-data-value {
-            color: var(--neo-text);
+            color: var(--verify-text);
             font-size: 1rem;
             font-weight: 900;
             line-height: 1.35;
@@ -206,26 +181,22 @@
         }
 
         .neo-code-box {
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 13px 14px;
-            background: var(--neo-surface);
-            color: var(--neo-text);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            background: var(--verify-bg);
+            color: var(--verify-text);
+            border: 1px solid var(--verify-border);
             font-size: .82rem;
             font-weight: 800;
             word-break: break-all;
         }
 
         .neo-share-url {
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 14px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
-            color: var(--neo-muted);
+            background: var(--verify-bg);
+            border: 1px solid var(--verify-border);
+            color: var(--verify-muted);
             font-size: .78rem;
             font-weight: 700;
             word-break: break-all;
@@ -236,7 +207,7 @@
             gap: 12px;
             align-items: flex-start;
             padding: 14px 0;
-            border-bottom: 1px solid rgba(120, 113, 108, 0.14);
+            border-bottom: 1px solid var(--verify-border);
         }
 
         .neo-list-item:last-child {
@@ -247,56 +218,53 @@
         .neo-list-icon {
             width: 42px;
             height: 42px;
-            border-radius: 15px;
+            border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             flex: 0 0 auto;
-            background: var(--neo-surface);
-            color: var(--neo-primary);
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
+            background: var(--verify-primary-soft);
+            color: var(--verify-primary);
         }
 
         .neo-status-stamp {
             position: absolute;
             top: 22px;
-            right: -42px;
-            transform: rotate(38deg);
-            min-width: 170px;
-            padding: 9px 18px;
+            right: 22px;
+            transform: none;
+            min-width: auto;
+            padding: 7px 12px;
             text-align: center;
             color: #ffffff;
-            font-size: .78rem;
+            font-size: .72rem;
             font-weight: 900;
-            letter-spacing: .08em;
+            letter-spacing: .04em;
             text-transform: uppercase;
-            box-shadow: 0 10px 22px rgba(17, 24, 39, 0.22);
+            border-radius: 999px;
+            box-shadow: none;
+            z-index: 2;
         }
 
         .neo-status-stamp.valid {
-            background: var(--neo-success);
+            background: var(--verify-success);
         }
 
         .neo-status-stamp.invalid {
-            background: var(--neo-danger);
+            background: var(--verify-danger);
         }
 
         .btn.btn-primary {
-            background: var(--neo-primary) !important;
+            background: var(--verify-primary) !important;
             border: 0 !important;
             color: #ffffff !important;
-            border-radius: 15px !important;
-            box-shadow:
-                5px 5px 12px rgba(120, 113, 108, 0.24),
-                -5px -5px 12px rgba(255, 255, 255, 0.68);
-            transition: 0.2s ease;
+            border-radius: 14px !important;
+            box-shadow: 0 12px 26px rgba(0, 158, 247, 0.20);
+            transition: .18s ease;
         }
 
         .btn.btn-primary:hover,
         .btn.btn-primary:focus {
-            background: var(--neo-primary-dark) !important;
+            background: var(--verify-primary-dark) !important;
             color: #ffffff !important;
             transform: translateY(-1px);
         }
@@ -304,20 +272,20 @@
         .btn.btn-light-primary,
         .btn.btn-light,
         .btn.btn-sm.btn-light-primary {
-            border: 0 !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
-            border-radius: 15px !important;
-            box-shadow:
-                4px 4px 10px var(--neo-dark-soft),
-                -4px -4px 10px var(--neo-light);
-            transition: 0.2s ease;
+            border: 1px solid var(--verify-border) !important;
+            background: #ffffff !important;
+            color: var(--verify-primary) !important;
+            border-radius: 14px !important;
+            box-shadow: none !important;
+            transition: .18s ease;
         }
 
         .btn.btn-light-primary:hover,
         .btn.btn-light:hover,
         .btn.btn-sm.btn-light-primary:hover {
-            color: var(--neo-primary-dark) !important;
+            color: var(--verify-primary-dark) !important;
+            background: var(--verify-primary-soft) !important;
+            border-color: rgba(0, 158, 247, 0.22) !important;
             transform: translateY(-1px);
         }
 
@@ -326,36 +294,48 @@
         .badge.badge-light-primary,
         .badge.badge-light-secondary {
             border-radius: 999px;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                3px 3px 8px var(--neo-dark-soft),
-                -3px -3px 8px var(--neo-light);
-            padding: 8px 12px;
+            padding: 7px 11px;
+            box-shadow: none !important;
+            border: 1px solid var(--verify-border);
+            font-weight: 800;
         }
 
         .badge.badge-light-success {
             color: #15803d !important;
+            background: var(--verify-success-soft) !important;
+            border-color: rgba(34, 197, 94, 0.18);
         }
 
         .badge.badge-light-danger {
             color: #b91c1c !important;
+            background: var(--verify-danger-soft) !important;
+            border-color: rgba(239, 68, 68, 0.18);
         }
 
         .badge.badge-light-primary {
-            color: var(--neo-primary) !important;
+            color: var(--verify-primary) !important;
+            background: var(--verify-primary-soft) !important;
+            border-color: rgba(0, 158, 247, 0.14);
         }
 
         .badge.badge-light-secondary {
-            color: var(--neo-muted) !important;
+            color: var(--verify-muted) !important;
+            background: var(--verify-bg) !important;
         }
 
         .neo-mini-help {
-            border-radius: 22px;
+            border-radius: 18px;
             padding: 18px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            background: var(--verify-bg);
+            border: 1px solid var(--verify-border);
+        }
+
+        .neo-share-card .card-body,
+        .neo-info-card .card-body,
+        .neo-help-card .card-body,
+        .neo-verify-card .card-body,
+        .neo-verify-hero .card-body {
+            background: transparent !important;
         }
 
         @media (max-width: 991.98px) {
@@ -368,10 +348,8 @@
             .neo-info-card,
             .neo-share-card,
             .neo-help-card {
-                border-radius: 24px !important;
-                box-shadow:
-                    8px 8px 18px var(--neo-dark-soft),
-                    -8px -8px 18px var(--neo-light) !important;
+                border-radius: 20px !important;
+                box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06) !important;
             }
 
             .neo-status-stamp {
@@ -401,8 +379,18 @@
             }
 
             .neo-status-icon {
-                width: 62px;
-                height: 62px;
+                width: 60px;
+                height: 60px;
+                border-radius: 16px;
+            }
+
+            .neo-data-card {
+                min-height: auto;
+            }
+
+            .neo-code-box,
+            .neo-share-url {
+                font-size: .76rem;
             }
         }
     </style>

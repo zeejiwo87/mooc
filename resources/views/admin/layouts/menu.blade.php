@@ -1,253 +1,161 @@
 <style>
     :root {
-        --neo-dark-bg: #111827;
-        --neo-dark-surface: #151f32;
-        --neo-dark-surface-soft: #1b2740;
-        --neo-dark-border: rgba(255, 255, 255, 0.06);
-        --neo-dark-text: #e5e7eb;
-        --neo-dark-muted: #9ca3af;
-        --neo-dark-primary: #009ef7;
-        --neo-dark-primary-2: #3b82f6;
-        --neo-dark-shadow-dark: rgba(0, 0, 0, 0.45);
-        --neo-dark-shadow-light: rgba(255, 255, 255, 0.055);
-        --neo-dark-inset-dark: rgba(0, 0, 0, 0.42);
-        --neo-dark-inset-light: rgba(255, 255, 255, 0.05);
+        --admin-menu-bg: #0f172a;
+        --admin-menu-bg-2: #111827;
+        --admin-menu-surface: #162033;
+        --admin-menu-surface-hover: #1e293b;
+        --admin-menu-active: #034870;
+        --admin-menu-active-dark: #fdfdfd;
+        --admin-menu-text: #e5e7eb;
+        --admin-menu-muted: #94a3b8;
+        --admin-menu-border: rgba(255, 255, 255, .08);
+        --admin-menu-icon-bg: rgba(0, 158, 247, .16);
     }
 
     #kt_aside.aside {
-        background:
-            radial-gradient(circle at top left, rgba(0, 158, 247, 0.12), transparent 34%),
-            radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.08), transparent 32%),
-            linear-gradient(145deg, #121a2b, #0d1320) !important;
-        border-right: 1px solid var(--neo-dark-border);
-        box-shadow:
-            14px 0 35px rgba(0, 0, 0, 0.28),
-            inset -1px 0 0 rgba(255, 255, 255, 0.04) !important;
+        background: linear-gradient(180deg, var(--admin-menu-bg), var(--admin-menu-bg-2)) !important;
+        border-right: 1px solid var(--admin-menu-border) !important;
+        box-shadow: 8px 0 24px rgba(15, 23, 42, .35) !important;
     }
 
     #kt_aside_logo {
-        min-height: 74px;
-        padding: 14px 16px !important;
+        min-height: 72px;
+        padding: 14px 18px !important;
         background: transparent !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+        border-bottom: 1px solid var(--admin-menu-border) !important;
     }
 
     #kt_aside_logo p {
         width: 100%;
         margin: 0 !important;
-        padding: 14px 16px !important;
-        color: var(--neo-dark-text) !important;
-        line-height: 1.25;
+        padding: 12px 14px !important;
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid var(--admin-menu-border);
+        border-radius: 12px;
+        font-weight: 800 !important;
+        line-height: 1.35;
         text-align: center;
-        border-radius: 20px;
-        background: linear-gradient(145deg, #172238, #101827);
-        box-shadow:
-            7px 7px 16px var(--neo-dark-shadow-dark),
-            -7px -7px 16px var(--neo-dark-shadow-light),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.035);
     }
 
     #kt_aside .aside-menu {
         background: transparent !important;
     }
 
-    .neo-admin-sidebar-wrapper {
+    .admin-sidebar-simple {
         padding: 0 14px 18px;
     }
 
-    .neo-admin-sidebar-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 26px;
-        padding: 14px;
-        background: linear-gradient(145deg, #151f32, #0f1726);
-        box-shadow:
-            inset 5px 5px 13px var(--neo-dark-inset-dark),
-            inset -5px -5px 13px var(--neo-dark-inset-light),
-            8px 8px 20px rgba(0, 0, 0, 0.20);
+    .admin-simple-menu.menu {
+        width: 100%;
     }
 
-    .neo-admin-sidebar-card::before {
-        content: "";
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        right: -78px;
-        top: -78px;
-        border-radius: 50%;
-        background: rgba(0, 158, 247, 0.11);
-        pointer-events: none;
-    }
-
-    .neo-admin-sidebar-card::after {
-        content: "";
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        left: -70px;
-        bottom: -70px;
-        border-radius: 50%;
-        background: rgba(59, 130, 246, 0.075);
-        pointer-events: none;
-    }
-
-    .neo-admin-menu.menu {
-        position: relative;
-        z-index: 1;
-    }
-
-    .neo-admin-menu .menu-item {
+    .admin-simple-menu .menu-item {
         margin: 0;
     }
 
-    .neo-menu-section-label {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 14px 4px 8px;
-        color: var(--neo-dark-muted);
-        font-size: 10px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+    .admin-simple-menu .menu-link {
+        min-height: 46px;
+        margin: 4px 0;
+        padding: 10px 12px !important;
+        border-radius: 12px;
+        color: var(--admin-menu-text) !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        transition: .18s ease;
     }
 
-    .neo-menu-section-label:first-child {
-        margin-top: 2px;
-    }
-
-    .neo-menu-section-label::after {
-        content: "";
-        height: 1px;
-        flex: 1;
-        background: rgba(255, 255, 255, 0.07);
-    }
-
-    .neo-admin-menu .menu-link {
-        position: relative;
-        min-height: 48px;
-        margin: 7px 0;
-        padding: 11px 13px !important;
-        border-radius: 17px;
-        color: var(--neo-dark-text) !important;
-        background: transparent;
-        border: 1px solid transparent;
-        transition:
-            transform 0.18s ease,
-            box-shadow 0.18s ease,
-            background 0.18s ease,
-            border-color 0.18s ease,
-            color 0.18s ease;
-    }
-
-    .neo-admin-menu .menu-link:hover {
-        transform: translateY(-1px);
+    .admin-simple-menu .menu-link:hover {
         color: #ffffff !important;
-        background: linear-gradient(145deg, #18243a, #111a2b);
-        border-color: rgba(255, 255, 255, 0.055);
-        box-shadow:
-            6px 6px 14px var(--neo-dark-shadow-dark),
-            -6px -6px 14px var(--neo-dark-shadow-light);
+        background: var(--admin-menu-surface-hover) !important;
+        border-color: var(--admin-menu-border) !important;
     }
 
-    .neo-admin-menu .menu-link.active,
-    .neo-admin-menu .menu-item.here > .menu-link,
-    .neo-admin-menu .menu-item.show > .menu-link {
+    .admin-simple-menu .menu-link.active,
+    .admin-simple-menu .menu-item.here > .menu-link,
+    .admin-simple-menu .menu-item.show > .menu-link {
         color: #ffffff !important;
-        background: linear-gradient(135deg, var(--neo-dark-primary), var(--neo-dark-primary-2)) !important;
-        border-color: rgba(255, 255, 255, 0.10);
-        box-shadow:
-            8px 8px 18px rgba(0, 0, 0, 0.38),
-            -5px -5px 14px rgba(255, 255, 255, 0.055),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.18);
+        background: var(--admin-menu-active) !important;
+        border-color: rgba(255, 255, 255, .16) !important;
+        box-shadow: 0 10px 24px rgba(0, 158, 247, .22);
     }
 
-    .neo-admin-menu .menu-title {
+    .admin-simple-menu .menu-title {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: .65rem;
         color: inherit !important;
         font-size: 13px;
         font-weight: 800;
-        letter-spacing: 0.01em;
+        line-height: 1.2;
     }
 
-    .neo-menu-icon {
-        width: 34px;
-        height: 34px;
-        min-width: 34px;
-        display: inline-flex;
+    .admin-simple-menu .menu-title i {
+        width: 28px;
+        min-width: 28px;
+        height: 28px;
+        display: inline-flex !important;
         align-items: center;
         justify-content: center;
-        border-radius: 13px;
-        color: var(--neo-dark-primary);
-        background: linear-gradient(145deg, #18243a, #101827);
-        box-shadow:
-            4px 4px 10px rgba(0, 0, 0, 0.38),
-            -4px -4px 10px rgba(255, 255, 255, 0.045),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.035);
-        transition: 0.18s ease;
+        border-radius: 9px;
+        background: var(--admin-menu-icon-bg);
+        color: #38bdf8 !important;
+        font-size: 1.15rem !important;
+        line-height: 1 !important;
+        opacity: 1 !important;
     }
 
-    .neo-admin-menu .menu-link:hover .neo-menu-icon {
-        color: #ffffff;
-        background: linear-gradient(145deg, #1d2b46, #121b2d);
+    .admin-simple-menu .menu-link:hover .menu-title i {
+        background: rgba(255, 255, 255, .10);
+        color: #ffffff !important;
     }
 
-    .neo-admin-menu .menu-link.active .neo-menu-icon,
-    .neo-admin-menu .menu-item.here > .menu-link .neo-menu-icon,
-    .neo-admin-menu .menu-item.show > .menu-link .neo-menu-icon {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.17);
-        box-shadow:
-            inset 2px 2px 5px rgba(0, 0, 0, 0.18),
-            inset -2px -2px 5px rgba(255, 255, 255, 0.14);
+    .admin-simple-menu .menu-link.active .menu-title i,
+    .admin-simple-menu .menu-item.here > .menu-link .menu-title i,
+    .admin-simple-menu .menu-item.show > .menu-link .menu-title i {
+        background: rgba(255, 255, 255, .20);
+        color: #ffffff !important;
     }
 
-    .neo-admin-menu .menu-arrow {
-        color: inherit !important;
+    .admin-simple-menu .menu-arrow {
+        color: var(--admin-menu-muted) !important;
     }
 
-    .neo-admin-menu .menu-arrow::after {
+    .admin-simple-menu .menu-link:hover .menu-arrow,
+    .admin-simple-menu .menu-item.here > .menu-link .menu-arrow,
+    .admin-simple-menu .menu-item.show > .menu-link .menu-arrow {
+        color: #ffffff !important;
+    }
+
+    .admin-simple-menu .menu-arrow::after {
         background-color: currentColor !important;
-        opacity: 0.85;
+        opacity: 1 !important;
     }
 
-    .neo-admin-menu .menu-sub {
-        margin: 4px 0 8px 18px;
-        padding: 7px 0 7px 12px;
-        border-left: 2px solid rgba(0, 158, 247, 0.22);
+    .admin-simple-menu .menu-sub {
+        margin: 4px 0 8px 36px;
+        padding: 5px 0 5px 10px;
+        border-left: 1px solid rgba(148, 163, 184, .28);
     }
 
-    .neo-admin-menu .menu-sub .menu-link {
-        min-height: 42px;
-        margin: 6px 0;
-        padding: 9px 12px !important;
-        border-radius: 15px;
-        color: var(--neo-dark-text) !important;
+    .admin-simple-menu .menu-sub .menu-link {
+        min-height: 38px;
+        padding: 8px 10px !important;
+        border-radius: 10px;
+        color: var(--admin-menu-muted) !important;
+        background: transparent !important;
     }
 
-    .neo-admin-menu .menu-sub .menu-title {
+    .admin-simple-menu .menu-sub .menu-link:hover,
+    .admin-simple-menu .menu-sub .menu-link.active {
+        color: #ffffff !important;
+        background: rgba(0, 158, 247, .14) !important;
+        border-color: rgba(0, 158, 247, .20) !important;
+    }
+
+    .admin-simple-menu .menu-sub .menu-title {
         font-size: 12px;
         font-weight: 800;
-    }
-
-    .neo-sub-dot {
-        width: 9px;
-        height: 9px;
-        min-width: 9px;
-        border-radius: 50%;
-        background: rgba(0, 158, 247, 0.55);
-        box-shadow:
-            2px 2px 5px rgba(0, 0, 0, 0.38),
-            -2px -2px 5px rgba(255, 255, 255, 0.04);
-    }
-
-    .neo-admin-menu .menu-sub .menu-link.active .neo-sub-dot {
-        background: #ffffff;
-        box-shadow: none;
     }
 
     .hover-scroll-overlay-y::-webkit-scrollbar {
@@ -256,7 +164,7 @@
 
     .hover-scroll-overlay-y::-webkit-scrollbar-thumb {
         border-radius: 999px;
-        background: rgba(0, 158, 247, 0.38);
+        background: rgba(0, 158, 247, .48);
     }
 
     .hover-scroll-overlay-y::-webkit-scrollbar-track {
@@ -267,48 +175,40 @@
         #kt_aside.aside {
             width: 280px !important;
             max-width: 86vw;
-            border-radius: 0 28px 28px 0;
         }
 
-        .neo-admin-sidebar-wrapper {
+        .admin-sidebar-simple {
             padding: 0 12px 16px;
         }
 
-        .neo-admin-sidebar-card {
-            border-radius: 24px;
-        }
-
-        .neo-admin-menu .menu-link {
-            min-height: 50px;
+        .admin-simple-menu .menu-link {
+            min-height: 46px;
         }
     }
 
     @media (max-width: 575.98px) {
         #kt_aside_logo {
-            min-height: 68px;
+            min-height: 66px;
             padding: 12px !important;
         }
 
         #kt_aside_logo p {
             font-size: 13px !important;
-            border-radius: 18px;
-            padding: 12px !important;
         }
 
-        .neo-admin-menu .menu-title {
+        .admin-simple-menu .menu-title {
             font-size: 12px;
         }
 
-        .neo-menu-icon {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            border-radius: 12px;
+        .admin-simple-menu .menu-title i {
+            width: 26px;
+            min-width: 26px;
+            height: 26px;
+            font-size: 1.05rem !important;
         }
 
-        .neo-admin-menu .menu-link {
-            padding: 10px 11px !important;
-            border-radius: 16px;
+        .admin-simple-menu .menu-link {
+            padding: 9px 10px !important;
         }
     }
 </style>
@@ -322,136 +222,96 @@
      data-kt-scroll-wrappers="#kt_aside_menu"
      data-kt-scroll-offset="0">
 
-    <div class="neo-admin-sidebar-wrapper">
-        <div class="neo-admin-sidebar-card">
+    <div class="admin-sidebar-simple">
+        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 admin-simple-menu"
+             id="kt_aside_menu"
+             data-kt-menu="true">
 
-            <div class="menu menu-column neo-admin-menu"
-                 id="kt_aside_menu"
-                 data-kt-menu="true">
-
-                <div class="neo-menu-section-label">
-                    <span>Utama</span>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
-                       href="{{ route('index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-grid-fill fs-4"></i>
-                            </span>
-                            Dashboard
-                        </span>
-                    </a>
-                </div>
-
-                <div class="neo-menu-section-label">
-                    <span>Aplikasi</span>
-                </div>
-
-                <div data-kt-menu-trigger="click"
-                     class="menu-item menu-accordion {{ request()->routeIs('admin.app.*') ? 'here show' : '' }}">
-                    <span class="menu-link">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-people-fill fs-4"></i>
-                            </span>
-                            App
-                        </span>
-                        <span class="menu-arrow"></span>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
+                   href="{{ route('index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-grid-fill fs-3 me-2"></i>
+                        Dashboard
                     </span>
+                </a>
+            </div>
 
-                    <div class="menu-sub menu-sub-accordion">
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('admin.app.mentor.*') ? 'active' : '' }}"
-                               href="{{ route('admin.app.mentor.index') }}">
-                                <span class="menu-title">
-                                    <span class="neo-sub-dot"></span>
-                                    Mentor
-                                </span>
-                            </a>
-                        </div>
+            <div data-kt-menu-trigger="click"
+                 class="menu-item menu-accordion {{ request()->routeIs('admin.app.*') ? 'here show' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-title">
+                        <i class="bi bi-people-fill fs-3 me-2"></i>
+                        App
+                    </span>
+                    <span class="menu-arrow"></span>
+                </span>
 
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('admin.app.pengguna.*') ? 'active' : '' }}"
-                               href="{{ route('admin.app.pengguna.index') }}">
-                                <span class="menu-title">
-                                    <span class="neo-sub-dot"></span>
-                                    Pengguna
-                                </span>
-                            </a>
-                        </div>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('admin.app.mentor.*') ? 'active' : '' }}"
+                           href="{{ route('admin.app.mentor.index') }}">
+                            <span class="menu-title">Mentor</span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('admin.app.pengguna.*') ? 'active' : '' }}"
+                           href="{{ route('admin.app.pengguna.index') }}">
+                            <span class="menu-title">Pengguna</span>
+                        </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="neo-menu-section-label">
-                    <span>Master Kelas</span>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('admin.kelas.tag.*') ? 'active' : '' }}"
+                   href="{{ route('admin.kelas.tag.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-tags-fill fs-3 me-2"></i>
+                        Tag
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.kelas.tag.*') ? 'active' : '' }}"
-                       href="{{ route('admin.kelas.tag.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-tags-fill fs-4"></i>
-                            </span>
-                            Tag
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('admin.kelas.kategori.*') ? 'active' : '' }}"
+                   href="{{ route('admin.kelas.kategori.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-folder-fill fs-3 me-2"></i>
+                        Kategori
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.kelas.kategori.*') ? 'active' : '' }}"
-                       href="{{ route('admin.kelas.kategori.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-folder-fill fs-4"></i>
-                            </span>
-                            Kategori
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('admin.kelas.kategori_sub.*') ? 'active' : '' }}"
+                   href="{{ route('admin.kelas.kategori_sub.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-diagram-3-fill fs-3 me-2"></i>
+                        Kategori Sub
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.kelas.kategori_sub.*') ? 'active' : '' }}"
-                       href="{{ route('admin.kelas.kategori_sub.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-diagram-3-fill fs-4"></i>
-                            </span>
-                            Kategori Sub
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('admin.kelas.kelas.*') ? 'active' : '' }}"
+                   href="{{ route('admin.kelas.kelas.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-easel-fill fs-3 me-2"></i>
+                        Kelas
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.kelas.kelas.*') ? 'active' : '' }}"
-                       href="{{ route('admin.kelas.kelas.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-easel-fill fs-4"></i>
-                            </span>
-                            Kelas
-                        </span>
-                    </a>
-                </div>
-
-                <div class="neo-menu-section-label">
-                    <span>Aktivitas</span>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.kelas.pendaftaran.*') ? 'active' : '' }}"
-                       href="{{ route('admin.kelas.pendaftaran.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-person-plus-fill fs-4"></i>
-                            </span>
-                            Pendaftaran
-                        </span>
-                    </a>
-                </div>
-
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('admin.kelas.pendaftaran.*') ? 'active' : '' }}"
+                   href="{{ route('admin.kelas.pendaftaran.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-person-plus-fill fs-3 me-2"></i>
+                        Pendaftaran
+                    </span>
+                </a>
             </div>
 
         </div>

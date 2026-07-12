@@ -1,17 +1,16 @@
 <style>
     #form_edit {
-        --neo-modal-bg: #eef2f7;
-        --neo-modal-surface: #eef2f7;
-        --neo-modal-surface-soft: #f3f6fa;
-        --neo-modal-text: #1f2937;
-        --neo-modal-muted: #6b7280;
-        --neo-modal-border: rgba(148, 163, 184, 0.18);
-        --neo-modal-shadow-dark: rgba(163, 177, 198, 0.42);
-        --neo-modal-shadow-light: rgba(255, 255, 255, 0.95);
-        --neo-modal-primary: #3b82f6;
-        --neo-modal-primary-dark: #2563eb;
-        --neo-modal-danger: #ef4444;
-        --neo-modal-warning: #f59e0b;
+        --simple-primary: #0f62fe;
+        --simple-primary-dark: #0043ce;
+        --simple-danger: #ef4444;
+        --simple-danger-dark: #dc2626;
+        --simple-warning: #f59e0b;
+        --simple-success: #10b981;
+        --simple-text: #111827;
+        --simple-muted: #64748b;
+        --simple-border: #e5e7eb;
+        --simple-soft: #f8fafc;
+        --simple-white: #ffffff;
     }
 
     #form_edit .modal-dialog {
@@ -20,100 +19,92 @@
     }
 
     #form_edit .modal-content {
-        border: 0;
-        border-radius: 28px;
-        background: var(--neo-modal-bg);
-        box-shadow:
-            18px 18px 40px rgba(15, 23, 42, 0.22),
-            -10px -10px 28px rgba(255, 255, 255, 0.8);
         overflow: hidden;
+        border: 0 !important;
+        border-radius: 14px !important;
+        background: var(--simple-white) !important;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, .14) !important;
     }
 
     #form_edit .modal-header {
         min-height: auto;
-        padding: 24px 26px 18px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        background: transparent;
+        padding: 18px 22px;
+        background: var(--simple-white) !important;
+        border-bottom: 1px solid #eef2f7 !important;
     }
 
     #form_edit .neo-modal-title-wrap {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
         min-width: 0;
     }
 
     #form_edit .neo-modal-title-icon {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        border-radius: 17px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--neo-modal-primary);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.28),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 1.2rem;
+        border-radius: 10px;
+        color: #ffffff;
+        background: var(--simple-primary);
+        font-size: 1rem;
     }
 
     #form_edit .modal-title {
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 1.18rem;
+        color: var(--simple-text);
+        font-size: 1.08rem;
         line-height: 1.25;
-        font-weight: 850;
-        letter-spacing: -0.02em;
+        font-weight: 800;
     }
 
     #form_edit .neo-modal-subtitle {
-        margin: 5px 0 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.86rem;
+        margin: 4px 0 0;
+        color: var(--simple-muted);
+        font-size: .86rem;
         line-height: 1.4;
         font-weight: 500;
     }
 
     #form_edit .neo-btn-close {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
         padding: 0;
-        border: 0;
-        border-radius: 15px;
+        border: 0 !important;
+        border-radius: 8px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            6px 6px 14px rgba(163, 177, 198, 0.34),
-            -6px -6px 14px rgba(255, 255, 255, 0.9);
+        color: var(--simple-muted);
+        background: transparent !important;
+        box-shadow: none !important;
         opacity: 1;
-        transition: .18s ease;
+        transition: .16s ease;
     }
 
     #form_edit .neo-btn-close:hover {
-        color: var(--neo-modal-danger);
-        transform: translateY(-1px);
+        color: var(--simple-danger);
+        background: #fef2f2 !important;
     }
 
     #form_edit .neo-btn-close i {
-        font-size: 1.2rem;
+        font-size: 1rem;
         line-height: 1;
     }
 
     #form_edit .modal-body {
-        padding: 24px 26px;
-        background: transparent;
+        padding: 22px;
+        background: var(--simple-soft) !important;
     }
 
     #form_edit .neo-form-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.85fr);
-        gap: 22px;
+        grid-template-columns: minmax(0, 1.35fr) minmax(340px, .85fr);
+        gap: 18px;
         align-items: start;
     }
 
@@ -121,47 +112,46 @@
     #form_edit .neo-right-stack {
         display: flex;
         flex-direction: column;
-        gap: 22px;
+        gap: 18px;
         min-width: 0;
     }
 
     #form_edit .neo-section {
-        border-radius: 24px;
-        padding: 20px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            10px 10px 22px var(--neo-modal-shadow-dark),
-            -10px -10px 22px var(--neo-modal-shadow-light);
+        padding: 18px;
+        border: 1px solid var(--simple-border);
+        border-radius: 12px;
+        background: var(--simple-white);
+        box-shadow: none !important;
     }
 
     #form_edit .neo-section-title {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin: 0 0 18px;
+        gap: 8px;
+        margin: 0 0 16px;
         padding-bottom: 12px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        color: var(--neo-modal-text);
-        font-size: 0.95rem;
+        border-bottom: 1px solid #eef2f7;
+        color: var(--simple-text);
+        font-size: .95rem;
         line-height: 1.3;
-        font-weight: 850;
+        font-weight: 800;
     }
 
     #form_edit .neo-section-title i {
-        color: var(--neo-modal-primary);
+        color: var(--simple-primary);
         font-size: 1rem;
     }
 
     #form_edit .neo-field-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
+        gap: 14px;
     }
 
     #form_edit .neo-field-grid-3 {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
+        gap: 14px;
     }
 
     #form_edit .neo-field {
@@ -169,13 +159,10 @@
         flex-direction: column;
         gap: 7px;
         min-width: 0;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
-    #form_edit .neo-field:last-child {
-        margin-bottom: 0;
-    }
-
+    #form_edit .neo-field:last-child,
     #form_edit .neo-field.no-margin {
         margin-bottom: 0;
     }
@@ -189,38 +176,36 @@
         align-items: center;
         gap: 6px;
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 0.86rem;
+        color: #374151;
+        font-size: .84rem;
         line-height: 1.35;
         font-weight: 800;
     }
 
     #form_edit .neo-label.required::after {
         content: "*";
-        color: var(--neo-modal-danger);
+        color: var(--simple-danger);
         font-weight: 900;
     }
 
     #form_edit .form-control,
     #form_edit .form-select,
     #form_edit .select2-container--bootstrap5 .select2-selection {
-        min-height: 44px;
-        border: 0 !important;
-        border-radius: 16px !important;
-        color: var(--neo-modal-text) !important;
-        background: var(--neo-modal-surface) !important;
-        font-size: 0.9rem !important;
+        min-height: 42px;
+        border: 1px solid var(--simple-border) !important;
+        border-radius: 8px !important;
+        color: var(--simple-text) !important;
+        background: var(--simple-white) !important;
+        font-size: .88rem !important;
         font-weight: 600;
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92) !important;
+        box-shadow: none !important;
         outline: none !important;
-        transition: .18s ease;
+        transition: .16s ease;
     }
 
     #form_edit .form-control,
     #form_edit .form-select {
-        padding: 11px 14px !important;
+        padding: 10px 12px !important;
     }
 
     #form_edit textarea.form-control {
@@ -229,12 +214,12 @@
     }
 
     #form_edit .form-control:focus,
-    #form_edit .form-select:focus {
-        background: #f8fafc !important;
-        box-shadow:
-            inset 4px 4px 8px rgba(163, 177, 198, 0.22),
-            inset -4px -4px 8px rgba(255, 255, 255, 0.96),
-            0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+    #form_edit .form-select:focus,
+    #form_edit .select2-container--bootstrap5.select2-container--focus .select2-selection,
+    #form_edit .select2-container--bootstrap5.select2-container--open .select2-selection {
+        border-color: var(--simple-primary) !important;
+        box-shadow: 0 0 0 .2rem rgba(15, 98, 254, .10) !important;
+        background: var(--simple-white) !important;
     }
 
     #form_edit .form-control::placeholder {
@@ -251,10 +236,10 @@
     }
 
     #form_edit .select2-container--bootstrap5 .select2-selection__rendered {
-        color: var(--neo-modal-text) !important;
+        color: var(--simple-text) !important;
         font-weight: 600;
-        line-height: 44px !important;
-        padding-left: 14px !important;
+        line-height: 42px !important;
+        padding-left: 12px !important;
         padding-right: 36px !important;
     }
 
@@ -264,28 +249,26 @@
     }
 
     #form_edit .select2-container--bootstrap5 .select2-selection__arrow {
-        height: 44px !important;
+        height: 42px !important;
     }
 
     #form_edit .invalid-feedback {
         margin-top: 2px;
-        font-size: 0.78rem;
+        font-size: .78rem;
         font-weight: 700;
     }
 
     #form_edit #edit_deskripsi_lengkap_editor {
-        min-height: 220px !important;
-        border: 0 !important;
-        border-radius: 16px !important;
-        padding: 14px !important;
-        color: var(--neo-modal-text) !important;
-        background: var(--neo-modal-surface) !important;
-        font-size: 0.9rem !important;
+        min-height: 210px !important;
+        padding: 12px !important;
+        border: 1px solid var(--simple-border) !important;
+        border-radius: 8px !important;
+        color: var(--simple-text) !important;
+        background: var(--simple-white) !important;
+        font-size: .88rem !important;
         font-weight: 600;
         line-height: 1.6;
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92) !important;
+        box-shadow: none !important;
         overflow: auto;
     }
 
@@ -293,14 +276,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
     }
 
     #form_edit .neo-media-title {
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 0.9rem;
-        font-weight: 850;
+        color: var(--simple-text);
+        font-size: .9rem;
+        font-weight: 800;
         line-height: 1.35;
         text-align: center;
     }
@@ -309,28 +292,25 @@
         position: relative;
         width: 250px;
         height: 142px;
-        border-radius: 28px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 6px 6px 13px rgba(163, 177, 198, 0.26),
-            inset -6px -6px 13px rgba(255, 255, 255, 0.92);
+        border: 1px dashed #cbd5e1;
+        border-radius: 12px;
+        background: #f8fafc;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: none !important;
     }
 
     #form_edit .image-input-wrapper {
         width: 220px !important;
         height: 112px !important;
-        border: 0 !important;
-        border-radius: 22px !important;
-        background-color: var(--neo-modal-surface-soft);
+        border: 1px solid var(--simple-border) !important;
+        border-radius: 10px !important;
+        background-color: #ffffff;
         background-size: cover !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.32),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
+        box-shadow: none !important;
     }
 
     #form_edit .image-input-wrapper::before {
@@ -342,7 +322,7 @@
         align-items: center;
         justify-content: center;
         color: #94a3b8;
-        font-size: 2.4rem;
+        font-size: 2rem;
     }
 
     #form_edit .image-input-wrapper[style*="background-image"]::before {
@@ -350,113 +330,108 @@
     }
 
     #form_edit .image-input [data-kt-image-input-action] {
-        width: 34px !important;
-        height: 34px !important;
+        width: 32px !important;
+        height: 32px !important;
         border: 0 !important;
-        border-radius: 13px !important;
-        color: var(--neo-modal-primary);
-        background: var(--neo-modal-surface) !important;
-        box-shadow:
-            5px 5px 12px rgba(163, 177, 198, 0.36),
-            -5px -5px 12px rgba(255, 255, 255, 0.92) !important;
+        border-radius: 8px !important;
+        color: #ffffff !important;
+        background: var(--simple-primary) !important;
+        box-shadow: 0 6px 14px rgba(15, 23, 42, .14) !important;
     }
 
     #form_edit .image-input [data-kt-image-input-action] i {
-        font-size: 0.95rem !important;
+        color: #ffffff !important;
+        font-size: .9rem !important;
     }
 
     #form_edit .image-input [data-kt-image-input-action="change"] {
-        right: -9px;
-        top: 13px;
+        right: -8px;
+        top: 12px;
+        background: var(--simple-primary) !important;
     }
 
     #form_edit .image-input [data-kt-image-input-action="cancel"] {
-        right: -9px;
-        bottom: 58px;
-        color: var(--neo-modal-warning);
+        right: -8px;
+        bottom: 56px;
+        background: var(--simple-warning) !important;
     }
 
     #form_edit .image-input [data-kt-image-input-action="remove"] {
-        right: -9px;
-        bottom: 16px;
-        color: var(--neo-modal-danger);
+        right: -8px;
+        bottom: 15px;
+        background: var(--simple-danger) !important;
     }
 
     #form_edit .neo-form-help {
         margin: 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.82rem;
+        color: var(--simple-muted);
+        font-size: .8rem;
         line-height: 1.45;
         font-weight: 600;
         text-align: center;
     }
 
     #form_edit .neo-file-panel {
-        margin-top: 22px;
-        border-radius: 20px;
-        padding: 18px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.22),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid var(--simple-border);
+        border-radius: 10px;
+        background: #f8fafc;
+        box-shadow: none !important;
     }
 
     #form_edit .neo-file-help {
         margin: 8px 0 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.8rem;
+        color: var(--simple-muted);
+        font-size: .8rem;
         line-height: 1.45;
         font-weight: 600;
         text-align: center;
     }
 
     #form_edit .modal-footer {
-        gap: 12px;
-        padding: 18px 26px 24px;
-        border-top: 1px solid var(--neo-modal-border);
-        background: transparent;
+        gap: 10px;
+        padding: 16px 22px 18px;
+        border-top: 1px solid #eef2f7 !important;
+        background: var(--simple-white) !important;
     }
 
     #form_edit .neo-btn {
-        min-height: 42px;
+        min-height: 40px;
         min-width: 104px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 10px 16px;
-        border: 0;
-        border-radius: 16px;
-        font-size: 0.88rem;
+        padding: 9px 15px;
+        border: 0 !important;
+        border-radius: 8px;
+        font-size: .86rem;
         line-height: 1;
-        font-weight: 850;
-        transition: .18s ease;
+        font-weight: 800;
+        box-shadow: none !important;
+        transition: .16s ease;
     }
 
     #form_edit .neo-btn-light {
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.36),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
+        color: #ffffff !important;
+        background: var(--simple-danger) !important;
     }
 
     #form_edit .neo-btn-light:hover {
-        color: var(--neo-modal-text);
+        color: #ffffff !important;
+        background: var(--simple-danger-dark) !important;
         transform: translateY(-1px);
     }
 
     #form_edit .neo-btn-primary {
-        color: #ffffff;
-        background: var(--neo-modal-primary);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.42),
-            -7px -7px 16px rgba(255, 255, 255, 0.88);
+        color: #ffffff !important;
+        background: var(--simple-primary) !important;
     }
 
     #form_edit .neo-btn-primary:hover {
-        color: #ffffff;
-        background: var(--neo-modal-primary-dark);
+        color: #ffffff !important;
+        background: var(--simple-primary-dark) !important;
         transform: translateY(-1px);
     }
 
@@ -485,16 +460,13 @@
             margin: 1.25rem auto;
         }
 
-        #form_edit .modal-header {
-            padding: 22px 22px 16px;
-        }
-
+        #form_edit .modal-header,
         #form_edit .modal-body {
-            padding: 22px;
+            padding: 20px;
         }
 
         #form_edit .modal-footer {
-            padding: 16px 22px 22px;
+            padding: 16px 20px 20px;
         }
 
         #form_edit .neo-field-grid,
@@ -506,53 +478,40 @@
     @media (max-width: 767.98px) {
         #form_edit .modal-dialog {
             max-width: calc(100vw - 24px);
-            margin: 0.75rem auto;
-        }
-
-        #form_edit .modal-content {
-            border-radius: 24px;
+            margin: .75rem auto;
         }
 
         #form_edit .modal-header {
             align-items: flex-start;
-            padding: 20px 18px 15px;
-        }
-
-        #form_edit .neo-modal-title-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 15px;
-            font-size: 1.08rem;
-        }
-
-        #form_edit .modal-title {
-            font-size: 1.05rem;
-        }
-
-        #form_edit .neo-modal-subtitle {
-            font-size: 0.82rem;
-        }
-
-        #form_edit .neo-btn-close {
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 13px;
+            padding: 18px;
         }
 
         #form_edit .modal-body {
             padding: 18px;
         }
 
+        #form_edit .neo-modal-title-icon {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 9px;
+        }
+
+        #form_edit .modal-title {
+            font-size: 1rem;
+        }
+
+        #form_edit .neo-modal-subtitle {
+            font-size: .82rem;
+        }
+
         #form_edit .neo-left-stack,
         #form_edit .neo-right-stack {
-            gap: 16px;
+            gap: 14px;
         }
 
         #form_edit .neo-section {
-            border-radius: 22px;
-            padding: 18px;
+            padding: 16px;
         }
 
         #form_edit .neo-field-grid,
@@ -560,33 +519,21 @@
             grid-template-columns: 1fr;
             gap: 0;
         }
-
-        #form_edit .modal-footer {
-            padding: 15px 18px 18px;
-        }
     }
 
     @media (max-width: 575.98px) {
         #form_edit .modal-dialog {
             max-width: calc(100vw - 16px);
-            margin: 0.5rem auto;
+            margin: .5rem auto;
         }
 
-        #form_edit .modal-content {
-            border-radius: 22px;
-        }
-
-        #form_edit .modal-header {
-            padding: 18px 16px 14px;
-        }
-
+        #form_edit .modal-header,
         #form_edit .modal-body {
             padding: 16px;
         }
 
         #form_edit .neo-section {
-            padding: 16px;
-            border-radius: 20px;
+            padding: 14px;
         }
 
         #form_edit .image-input {

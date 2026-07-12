@@ -3,17 +3,14 @@
 @section('css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --pg-primary: #009ef7;
+            --pg-primary-dark: #008bd8;
+            --pg-primary-soft: #eaf6ff;
+            --pg-bg: #f8fafc;
+            --pg-surface: #ffffff;
+            --pg-border: #e5e7eb;
+            --pg-text: #111827;
+            --pg-muted: #64748b;
         }
 
         .pengguna-wrapper {
@@ -33,26 +30,30 @@
         .pengguna-header-card {
             position: relative;
             overflow: hidden;
-            border: 0 !important;
-            border-radius: 30px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light) !important;
+            border: 1px solid var(--pg-border) !important;
+            border-radius: 22px !important;
+            background: var(--pg-surface) !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06) !important;
             max-height: 280px;
             opacity: 1;
             transform: translateY(0) scale(1);
             transition:
-                opacity .28s ease,
-                transform .28s ease,
-                margin .28s ease,
-                max-height .32s ease,
-                padding .28s ease;
+                opacity .24s ease,
+                transform .24s ease,
+                margin .24s ease,
+                max-height .28s ease,
+                padding .24s ease;
+        }
+
+        .pengguna-header-card::before,
+        .pengguna-header-card::after {
+            display: none !important;
+            content: none !important;
         }
 
         .pengguna-header-card.is-hidden {
             opacity: 0;
-            transform: translateY(-12px) scale(.985);
+            transform: translateY(-10px) scale(.99);
             max-height: 0;
             margin-bottom: 0 !important;
             padding-top: 0 !important;
@@ -61,43 +62,19 @@
         }
 
         .pengguna-header-card.is-showing {
-            animation: penggunaWelcomeShow .34s ease both;
+            animation: penggunaWelcomeShow .28s ease both;
         }
 
         @keyframes penggunaWelcomeShow {
             from {
                 opacity: 0;
-                transform: translateY(-12px) scale(.985);
+                transform: translateY(-10px) scale(.99);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
-        }
-
-        .pengguna-header-card::before {
-            content: "";
-            position: absolute;
-            width: 430px;
-            height: 430px;
-            right: -210px;
-            top: -230px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(0, 158, 247, .18), transparent 68%);
-            pointer-events: none;
-        }
-
-        .pengguna-header-card::after {
-            content: "";
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            left: -170px;
-            bottom: -190px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 255, 255, .78), transparent 64%);
-            pointer-events: none;
         }
 
         .pengguna-header-card > * {
@@ -112,26 +89,21 @@
             z-index: 10;
             width: 32px;
             height: 32px;
-            border: 0;
+            border: 1px solid var(--pg-border);
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #57534e;
-            background: var(--neo-surface);
-            box-shadow:
-                4px 4px 9px rgba(120, 113, 108, .18),
-                -4px -4px 9px rgba(255, 255, 255, .82);
-            transition: .2s ease;
+            color: var(--pg-muted);
+            background: #ffffff;
+            transition: .18s ease;
             cursor: pointer;
         }
 
         .pengguna-header-close:hover {
-            color: #44403c;
-            background: #f1f0ef;
-            box-shadow:
-                inset 3px 3px 7px rgba(120, 113, 108, .15),
-                inset -3px -3px 7px rgba(255, 255, 255, .82);
+            color: var(--pg-primary);
+            background: var(--pg-primary-soft);
+            border-color: rgba(0, 158, 247, 0.24);
             transform: translateY(-1px);
         }
 
@@ -143,11 +115,10 @@
             width: 68px;
             height: 68px;
             border-radius: 999px;
-            padding: 6px;
-            background: var(--neo-surface);
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light);
+            padding: 4px;
+            background: #ffffff;
+            border: 1px solid var(--pg-border);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
             overflow: hidden;
             flex-shrink: 0;
         }
@@ -161,20 +132,20 @@
         }
 
         .pengguna-welcome-label {
-            color: var(--neo-primary);
+            color: var(--pg-primary);
             font-weight: 900;
             letter-spacing: .055em;
         }
 
         .pengguna-welcome-title {
-            color: var(--neo-text);
+            color: var(--pg-text);
             font-weight: 900;
             letter-spacing: -.028em;
         }
 
         .pengguna-welcome-desc {
-            color: var(--neo-muted);
-            font-weight: 700;
+            color: var(--pg-muted);
+            font-weight: 600;
             line-height: 1.6;
         }
 
@@ -187,18 +158,19 @@
         }
 
         .pengguna-btn-neo {
-            min-height: 48px;
+            min-height: 46px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 9px;
-            padding: 0 20px;
-            border: 0 !important;
-            border-radius: 17px !important;
+            padding: 0 18px;
+            border-radius: 14px !important;
             font-weight: 900 !important;
             line-height: 1;
             white-space: nowrap;
-            transition: .22s ease;
+            transition: .18s ease;
+            border: 1px solid transparent !important;
+            box-shadow: none !important;
         }
 
         .pengguna-btn-neo i {
@@ -206,44 +178,42 @@
         }
 
         .pengguna-btn-neo-primary {
-            background: var(--neo-primary) !important;
+            background: var(--pg-primary) !important;
             color: #ffffff !important;
-            box-shadow:
-                7px 7px 16px rgba(120, 113, 108, .28),
-                -7px -7px 16px rgba(255, 255, 255, .72) !important;
+            border-color: var(--pg-primary) !important;
+            box-shadow: 0 12px 26px rgba(0, 158, 247, 0.20) !important;
         }
 
         .pengguna-btn-neo-primary:hover {
-            background: var(--neo-primary-dark) !important;
+            background: var(--pg-primary-dark) !important;
             color: #ffffff !important;
             transform: translateY(-1px);
         }
 
         .pengguna-btn-neo-soft {
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light) !important;
+            background: #ffffff !important;
+            color: var(--pg-primary) !important;
+            border-color: var(--pg-border) !important;
         }
 
         .pengguna-btn-neo-soft:hover {
-            color: var(--neo-primary-dark) !important;
+            color: var(--pg-primary-dark) !important;
+            background: var(--pg-primary-soft) !important;
+            border-color: rgba(0, 158, 247, 0.24) !important;
             transform: translateY(-1px);
         }
 
         .pengguna-card-tight {
-            border: 0 !important;
-            border-radius: 30px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light) !important;
+            border: 1px solid var(--pg-border) !important;
+            border-radius: 22px !important;
+            background: var(--pg-surface) !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06) !important;
             overflow: hidden;
         }
 
         .pengguna-card-tight .card-body {
             padding: 0 !important;
+            background: transparent !important;
         }
 
         .pengguna-nav-wrap {
@@ -253,16 +223,13 @@
         .pengguna-nav {
             display: flex;
             align-items: center;
-            gap: 12px !important;
+            gap: 10px !important;
             overflow-x: auto;
             white-space: nowrap;
-            padding: 9px !important;
-            border: 0 !important;
-            border-radius: 23px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px rgba(120, 113, 108, .14),
-                inset -5px -5px 12px rgba(255, 255, 255, .78);
+            padding: 6px !important;
+            border: 1px solid var(--pg-border) !important;
+            border-radius: 18px;
+            background: var(--pg-bg);
         }
 
         .pengguna-nav::-webkit-scrollbar {
@@ -275,21 +242,19 @@
         }
 
         .pengguna-nav .nav-link {
-            min-height: 48px;
+            min-height: 44px;
             display: inline-flex !important;
             align-items: center;
             justify-content: center;
             gap: 8px !important;
-            padding: 0 22px !important;
+            padding: 0 18px !important;
             border: 0 !important;
-            border-radius: 17px !important;
-            color: var(--neo-muted) !important;
-            background: var(--neo-surface) !important;
+            border-radius: 14px !important;
+            color: var(--pg-muted) !important;
+            background: transparent !important;
             font-weight: 900 !important;
-            transition: .22s ease;
-            box-shadow:
-                6px 6px 14px var(--neo-dark-soft),
-                -6px -6px 14px var(--neo-light) !important;
+            transition: .18s ease;
+            box-shadow: none !important;
         }
 
         .pengguna-nav .nav-link i {
@@ -298,11 +263,9 @@
 
         .pengguna-nav .nav-link:hover,
         .pengguna-nav .nav-link.active {
-            color: var(--neo-primary) !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light) !important;
+            color: var(--pg-primary) !important;
+            background: #ffffff !important;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05) !important;
         }
 
         .pengguna-content-area {
@@ -312,7 +275,7 @@
         @media (max-width: 991.98px) {
             .pengguna-header-card,
             .pengguna-card-tight {
-                border-radius: 26px !important;
+                border-radius: 20px !important;
             }
 
             .pengguna-header-card {
@@ -347,11 +310,9 @@
         @media (max-width: 767.98px) {
             .pengguna-header-card {
                 padding: 18px !important;
-                border-radius: 24px !important;
+                border-radius: 18px !important;
                 max-height: 480px;
-                box-shadow:
-                    9px 9px 20px var(--neo-dark),
-                    -9px -9px 20px var(--neo-light) !important;
+                box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06) !important;
             }
 
             .pengguna-header-card.is-hidden {
@@ -383,20 +344,21 @@
             .pengguna-header-actions {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
+                gap: 10px;
             }
 
             .pengguna-header-actions .pengguna-btn-neo {
                 width: 100%;
-                min-height: 48px;
+                min-height: 46px;
                 padding-left: 10px;
                 padding-right: 10px;
-                border-radius: 16px !important;
+                border-radius: 14px !important;
             }
 
             .pengguna-card-tight {
                 background: transparent !important;
                 box-shadow: none !important;
+                border: 0 !important;
                 border-radius: 0 !important;
             }
 
@@ -407,14 +369,13 @@
             .pengguna-nav {
                 display: grid !important;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px !important;
+                gap: 8px !important;
                 width: 100%;
-                padding: 10px !important;
-                border-radius: 22px;
-                background: var(--neo-surface) !important;
-                box-shadow:
-                    8px 8px 18px var(--neo-dark-soft),
-                    -8px -8px 18px var(--neo-light) !important;
+                padding: 8px !important;
+                border-radius: 18px;
+                background: #ffffff !important;
+                border: 1px solid var(--pg-border) !important;
+                box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05) !important;
             }
 
             .pengguna-nav .nav-item {
@@ -423,20 +384,16 @@
 
             .pengguna-nav .nav-link {
                 width: 100%;
-                min-height: 48px;
+                min-height: 46px;
                 padding: 0 10px !important;
-                background: var(--neo-surface) !important;
-                box-shadow:
-                    5px 5px 12px var(--neo-dark-soft),
-                    -5px -5px 12px var(--neo-light) !important;
+                background: transparent !important;
             }
 
             .pengguna-nav .nav-link:hover,
             .pengguna-nav .nav-link.active {
-                color: var(--neo-primary) !important;
-                box-shadow:
-                    inset 4px 4px 9px var(--neo-inset-dark),
-                    inset -4px -4px 9px var(--neo-inset-light) !important;
+                color: var(--pg-primary) !important;
+                background: var(--pg-primary-soft) !important;
+                box-shadow: none !important;
             }
 
             .pengguna-content-area {

@@ -1,511 +1,304 @@
+
 <style>
-    #form_detail {
-        --neo-modal-bg: #eef2f7;
-        --neo-modal-surface: #eef2f7;
-        --neo-modal-surface-soft: #f3f6fa;
-        --neo-modal-text: #1f2937;
-        --neo-modal-muted: #6b7280;
-        --neo-modal-border: rgba(148, 163, 184, 0.18);
-        --neo-modal-shadow-dark: rgba(163, 177, 198, 0.42);
-        --neo-modal-shadow-light: rgba(255, 255, 255, 0.95);
-        --neo-modal-primary: #3b82f6;
-        --neo-modal-danger: #ef4444;
-        --neo-modal-success: #10b981;
-        --neo-modal-warning: #f59e0b;
-    }
-
-    #form_detail .modal-dialog {
-        max-width: 1080px;
-        margin: 1.75rem auto;
-    }
-
-    #form_detail .modal-content {
+    .pengguna-modal-simple .modal-content {
         border: 0;
-        border-radius: 28px;
-        background: var(--neo-modal-bg);
-        box-shadow:
-            18px 18px 40px rgba(15, 23, 42, 0.22),
-            -10px -10px 28px rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, .18);
         overflow: hidden;
     }
 
-    #form_detail .modal-header {
+    .pengguna-modal-simple .modal-header {
         min-height: auto;
-        padding: 24px 26px 18px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        background: transparent;
+        padding: 16px 18px;
+        background: #ffffff;
+        border-bottom: 1px solid #eef2f7;
     }
 
-    #form_detail .neo-modal-title-wrap {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        min-width: 0;
-    }
-
-    #form_detail .neo-modal-title-icon {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        border-radius: 17px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--neo-modal-primary);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.28),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 1.2rem;
-    }
-
-    #form_detail .modal-title {
+    .pengguna-modal-simple .modal-title {
+        color: #111827;
+        font-weight: 800;
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 1.18rem;
-        line-height: 1.25;
-        font-weight: 850;
-        letter-spacing: -0.02em;
     }
 
-    #form_detail .neo-modal-subtitle {
-        margin: 5px 0 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.86rem;
-        line-height: 1.4;
-        font-weight: 500;
+    .pengguna-modal-simple .modal-body {
+        padding: 18px;
+        background: #ffffff;
     }
 
-    #form_detail .neo-btn-close {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
-        padding: 0;
-        border: 0;
-        border-radius: 15px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            6px 6px 14px rgba(163, 177, 198, 0.34),
-            -6px -6px 14px rgba(255, 255, 255, 0.9);
-        opacity: 1;
-        transition: .18s ease;
+    .pengguna-modal-simple .modal-footer {
+        padding: 14px 18px 18px;
+        background: #ffffff;
+        border-top: 1px solid #eef2f7;
+        gap: 8px;
     }
 
-    #form_detail .neo-btn-close:hover {
-        color: var(--neo-modal-danger);
-        transform: translateY(-1px);
+    .pengguna-modal-simple .section-title {
+        color: #111827 !important;
+        font-weight: 800;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e5e7eb !important;
     }
 
-    #form_detail .neo-btn-close i {
-        font-size: 1.2rem;
-        line-height: 1;
+    .pengguna-modal-simple label,
+    .pengguna-modal-simple label span {
+        color: #111827 !important;
+        font-weight: 800;
     }
 
-    #form_detail .modal-body {
-        padding: 24px 26px;
-        background: transparent;
+    .pengguna-modal-simple .form-control {
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px !important;
+        min-height: 38px;
+        color: #111827;
+        box-shadow: none !important;
     }
 
-    #form_detail .neo-detail-grid {
-        display: grid;
-        grid-template-columns: 260px minmax(0, 1fr) minmax(0, 1.22fr);
-        gap: 22px;
-        align-items: stretch;
+    .pengguna-modal-simple .form-control:focus {
+        border-color: #074366 !important;
+        box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
     }
 
-    #form_detail .neo-section {
-        height: 100%;
-        border-radius: 24px;
-        padding: 20px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            10px 10px 22px var(--neo-modal-shadow-dark),
-            -10px -10px 22px var(--neo-modal-shadow-light);
+    .pengguna-modal-simple textarea.form-control {
+        resize: vertical;
     }
 
-    #form_detail .neo-section-title {
+    .pengguna-modal-simple .btn {
+        border-radius: 8px;
+        font-weight: 700;
+    }
+
+    .pengguna-modal-simple .btn-primary {
+        background: #074366 !important;
+        border-color: #074366 !important;
+        color: #ffffff !important;
+        box-shadow: 0 8px 18px rgba(7, 67, 102, .22) !important;
+    }
+
+    .pengguna-modal-simple .btn-primary:hover {
+        background: #052f49 !important;
+        border-color: #052f49 !important;
+        color: #ffffff !important;
+    }
+
+    .pengguna-modal-simple .btn-light {
+        background: #ef4444 !important;
+        border-color: #ef4444 !important;
+        color: #ffffff !important;
+        box-shadow: 0 8px 18px rgba(239, 68, 68, .18) !important;
+    }
+
+    .pengguna-modal-simple .btn-light:hover {
+        background: #dc2626 !important;
+        border-color: #dc2626 !important;
+        color: #ffffff !important;
+    }
+
+    .pengguna-modal-simple .btn-close {
+        background-color: #ef4444 !important;
+        opacity: 1 !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+    }
+
+    .pengguna-modal-simple .image-input-wrapper {
+        background-color: #f8fafc;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .pengguna-modal-simple .btn-icon[data-kt-image-input-action="change"] {
+        background: #074366 !important;
+        border-color: #074366 !important;
+        color: #ffffff !important;
+    }
+
+    .pengguna-modal-simple .btn-icon[data-kt-image-input-action="cancel"],
+    .pengguna-modal-simple .btn-icon[data-kt-image-input-action="remove"] {
+        background: #ef4444 !important;
+        border-color: #ef4444 !important;
+        color: #ffffff !important;
+    }
+
+    .pengguna-modal-simple .btn-icon[data-kt-image-input-action] i {
+        color: #ffffff !important;
+    }
+
+    .pengguna-modal-simple .btn-icon[data-kt-image-input-action]:hover {
+        filter: brightness(.92);
+    }
+
+    .pengguna-modal-simple .form-text,
+    .pengguna-modal-simple small {
+        font-size: 12px;
+    }
+
+    .pengguna-modal-simple .radio-option {
+        min-height: 38px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin: 0 0 18px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        color: var(--neo-modal-text);
-        font-size: 0.95rem;
-        line-height: 1.3;
-        font-weight: 850;
+        gap: 9px;
+        padding: 8px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #f8fafc;
+        cursor: pointer;
     }
 
-    #form_detail .neo-section-title i {
-        color: var(--neo-modal-primary);
-        font-size: 1rem;
-    }
-
-    #form_detail .neo-photo-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #form_detail #detail_foto_section {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    #form_detail .neo-photo-frame {
-        width: 170px;
-        height: 170px;
-        border-radius: 34px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 6px 6px 13px rgba(163, 177, 198, 0.26),
-            inset -6px -6px 13px rgba(255, 255, 255, 0.92);
-    }
-
-    #form_detail .neo-photo-inner {
-        width: 140px;
-        height: 140px;
-        border-radius: 28px;
-        overflow: hidden;
-        background: var(--neo-modal-surface-soft);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.32),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
-    }
-
-    #form_detail #detail_foto_preview {
-        width: 140px !important;
-        height: 140px !important;
-        object-fit: cover;
-        border-radius: 28px !important;
-        display: block;
-    }
-
-    #form_detail .neo-detail-field {
-        margin-bottom: 16px;
-    }
-
-    #form_detail .neo-detail-field:last-child {
-        margin-bottom: 0;
-    }
-
-    #form_detail .neo-detail-label {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        margin: 0 0 8px;
-        color: var(--neo-modal-muted);
-        font-size: 0.8rem;
-        line-height: 1.35;
-        font-weight: 850;
-        letter-spacing: .035em;
-        text-transform: uppercase;
-    }
-
-    #form_detail .neo-detail-label i {
-        color: var(--neo-modal-primary);
-        font-size: 0.9rem;
-    }
-
-    #form_detail .neo-detail-value {
-        min-height: 44px;
+    .pengguna-modal-simple .radio-option .form-check-input {
         margin: 0;
-        padding: 12px 14px;
-        border-radius: 16px;
-        color: var(--neo-modal-text);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 0.9rem;
-        line-height: 1.5;
-        font-weight: 650;
+    }
+
+    .pengguna-modal-simple .radio-option .form-check-input:checked {
+        background-color: #074366;
+        border-color: #074366;
+    }
+
+    .pengguna-modal-simple .radio-option .form-check-label {
+        margin: 0;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .pengguna-modal-simple .detail-box {
+        min-height: 38px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px 10px;
+        color: #111827;
+        background: #f8fafc;
+        font-weight: 600;
         word-break: break-word;
     }
 
-    #form_detail .neo-detail-value:empty::before {
+    .pengguna-modal-simple .detail-box:empty::before {
         content: "-";
-        color: var(--neo-modal-muted);
-        font-weight: 600;
+        color: #64748b;
     }
 
-    #form_detail .neo-detail-value.long-text {
-        min-height: 112px;
+    .pengguna-modal-simple .detail-box.long-text {
+        min-height: 90px;
         white-space: pre-line;
     }
 
-    #form_detail .neo-status-value {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 38px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        color: var(--neo-modal-text);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 0.86rem;
-        line-height: 1.3;
+    .pengguna-modal-simple .metric-box {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .pengguna-modal-simple .metric-label {
+        color: #64748b;
+        font-size: 12px;
         font-weight: 800;
-        word-break: break-word;
-    }
-
-    #form_detail .neo-status-value:empty::before {
-        content: "-";
-        color: var(--neo-modal-muted);
-    }
-
-    #form_detail .neo-metric-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 16px;
-    }
-
-    #form_detail .neo-metric-card {
-        min-height: 94px;
-        border-radius: 20px;
-        padding: 15px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.34),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
-    }
-
-    #form_detail .neo-metric-label {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        margin: 0 0 10px;
-        color: var(--neo-modal-muted);
-        font-size: 0.76rem;
-        line-height: 1.3;
-        font-weight: 850;
-        letter-spacing: .035em;
         text-transform: uppercase;
+        letter-spacing: .04em;
+        margin-bottom: 5px;
     }
 
-    #form_detail .neo-metric-label i {
-        color: var(--neo-modal-primary);
-    }
-
-    #form_detail .neo-metric-value {
+    .pengguna-modal-simple .metric-value {
+        color: #111827;
+        font-size: 18px;
+        font-weight: 800;
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 1.15rem;
-        line-height: 1.2;
-        font-weight: 850;
-        word-break: break-word;
-    }
-
-    #form_detail .neo-metric-value:empty::before {
-        content: "-";
-        color: var(--neo-modal-muted);
-    }
-
-    #form_detail .neo-last-login {
-        margin-top: 14px;
-    }
-
-    #form_detail .modal-footer {
-        gap: 12px;
-        padding: 18px 26px 24px;
-        border-top: 1px solid var(--neo-modal-border);
-        background: transparent;
-    }
-
-    #form_detail .neo-btn {
-        min-height: 42px;
-        min-width: 104px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 10px 16px;
-        border: 0;
-        border-radius: 16px;
-        font-size: 0.88rem;
-        line-height: 1;
-        font-weight: 850;
-        transition: .18s ease;
-    }
-
-    #form_detail .neo-btn-light {
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.36),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
-    }
-
-    #form_detail .neo-btn-light:hover {
-        color: var(--neo-modal-text);
-        transform: translateY(-1px);
-    }
-
-    #form_detail .neo-btn:active {
-        transform: translateY(0);
-    }
-
-    @media (max-width: 1199.98px) {
-        #form_detail .modal-dialog {
-            max-width: calc(100vw - 40px);
-        }
-
-        #form_detail .neo-detail-grid {
-            grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1fr);
-            gap: 18px;
-        }
-    }
-
-    @media (max-width: 991.98px) {
-        #form_detail .modal-dialog {
-            max-width: calc(100vw - 32px);
-            margin: 1.25rem auto;
-        }
-
-        #form_detail .modal-header {
-            padding: 22px 22px 16px;
-        }
-
-        #form_detail .modal-body {
-            padding: 22px;
-        }
-
-        #form_detail .modal-footer {
-            padding: 16px 22px 22px;
-        }
-
-        #form_detail .neo-detail-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        #form_detail .neo-photo-section {
-            grid-column: 1 / -1;
-        }
     }
 
     @media (max-width: 767.98px) {
-        #form_detail .modal-dialog {
-            max-width: calc(100vw - 24px);
-            margin: 0.75rem auto;
+        .pengguna-modal-simple .modal-body {
+            padding: 15px;
         }
 
-        #form_detail .modal-content {
-            border-radius: 24px;
-        }
-
-        #form_detail .modal-header {
-            align-items: flex-start;
-            padding: 20px 18px 15px;
-        }
-
-        #form_detail .neo-modal-title-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 15px;
-            font-size: 1.08rem;
-        }
-
-        #form_detail .modal-title {
-            font-size: 1.05rem;
-        }
-
-        #form_detail .neo-modal-subtitle {
-            font-size: 0.82rem;
-        }
-
-        #form_detail .neo-btn-close {
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 13px;
-        }
-
-        #form_detail .modal-body {
-            padding: 18px;
-        }
-
-        #form_detail .neo-detail-grid {
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        #form_detail .neo-section {
-            border-radius: 22px;
-            padding: 18px;
-        }
-
-        #form_detail .modal-footer {
-            padding: 15px 18px 18px;
-        }
-    }
-
-    @media (max-width: 575.98px) {
-        #form_detail .modal-dialog {
-            max-width: calc(100vw - 16px);
-            margin: 0.5rem auto;
-        }
-
-        #form_detail .modal-content {
-            border-radius: 22px;
-        }
-
-        #form_detail .modal-header {
-            padding: 18px 16px 14px;
-        }
-
-        #form_detail .modal-body {
-            padding: 16px;
-        }
-
-        #form_detail .neo-section {
-            padding: 16px;
-            border-radius: 20px;
-        }
-
-        #form_detail .neo-photo-frame {
-            width: 154px;
-            height: 154px;
-            border-radius: 30px;
-        }
-
-        #form_detail .neo-photo-inner,
-        #form_detail #detail_foto_preview {
-            width: 126px !important;
-            height: 126px !important;
-            border-radius: 24px !important;
-        }
-
-        #form_detail .neo-metric-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        #form_detail .modal-footer {
+        .pengguna-modal-simple .modal-footer {
             flex-direction: column-reverse;
             align-items: stretch;
-            padding: 14px 16px 16px;
         }
 
-        #form_detail .neo-btn {
+        .pengguna-modal-simple .modal-footer .btn {
             width: 100%;
         }
     }
+    /* ===== DETAIL PENGGUNA: STYLE TOMBOL SESUAI REQUEST ===== */
+
+/* Judul section jadi hitam */
+#form_detail .neo-section-title,
+#form_detail .neo-detail-label,
+#form_detail .neo-metric-label {
+    color: #111827 !important;
+}
+
+#form_detail .neo-section-title {
+    border-bottom-color: #e5e7eb !important;
+}
+
+#form_detail .neo-section-title i,
+#form_detail .neo-detail-label i,
+#form_detail .neo-metric-label i {
+    color: #074366 !important;
+}
+
+/* X close: tanpa background */
+#form_detail .neo-btn-close {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: #64748b !important;
+    border-radius: 0 !important;
+    opacity: .75 !important;
+}
+
+#form_detail .neo-btn-close:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #ef4444 !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+#form_detail .neo-btn-close i {
+    color: inherit !important;
+}
+
+/* Tombol Tutup bawah: merah */
+#form_detail .neo-btn-light {
+    background: #ef4444 !important;
+    border-color: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 18px rgba(239, 68, 68, .18) !important;
+}
+
+#form_detail .neo-btn-light:hover {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+#form_detail .neo-btn-light i {
+    color: #ffffff !important;
+}
+
+/* ===== DETAIL PENGGUNA: X CLOSE TANPA BACKGROUND ===== */
+#form_detail.pengguna-modal-simple .btn-close {
+    background-color: transparent !important;
+    background-image: var(--bs-btn-close-bg) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    opacity: .65 !important;
+    border-radius: 0 !important;
+}
+
+#form_detail.pengguna-modal-simple .btn-close:hover {
+    background-color: transparent !important;
+    background-image: var(--bs-btn-close-bg) !important;
+    opacity: 1 !important;
+}
 </style>
 
-<div class="modal fade"
+<div class="modal fade pengguna-modal-simple"
      id="form_detail"
      data-bs-backdrop="static"
      data-bs-keyboard="false"
@@ -515,131 +308,95 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="neo-modal-title-wrap">
-                    <span class="neo-modal-title-icon">
-                        <i class="bi bi-person-lines-fill"></i>
-                    </span>
-                    <div>
-                        <h5 class="modal-title">Detail Pengguna</h5>
-                        <p class="neo-modal-subtitle">Informasi lengkap data pengguna</p>
-                    </div>
-                </div>
-
-                <button type="button"
-                        class="neo-btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close">
-                    <i class="bi bi-x-lg"></i>
-                </button>
+                <h5 class="modal-title">Detail Pengguna</h5>
+                <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
             </div>
 
             <div class="modal-body">
-                <div class="neo-detail-grid">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="d-flex flex-column align-items-center mb-4 mb-md-0">
+                            <h6 class="section-title w-100 text-center">Foto Profil</h6>
 
-                    <div class="neo-section neo-photo-section">
-                        <h6 class="neo-section-title">
-                            <i class="bi bi-image-fill"></i>
-                            Foto Profil
-                        </h6>
+                            <div id="detail_foto_section">
+                                <img id="detail_foto_preview"
+                                     class="w-150px h-150px rounded border object-fit-cover"
+                                     alt="Foto Pengguna"/>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div id="detail_foto_section">
-                            <div class="neo-photo-frame">
-                                <div class="neo-photo-inner">
-                                    <img id="detail_foto_preview"
-                                         alt="Foto Pengguna"/>
+                    <div class="col-md-4">
+                        <h6 class="section-title">Data Dasar</h6>
+
+                        <div class="mb-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Nama</span>
+                            </label>
+                            <p id="detail_nama" class="detail-box mb-0"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Email</span>
+                            </label>
+                            <p id="detail_email" class="detail-box mb-0"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Telepon</span>
+                            </label>
+                            <p id="detail_telepon" class="detail-box mb-0"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Terverifikasi</span>
+                            </label>
+                            <p id="detail_terverifikasi" class="detail-box mb-0"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <h6 class="section-title">Informasi Tambahan</h6>
+
+                        <div class="mb-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Bio</span>
+                            </label>
+                            <p id="detail_bio" class="detail-box long-text mb-0"></p>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="metric-box">
+                                    <div class="metric-label">Kelas Selesai</div>
+                                    <p id="detail_total_kelas_selesai" class="metric-value"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="metric-box">
+                                    <div class="metric-label">Total Poin</div>
+                                    <p id="detail_total_poin" class="metric-value"></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="neo-section">
-                        <h6 class="neo-section-title">
-                            <i class="bi bi-person-vcard-fill"></i>
-                            Data Dasar
-                        </h6>
-
-                        <div class="neo-detail-field">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-person-fill"></i>
-                                Nama
+                        <div class="mt-3">
+                            <label class="d-flex align-items-center fs-sm-8 fs-lg-6 fw-bolder mb-1">
+                                <span>Terakhir Login</span>
                             </label>
-                            <p id="detail_nama" class="neo-detail-value"></p>
-                        </div>
-
-                        <div class="neo-detail-field">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-envelope-fill"></i>
-                                Email
-                            </label>
-                            <p id="detail_email" class="neo-detail-value"></p>
-                        </div>
-
-                        <div class="neo-detail-field">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-telephone-fill"></i>
-                                Telepon
-                            </label>
-                            <p id="detail_telepon" class="neo-detail-value"></p>
-                        </div>
-
-                        <div class="neo-detail-field">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-patch-check-fill"></i>
-                                Terverifikasi
-                            </label>
-                            <p id="detail_terverifikasi" class="neo-status-value"></p>
+                            <p id="detail_last_login" class="detail-box mb-0"></p>
                         </div>
                     </div>
-
-                    <div class="neo-section">
-                        <h6 class="neo-section-title">
-                            <i class="bi bi-info-circle-fill"></i>
-                            Informasi Tambahan
-                        </h6>
-
-                        <div class="neo-detail-field">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-card-text"></i>
-                                Bio
-                            </label>
-                            <p id="detail_bio" class="neo-detail-value long-text"></p>
-                        </div>
-
-                        <div class="neo-metric-grid">
-                            <div class="neo-metric-card">
-                                <p class="neo-metric-label">
-                                    <i class="bi bi-mortarboard-fill"></i>
-                                    Kelas Selesai
-                                </p>
-                                <p id="detail_total_kelas_selesai" class="neo-metric-value"></p>
-                            </div>
-
-                            <div class="neo-metric-card">
-                                <p class="neo-metric-label">
-                                    <i class="bi bi-stars"></i>
-                                    Total Poin
-                                </p>
-                                <p id="detail_total_poin" class="neo-metric-value"></p>
-                            </div>
-                        </div>
-
-                        <div class="neo-detail-field neo-last-login">
-                            <label class="neo-detail-label">
-                                <i class="bi bi-clock-history"></i>
-                                Terakhir Login
-                            </label>
-                            <p id="detail_last_login" class="neo-detail-value"></p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button"
-                        class="neo-btn neo-btn-light"
-                        data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle"></i>
+                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>
                     Tutup
                 </button>
             </div>

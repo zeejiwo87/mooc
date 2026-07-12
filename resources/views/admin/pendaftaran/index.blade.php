@@ -6,420 +6,505 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/buttons.dataTables.min.css') }}" />
 
     <style>
-        .pendaftaran-neo-page {
-            --neo-bg: #eef2f7;
-            --neo-surface: #eef2f7;
-            --neo-text: #1f2937;
-            --neo-muted: #64748b;
-            --neo-border: rgba(148, 163, 184, .22);
-            --neo-primary: #2563eb;
-            --neo-success: #16a34a;
-            --neo-warning: #b45309;
-            --neo-danger: #b91c1c;
-            --neo-shadow-dark: rgba(163, 177, 198, .34);
-            --neo-shadow-light: rgba(255, 255, 255, .86);
-            padding: 0 28px 30px;
-            color: var(--neo-text);
+        /* =========================================================
+           HALAMAN DATA PENDAFTARAN KELAS
+           Simple, bersih, konsisten seperti Data Kelas
+           Visual only: tidak mengubah route, id, include, atau logic backend
+        ========================================================= */
+
+        .admin-page-simple {
+            width: 100%;
         }
 
-        .pendaftaran-neo-page .content {
-            max-width: 1480px;
-            margin: 0 auto;
+        .admin-page-simple .page-title h3 {
+            margin-bottom: 4px;
+            color: #111827;
         }
 
-        .pendaftaran-neo-page .card {
-            border: 0 !important;
-            border-radius: 28px;
-            background: var(--neo-surface);
-            box-shadow:
-                10px 10px 22px var(--neo-shadow-dark),
-                -10px -10px 22px var(--neo-shadow-light) !important;
+        .admin-page-simple .page-title p {
+            color: #64748b;
+        }
+
+        /* Card */
+        .admin-page-simple .card {
             overflow: hidden;
+            border: 0;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
         }
 
-        .pendaftaran-neo-page .card-header {
-            min-height: unset;
-            padding: 24px 26px;
-            border-bottom: 1px solid rgba(148, 163, 184, .18);
-            background: var(--neo-surface);
+        .admin-page-simple .card-header {
+            min-height: auto;
+            padding: 16px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f7;
         }
 
-        .pendaftaran-neo-page .card-title {
+        .admin-page-simple .card-title {
             margin: 0;
         }
 
-        .pendaftaran-neo-page .card-label {
+        .admin-page-simple .card-body {
+            padding: 18px;
+        }
+
+        /* Tombol umum */
+        .admin-page-simple .btn {
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: none !important;
+        }
+
+        .admin-page-simple .btn-primary {
+            color: #ffffff !important;
+            background: #074366 !important;
+            border-color: #074366 !important;
+            box-shadow: 0 8px 18px rgba(7, 67, 102, .20) !important;
+        }
+
+        .admin-page-simple .btn-primary:hover,
+        .admin-page-simple .btn-primary:focus {
+            color: #ffffff !important;
+            background: #052f49 !important;
+            border-color: #052f49 !important;
+        }
+
+        /* Filter */
+        .admin-page-simple .filter-panel {
+            margin-bottom: 18px;
+            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+        }
+
+        .admin-page-simple .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .admin-page-simple .filter-field {
+            min-width: 0;
+        }
+
+        .admin-page-simple .filter-label {
+            display: block;
+            margin-bottom: 7px;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* Select dan Select2 */
+        .admin-page-simple .filter-panel .form-select,
+        .admin-page-simple .filter-panel .select2-container--bootstrap5 .select2-selection,
+        .admin-page-simple .filter-panel .select2-container .select2-selection--single {
+            min-height: 40px;
+            color: #111827 !important;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+        }
+
+        .admin-page-simple .filter-panel .form-select {
+            padding: 8px 11px !important;
+            font-size: 13px;
+        }
+
+        .admin-page-simple .filter-panel .select2-container {
+            width: 100% !important;
+        }
+
+        .admin-page-simple .filter-panel .select2-container--bootstrap5 .select2-selection,
+        .admin-page-simple .filter-panel .select2-container .select2-selection--single {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--neo-text);
-            font-size: 1.18rem;
-            font-weight: 900 !important;
-            letter-spacing: -.01em;
+            padding: 6px 10px;
         }
 
-        .pendaftaran-neo-page .card-label::before {
-            content: "\F1C8";
-            font-family: bootstrap-icons !important;
-            width: 42px;
-            height: 42px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
-            box-shadow:
-                5px 5px 11px rgba(163, 177, 198, .28),
-                -5px -5px 11px rgba(255, 255, 255, .78);
-            font-size: 1.05rem;
+        .admin-page-simple .filter-panel .select2-container--bootstrap5.select2-container--focus .select2-selection,
+        .admin-page-simple .filter-panel .select2-container--focus .select2-selection,
+        .admin-page-simple .filter-panel .form-select:focus {
+            border-color: #074366 !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
         }
 
-        .pendaftaran-neo-page .card-body {
-            padding: 24px 26px 28px !important;
-            background: var(--neo-surface);
+        /* Tabel */
+        .admin-page-simple .table-responsive {
+            width: 100%;
         }
 
-        .pendaftaran-neo-page .table-responsive.mb-8 {
-            margin-bottom: 0 !important;
-            padding: 18px !important;
-            border: 0 !important;
-            border-radius: 24px !important;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 11px rgba(163, 177, 198, .18),
-                inset -5px -5px 11px rgba(255, 255, 255, .82);
-        }
-
-        .pendaftaran-neo-page label,
-        .pendaftaran-neo-page .form-label {
-            color: #334155;
-            font-weight: 850 !important;
-        }
-
-        .pendaftaran-neo-page .form-control,
-        .pendaftaran-neo-page .form-select {
-            min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 15px !important;
-            color: #1e293b;
-            background-color: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .18),
-                inset -4px -4px 9px rgba(255, 255, 255, .8) !important;
-            font-weight: 700;
-        }
-
-        .pendaftaran-neo-page .form-control:focus,
-        .pendaftaran-neo-page .form-select:focus {
-            border-color: rgba(37, 99, 235, .34) !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .2),
-                inset -4px -4px 9px rgba(255, 255, 255, .84),
-                0 0 0 .18rem rgba(37, 99, 235, .08) !important;
-        }
-
-        .pendaftaran-neo-page .select2-container--bootstrap5 .select2-selection,
-        .pendaftaran-neo-page .select2-container .select2-selection--single {
-            min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 15px !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .18),
-                inset -4px -4px 9px rgba(255, 255, 255, .8) !important;
-        }
-
-        .pendaftaran-neo-page .select2-container--bootstrap5 .select2-selection__rendered,
-        .pendaftaran-neo-page .select2-container .select2-selection__rendered {
-            color: #1e293b !important;
-            font-weight: 750;
-            line-height: 40px !important;
-            padding-left: 14px !important;
-        }
-
-        .pendaftaran-neo-page .btn,
-        .pendaftaran-neo-page .dt-button,
-        .pendaftaran-neo-page a.btn {
-            min-height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            padding: 9px 14px !important;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--neo-surface) !important;
-            font-size: .8rem;
-            line-height: 1;
-            font-weight: 850;
-            text-decoration: none !important;
-            box-shadow:
-                5px 5px 11px rgba(163, 177, 198, .26),
-                -5px -5px 11px rgba(255, 255, 255, .78) !important;
-            transition: .18s ease;
-        }
-
-        .pendaftaran-neo-page .btn:hover,
-        .pendaftaran-neo-page .dt-button:hover,
-        .pendaftaran-neo-page a.btn:hover {
-            transform: translateY(-1px);
-            color: #0f172a !important;
-            border-color: rgba(100, 116, 139, .3) !important;
-            box-shadow:
-                6px 6px 14px rgba(163, 177, 198, .3),
-                -6px -6px 14px rgba(255, 255, 255, .84) !important;
-        }
-
-        .pendaftaran-neo-page .btn-primary,
-        .pendaftaran-neo-page .btn-info,
-        .pendaftaran-neo-page .btn-success {
-            color: var(--neo-primary) !important;
-        }
-
-        .pendaftaran-neo-page .btn-warning {
-            color: var(--neo-warning) !important;
-        }
-
-        .pendaftaran-neo-page .btn-danger {
-            color: var(--neo-danger) !important;
-        }
-
-        .pendaftaran-neo-page .btn-light,
-        .pendaftaran-neo-page .btn-secondary {
-            color: #475569 !important;
-        }
-
-        .pendaftaran-neo-page #example_wrapper {
-            color: var(--neo-text);
-        }
-
-        .pendaftaran-neo-page #example_wrapper .dataTables_length,
-        .pendaftaran-neo-page #example_wrapper .dataTables_filter,
-        .pendaftaran-neo-page #example_wrapper .dataTables_info {
-            color: var(--neo-muted) !important;
-            font-weight: 750;
-        }
-
-        .pendaftaran-neo-page #example_wrapper .dataTables_filter input,
-        .pendaftaran-neo-page #example_wrapper .dataTables_length select {
-            margin-left: 8px;
-            min-height: 38px;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 13px !important;
-            color: #1e293b;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                inset 4px 4px 8px rgba(163, 177, 198, .17),
-                inset -4px -4px 8px rgba(255, 255, 255, .78) !important;
-            font-weight: 700;
-        }
-
-        .pendaftaran-neo-page .table-responsive > .table-responsive {
-            padding: 10px;
-            border-radius: 20px;
-            background: var(--neo-surface);
-            box-shadow:
-                5px 5px 13px rgba(163, 177, 198, .2),
-                -5px -5px 13px rgba(255, 255, 255, .7);
-        }
-
-        .pendaftaran-neo-page table.dataTable,
-        .pendaftaran-neo-page .table {
+        .admin-page-simple .table {
             width: 100% !important;
-            margin: 0 !important;
-            border-collapse: separate !important;
-            border-spacing: 0 9px !important;
+            margin-bottom: 0;
         }
 
-        .pendaftaran-neo-page table.dataTable thead tr,
-        .pendaftaran-neo-page .table thead tr {
-            border: 0 !important;
-        }
-
-        .pendaftaran-neo-page table.dataTable thead th,
-        .pendaftaran-neo-page .table thead th {
-            padding: 12px 14px !important;
-            border: 0 !important;
-            color: #64748b !important;
-            background: transparent !important;
-            font-size: .76rem !important;
-            font-weight: 900 !important;
-            letter-spacing: .035em;
+        .admin-page-simple .table thead th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: .04em;
+            white-space: nowrap;
+            background: #ffffff;
+            border-bottom-color: #eef2f7;
         }
 
-        .pendaftaran-neo-page table.dataTable tbody tr,
-        .pendaftaran-neo-page .table tbody tr {
-            background: var(--neo-surface) !important;
-            box-shadow:
-                4px 4px 11px rgba(163, 177, 198, .18),
-                -4px -4px 11px rgba(255, 255, 255, .72);
-        }
-
-        .pendaftaran-neo-page table.dataTable tbody td,
-        .pendaftaran-neo-page .table tbody td {
-            padding: 13px 14px !important;
-            border-top: 1px solid rgba(148, 163, 184, .12) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, .55) !important;
-            color: #334155 !important;
-            background: transparent !important;
-            font-weight: 750;
+        .admin-page-simple .table tbody td {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: #111827;
+            font-size: 14px;
             vertical-align: middle;
         }
 
-        .pendaftaran-neo-page table.dataTable tbody td:first-child,
-        .pendaftaran-neo-page .table tbody td:first-child {
-            border-radius: 16px 0 0 16px;
-            border-left: 1px solid rgba(148, 163, 184, .12) !important;
+        .admin-page-simple .table tbody tr:last-child td {
+            border-bottom: 0;
         }
 
-        .pendaftaran-neo-page table.dataTable tbody td:last-child,
-        .pendaftaran-neo-page .table tbody td:last-child {
-            border-radius: 0 16px 16px 0;
-            border-right: 1px solid rgba(255, 255, 255, .55) !important;
+        .admin-page-simple .table tbody tr:hover {
+            background: #f8fafc;
         }
 
-        .pendaftaran-neo-page .badge,
-        .pendaftaran-neo-page .badge-light,
-        .pendaftaran-neo-page .badge-primary,
-        .pendaftaran-neo-page .badge-success,
-        .pendaftaran-neo-page .badge-warning,
-        .pendaftaran-neo-page .badge-danger {
+        .admin-page-simple .badge,
+        .admin-page-simple .badge-light,
+        .admin-page-simple .badge-primary,
+        .admin-page-simple .badge-success,
+        .admin-page-simple .badge-warning,
+        .admin-page-simple .badge-danger,
+        .admin-page-simple .badge-light-success,
+        .admin-page-simple .badge-light-warning,
+        .admin-page-simple .badge-light-danger,
+        .admin-page-simple .badge-light-primary,
+        .admin-page-simple .badge-light-info {
             min-height: 28px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 7px 11px;
+            padding: 6px 10px;
             border-radius: 999px;
-            background: var(--neo-surface) !important;
+            border: 1px solid #e5e7eb !important;
+            background: #f8fafc !important;
             color: #475569 !important;
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .2),
-                -4px -4px 9px rgba(255, 255, 255, .74);
-            font-weight: 850;
+            font-weight: 700;
         }
 
-        .pendaftaran-neo-page .badge-success,
-        .pendaftaran-neo-page .text-success {
-            color: #166534 !important;
+        .admin-page-simple .badge-success,
+        .admin-page-simple .badge-light-success,
+        .admin-page-simple .text-success {
+            color: #047857 !important;
+            background: #ecfdf5 !important;
+            border-color: #bbf7d0 !important;
         }
 
-        .pendaftaran-neo-page .badge-warning,
-        .pendaftaran-neo-page .text-warning {
+        .admin-page-simple .badge-warning,
+        .admin-page-simple .badge-light-warning,
+        .admin-page-simple .text-warning {
             color: #92400e !important;
+            background: #fffbeb !important;
+            border-color: #fde68a !important;
         }
 
-        .pendaftaran-neo-page .badge-danger,
-        .pendaftaran-neo-page .text-danger {
+        .admin-page-simple .badge-danger,
+        .admin-page-simple .badge-light-danger,
+        .admin-page-simple .text-danger {
             color: #b91c1c !important;
+            background: #fef2f2 !important;
+            border-color: #fecaca !important;
         }
 
-        .pendaftaran-neo-page .dataTables_paginate .pagination {
-            gap: 7px;
-            margin-top: 14px !important;
+        /* Tombol aksi */
+        #example th:first-child,
+        #example td:first-child {
+            width: 132px !important;
+            min-width: 132px !important;
+            white-space: nowrap;
+            text-align: center;
         }
 
-        .pendaftaran-neo-page .dataTables_paginate .page-item .page-link {
-            min-width: 36px;
-            height: 36px;
+        #example .action-icon-btn,
+        #example .btn.btn-icon.action-icon-btn,
+        #example td:first-child .btn.btn-icon,
+        #example td:first-child a,
+        #example td:first-child button {
+            width: 34px !important;
+            height: 34px !important;
+            min-width: 34px !important;
+            min-height: 34px !important;
+            margin: 0 3px !important;
+            padding: 0 !important;
+            border: 0 !important;
+            border-radius: 8px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #ffffff !important;
+            background: #3b82f6 !important;
+            box-shadow: 0 5px 12px rgba(15, 23, 42, .12) !important;
+            transition: transform .18s ease, filter .18s ease;
+            vertical-align: middle !important;
+        }
+
+        #example .action-icon-btn .bi,
+        #example .btn.btn-icon.action-icon-btn .bi,
+        #example td:first-child .btn.btn-icon .bi,
+        #example td:first-child a i,
+        #example td:first-child button i,
+        #example td:first-child .bi {
+            color: #ffffff !important;
+            font-size: 15px !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Detail = Biru */
+        #example .action-icon-btn[data-bs-target="#form_detail"],
+        #example .btn[data-bs-target="#form_detail"],
+        #example td:first-child a[data-bs-target="#form_detail"],
+        #example td:first-child button[data-bs-target="#form_detail"],
+        #example td:first-child a[title*="Detail"],
+        #example td:first-child button[title*="Detail"],
+        #example td:first-child a[title*="Lihat"],
+        #example td:first-child button[title*="Lihat"] {
+            background: #3b82f6 !important;
+        }
+
+        /* Edit = Kuning */
+        #example .action-icon-btn[data-bs-target="#form_edit"],
+        #example .btn[data-bs-target="#form_edit"],
+        #example td:first-child a[data-bs-target="#form_edit"],
+        #example td:first-child button[data-bs-target="#form_edit"],
+        #example td:first-child a[title*="Edit"],
+        #example td:first-child button[title*="Edit"] {
+            background: #f59e0b !important;
+        }
+
+        /* Hapus = Merah */
+        #example .action-icon-btn[onclick*="deleteConfirmation"],
+        #example .btn[onclick*="deleteConfirmation"],
+        #example td:first-child a[onclick*="delete"],
+        #example td:first-child button[onclick*="delete"],
+        #example td:first-child a[title*="Hapus"],
+        #example td:first-child button[title*="Hapus"] {
+            background: #ef4444 !important;
+        }
+
+        #example .action-icon-btn:hover,
+        #example td:first-child .btn.btn-icon:hover,
+        #example td:first-child a:hover,
+        #example td:first-child button:hover {
+            color: #ffffff !important;
+            filter: brightness(.94);
+            transform: translateY(-1px);
+        }
+
+        #example .action-icon-btn:active,
+        #example td:first-child .btn.btn-icon:active,
+        #example td:first-child a:active,
+        #example td:first-child button:active {
+            transform: translateY(0);
+        }
+
+        /* DataTables */
+        .admin-page-simple .dataTables_wrapper {
+            width: 100%;
+            color: #111827;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_length,
+        .admin-page-simple .dataTables_wrapper .dataTables_filter,
+        .admin-page-simple .dataTables_wrapper .dataTables_info,
+        .admin-page-simple .dataTables_wrapper .dataTables_paginate {
+            color: #64748b !important;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_length label,
+        .admin-page-simple .dataTables_wrapper .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_filter input,
+        .admin-page-simple .dataTables_wrapper .dataTables_length select {
+            min-height: 38px;
+            padding: 7px 10px !important;
+            color: #111827;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_filter input:focus,
+        .admin-page-simple .dataTables_wrapper .dataTables_length select:focus {
+            border-color: #074366 !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
+        }
+
+        /* Excel kiri dan pencarian kanan */
+        .admin-page-simple .dataTables_wrapper > .dt-buttons,
+        .admin-page-simple .dataTables_wrapper .dt-buttons {
+            float: left !important;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dt-buttons .btn,
+        .admin-page-simple .dataTables_wrapper .dt-button {
+            margin-right: 6px !important;
+            border-radius: 8px !important;
+            color: #ffffff !important;
+            background: #10b981 !important;
+            border: 1px solid #10b981 !important;
+            font-weight: 700 !important;
+            box-shadow: none !important;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_filter {
+            float: right !important;
+            margin-bottom: 12px;
+            text-align: right !important;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_filter label {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 8px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .admin-page-simple .dataTables_wrapper .dataTables_filter input {
+            width: 230px !important;
+            margin-left: 6px !important;
+        }
+
+        .admin-page-simple .dataTables_wrapper::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        /* Pagination */
+        .admin-page-simple .dataTables_wrapper .pagination {
+            gap: 4px;
+            margin-bottom: 0;
+            justify-content: flex-end;
+        }
+
+        .admin-page-simple .dataTables_wrapper .page-link {
+            min-width: 34px;
+            height: 34px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(148, 163, 184, .18) !important;
-            border-radius: 13px !important;
-            color: #475569 !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .2),
-                -4px -4px 9px rgba(255, 255, 255, .74);
-            font-weight: 850;
+            color: #64748b;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px !important;
+            font-weight: 700;
         }
 
-        .pendaftaran-neo-page .dataTables_paginate .page-item.active .page-link {
-            color: var(--neo-primary) !important;
-            box-shadow:
-                inset 4px 4px 8px rgba(163, 177, 198, .2),
-                inset -4px -4px 8px rgba(255, 255, 255, .78) !important;
+        .admin-page-simple .dataTables_wrapper .page-item.active .page-link {
+            color: #ffffff;
+            background: #074366;
+            border-color: #074366;
         }
 
-        .pendaftaran-neo-page .dataTables_paginate .page-item.disabled .page-link {
-            opacity: .55;
+        .admin-page-simple .dataTables_wrapper .page-item.disabled .page-link {
+            color: #94a3b8;
+            background: #f8fafc;
         }
 
+        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before,
+        table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control::before {
+            background: #074366 !important;
+            border: 0 !important;
+            box-shadow: none !important;
+        }
+
+        /* Modal */
         #form_create .modal-dialog,
         #form_edit .modal-dialog,
         #form_detail .modal-dialog {
-            margin-top: 40px;
+            margin-top: 28px;
+            margin-bottom: 28px;
         }
 
         #form_create .modal-content,
         #form_edit .modal-content,
         #form_detail .modal-content {
-            border: 1px solid rgba(148, 163, 184, .18) !important;
-            border-radius: 26px !important;
-            background: #eef2f7 !important;
-            box-shadow:
-                12px 12px 28px rgba(15, 23, 42, .16),
-                -8px -8px 22px rgba(255, 255, 255, .68) !important;
             overflow: hidden;
+            border: 0 !important;
+            border-radius: 12px !important;
+            background: #ffffff !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
         #form_create .modal-header,
         #form_edit .modal-header,
         #form_detail .modal-header {
-            padding: 22px 24px;
-            border-bottom: 1px solid rgba(148, 163, 184, .18) !important;
-            background: #eef2f7 !important;
+            padding: 16px 20px;
+            background: #ffffff !important;
+            border-bottom: 1px solid #eef2f7 !important;
         }
 
         #form_create .modal-title,
         #form_edit .modal-title,
         #form_detail .modal-title {
-            color: #1f2937;
-            font-weight: 900;
+            color: #111827;
+            font-size: 18px;
+            font-weight: 800;
         }
 
         #form_create .modal-body,
         #form_edit .modal-body,
         #form_detail .modal-body {
-            padding: 24px;
-            background: #eef2f7 !important;
+            padding: 22px;
+            background: #ffffff !important;
         }
 
         #form_create .modal-footer,
         #form_edit .modal-footer,
         #form_detail .modal-footer {
-            padding: 18px 24px 22px;
-            border-top: 1px solid rgba(148, 163, 184, .16) !important;
-            background: #eef2f7 !important;
+            gap: 8px;
+            padding: 14px 20px 18px;
+            background: #ffffff !important;
+            border-top: 1px solid #eef2f7 !important;
         }
 
         #form_create h6,
         #form_edit h6,
         #form_detail h6 {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 18px !important;
-            padding: 10px 14px !important;
-            border: 0 !important;
-            border-radius: 14px;
-            color: #334155 !important;
-            background: #eef2f7;
-            box-shadow:
-                inset 4px 4px 8px rgba(163, 177, 198, .16),
-                inset -4px -4px 8px rgba(255, 255, 255, .74);
-            font-weight: 900 !important;
+            margin-bottom: 16px !important;
+            padding-bottom: 10px !important;
+            color: #074366 !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            font-size: 14px;
+            font-weight: 800 !important;
         }
 
-        #form_create h6::before,
-        #form_edit h6::before,
-        #form_detail h6::before {
-            content: "\F431";
-            font-family: bootstrap-icons !important;
-            color: #2563eb;
+        #form_create label,
+        #form_edit label,
+        #form_detail label {
+            color: #111827 !important;
+            font-weight: 800 !important;
         }
 
         #form_create .form-control,
@@ -427,149 +512,193 @@
         #form_edit .form-control,
         #form_edit .form-select,
         #form_detail .form-control,
-        #form_detail .form-select {
-            min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 15px !important;
-            color: #1e293b;
-            background: #eef2f7 !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .18),
-                inset -4px -4px 9px rgba(255, 255, 255, .76) !important;
-            font-weight: 750;
-        }
-
+        #form_detail .form-select,
         #form_create .select2-container--bootstrap5 .select2-selection,
         #form_create .select2-container .select2-selection--single,
         #form_edit .select2-container--bootstrap5 .select2-selection,
         #form_edit .select2-container .select2-selection--single {
             min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 15px !important;
-            background: #eef2f7 !important;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .18),
-                inset -4px -4px 9px rgba(255, 255, 255, .76) !important;
+            color: #111827 !important;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-weight: 600;
         }
 
-        #form_create label,
-        #form_edit label,
-        #form_detail label {
-            color: #334155 !important;
-            font-weight: 850 !important;
+        #form_create .form-control:focus,
+        #form_create .form-select:focus,
+        #form_edit .form-control:focus,
+        #form_edit .form-select:focus {
+            border-color: #074366 !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
         }
 
         #form_detail p {
-            min-height: 42px;
+            min-height: 40px;
             display: flex;
             align-items: center;
             margin: 0;
-            padding: 10px 13px;
-            border-radius: 14px;
-            color: #1e293b !important;
-            background: #eef2f7;
-            box-shadow:
-                inset 4px 4px 9px rgba(163, 177, 198, .16),
-                inset -4px -4px 9px rgba(255, 255, 255, .76);
-            font-weight: 750 !important;
+            padding: 9px 11px;
+            color: #334155 !important;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600 !important;
         }
 
         #form_create .btn,
         #form_edit .btn,
         #form_detail .btn {
-            min-height: 38px;
+            min-height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 7px;
-            padding: 9px 15px !important;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            box-shadow:
-                5px 5px 11px rgba(163, 177, 198, .24),
-                -5px -5px 11px rgba(255, 255, 255, .72) !important;
-            font-weight: 850;
+            gap: 6px;
+            padding: 8px 15px !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 13px;
+            line-height: 1;
+            font-weight: 700;
         }
 
         #form_create .btn-primary,
         #form_edit .btn-primary {
-            color: #2563eb !important;
+            color: #ffffff !important;
+            background: #074366 !important;
+            border: 1px solid #074366 !important;
         }
 
         #form_create .btn-light,
         #form_edit .btn-light,
         #form_detail .btn-light {
-            color: #475569 !important;
+            color: #ffffff !important;
+            background: #ef4444 !important;
+            border: 1px solid #ef4444 !important;
         }
 
         #form_create .btn-close,
         #form_edit .btn-close,
         #form_detail .btn-close {
-            width: 34px;
-            height: 34px;
-            border-radius: 12px;
-            background-color: #eef2f7;
-            box-shadow:
-                4px 4px 9px rgba(163, 177, 198, .22),
-                -4px -4px 9px rgba(255, 255, 255, .72);
-            opacity: .85;
+            width: 32px;
+            height: 32px;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            opacity: .78;
+        }
+
+        .select2-container--open {
+            z-index: 1065 !important;
+        }
+
+        .select2-dropdown {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, .12) !important;
+            overflow: hidden;
+        }
+
+        .select2-results__option {
+            padding: 9px 11px !important;
+            color: #334155 !important;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .select2-results__option--highlighted {
+            color: #ffffff !important;
+            background: #074366 !important;
         }
 
         .modal-backdrop.show {
-            opacity: .36;
+            opacity: .34 !important;
+            background: #0f172a !important;
         }
 
         .swal2-popup {
-            border-radius: 24px !important;
-            background: #eef2f7 !important;
-            box-shadow:
-                12px 12px 28px rgba(15, 23, 42, .16),
-                -8px -8px 22px rgba(255, 255, 255, .64) !important;
+            color: #111827 !important;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 12px !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
         .swal2-title {
-            color: #1f2937 !important;
-            font-weight: 900 !important;
+            color: #111827 !important;
+            font-weight: 800 !important;
         }
 
         .swal2-html-container,
         .swal2-content {
-            color: #64748b !important;
-            font-weight: 650 !important;
+            color: #475569 !important;
+            font-weight: 600 !important;
         }
 
         .swal2-confirm,
         .swal2-cancel {
-            border-radius: 14px !important;
-            font-weight: 850 !important;
+            min-height: 40px;
+            border-radius: 8px !important;
             box-shadow: none !important;
+            font-weight: 700 !important;
         }
 
+        /* Responsive */
         @media (max-width: 767.98px) {
-            .pendaftaran-neo-page {
-                padding: 0 16px 24px;
+            .admin-page-simple .page-title {
+                margin-bottom: 18px !important;
             }
 
-            .pendaftaran-neo-page .card-header {
+            .admin-page-simple .card-header {
+                align-items: flex-start !important;
                 flex-direction: column;
-                align-items: stretch;
-                gap: 16px;
+                gap: 12px;
+                padding: 15px;
             }
 
-            .pendaftaran-neo-page .card-toolbar,
-            .pendaftaran-neo-page .card-toolbar .d-flex,
-            .pendaftaran-neo-page .card-toolbar .btn {
+            .admin-page-simple .card-header .btn {
                 width: 100%;
             }
 
-            .pendaftaran-neo-page .card-body {
-                padding: 18px !important;
+            .admin-page-simple .card-body {
+                padding: 15px;
             }
 
-            .pendaftaran-neo-page .table-responsive.mb-8 {
-                padding: 14px !important;
+            .admin-page-simple .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-page-simple .dataTables_wrapper > .dt-buttons,
+            .admin-page-simple .dataTables_wrapper .dt-buttons,
+            .admin-page-simple .dataTables_wrapper .dataTables_filter {
+                float: none !important;
+                width: 100% !important;
+                display: flex !important;
+                justify-content: flex-start !important;
+                margin-bottom: 10px !important;
+                text-align: left !important;
+            }
+
+            .admin-page-simple .dataTables_wrapper .dataTables_length label,
+            .admin-page-simple .dataTables_wrapper .dataTables_filter label {
+                width: 100% !important;
+                align-items: flex-start !important;
+                flex-direction: column !important;
+            }
+
+            .admin-page-simple .dataTables_wrapper .dataTables_filter input {
+                width: 100% !important;
+                margin-left: 0 !important;
+            }
+
+            .admin-page-simple .dataTables_wrapper .pagination {
+                justify-content: flex-start;
+                flex-wrap: wrap;
             }
 
             #form_create .modal-dialog,
@@ -583,65 +712,122 @@
             #form_detail .modal-body {
                 padding: 18px;
             }
+
+            #form_create .modal-footer,
+            #form_edit .modal-footer,
+            #form_detail .modal-footer {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
         }
 
-        /* FIX: jarak icon plus/minus responsive DataTables agar tidak mepet tombol aksi */
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
-            position: relative;
+        /* =========================================================
+           FIX FINAL ACTION BUTTONS PENDAFTARAN
+           Progres hijau, Detail biru, Edit kuning, Hapus merah
+           Diletakkan paling bawah agar tidak kalah oleh style lain.
+        ========================================================= */
+        #example th:first-child,
+        #example td:first-child {
+            width: 150px !important;
+            min-width: 150px !important;
+            white-space: nowrap !important;
+            text-align: center !important;
         }
 
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
-            padding-left: 48px !important;
-        }
-
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control::before {
-            top: 50% !important;
-            left: 16px !important;
-            transform: translateY(-50%) !important;
-            margin-top: 0 !important;
-            width: 24px !important;
-            height: 24px !important;
-            line-height: 22px !important;
-            border-radius: 999px !important;
-            border: 1px solid rgba(148, 163, 184, .32) !important;
-            background: #eef2f7 !important;
-            color: #2563eb !important;
-            box-shadow:
-                3px 3px 7px rgba(163, 177, 198, .28),
-                -3px -3px 7px rgba(255, 255, 255, .82) !important;
-        }
-
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control::before,
-        .pendaftaran-neo-page table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control::before {
-            background: #eef2f7 !important;
-            color: #dc2626 !important;
-        }
-
-        .pendaftaran-neo-page table.dataTable tbody td:last-child,
-        .pendaftaran-neo-page table.dataTable tbody th:last-child {
-            min-width: 150px;
-        }
-
-        .pendaftaran-neo-page .action-row,
-        .pendaftaran-neo-page .table-actions,
-        .pendaftaran-neo-page td .d-flex,
-        .pendaftaran-neo-page td .btn-group {
-            gap: 10px !important;
+        #example td:first-child .action-icon-btn,
+        #example td:first-child .btn,
+        #example td:first-child a,
+        #example td:first-child button,
+        #example .action-icon-btn {
+            width: 34px !important;
+            height: 34px !important;
+            min-width: 34px !important;
+            min-height: 34px !important;
+            display: inline-flex !important;
             align-items: center !important;
-            flex-wrap: nowrap !important;
+            justify-content: center !important;
+            margin: 0 3px 0 0 !important;
+            padding: 0 !important;
+            color: #ffffff !important;
+            background-color: #3b82f6 !important;
+            border: 0 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 5px 12px rgba(15, 23, 42, .12) !important;
+            line-height: 1 !important;
+            vertical-align: middle !important;
         }
 
-        .pendaftaran-neo-page td .btn,
-        .pendaftaran-neo-page td .btn-sm,
-        .pendaftaran-neo-page td a.btn,
-        .pendaftaran-neo-page td button.btn {
-            margin-left: 4px !important;
-            margin-right: 4px !important;
+        #example td:first-child .action-icon-btn:last-child,
+        #example td:first-child .btn:last-child,
+        #example td:first-child a:last-child,
+        #example td:first-child button:last-child {
+            margin-right: 0 !important;
+        }
+
+        #example td:first-child .action-icon-btn i,
+        #example td:first-child .action-icon-btn .bi,
+        #example td:first-child .btn i,
+        #example td:first-child .btn .bi,
+        #example td:first-child a i,
+        #example td:first-child a .bi,
+        #example td:first-child button i,
+        #example td:first-child button .bi,
+        #example .action-icon-btn i,
+        #example .action-icon-btn .bi {
+            color: #ffffff !important;
+            font-size: 15px !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Progres = hijau */
+        #example td:first-child a[title*="Progres"],
+        #example td:first-child .action-icon-btn[title*="Progres"],
+        #example td:first-child a[href*="progres"],
+        #example td:first-child a[href*="progres_kelas"],
+        #example td:first-child a:has(.bi-layout-text-sidebar-reverse) {
+            background-color: #10b981 !important;
+            border-color: #10b981 !important;
+        }
+
+        /* Detail = biru */
+        #example td:first-child button[data-bs-target="#form_detail"],
+        #example td:first-child .action-icon-btn[data-bs-target="#form_detail"],
+        #example td:first-child .btn[data-bs-target="#form_detail"],
+        #example td:first-child button[title*="Detail"],
+        #example td:first-child .btn[title*="Detail"] {
+            background-color: #3b82f6 !important;
+            border-color: #3b82f6 !important;
+        }
+
+        /* Edit = kuning */
+        #example td:first-child button[data-bs-target="#form_edit"],
+        #example td:first-child .action-icon-btn[data-bs-target="#form_edit"],
+        #example td:first-child .btn[data-bs-target="#form_edit"],
+        #example td:first-child button[title*="Edit"],
+        #example td:first-child .btn[title*="Edit"] {
+            background-color: #f59e0b !important;
+            border-color: #f59e0b !important;
+        }
+
+        /* Hapus = merah, untuk jaga-jaga jika nanti ada delete */
+        #example td:first-child button[onclick*="delete"],
+        #example td:first-child .action-icon-btn[onclick*="delete"],
+        #example td:first-child .btn[onclick*="delete"],
+        #example td:first-child button[title*="Hapus"],
+        #example td:first-child .btn[title*="Hapus"] {
+            background-color: #ef4444 !important;
+            border-color: #ef4444 !important;
+        }
+
+        #example td:first-child .action-icon-btn:hover,
+        #example td:first-child .btn:hover,
+        #example td:first-child a:hover,
+        #example td:first-child button:hover {
+            color: #ffffff !important;
+            filter: brightness(.94) !important;
+            transform: translateY(-1px) !important;
         }
 
     </style>
@@ -656,69 +842,81 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid pendaftaran-neo-page">
-        <div class="content flex-column-fluid">
-            <div class="card mb-xl-8 mb-5 border-2 shadow">
-                <div class="card-header">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder mb-1">Data Pendaftaran Kelas</span>
-                    </h3>
-                    <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <a type="button" class="btn btn-sm btn-primary fs-sm-8 fs-lg-6" data-bs-toggle="modal"
-                                data-bs-target="#form_create" title="Tambah Pendaftaran">Tambah Pendaftaran</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-5">
-                    <div
-                        class="table-responsive mb-8 p-4 mx-0 border-hover-dark border-primary border-1 fs-sm-8 fs-lg-6 rounded-2">
-                        <div class="row mb-4 fs-sm-8 fs-lg-6">
-                            <div class="col-md-4 mb-2">
-                                <label class="d-flex align-items-center fw-bolder mb-1">
-                                    <span>Filter Kelas</span>
-                                </label>
-                                <select data-control="select2" id="filter_id_kelas"
-                                    class="form-select form-select-sm fs-sm-8 fs-lg-6" data-allow-clear="true"
+    <div class="container-fluid admin-page-simple">
+
+        <div class="page-title mb-4">
+            <h3 class="fw-bold">Data Pendaftaran Kelas</h3>
+            <p class="text-muted mb-0">Kelola peserta yang terdaftar pada kelas, status, progres, dan waktu akses terakhir</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder mb-1">Daftar Pendaftaran</span>
+                </h3>
+
+                <a type="button"
+                   class="btn btn-primary btn-sm fs-sm-8 fs-lg-6"
+                   data-bs-toggle="modal"
+                   data-bs-target="#form_create"
+                   title="Tambah Pendaftaran">
+                    <i class="bi bi-plus-lg me-1"></i>
+                    Tambah Pendaftaran
+                </a>
+            </div>
+
+            <div class="card-body">
+
+                <div class="filter-panel">
+                    <div class="filter-grid">
+                        <div class="filter-field">
+                            <label class="filter-label" for="filter_id_kelas">Filter Kelas</label>
+                            <select data-control="select2"
+                                    id="filter_id_kelas"
+                                    class="form-select form-select-sm fs-sm-8 fs-lg-6"
+                                    data-allow-clear="true"
                                     data-placeholder="Pilih Kelas">
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label class="d-flex align-items-center fw-bolder mb-1">
-                                    <span>Filter Status</span>
-                                </label>
-                                <select id="filter_status" data-control="select2"
-                                    class="form-select form-select-sm fs-sm-8 fs-lg-6" data-allow-clear="true"
-                                    data-placeholder="Pilih Status">
-                                    <option value="">Semua Status</option>
-                                    <option value="aktif">Aktif</option>
-                                    <option value="selesai">Selesai</option>
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                        <div class="table-responsive">
-                            <table id="example"
-                                class="table table-sm align-middle table-row-bordered table-row-solid gs-0 gy-2">
-                                <thead>
-                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0 fs-sm-8 fs-lg-6">
-                                        <th class="min-w-125px ps-5 text-nowrap">Aksi</th>
-                                        <th class="min-w-150px">Pengguna</th>
-                                        <th class="min-w-180px">Kelas</th>
-                                        <th class="min-w-150px">Terdaftar Pada</th>
-                                        <th class="min-w-100px">Progres (%)</th>
-                                        <th class="min-w-100px">Status</th>
-                                        <th class="min-w-150px">Selesai Pada</th>
-                                        <th class="min-w-150px">Terakhir Akses</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-800 fw-bolder fs-sm-8 fs-lg-6">
-                                </tbody>
-                            </table>
+
+                        <div class="filter-field">
+                            <label class="filter-label" for="filter_status">Filter Status</label>
+                            <select id="filter_status"
+                                    data-control="select2"
+                                    class="form-select form-select-sm fs-sm-8 fs-lg-6"
+                                    data-allow-clear="true"
+                                    data-placeholder="Pilih Status">
+                                <option value="">Semua Status</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="selesai">Selesai</option>
+                            </select>
                         </div>
                     </div>
                 </div>
+
+                <div class="table-responsive">
+                    <table id="example"
+                           class="table table-sm align-middle table-row-bordered table-row-solid gs-0 gy-2">
+                        <thead>
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0 fs-sm-8 fs-lg-6">
+                                <th class="min-w-125px ps-5 text-nowrap">Aksi</th>
+                                <th class="min-w-150px">Pengguna</th>
+                                <th class="min-w-180px">Kelas</th>
+                                <th class="min-w-150px">Terdaftar Pada</th>
+                                <th class="min-w-100px">Progres (%)</th>
+                                <th class="min-w-100px">Status</th>
+                                <th class="min-w-150px">Selesai Pada</th>
+                                <th class="min-w-150px">Terakhir Akses</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-800 fw-bolder fs-sm-8 fs-lg-6">
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
+
     </div>
 
     @include('admin.pendaftaran.view.detail')
@@ -765,4 +963,105 @@
     @include('admin.pendaftaran.script.create')
     @include('admin.pendaftaran.script.edit')
     @include('admin.pendaftaran.script.detail')
+
+    <script>
+        function warnaTombolAksiPendaftaran() {
+            $('#example .action-icon-btn, #example tbody td:first-child .btn, #example tbody td:first-child button, #example tbody td:first-child a').each(function () {
+                const $btn = $(this);
+                const html = String($btn.html() || '').toLowerCase();
+                const title = String($btn.attr('title') || '').toLowerCase();
+                const target = String($btn.attr('data-bs-target') || '').toLowerCase();
+                const onclick = String($btn.attr('onclick') || '').toLowerCase();
+                const href = String($btn.attr('href') || '').toLowerCase();
+
+                let warna = '#3b82f6';
+
+                if (
+                    title.includes('progres') ||
+                    title.includes('materi') ||
+                    href.includes('progres') ||
+                    href.includes('progres_kelas') ||
+                    html.includes('layout-text-sidebar')
+                ) {
+                    warna = '#10b981';
+                } else if (
+                    target.includes('form_edit') ||
+                    title.includes('edit') ||
+                    html.includes('pencil') ||
+                    html.includes('bi-pencil')
+                ) {
+                    warna = '#f59e0b';
+                } else if (
+                    onclick.includes('delete') ||
+                    onclick.includes('hapus') ||
+                    title.includes('hapus') ||
+                    html.includes('trash') ||
+                    html.includes('bi-trash')
+                ) {
+                    warna = '#ef4444';
+                } else if (
+                    target.includes('form_detail') ||
+                    title.includes('detail') ||
+                    title.includes('lihat') ||
+                    html.includes('file-text') ||
+                    html.includes('bi-file-text')
+                ) {
+                    warna = '#3b82f6';
+                }
+
+                $btn.addClass('aksi-warna-final').attr('style', function (_, oldStyle) {
+                    return oldStyle || '';
+                }).css({
+                    width: '34px',
+                    height: '34px',
+                    minWidth: '34px',
+                    minHeight: '34px',
+                    padding: '0',
+                    margin: '0 3px 0 0',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#ffffff',
+                    backgroundColor: warna,
+                    borderColor: warna,
+                    borderWidth: '0',
+                    borderStyle: 'solid',
+                    borderRadius: '8px',
+                    boxShadow: '0 5px 12px rgba(15, 23, 42, .12)',
+                    lineHeight: '1',
+                    verticalAlign: 'middle'
+                });
+
+                $btn.find('i, .bi, span').css({
+                    color: '#ffffff',
+                    fontSize: '15px',
+                    lineHeight: '1',
+                    margin: '0',
+                    padding: '0'
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            warnaTombolAksiPendaftaran();
+
+            $('#example').on('draw.dt init.dt xhr.dt responsive-display.dt column-visibility.dt', function () {
+                warnaTombolAksiPendaftaran();
+                setTimeout(warnaTombolAksiPendaftaran, 50);
+            });
+
+            const tableTarget = document.getElementById('example');
+            if (tableTarget) {
+                const observer = new MutationObserver(function () {
+                    warnaTombolAksiPendaftaran();
+                });
+                observer.observe(tableTarget, { childList: true, subtree: true });
+            }
+
+            setTimeout(warnaTombolAksiPendaftaran, 100);
+            setTimeout(warnaTombolAksiPendaftaran, 300);
+            setTimeout(warnaTombolAksiPendaftaran, 700);
+            setTimeout(warnaTombolAksiPendaftaran, 1200);
+        });
+    </script>
 @endsection

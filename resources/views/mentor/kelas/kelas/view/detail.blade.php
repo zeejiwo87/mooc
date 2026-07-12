@@ -1,119 +1,109 @@
 <style>
     #form_detail {
-        --neo-modal-bg: #eef2f7;
-        --neo-modal-surface: #eef2f7;
-        --neo-modal-surface-soft: #f3f6fa;
-        --neo-modal-text: #1f2937;
-        --neo-modal-muted: #6b7280;
-        --neo-modal-border: rgba(148, 163, 184, 0.18);
-        --neo-modal-shadow-dark: rgba(163, 177, 198, 0.42);
-        --neo-modal-shadow-light: rgba(255, 255, 255, 0.95);
-        --neo-modal-primary: #3b82f6;
-        --neo-modal-primary-dark: #2563eb;
-        --neo-modal-danger: #ef4444;
-        --neo-modal-warning: #f59e0b;
+        --modal-primary: #074366;
+        --modal-blue: #3b82f6;
+        --modal-red: #ef4444;
+        --modal-green: #10b981;
+        --modal-purple: #8b5cf6;
+        --modal-text: #111827;
+        --modal-muted: #64748b;
+        --modal-border: #eef2f7;
+        --modal-soft: #f8fafc;
+        --modal-white: #ffffff;
     }
 
     #form_detail .modal-dialog {
-        max-width: 1180px;
-        margin: 1.75rem auto;
+        max-width: 1120px;
+        margin: 1.5rem auto;
     }
 
     #form_detail .modal-content {
-        border: 0;
-        border-radius: 28px;
-        background: var(--neo-modal-bg);
-        box-shadow:
-            18px 18px 40px rgba(15, 23, 42, 0.22),
-            -10px -10px 28px rgba(255, 255, 255, 0.8);
         overflow: hidden;
+        border: 0 !important;
+        border-radius: 14px !important;
+        background: var(--modal-white) !important;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
     }
 
     #form_detail .modal-header {
         min-height: auto;
-        padding: 24px 26px 18px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        background: transparent;
+        padding: 18px 22px;
+        background: var(--modal-white) !important;
+        border-bottom: 1px solid var(--modal-border) !important;
     }
 
     #form_detail .neo-modal-title-wrap {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
         min-width: 0;
     }
 
     #form_detail .neo-modal-title-icon {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        border-radius: 17px;
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 10px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--neo-modal-primary);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.28),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 1.2rem;
+        color: #ffffff;
+        background: var(--modal-primary);
+        font-size: 1.05rem;
     }
 
     #form_detail .modal-title {
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 1.18rem;
+        color: var(--modal-text);
+        font-size: 1.08rem;
         line-height: 1.25;
-        font-weight: 850;
-        letter-spacing: -0.02em;
+        font-weight: 800;
     }
 
     #form_detail .neo-modal-subtitle {
-        margin: 5px 0 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.86rem;
+        margin: 4px 0 0;
+        color: var(--modal-muted);
+        font-size: .84rem;
         line-height: 1.4;
         font-weight: 500;
     }
 
     #form_detail .neo-btn-close {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
         padding: 0;
-        border: 0;
-        border-radius: 15px;
+        border: 0 !important;
+        border-radius: 8px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            6px 6px 14px rgba(163, 177, 198, 0.34),
-            -6px -6px 14px rgba(255, 255, 255, 0.9);
+        color: var(--modal-muted);
+        background: transparent !important;
+        box-shadow: none !important;
         opacity: 1;
-        transition: .18s ease;
+        transition: .16s ease;
     }
 
     #form_detail .neo-btn-close:hover {
-        color: var(--neo-modal-danger);
-        transform: translateY(-1px);
+        color: var(--modal-red);
+        background: #fef2f2 !important;
     }
 
     #form_detail .neo-btn-close i {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         line-height: 1;
     }
 
     #form_detail .modal-body {
-        padding: 24px 26px;
-        background: transparent;
+        padding: 22px;
+        background: #f8fafc !important;
     }
 
     #form_detail .neo-detail-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
-        gap: 22px;
+        grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+        gap: 18px;
         align-items: start;
     }
 
@@ -121,34 +111,33 @@
     #form_detail .neo-right-stack {
         display: flex;
         flex-direction: column;
-        gap: 22px;
+        gap: 18px;
         min-width: 0;
     }
 
     #form_detail .neo-section {
-        border-radius: 24px;
-        padding: 20px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            10px 10px 22px var(--neo-modal-shadow-dark),
-            -10px -10px 22px var(--neo-modal-shadow-light);
+        border: 1px solid var(--modal-border);
+        border-radius: 12px;
+        padding: 18px;
+        background: var(--modal-white);
+        box-shadow: 0 6px 18px rgba(15, 23, 42, .04);
     }
 
     #form_detail .neo-section-title {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin: 0 0 18px;
+        gap: 8px;
+        margin: 0 0 16px;
         padding-bottom: 12px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        color: var(--neo-modal-text);
-        font-size: 0.95rem;
+        border-bottom: 1px solid var(--modal-border);
+        color: var(--modal-text);
+        font-size: .95rem;
         line-height: 1.3;
-        font-weight: 850;
+        font-weight: 800;
     }
 
     #form_detail .neo-section-title i {
-        color: var(--neo-modal-primary);
+        color: var(--modal-primary);
         font-size: 1rem;
     }
 
@@ -169,68 +158,56 @@
     #form_detail .neo-info-label {
         display: flex;
         align-items: center;
-        gap: 7px;
-        margin: 0 0 8px;
-        color: var(--neo-modal-muted);
-        font-size: 0.78rem;
+        gap: 6px;
+        margin: 0 0 7px;
+        color: var(--modal-muted);
+        font-size: .74rem;
         line-height: 1.35;
-        font-weight: 850;
-        letter-spacing: .035em;
+        font-weight: 800;
+        letter-spacing: .04em;
         text-transform: uppercase;
     }
 
     #form_detail .neo-info-label i {
-        color: var(--neo-modal-primary);
-        font-size: 0.9rem;
+        color: var(--modal-blue);
+        font-size: .85rem;
     }
 
-    #form_detail .neo-info-value {
-        min-height: 44px;
+    #form_detail .neo-info-value,
+    #form_detail .neo-text-box,
+    #form_detail .neo-video-link {
         margin: 0;
-        padding: 12px 14px;
-        border-radius: 16px;
-        color: var(--neo-modal-text);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 0.9rem;
-        line-height: 1.5;
-        font-weight: 650;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        color: var(--modal-text);
+        background: var(--modal-soft);
+        box-shadow: none !important;
+        font-size: .9rem;
+        line-height: 1.55;
+        font-weight: 600;
         word-break: break-word;
     }
 
-    #form_detail .neo-info-value:empty::before {
+    #form_detail .neo-info-value {
+        min-height: 42px;
+        padding: 11px 13px;
+    }
+
+    #form_detail .neo-info-value:empty::before,
+    #form_detail .neo-text-box:empty::before {
         content: "-";
-        color: var(--neo-modal-muted);
+        color: var(--modal-muted);
         font-weight: 600;
     }
 
     #form_detail .neo-text-box {
-        min-height: 126px;
-        margin: 0;
-        padding: 14px;
-        border-radius: 16px;
-        color: var(--neo-modal-text);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 0.9rem;
-        line-height: 1.65;
-        font-weight: 600;
-        word-break: break-word;
+        min-height: 112px;
+        padding: 13px;
         white-space: pre-line;
     }
 
-    #form_detail .neo-text-box:empty::before {
-        content: "-";
-        color: var(--neo-modal-muted);
-        font-weight: 600;
-    }
-
     #form_detail #detail_deskripsi_lengkap {
-        min-height: 180px;
+        min-height: 165px;
         overflow: auto;
     }
 
@@ -239,31 +216,24 @@
     }
 
     #form_detail .neo-video-link {
-        min-height: 44px;
+        min-height: 42px;
         display: flex;
         align-items: center;
-        gap: 9px;
-        padding: 12px 14px;
-        border-radius: 16px;
-        color: var(--neo-modal-primary) !important;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 0.9rem;
-        line-height: 1.45;
-        font-weight: 800;
+        gap: 8px;
+        padding: 11px 13px;
+        color: var(--modal-blue) !important;
         text-decoration: none !important;
-        word-break: break-word;
     }
 
     #form_detail .neo-video-link:hover {
-        color: var(--neo-modal-primary-dark) !important;
+        color: var(--modal-primary) !important;
+        border-color: #bfdbfe;
+        background: #eff6ff;
     }
 
     #form_detail .neo-video-link:empty::before {
         content: "Belum ada video intro.";
-        color: var(--neo-modal-muted);
+        color: var(--modal-muted);
         font-weight: 600;
     }
 
@@ -274,62 +244,39 @@
     #form_detail .neo-media-box {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 18px;
+        align-items: stretch;
+        gap: 16px;
     }
 
-    #form_detail .neo-banner-frame {
+    #form_detail .neo-banner-frame,
+    #form_detail .neo-certificate-box {
         width: 100%;
-        max-width: 360px;
-        min-height: 190px;
-        border-radius: 24px;
+        border: 1px solid var(--modal-border);
+        border-radius: 12px;
         padding: 14px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 6px 6px 13px rgba(163, 177, 198, 0.26),
-            inset -6px -6px 13px rgba(255, 255, 255, 0.92);
+        background: var(--modal-soft);
+        box-shadow: none !important;
+        text-align: center;
     }
 
-    #form_detail .neo-banner-title {
+    #form_detail .neo-banner-title,
+    #form_detail .neo-certificate-title {
         display: block;
         margin: 0 0 12px;
-        color: var(--neo-modal-text);
-        font-size: 0.88rem;
-        font-weight: 850;
+        color: var(--modal-text);
+        font-size: .86rem;
+        font-weight: 800;
         text-align: center;
     }
 
     #form_detail #detail_banner_preview {
         width: 100%;
-        max-height: 150px;
+        max-height: 170px;
         object-fit: cover;
-        border: 0 !important;
-        border-radius: 18px !important;
-        background: var(--neo-modal-surface-soft);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.32),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
-    }
-
-    #form_detail .neo-certificate-box {
-        width: 100%;
-        max-width: 360px;
-        border-radius: 22px;
-        padding: 18px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            8px 8px 18px rgba(163, 177, 198, 0.34),
-            -8px -8px 18px rgba(255, 255, 255, 0.92);
-        text-align: center;
-    }
-
-    #form_detail .neo-certificate-title {
-        display: block;
-        margin: 0 0 12px;
-        color: var(--neo-modal-text);
-        font-size: 0.88rem;
-        font-weight: 850;
-        text-align: center;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 10px !important;
+        background: #ffffff;
+        box-shadow: none !important;
     }
 
     #form_detail .neo-certificate-btn {
@@ -339,28 +286,27 @@
         justify-content: center;
         gap: 8px;
         border: 0 !important;
-        border-radius: 15px !important;
+        border-radius: 8px !important;
         padding: 10px 14px !important;
         color: #ffffff !important;
-        background: var(--neo-modal-primary) !important;
-        font-size: 0.84rem;
-        font-weight: 850;
-        box-shadow:
-            6px 6px 14px rgba(163, 177, 198, 0.36),
-            -6px -6px 14px rgba(255, 255, 255, 0.92);
+        background: var(--modal-purple) !important;
+        font-size: .84rem;
+        font-weight: 800;
+        box-shadow: 0 6px 14px rgba(139, 92, 246, .18) !important;
         text-decoration: none !important;
     }
 
     #form_detail .neo-certificate-btn:hover {
-        background: var(--neo-modal-primary-dark) !important;
+        color: #ffffff !important;
+        background: #7c3aed !important;
     }
 
     #form_detail #detail_sertifikat_name {
         margin-top: 10px !important;
-        color: var(--neo-modal-muted) !important;
-        font-size: 0.8rem !important;
+        color: var(--modal-muted) !important;
+        font-size: .8rem !important;
         line-height: 1.45;
-        font-weight: 650;
+        font-weight: 600;
         word-break: break-word;
     }
 
@@ -368,45 +314,44 @@
         display: inline-flex;
         justify-content: center;
         width: 100%;
-        color: var(--neo-modal-muted) !important;
-        font-size: 0.86rem !important;
+        color: var(--modal-muted) !important;
+        font-size: .86rem !important;
         line-height: 1.45;
-        font-weight: 650;
+        font-weight: 600;
     }
 
     #form_detail .modal-footer {
-        gap: 12px;
-        padding: 18px 26px 24px;
-        border-top: 1px solid var(--neo-modal-border);
-        background: transparent;
+        gap: 10px;
+        padding: 16px 22px;
+        border-top: 1px solid var(--modal-border) !important;
+        background: var(--modal-white) !important;
     }
 
     #form_detail .neo-btn {
-        min-height: 42px;
-        min-width: 104px;
+        min-height: 40px;
+        min-width: 100px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         padding: 10px 16px;
-        border: 0;
-        border-radius: 16px;
-        font-size: 0.88rem;
+        border: 0 !important;
+        border-radius: 8px;
+        font-size: .86rem;
         line-height: 1;
-        font-weight: 850;
-        transition: .18s ease;
+        font-weight: 800;
+        transition: .16s ease;
     }
 
     #form_detail .neo-btn-light {
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.36),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
+        color: #ffffff !important;
+        background: var(--modal-red) !important;
+        box-shadow: 0 6px 14px rgba(239, 68, 68, .18) !important;
     }
 
     #form_detail .neo-btn-light:hover {
-        color: var(--neo-modal-text);
+        color: #ffffff !important;
+        background: #dc2626 !important;
         transform: translateY(-1px);
     }
 
@@ -430,112 +375,80 @@
             margin: 1.25rem auto;
         }
 
-        #form_detail .modal-header {
-            padding: 22px 22px 16px;
-        }
-
-        #form_detail .modal-body {
-            padding: 22px;
-        }
-
+        #form_detail .modal-header,
+        #form_detail .modal-body,
         #form_detail .modal-footer {
-            padding: 16px 22px 22px;
+            padding-left: 18px;
+            padding-right: 18px;
         }
     }
 
     @media (max-width: 767.98px) {
         #form_detail .modal-dialog {
             max-width: calc(100vw - 24px);
-            margin: 0.75rem auto;
+            margin: .75rem auto;
         }
 
         #form_detail .modal-content {
-            border-radius: 24px;
+            border-radius: 12px !important;
         }
 
         #form_detail .modal-header {
             align-items: flex-start;
-            padding: 20px 18px 15px;
+            padding-top: 16px;
+            padding-bottom: 14px;
         }
 
         #form_detail .neo-modal-title-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 15px;
-            font-size: 1.08rem;
-        }
-
-        #form_detail .modal-title {
-            font-size: 1.05rem;
-        }
-
-        #form_detail .neo-modal-subtitle {
-            font-size: 0.82rem;
-        }
-
-        #form_detail .neo-btn-close {
             width: 38px;
             height: 38px;
             min-width: 38px;
-            border-radius: 13px;
+            border-radius: 9px;
+        }
+
+        #form_detail .modal-title {
+            font-size: 1rem;
+        }
+
+        #form_detail .neo-modal-subtitle {
+            font-size: .8rem;
         }
 
         #form_detail .modal-body {
-            padding: 18px;
+            padding-top: 18px;
+            padding-bottom: 18px;
         }
 
         #form_detail .neo-left-stack,
         #form_detail .neo-right-stack {
-            gap: 16px;
+            gap: 14px;
         }
 
         #form_detail .neo-section {
-            border-radius: 22px;
-            padding: 18px;
+            padding: 15px;
         }
 
         #form_detail .neo-info-grid {
             grid-template-columns: 1fr;
-        }
-
-        #form_detail .modal-footer {
-            padding: 15px 18px 18px;
         }
     }
 
     @media (max-width: 575.98px) {
         #form_detail .modal-dialog {
             max-width: calc(100vw - 16px);
-            margin: 0.5rem auto;
+            margin: .5rem auto;
         }
 
-        #form_detail .modal-content {
-            border-radius: 22px;
-        }
-
-        #form_detail .modal-header {
-            padding: 18px 16px 14px;
-        }
-
-        #form_detail .modal-body {
-            padding: 16px;
-        }
-
-        #form_detail .neo-section {
-            padding: 16px;
-            border-radius: 20px;
-        }
-
-        #form_detail .neo-banner-frame,
-        #form_detail .neo-certificate-box {
-            max-width: 100%;
+        #form_detail .modal-header,
+        #form_detail .modal-body,
+        #form_detail .modal-footer {
+            padding-left: 14px;
+            padding-right: 14px;
         }
 
         #form_detail .modal-footer {
             flex-direction: column-reverse;
             align-items: stretch;
-            padding: 14px 16px 16px;
         }
 
         #form_detail .neo-btn {

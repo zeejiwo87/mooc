@@ -2,19 +2,25 @@
 
 @section('css')
     <style>
+        /* =========================================================
+           KELAS BUILDER / ISI KELAS
+           Tampilan flat, simple, konsisten
+           Visual only
+        ========================================================= */
+
         .kelas-builder-page {
-            --bg: #eef2f7;
-            --surface: #eef2f7;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --border: rgba(148, 163, 184, .2);
-            --primary: #3b82f6;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --shadow-dark: rgba(163, 177, 198, .42);
-            --shadow-light: rgba(255, 255, 255, .95);
-            padding: 0 30px 30px;
+            --page-primary: #074366;
+            --page-primary-dark: #052f49;
+            --page-success: #10b981;
+            --page-warning: #f59e0b;
+            --page-danger: #ef4444;
+            --page-text: #111827;
+            --page-muted: #64748b;
+            --page-border: #e5e7eb;
+            --page-soft: #f8fafc;
+            --page-white: #ffffff;
+            padding: 0 24px 28px;
+            color: var(--page-text);
         }
 
         .kelas-builder-shell {
@@ -22,19 +28,20 @@
             margin: 0 auto;
         }
 
+        /* Card dan panel utama */
         .neo-card,
         .panel,
         .builder-card,
         .video-panel {
-            border: 0;
-            border-radius: 28px;
-            background: var(--surface);
-            box-shadow: 10px 10px 22px var(--shadow-dark), -10px -10px 22px var(--shadow-light);
             overflow: hidden;
+            background: var(--page-white);
+            border: 1px solid #eef2f7;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
         }
 
         .hero-banner {
-            min-height: 240px;
+            min-height: 230px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -44,12 +51,12 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(15, 23, 42, .28);
+            background: rgba(15, 23, 42, .20);
         }
 
         .hero-body,
         .content-body {
-            padding: 26px 28px 28px;
+            padding: 22px;
         }
 
         .hero-top,
@@ -60,140 +67,158 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 18px;
+            gap: 16px;
         }
 
         .kelas-title {
             margin: 0;
-            color: var(--text);
-            font-size: 1.75rem;
-            line-height: 1.25;
-            font-weight: 850;
+            color: var(--page-text);
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 800;
         }
 
         .kelas-owner,
         .muted-text {
-            color: var(--muted);
-            font-weight: 650;
+            color: var(--page-muted);
+            font-weight: 600;
         }
 
         .kelas-owner span {
-            color: var(--text);
-            font-weight: 850;
-        }
-
-        .badge-neo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 30px;
-            padding: 7px 12px;
-            border-radius: 999px;
-            background: var(--surface);
-            color: var(--primary);
-            font-size: .78rem;
-            line-height: 1;
-            font-weight: 850;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .28), -5px -5px 10px rgba(255, 255, 255, .92);
-        }
-
-        .badge-neo.success,
-        .badge-neo.warning,
-        .badge-neo.danger {
-            color: #475569;
+            color: var(--page-text);
+            font-weight: 800;
         }
 
         .stars {
             display: flex;
             align-items: center;
             gap: 3px;
-            color: var(--warning);
+            color: var(--page-warning);
         }
 
         .stars .bi-star {
-            color: #94a3b8;
+            color: #cbd5e1;
         }
 
         .rating-number {
             margin-left: 8px;
-            color: var(--text);
-            font-weight: 850;
+            color: var(--page-text);
+            font-weight: 800;
         }
 
         .short-desc {
             max-width: 920px;
-            margin: 18px 0 0;
-            color: var(--muted);
+            margin: 16px 0 0;
+            color: var(--page-muted);
             line-height: 1.65;
             font-weight: 600;
         }
 
-        .stat-row,
+        /* Badge */
+        .badge-neo {
+            min-height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            color: #334155;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 999px;
+            box-shadow: none;
+            font-size: 12px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .badge-neo.success {
+            color: #047857;
+            background: #ecfdf5;
+            border-color: #bbf7d0;
+        }
+
+        .badge-neo.warning {
+            color: #92400e;
+            background: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        .badge-neo.danger {
+            color: #b91c1c;
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
         .meta-row,
+        .stat-row,
         .action-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .stat-row {
-            margin-top: 24px;
+            margin-top: 22px;
         }
 
         .stat-item {
             min-width: 185px;
             display: flex;
             align-items: center;
-            gap: 13px;
-            padding: 15px 16px;
-            border-radius: 20px;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .92);
+            gap: 12px;
+            padding: 14px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .stat-icon {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
-            color: var(--primary);
-            background: var(--surface);
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .32), -5px -5px 10px rgba(255, 255, 255, .92);
-            font-size: 1.15rem;
+            color: var(--page-primary);
+            background: #ffffff;
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            box-shadow: none;
+            font-size: 18px;
         }
 
         .stat-value {
-            color: var(--text);
-            font-size: 1rem;
+            color: var(--page-text);
+            font-size: 15px;
             line-height: 1.2;
-            font-weight: 850;
+            font-weight: 800;
         }
 
         .stat-label {
             margin-top: 3px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 700;
+            color: var(--page-muted);
+            font-size: 12px;
+            font-weight: 600;
         }
 
+        /* Tabs */
         .tabs-card {
-            padding: 18px 20px 0;
-            border-bottom: 1px solid var(--border);
+            padding: 14px 16px 0;
+            background: var(--page-white);
+            border-bottom: 1px solid #eef2f7;
         }
 
         .tabs-scroll {
             width: 100%;
             overflow-x: auto;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }
 
         .neo-tabs {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             min-width: max-content;
             margin: 0;
             padding: 0;
@@ -201,55 +226,57 @@
         }
 
         .neo-tabs .nav-link {
-            min-height: 42px;
+            min-height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 15px !important;
-            border: 0 !important;
-            border-radius: 16px !important;
-            color: var(--muted) !important;
-            background: var(--surface) !important;
-            font-size: .86rem;
+            padding: 9px 13px !important;
+            color: var(--page-muted) !important;
+            background: #ffffff !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            box-shadow: none;
+            font-size: 13px;
             line-height: 1;
-            font-weight: 850;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .28), -5px -5px 10px rgba(255, 255, 255, .9);
+            font-weight: 700;
         }
 
         .neo-tabs .nav-link.active {
-            color: #fff !important;
-            background: var(--primary) !important;
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
         }
 
+        /* Layout */
         .main-grid {
             display: grid;
             grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
-            gap: 24px;
+            gap: 22px;
             align-items: start;
         }
 
         .panel,
         .video-panel,
         .builder-card {
-            padding: 20px;
+            padding: 18px;
         }
 
         .info-item {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .info-label {
             margin: 0 0 7px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 850;
-            text-transform: uppercase;
-            letter-spacing: .035em;
+            color: var(--page-text);
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         .info-value {
-            color: var(--text);
-            font-weight: 850;
+            color: var(--page-text);
+            font-weight: 700;
             word-break: break-word;
         }
 
@@ -257,7 +284,7 @@
         .dashboard-grid,
         .builder-stat-grid {
             display: grid;
-            gap: 14px;
+            gap: 12px;
         }
 
         .mini-grid {
@@ -266,58 +293,62 @@
 
         .dashboard-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            margin-top: 22px;
+            margin-top: 20px;
         }
 
         .builder-stat-grid {
             grid-template-columns: repeat(7, minmax(0, 1fr));
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .mini-stat,
         .dashboard-stat,
         .builder-stat {
-            padding: 16px;
-            border-radius: 20px;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .92);
+            padding: 14px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .stat-title {
-            margin: 0 0 8px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 850;
+            margin: 0 0 7px;
+            color: var(--page-muted);
+            font-size: 12px;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: .03em;
         }
 
         .stat-big {
             margin: 0;
-            color: var(--text);
-            font-size: 1.35rem;
-            line-height: 1.15;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 20px;
+            line-height: 1.2;
+            font-weight: 800;
         }
 
         .mentor-card {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 18px;
-            border-radius: 22px;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .92);
-            margin-bottom: 22px;
+            gap: 14px;
+            padding: 14px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
+            margin-bottom: 20px;
         }
 
         .mentor-avatar {
-            width: 66px;
-            height: 66px;
-            min-width: 66px;
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid var(--page-border);
             border-radius: 50%;
-            padding: 5px;
-            background: var(--surface);
-            box-shadow: 6px 6px 14px rgba(163, 177, 198, .34), -6px -6px 14px rgba(255, 255, 255, .92);
+            box-shadow: none;
         }
 
         .mentor-avatar img {
@@ -330,142 +361,150 @@
         .section-title {
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 8px;
             margin: 0 0 12px;
-            color: var(--text);
-            font-size: 1rem;
-            font-weight: 850;
+            color: var(--page-text);
+            font-size: 16px;
+            font-weight: 800;
         }
 
         .section-title i {
-            color: var(--primary);
+            color: var(--page-primary);
         }
 
         .description {
             margin: 0;
-            color: var(--muted);
+            color: var(--page-muted);
             line-height: 1.7;
             font-weight: 600;
         }
 
+        /* Tombol */
         .btn-neo-primary,
         .btn-neo {
-            min-height: 42px;
+            min-height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 16px;
-            border: 1px solid rgba(148, 163, 184, .22);
-            border-radius: 14px;
+            gap: 7px;
+            padding: 8px 13px;
             color: #334155 !important;
-            background: var(--surface) !important;
-            font-size: .84rem;
+            background: #ffffff !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px;
+            box-shadow: none;
+            font-size: 13px;
             line-height: 1;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .32), -5px -5px 12px rgba(255, 255, 255, .9);
-            transition: .18s ease;
+            transition: background .18s ease, border-color .18s ease, color .18s ease;
         }
 
         .btn-neo-primary {
-            color: #1e293b !important;
-            background: var(--surface) !important;
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
         }
 
-        .btn-neo {
-            min-height: 36px;
-            padding: 8px 12px;
-            border-radius: 13px;
-            font-size: .76rem;
+        .btn-neo-primary:hover {
+            color: #ffffff !important;
+            background: var(--page-primary-dark) !important;
+            border-color: var(--page-primary-dark) !important;
+            transform: none;
         }
 
-        .btn-neo.primary,
-        .btn-neo.success,
-        .btn-neo.warning,
-        .btn-neo.danger {
-            background: var(--surface) !important;
+        .btn-neo:hover {
+            color: #0f172a !important;
+            background: #f8fafc !important;
+            border-color: #cbd5e1 !important;
+            box-shadow: none;
+            transform: none;
         }
 
         .btn-neo.primary {
-            color: #1d4ed8 !important;
+            color: #ffffff !important;
+            background: #3b82f6 !important;
+            border-color: #3b82f6 !important;
         }
 
         .btn-neo.success {
-            color: #166534 !important;
+            color: #ffffff !important;
+            background: var(--page-success) !important;
+            border-color: var(--page-success) !important;
         }
 
         .btn-neo.warning {
-            color: #92400e !important;
+            color: #ffffff !important;
+            background: var(--page-warning) !important;
+            border-color: var(--page-warning) !important;
         }
 
         .btn-neo.danger {
-            color: #b91c1c !important;
-        }
-
-        .btn-neo-primary:hover,
-        .btn-neo:hover {
-            transform: translateY(-1px);
-            color: #0f172a !important;
-            border-color: rgba(100, 116, 139, .32);
-            box-shadow: 7px 7px 16px rgba(163, 177, 198, .4), -7px -7px 16px rgba(255, 255, 255, .95);
+            color: #ffffff !important;
+            background: var(--page-danger) !important;
+            border-color: var(--page-danger) !important;
         }
 
         .video-panel,
         .builder-card {
-            margin-top: 24px;
+            margin-top: 22px;
         }
 
         .video-frame {
             overflow: hidden;
-            border-radius: 22px;
+            padding: 0;
             background: #111827;
-            padding: 12px;
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
         }
 
         .video-frame .ratio {
             overflow: hidden;
-            border-radius: 18px;
+            border-radius: 10px;
         }
 
         .builder-title {
             margin: 0;
-            color: var(--text);
-            font-size: 1.18rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 18px;
+            font-weight: 800;
         }
 
         .empty-builder {
-            padding: 32px 22px;
-            border-radius: 22px;
+            padding: 28px 20px;
             text-align: center;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .92);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .empty-builder i {
             display: block;
             margin-bottom: 10px;
-            color: var(--primary);
-            font-size: 2.4rem;
+            color: var(--page-primary);
+            font-size: 36px;
         }
 
+        /* Builder isi kelas */
         .bagian-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .bagian-card {
             overflow: hidden;
-            border-radius: 24px;
-            background: var(--surface);
-            box-shadow: 8px 8px 18px rgba(163, 177, 198, .34), -8px -8px 18px rgba(255, 255, 255, .9);
+            background: #ffffff;
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .bagian-header {
-            padding: 18px;
-            border-bottom: 1px solid var(--border);
+            padding: 16px;
+            border-bottom: 1px solid var(--page-border);
+            background: #ffffff;
         }
 
         .bagian-kicker {
@@ -473,37 +512,39 @@
             align-items: center;
             gap: 6px;
             margin-bottom: 8px;
-            color: var(--primary);
-            font-size: .74rem;
-            font-weight: 900;
+            color: var(--page-primary);
+            font-size: 12px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: .04em;
+            letter-spacing: .03em;
         }
 
         .bagian-title {
             margin: 0;
-            color: var(--text);
-            font-size: 1.02rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 16px;
+            font-weight: 800;
         }
 
         .bagian-desc {
             margin: 8px 0 0;
-            color: var(--muted);
-            font-size: .84rem;
+            color: var(--page-muted);
+            font-size: 13px;
             line-height: 1.6;
             font-weight: 600;
         }
 
         .materi-list {
-            padding: 16px 18px 18px;
+            padding: 14px 16px 16px;
+            background: #ffffff;
         }
 
         .materi-item {
-            padding: 15px;
-            border-radius: 18px;
-            background: var(--surface);
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .9);
+            padding: 14px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .materi-item + .materi-item {
@@ -520,52 +561,39 @@
         .materi-title,
         .kuis-title {
             margin: 0;
-            color: var(--text);
-            font-size: .92rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 14px;
+            font-weight: 800;
         }
 
         .materi-empty,
-        .kuis-empty {
-            padding: 14px;
-            border-radius: 16px;
-            color: var(--muted);
-            background: var(--surface);
-            font-size: .84rem;
-            font-weight: 700;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .9);
+        .kuis-empty,
+        .soal-empty,
+        .jawaban-empty {
+            padding: 12px;
+            color: var(--page-muted);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            box-shadow: none;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .kuis-list {
             margin-top: 14px;
             padding-left: 12px;
-            border-left: 3px solid rgba(59, 130, 246, .25);
+            border-left: 3px solid rgba(7, 67, 102, .18);
         }
-
-        .kuis-item {
-            padding: 12px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, .38);
-            margin-top: 10px;
-        }
-
-        .quick-modal .modal-content {
-            border: 0;
-            border-radius: 24px;
-            overflow: hidden;
-        }
-
-        .quick-modal .modal-title {
-            font-weight: 900;
-        }
-
-        .quick-modal .ql-editor {
-            min-height: 170px;
-        }
-
 
         .kuis-item {
             display: block;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
+            margin-top: 10px;
         }
 
         .kuis-top-row,
@@ -581,9 +609,10 @@
             width: 100%;
             margin-top: 14px;
             padding: 12px;
-            border-radius: 18px;
-            background: var(--surface);
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .18), inset -4px -4px 9px rgba(255, 255, 255, .92);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .soal-list-head {
@@ -596,45 +625,36 @@
 
         .soal-list-title {
             margin: 0;
-            color: var(--text);
-            font-size: .86rem;
-            font-weight: 900;
-        }
-
-        .soal-empty,
-        .jawaban-empty {
-            padding: 12px;
-            border-radius: 15px;
-            color: var(--muted);
-            background: rgba(255, 255, 255, .42);
-            font-size: .8rem;
-            font-weight: 750;
+            color: var(--page-text);
+            font-size: 14px;
+            font-weight: 800;
         }
 
         .soal-item {
-            padding: 13px;
-            border-radius: 17px;
-            background: rgba(255, 255, 255, .44);
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .18), -4px -4px 10px rgba(255, 255, 255, .72);
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: none;
         }
 
         .soal-item + .soal-item {
-            margin-top: 11px;
+            margin-top: 10px;
         }
 
         .soal-title {
             margin: 0 0 7px;
-            color: var(--text);
-            font-size: .84rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 13px;
+            font-weight: 800;
         }
 
         .soal-text,
         .jawaban-text {
-            color: var(--muted);
-            font-size: .82rem;
+            color: var(--page-muted);
+            font-size: 13px;
             line-height: 1.55;
-            font-weight: 650;
+            font-weight: 600;
             word-break: break-word;
         }
 
@@ -647,16 +667,18 @@
 
         .jawaban-item {
             padding: 10px 11px;
-            border-radius: 14px;
-            background: var(--surface);
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .18), inset -3px -3px 7px rgba(255, 255, 255, .9);
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            box-shadow: none;
         }
 
         .jawaban-item.correct {
-            background: rgba(34, 197, 94, .12);
+            background: #ecfdf5;
+            border-color: #bbf7d0;
         }
 
-
+        /* Collapse dan dropdown aksi */
         .builder-title-line {
             display: flex;
             align-items: flex-start;
@@ -671,18 +693,19 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(148, 163, 184, .22);
-            border-radius: 12px;
-            color: #475569;
-            background: var(--surface);
-            box-shadow: 4px 4px 9px rgba(163, 177, 198, .24), -4px -4px 9px rgba(255, 255, 255, .88);
-            transition: .18s ease;
+            color: var(--page-muted);
+            background: #ffffff;
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            box-shadow: none;
+            transition: background .18s ease, color .18s ease;
         }
 
         .builder-collapse-toggle:hover {
-            color: #0f172a;
-            border-color: rgba(100, 116, 139, .32);
-            transform: translateY(-1px);
+            color: var(--page-text);
+            background: var(--page-soft);
+            border-color: #cbd5e1;
+            transform: none;
         }
 
         .builder-collapse-toggle i {
@@ -694,90 +717,30 @@
         }
 
         .builder-action-dropdown .dropdown-toggle {
-            min-width: 92px;
+            min-width: 86px;
         }
 
         .builder-action-dropdown .dropdown-menu {
             min-width: 210px;
-            border: 0;
-            border-radius: 16px;
             padding: 8px;
             background: #ffffff;
-            box-shadow: 0 16px 36px rgba(15, 23, 42, .14);
-            z-index: 2147483647 !important;
-        }
-
-        /* =====================================================
-           FIX DROPDOWN AKSI BUILDER
-           Penyebab dropdown ketutup: parent card/bagian punya overflow hidden.
-           Solusi: area builder dibuat overflow-visible + parent dropdown yang
-           sedang terbuka diangkat z-index-nya.
-        ====================================================== */
-        .kelas-detail-card,
-        .kelas-detail-card .content-body,
-        #kelola-isi-kelas,
-        #kelola-isi-kelas.builder-card,
-        #kelola-isi-kelas .builder-header,
-        #kelola-isi-kelas .bagian-list,
-        #kelola-isi-kelas .bagian-card,
-        #kelola-isi-kelas .bagian-header,
-        #kelola-isi-kelas .materi-list,
-        #kelola-isi-kelas .materi-item,
-        #kelola-isi-kelas .materi-main-row,
-        #kelola-isi-kelas .kuis-list,
-        #kelola-isi-kelas .kuis-item,
-        #kelola-isi-kelas .kuis-top-row,
-        #kelola-isi-kelas .soal-list,
-        #kelola-isi-kelas .soal-item,
-        #kelola-isi-kelas .soal-top-row,
-        #kelola-isi-kelas .jawaban-list,
-        #kelola-isi-kelas .jawaban-item,
-        #kelola-isi-kelas .jawaban-row,
-        #kelola-isi-kelas .action-row {
-            overflow: visible !important;
-        }
-
-        #kelola-isi-kelas .builder-action-dropdown {
-            position: relative;
-            z-index: 50;
-        }
-
-        #kelola-isi-kelas .builder-action-dropdown .dropdown-toggle {
-            position: relative;
-            z-index: 60;
-        }
-
-        #kelola-isi-kelas .builder-action-dropdown .dropdown-menu {
-            position: absolute;
-            z-index: 2147483647 !important;
-        }
-
-        #kelola-isi-kelas .builder-action-dropdown .dropdown-menu.show {
-            z-index: 2147483647 !important;
-        }
-
-        #kelola-isi-kelas .builder-dropdown-open {
-            position: relative !important;
-            z-index: 2147483000 !important;
-            overflow: visible !important;
-        }
-
-        #kelola-isi-kelas .builder-dropdown-open .dropdown-menu {
-            z-index: 2147483647 !important;
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, .12);
         }
 
         .builder-action-dropdown .dropdown-item {
+            min-height: 36px;
             display: flex;
             align-items: center;
             gap: 9px;
-            min-height: 36px;
             padding: 8px 10px;
-            border-radius: 11px;
             color: #334155 !important;
-            font-size: .8rem;
-            font-weight: 800;
             background: transparent !important;
+            border-radius: 8px;
             box-shadow: none !important;
+            font-size: 13px;
+            font-weight: 700;
             white-space: nowrap;
         }
 
@@ -802,17 +765,12 @@
 
         .builder-compact-note {
             margin-top: 12px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 750;
+            color: var(--page-muted);
+            font-size: 12px;
+            font-weight: 600;
         }
 
-
-
-        /* =====================================================
-           MODAL MELAYANG NEO - SOFT, SOLID, TIDAK MENYILAUKAN
-           Hanya mengubah popup/modal, tidak mengubah layout builder.
-        ====================================================== */
+        /* Modal cepat */
         .modal-backdrop.show {
             opacity: .34 !important;
             background: #0f172a !important;
@@ -824,151 +782,141 @@
         }
 
         .quick-modal .modal-content {
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 26px !important;
             overflow: hidden;
-            color: #1e293b;
-            background: #eef2f7 !important;
-            box-shadow: 0 22px 52px rgba(15, 23, 42, .18) !important;
+            color: var(--page-text);
+            background: #ffffff !important;
+            border: 0 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
         .quick-modal .modal-header {
-            min-height: 72px;
-            padding: 20px 24px 16px;
-            border-bottom: 1px solid rgba(148, 163, 184, .20) !important;
-            background: #eef2f7 !important;
+            min-height: auto;
+            padding: 16px 20px;
+            background: #ffffff !important;
+            border-bottom: 1px solid #eef2f7 !important;
         }
 
         .quick-modal .modal-title {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
             margin: 0;
-            color: #0f172a;
-            font-size: 1.02rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 18px;
+            font-weight: 800;
         }
 
         .quick-modal .modal-title::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            background: #64748b;
-            box-shadow: 0 0 0 5px rgba(100, 116, 139, .12);
+            content: none !important;
         }
 
         .quick-modal .modal-body {
-            padding: 24px;
-            background: #eef2f7 !important;
+            padding: 22px;
+            background: #ffffff !important;
         }
 
         .quick-modal .modal-footer {
-            gap: 10px;
-            padding: 16px 24px 22px;
-            border-top: 1px solid rgba(148, 163, 184, .20) !important;
-            background: #eef2f7 !important;
+            gap: 8px;
+            padding: 14px 20px 18px;
+            background: #ffffff !important;
+            border-top: 1px solid #eef2f7 !important;
         }
 
         .quick-modal .btn-close {
-            width: 38px;
-            height: 38px;
+            width: 32px;
+            height: 32px;
             margin: 0 !important;
             padding: 0 !important;
-            border: 1px solid rgba(148, 163, 184, .20);
-            border-radius: 14px;
-            opacity: 1;
-            background-color: #eef2f7 !important;
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .30), -4px -4px 10px rgba(255, 255, 255, .76);
-            transition: .16s ease;
+            background-color: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            opacity: .78;
+            transition: opacity .18s ease;
         }
 
         .quick-modal .btn-close:hover {
-            transform: translateY(-1px);
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .36), -5px -5px 12px rgba(255, 255, 255, .82);
+            opacity: 1;
+            transform: none;
+            box-shadow: none !important;
         }
 
         .quick-modal .form-label {
             margin-bottom: 8px;
-            color: #334155;
-            font-size: .82rem;
-            font-weight: 900 !important;
+            color: var(--page-text);
+            font-size: 13px;
+            font-weight: 800 !important;
         }
 
         .quick-modal .form-control,
         .quick-modal .form-select,
         .quick-modal textarea {
             min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 15px !important;
-            color: #0f172a !important;
-            background: #f8fafc !important;
-            font-weight: 700;
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .20), inset -3px -3px 7px rgba(255, 255, 255, .82) !important;
-            transition: .16s ease;
+            color: var(--page-text) !important;
+            background: #ffffff !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .quick-modal textarea.form-control,
         .quick-modal textarea {
             line-height: 1.58;
-            padding: 12px 14px;
+            padding: 10px 12px;
         }
 
         .quick-modal .form-control:focus,
         .quick-modal .form-select:focus,
         .quick-modal textarea:focus {
-            border-color: rgba(59, 130, 246, .38) !important;
-            background: #f8fafc !important;
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .18), inset -3px -3px 7px rgba(255, 255, 255, .82), 0 0 0 3px rgba(59, 130, 246, .10) !important;
+            border-color: var(--page-primary) !important;
+            background: #ffffff !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
         }
 
         .quick-modal .form-check-input {
-            width: 2.65rem;
-            height: 1.35rem;
-            border: 1px solid rgba(148, 163, 184, .34);
+            border: 1px solid #cbd5e1;
             background-color: #e2e8f0;
-            box-shadow: inset 2px 2px 5px rgba(163, 177, 198, .24), inset -2px -2px 5px rgba(255, 255, 255, .72);
+            box-shadow: none !important;
         }
 
         .quick-modal .form-check-input:checked {
-            border-color: #334155;
-            background-color: #334155;
+            border-color: var(--page-primary);
+            background-color: var(--page-primary);
         }
 
         .quick-modal .form-check-label {
             color: #475569;
-            font-weight: 750;
+            font-weight: 600;
         }
 
         .quick-modal .alert {
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 18px;
             color: #334155 !important;
-            background: #f8fafc !important;
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .14), inset -3px -3px 7px rgba(255, 255, 255, .82);
-            font-weight: 750;
+            background: var(--page-soft) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px;
+            box-shadow: none;
+            font-weight: 600;
         }
 
         .quick-modal .ql-toolbar.ql-snow,
         .quick-modal .ql-container.ql-snow {
-            border-color: rgba(148, 163, 184, .24) !important;
-            background: #f8fafc !important;
+            background: #ffffff !important;
+            border-color: var(--page-border) !important;
+            box-shadow: none !important;
         }
 
         .quick-modal .ql-toolbar.ql-snow {
-            border-radius: 15px 15px 0 0;
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .14), inset -3px -3px 7px rgba(255, 255, 255, .82);
+            border-radius: 8px 8px 0 0;
         }
 
         .quick-modal .ql-container.ql-snow {
-            border-radius: 0 0 15px 15px;
-            box-shadow: inset 3px 3px 7px rgba(163, 177, 198, .14), inset -3px -3px 7px rgba(255, 255, 255, .82);
+            border-radius: 0 0 8px 8px;
         }
 
         .quick-modal .ql-editor {
             min-height: 170px;
-            color: #0f172a;
-            font-weight: 650;
+            color: var(--page-text);
+            font-weight: 500;
         }
 
         .quick-modal .btn.btn-light,
@@ -978,70 +926,39 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 9px 18px;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            font-size: .82rem;
+            gap: 6px;
+            padding: 8px 15px;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 13px;
             line-height: 1;
-            font-weight: 850;
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .30), -4px -4px 10px rgba(255, 255, 255, .76) !important;
-            transition: .16s ease;
+            font-weight: 700;
+            transition: background .18s ease, border-color .18s ease;
+        }
+
+        .quick-modal .btn.btn-light,
+        .quick-modal .modal-footer .btn-light {
+            color: #ffffff !important;
+            background: var(--page-danger) !important;
+            border: 1px solid var(--page-danger) !important;
         }
 
         .quick-modal .btn.btn-primary,
         .quick-modal .modal-footer .btn-primary {
-            color: #1d4ed8 !important;
-            border-color: rgba(59, 130, 246, .30) !important;
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border: 1px solid var(--page-primary) !important;
         }
 
         .quick-modal .btn.btn-light:hover,
         .quick-modal .btn.btn-primary:hover,
         .quick-modal .modal-footer .btn:hover {
-            transform: translateY(-1px);
-            color: #0f172a !important;
-            background: #eef2f7 !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .34), -5px -5px 12px rgba(255, 255, 255, .82) !important;
+            transform: none;
+            box-shadow: none !important;
+            filter: brightness(.96);
         }
 
-        .swal2-container .swal2-popup {
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 24px !important;
-            color: #1e293b !important;
-            background: #eef2f7 !important;
-            box-shadow: 0 22px 52px rgba(15, 23, 42, .18) !important;
-        }
-
-        .swal2-container .swal2-title {
-            color: #0f172a !important;
-            font-weight: 900 !important;
-        }
-
-        .swal2-container .swal2-html-container {
-            color: #475569 !important;
-            font-weight: 650 !important;
-        }
-
-        .swal2-container .swal2-confirm,
-        .swal2-container .swal2-cancel {
-            min-height: 40px;
-            border: 1px solid rgba(148, 163, 184, .24) !important;
-            border-radius: 14px !important;
-            font-weight: 850 !important;
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .30), -4px -4px 10px rgba(255, 255, 255, .76) !important;
-        }
-
-        .swal2-container .swal2-confirm {
-            color: #1d4ed8 !important;
-            background: #eef2f7 !important;
-        }
-
-        .swal2-container .swal2-cancel {
-            color: #475569 !important;
-            background: #eef2f7 !important;
-        }
+        /* SweetAlert mengikuti style global yang sama seperti halaman index. */
 
         @media (max-width: 1199.98px) {
             .main-grid {
@@ -1055,7 +972,7 @@
 
         @media (max-width: 767.98px) {
             .kelas-builder-page {
-                padding: 0 18px 24px;
+                padding: 0 16px 24px;
             }
 
             .hero-top,
@@ -1065,6 +982,12 @@
             .kuis-item {
                 flex-direction: column;
                 align-items: stretch;
+            }
+
+            .hero-body,
+            .content-body,
+            .quick-modal .modal-body {
+                padding: 16px;
             }
 
             .dashboard-grid,
@@ -1086,10 +1009,300 @@
             }
 
             .btn-neo-primary,
-            .btn-neo {
+            .btn-neo,
+            .quick-modal .modal-footer .btn {
                 width: 100%;
             }
+
+            .quick-modal .modal-footer {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
         }
+
+        /* =========================================================
+           COLOR CLEANUP
+           Warna hanya untuk bagian penting, tetap flat dan simple
+        ========================================================= */
+
+        .kelas-builder-page {
+            --page-blue: #2563eb;
+            --page-cyan: #0891b2;
+            --page-indigo: #4f46e5;
+            --page-emerald: #059669;
+            --page-amber: #d97706;
+            --page-rose: #e11d48;
+
+            --soft-blue: #eff6ff;
+            --soft-cyan: #ecfeff;
+            --soft-indigo: #eef2ff;
+            --soft-emerald: #ecfdf5;
+            --soft-amber: #fffbeb;
+            --soft-rose: #fff1f2;
+        }
+
+        /* Bagian umum tetap netral */
+        .kelas-builder-page .hero-body,
+        .kelas-builder-page .panel,
+        .kelas-builder-page .builder-card,
+        .kelas-builder-page .bagian-header,
+        .kelas-builder-page .materi-list,
+        .kelas-builder-page .kuis-item,
+        .kelas-builder-page .soal-item {
+            background: #ffffff !important;
+        }
+
+        .kelas-builder-page .stat-item,
+        .kelas-builder-page .mini-stat,
+        .kelas-builder-page .dashboard-stat,
+        .kelas-builder-page .builder-stat,
+        .kelas-builder-page .materi-item,
+        .kelas-builder-page .soal-list,
+        .kelas-builder-page .jawaban-item,
+        .kelas-builder-page .mentor-card {
+            background: var(--page-soft) !important;
+            border-color: var(--page-border) !important;
+        }
+
+        /* Warna penting: rating dan status */
+        .kelas-builder-page .stars {
+            color: var(--page-warning);
+        }
+
+        .kelas-builder-page .badge-neo.success {
+            color: #047857 !important;
+            background: var(--soft-emerald) !important;
+            border-color: #bbf7d0 !important;
+        }
+
+        .kelas-builder-page .badge-neo.warning {
+            color: #92400e !important;
+            background: var(--soft-amber) !important;
+            border-color: #fde68a !important;
+        }
+
+        .kelas-builder-page .badge-neo.danger {
+            color: #b91c1c !important;
+            background: var(--soft-rose) !important;
+            border-color: #fecaca !important;
+        }
+
+        /* Icon utama tetap biru gelap */
+        .kelas-builder-page .stat-icon,
+        .kelas-builder-page .section-title i,
+        .kelas-builder-page .bagian-kicker,
+        .kelas-builder-page .empty-builder i {
+            color: var(--page-primary) !important;
+        }
+
+        .kelas-builder-page .stat-big,
+        .kelas-builder-page .stat-value,
+        .kelas-builder-page .info-value {
+            color: var(--page-text) !important;
+        }
+
+        /* Tabs tetap clean */
+        .kelas-builder-page .neo-tabs .nav-link:hover {
+            color: var(--page-primary) !important;
+            background: #f8fafc !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        .kelas-builder-page .neo-tabs .nav-link.active {
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
+        }
+
+        /* Struktur builder diberi aksen tipis saja */
+        .kelas-builder-page .bagian-card {
+            border-left: 4px solid var(--page-primary);
+        }
+
+        .kelas-builder-page .jawaban-item.correct {
+            background: var(--soft-emerald) !important;
+            border-color: #86efac !important;
+        }
+
+        /* Tombol langsung */
+        .kelas-builder-page #kelola-isi-kelas > .builder-header .btn-neo-primary,
+        .kelas-builder-page .empty-builder .btn-neo-primary {
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
+        }
+
+        /* Aksi dropdown: warna hanya untuk jenis aksi penting */
+        .kelas-builder-page .builder-action-dropdown .dropdown-toggle {
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-toggle:hover {
+            color: #ffffff !important;
+            background: var(--page-primary-dark) !important;
+            border-color: var(--page-primary-dark) !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-menu {
+            background: #ffffff !important;
+            border-color: var(--page-border) !important;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, .14);
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item {
+            margin-bottom: 5px;
+            border: 1px solid transparent;
+            background: transparent !important;
+            color: #334155 !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item:hover {
+            background: #f8fafc !important;
+            border-color: var(--page-border);
+            color: #0f172a !important;
+            filter: none;
+            transform: none;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-detail-builder,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item[data-builder-action^="detail-"] {
+            color: var(--page-blue) !important;
+            background: var(--soft-blue) !important;
+            border-color: #bfdbfe !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item[data-builder-action^="export-"] {
+            color: var(--page-cyan) !important;
+            background: var(--soft-cyan) !important;
+            border-color: #a5f3fc !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-create-materi,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-create-kuis,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-create-soal,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-create-jawaban {
+            color: var(--page-emerald) !important;
+            background: var(--soft-emerald) !important;
+            border-color: #a7f3d0 !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-import-soal {
+            color: var(--page-indigo) !important;
+            background: var(--soft-indigo) !important;
+            border-color: #c7d2fe !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-edit-bagian,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-edit-materi,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-edit-kuis,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-edit-soal,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-edit-jawaban {
+            color: var(--page-amber) !important;
+            background: var(--soft-amber) !important;
+            border-color: #fde68a !important;
+        }
+
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-delete-bagian,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-delete-materi,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-delete-kuis,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-delete-soal,
+        .kelas-builder-page .builder-action-dropdown .dropdown-item.btn-quick-delete-jawaban {
+            color: var(--page-danger) !important;
+            background: var(--soft-rose) !important;
+            border-color: #fecdd3 !important;
+        }
+
+        /* Modal cepat: hanya alert dan switch yang diberi warna ringan */
+        .quick-modal .alert.alert-primary {
+            color: var(--page-blue) !important;
+            background: var(--soft-blue) !important;
+            border-color: #bfdbfe !important;
+        }
+
+        .quick-modal .alert.alert-success {
+            color: var(--page-emerald) !important;
+            background: var(--soft-emerald) !important;
+            border-color: #a7f3d0 !important;
+        }
+
+        .quick-modal .form-check-input:checked {
+            border-color: var(--page-primary);
+            background-color: var(--page-primary);
+        }
+
+        .quick-modal .btn.btn-primary,
+        .quick-modal .modal-footer .btn-primary {
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
+        }
+
+        .quick-modal .btn.btn-light,
+        .quick-modal .modal-footer .btn-light {
+            background: var(--page-danger) !important;
+            border-color: var(--page-danger) !important;
+        }
+
+        /* =========================================================
+   FIX DROPDOWN AKSI TERTUTUP ELEMENT LAIN
+   Penyebab utama: parent card overflow:hidden
+   Visual only, tidak mengubah logic
+========================================================= */
+
+.kelas-builder-page .neo-card,
+.kelas-builder-page .builder-card,
+.kelas-builder-page .bagian-card,
+.kelas-builder-page .materi-item,
+.kelas-builder-page .kuis-item,
+.kelas-builder-page .soal-list,
+.kelas-builder-page .soal-item,
+.kelas-builder-page .jawaban-item {
+    overflow: visible !important;
+}
+
+.kelas-builder-page .builder-card,
+.kelas-builder-page .bagian-card,
+.kelas-builder-page .materi-item,
+.kelas-builder-page .kuis-item,
+.kelas-builder-page .soal-list,
+.kelas-builder-page .soal-item,
+.kelas-builder-page .jawaban-item,
+.kelas-builder-page .action-row,
+.kelas-builder-page .builder-action-dropdown {
+    position: relative;
+}
+
+.kelas-builder-page .builder-action-dropdown {
+    z-index: 50;
+}
+
+.kelas-builder-page .builder-action-dropdown.show,
+.kelas-builder-page .builder-action-dropdown:has(.dropdown-menu.show) {
+    z-index: 9999 !important;
+}
+
+.kelas-builder-page .builder-action-dropdown .dropdown-menu {
+    z-index: 10000 !important;
+    position: absolute !important;
+}
+
+.kelas-builder-page .builder-action-dropdown .dropdown-menu.show {
+    z-index: 10000 !important;
+}
+
+.kelas-builder-page .bagian-card:has(.dropdown-menu.show),
+.kelas-builder-page .materi-item:has(.dropdown-menu.show),
+.kelas-builder-page .kuis-item:has(.dropdown-menu.show),
+.kelas-builder-page .soal-list:has(.dropdown-menu.show),
+.kelas-builder-page .soal-item:has(.dropdown-menu.show),
+.kelas-builder-page .jawaban-item:has(.dropdown-menu.show) {
+    z-index: 9998 !important;
+}
+
     </style>
 @endsection
 
@@ -1214,7 +1427,7 @@
                     </div>
                 </div>
 
-                <div class="neo-card kelas-detail-card">
+                <div class="neo-card">
                     <div class="tabs-card">
                         <div class="tabs-scroll">
                             <ul class="neo-tabs">
@@ -1373,7 +1586,7 @@
                                             Tentang Kelas Ini
                                         </h4>
 
-                                        <div class="description">{!! nl2br(e($kelas->deskripsi_lengkap)) !!}</div>
+                                        <div class="description">{!! $kelas->deskripsi_lengkap !!}</div>
                                     </div>
                                 @endif
 
@@ -1510,7 +1723,7 @@
                                                     <h5 class="bagian-title">{{ $bagian->judul ?? 'Tanpa Judul' }}</h5>
 
                                                     @if (!empty($bagian->deskripsi))
-                                                        <div class="bagian-desc">{!! nl2br(e($bagian->deskripsi)) !!}</div>
+                                                        <div class="bagian-desc">{!! $bagian->deskripsi !!}</div>
                                                     @endif
                                                 </div>
 
@@ -2551,15 +2764,16 @@ Penjelasan: HTML digunakan untuk membuat struktur halaman web."></textarea>
             });
         }
 
-        function quickSuccessAndReload(title, message) {
+        function quickSuccessAndReload(title) {
             Swal.fire({
                 icon: 'success',
-                title: title,
-                text: message || '',
+                title: title || 'Data berhasil diperbarui',
                 showConfirmButton: false,
-                timer: 1200,
+                timer: 1500,
                 timerProgressBar: true
-            }).then(() => location.reload());
+            }).then(() => {
+                location.reload();
+            });
         }
 
         function quickWarning(response) {
@@ -2578,10 +2792,12 @@ Penjelasan: HTML digunakan untuk membuat struktur halaman web."></textarea>
 
         function quickConfirmSubmit(title, callback) {
             Swal.fire({
-                title: title,
-                text: 'Pastikan data sudah benar.',
+                title: title || 'Kamu yakin?',
+                text: 'Apakah datanya benar dan apa yang anda inginkan?',
                 icon: 'warning',
                 confirmButtonColor: '#3085d6',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 showCancelButton: true,
                 cancelButtonColor: '#dd3333',
                 confirmButtonText: 'Ya, Simpan',
@@ -2600,6 +2816,8 @@ Penjelasan: HTML digunakan untuk membuat struktur halaman web."></textarea>
                 text: 'Data turunannya juga akan ikut terhapus.',
                 icon: 'warning',
                 confirmButtonColor: '#dd3333',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 showCancelButton: true,
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: 'Ya, Hapus',
@@ -3427,48 +3645,6 @@ Penjelasan: HTML digunakan untuk membuat struktur halaman web."></textarea>
                 Swal.close();
                 ErrorHandler.handleError(error);
             });
-        });
-
-        function quickLiftBuilderDropdownStack($dropdown, enabled) {
-            const stackSelector = [
-                '.builder-action-dropdown',
-                '.action-row',
-                '.bagian-card',
-                '.bagian-header',
-                '.materi-list',
-                '.materi-item',
-                '.materi-main-row',
-                '.kuis-list',
-                '.kuis-item',
-                '.kuis-top-row',
-                '.soal-list',
-                '.soal-item',
-                '.soal-top-row',
-                '.jawaban-list',
-                '.jawaban-item',
-                '.jawaban-row',
-                '.builder-card',
-                '.kelas-detail-card',
-                '.content-body'
-            ].join(', ');
-
-            const $targets = $dropdown.add($dropdown.parents(stackSelector));
-
-            if (enabled) {
-                $('#kelola-isi-kelas .builder-dropdown-open').removeClass('builder-dropdown-open');
-                $targets.addClass('builder-dropdown-open');
-                return;
-            }
-
-            $targets.removeClass('builder-dropdown-open');
-        }
-
-        $(document).on('show.bs.dropdown', '#kelola-isi-kelas .builder-action-dropdown', function () {
-            quickLiftBuilderDropdownStack($(this), true);
-        });
-
-        $(document).on('hidden.bs.dropdown', '#kelola-isi-kelas .builder-action-dropdown', function () {
-            quickLiftBuilderDropdownStack($(this), false);
         });
 
         $(function () {

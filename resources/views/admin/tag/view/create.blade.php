@@ -1,405 +1,306 @@
 <style>
-    #form_create {
-        --neo-modal-bg: #eef2f7;
-        --neo-modal-surface: #eef2f7;
-        --neo-modal-surface-soft: #f3f6fa;
-        --neo-modal-text: #1f2937;
-        --neo-modal-muted: #6b7280;
-        --neo-modal-border: rgba(148, 163, 184, 0.18);
-        --neo-modal-shadow-dark: rgba(163, 177, 198, 0.42);
-        --neo-modal-shadow-light: rgba(255, 255, 255, 0.95);
-        --neo-modal-primary: #3b82f6;
-        --neo-modal-primary-dark: #2563eb;
-        --neo-modal-danger: #ef4444;
+    /* =========================================================
+       CREATE TAG
+       Konsisten dengan tampilan Create Pengguna
+    ========================================================= */
+
+    #form_create.tag-modal-simple .modal-dialog {
+        width: calc(100% - 48px);
+        max-width: 900px;
+        margin: 24px auto;
     }
 
-    #form_create .modal-dialog {
-        max-width: 680px;
-        margin: 1.75rem auto;
+    #form_create.tag-modal-simple .modal-dialog > form {
+        width: 100%;
     }
 
-    #form_create .modal-content {
-        border: 0;
-        border-radius: 28px;
-        background: var(--neo-modal-bg);
-        box-shadow:
-            18px 18px 40px rgba(15, 23, 42, 0.22),
-            -10px -10px 28px rgba(255, 255, 255, 0.8);
+    #form_create.tag-modal-simple .modal-content {
+        width: 100%;
         overflow: hidden;
-    }
-
-    #form_create .modal-header {
-        min-height: auto;
-        padding: 24px 26px 18px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        background: transparent;
-    }
-
-    #form_create .neo-modal-title-wrap {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        min-width: 0;
-    }
-
-    #form_create .neo-modal-title-icon {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        border-radius: 17px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--neo-modal-primary);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.28),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92);
-        font-size: 1.2rem;
-    }
-
-    #form_create .modal-title {
-        margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 1.18rem;
-        line-height: 1.25;
-        font-weight: 850;
-        letter-spacing: -0.02em;
-    }
-
-    #form_create .neo-modal-subtitle {
-        margin: 5px 0 0;
-        color: var(--neo-modal-muted);
-        font-size: 0.86rem;
-        line-height: 1.4;
-        font-weight: 500;
-    }
-
-    #form_create .neo-btn-close {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
-        padding: 0;
         border: 0;
-        border-radius: 15px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            6px 6px 14px rgba(163, 177, 198, 0.34),
-            -6px -6px 14px rgba(255, 255, 255, 0.9);
-        opacity: 1;
-        transition: .18s ease;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, .18);
     }
 
-    #form_create .neo-btn-close:hover {
-        color: var(--neo-modal-danger);
-        transform: translateY(-1px);
-    }
-
-    #form_create .neo-btn-close i {
-        font-size: 1.2rem;
-        line-height: 1;
-    }
-
-    #form_create .modal-body {
-        padding: 24px 26px;
-        background: transparent;
-    }
-
-    #form_create .neo-section {
-        border-radius: 24px;
-        padding: 20px;
-        background: var(--neo-modal-surface);
-        box-shadow:
-            10px 10px 22px var(--neo-modal-shadow-dark),
-            -10px -10px 22px var(--neo-modal-shadow-light);
-    }
-
-    #form_create .neo-section-title {
+    /* Header */
+    #form_create.tag-modal-simple .modal-header {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin: 0 0 18px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--neo-modal-border);
-        color: var(--neo-modal-text);
-        font-size: 0.95rem;
-        line-height: 1.3;
-        font-weight: 850;
+        justify-content: space-between;
+        min-height: auto;
+        padding: 16px 18px;
+        background: #ffffff;
+        border-bottom: 1px solid #eef2f7;
     }
 
-    #form_create .neo-section-title i {
-        color: var(--neo-modal-primary);
-        font-size: 1rem;
-    }
-
-    #form_create .neo-field {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        margin-bottom: 0;
-    }
-
-    #form_create .neo-label {
-        display: flex;
-        align-items: center;
-        gap: 6px;
+    #form_create.tag-modal-simple .modal-title {
         margin: 0;
-        color: var(--neo-modal-text);
-        font-size: 0.86rem;
-        line-height: 1.35;
+        color: #111827;
+        font-size: 18px;
+        line-height: 1.4;
         font-weight: 800;
     }
 
-    #form_create .neo-label.required::after {
-        content: "*";
-        color: var(--neo-modal-danger);
-        font-weight: 900;
-    }
-
-    #form_create .form-control {
-        min-height: 44px;
+    /* Tombol X tanpa background */
+    #form_create.tag-modal-simple .btn-close {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        margin: 0;
+        padding: 0;
         border: 0 !important;
-        border-radius: 16px !important;
-        padding: 11px 14px !important;
-        color: var(--neo-modal-text) !important;
-        background: var(--neo-modal-surface) !important;
-        font-size: 0.9rem !important;
-        font-weight: 600;
-        box-shadow:
-            inset 5px 5px 10px rgba(163, 177, 198, 0.25),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.92) !important;
-        outline: none !important;
-        transition: .18s ease;
+        border-radius: 0 !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        opacity: .75 !important;
     }
 
-    #form_create .form-control:focus {
-        background: #f8fafc !important;
-        box-shadow:
-            inset 4px 4px 8px rgba(163, 177, 198, 0.22),
-            inset -4px -4px 8px rgba(255, 255, 255, 0.96),
-            0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+    #form_create.tag-modal-simple .btn-close:hover {
+        background-color: transparent !important;
+        opacity: 1 !important;
     }
 
-    #form_create .form-control::placeholder {
-        color: #9ca3af;
-        font-weight: 500;
+    #form_create.tag-modal-simple .btn-close:focus {
+        outline: none;
+        background-color: transparent !important;
+        box-shadow: none !important;
     }
 
-    #form_create .invalid-feedback {
-        margin-top: 2px;
-        font-size: 0.78rem;
-        font-weight: 700;
+    /* Body */
+    #form_create.tag-modal-simple .modal-body {
+        padding: 24px;
+        background: #ffffff;
     }
 
-    #form_create .modal-footer {
-        gap: 12px;
-        padding: 18px 26px 24px;
-        border-top: 1px solid var(--neo-modal-border);
-        background: transparent;
+    #form_create.tag-modal-simple .section-title {
+        margin: 0 0 18px;
+        padding-bottom: 10px;
+        color: #111827 !important;
+        font-size: 14px;
+        line-height: 1.4;
+        font-weight: 800;
+        border-bottom: 1px solid #e5e7eb !important;
     }
 
-    #form_create .neo-btn {
+    #form_create.tag-modal-simple .form-field {
+        width: 100%;
+        margin: 0;
+    }
+
+    #form_create.tag-modal-simple label,
+    #form_create.tag-modal-simple label span {
+        color: #111827 !important;
+        font-size: 13px;
+        line-height: 1.4;
+        font-weight: 800 !important;
+    }
+
+    #form_create.tag-modal-simple label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px !important;
+    }
+
+    /* Input */
+    #form_create.tag-modal-simple .form-control {
+        width: 100%;
         min-height: 42px;
-        min-width: 104px;
+        padding: 9px 12px;
+        color: #111827;
+        font-size: 14px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px !important;
+        outline: none;
+        box-shadow: none !important;
+        transition:
+            border-color .18s ease,
+            box-shadow .18s ease;
+    }
+
+    #form_create.tag-modal-simple .form-control:hover {
+        border-color: #cbd5e1 !important;
+    }
+
+    #form_create.tag-modal-simple .form-control:focus {
+        border-color: #074366 !important;
+        box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
+    }
+
+    #form_create.tag-modal-simple .form-control::placeholder {
+        color: #94a3b8;
+    }
+
+    #form_create.tag-modal-simple .invalid-feedback {
+        margin-top: 5px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    #form_create.tag-modal-simple .form-text {
+        margin-top: 7px;
+        color: #64748b !important;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* Footer */
+    #form_create.tag-modal-simple .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 14px 18px 18px;
+        background: #ffffff;
+        border-top: 1px solid #eef2f7;
+    }
+
+    #form_create.tag-modal-simple .modal-footer .btn {
+        min-width: 100px;
+        min-height: 40px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 10px 16px;
-        border: 0;
-        border-radius: 16px;
-        font-size: 0.88rem;
-        line-height: 1;
-        font-weight: 850;
-        transition: .18s ease;
+        gap: 5px;
+        margin: 0;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
     }
 
-    #form_create .neo-btn-light {
-        color: var(--neo-modal-muted);
-        background: var(--neo-modal-surface);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.36),
-            -7px -7px 16px rgba(255, 255, 255, 0.92);
+
+
+    /* Tombol Simpan biru gelap */
+    #form_create.tag-modal-simple .btn-primary {
+        color: #ffffff !important;
+        background: #074366 !important;
+        border-color: #074366 !important;
+        box-shadow: 0 8px 18px rgba(7, 67, 102, .22) !important;
     }
 
-    #form_create .neo-btn-light:hover {
-        color: var(--neo-modal-text);
-        transform: translateY(-1px);
+    #form_create.tag-modal-simple .btn-primary:hover,
+    #form_create.tag-modal-simple .btn-primary:focus {
+        color: #ffffff !important;
+        background: #052f49 !important;
+        border-color: #052f49 !important;
     }
 
-    #form_create .neo-btn-primary {
-        color: #ffffff;
-        background: var(--neo-modal-primary);
-        box-shadow:
-            7px 7px 16px rgba(163, 177, 198, 0.42),
-            -7px -7px 16px rgba(255, 255, 255, 0.88);
-    }
-
-    #form_create .neo-btn-primary:hover {
-        color: #ffffff;
-        background: var(--neo-modal-primary-dark);
-        transform: translateY(-1px);
-    }
-
-    #form_create .neo-btn:active {
-        transform: translateY(0);
-    }
-
-    @media (max-width: 767.98px) {
-        #form_create .modal-dialog {
-            max-width: calc(100vw - 24px);
-            margin: 0.75rem auto;
+    /* Tablet */
+    @media (max-width: 991.98px) {
+        #form_create.tag-modal-simple .modal-dialog {
+            width: calc(100% - 32px);
+            max-width: 760px;
+            margin: 16px auto;
         }
 
-        #form_create .modal-content {
-            border-radius: 24px;
-        }
-
-        #form_create .modal-header {
-            align-items: flex-start;
-            padding: 20px 18px 15px;
-        }
-
-        #form_create .neo-modal-title-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 15px;
-            font-size: 1.08rem;
-        }
-
-        #form_create .modal-title {
-            font-size: 1.05rem;
-        }
-
-        #form_create .neo-modal-subtitle {
-            font-size: 0.82rem;
-        }
-
-        #form_create .neo-btn-close {
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 13px;
-        }
-
-        #form_create .modal-body {
-            padding: 18px;
-        }
-
-        #form_create .neo-section {
-            border-radius: 22px;
-            padding: 18px;
-        }
-
-        #form_create .modal-footer {
-            padding: 15px 18px 18px;
+        #form_create.tag-modal-simple .modal-body {
+            padding: 20px;
         }
     }
 
+    /* Mobile */
     @media (max-width: 575.98px) {
-        #form_create .modal-dialog {
-            max-width: calc(100vw - 16px);
-            margin: 0.5rem auto;
+        #form_create.tag-modal-simple .modal-dialog {
+            width: calc(100% - 20px);
+            max-width: none;
+            margin: 10px auto;
         }
 
-        #form_create .modal-content {
-            border-radius: 22px;
+        #form_create.tag-modal-simple .modal-content {
+            border-radius: 10px;
         }
 
-        #form_create .modal-header {
-            padding: 18px 16px 14px;
-        }
-
-        #form_create .modal-body {
+        #form_create.tag-modal-simple .modal-header {
             padding: 16px;
         }
 
-        #form_create .neo-section {
-            padding: 16px;
-            border-radius: 20px;
+        #form_create.tag-modal-simple .modal-title {
+            font-size: 16px;
         }
 
-        #form_create .modal-footer {
+        #form_create.tag-modal-simple .modal-body {
+            padding: 16px;
+        }
+
+        #form_create.tag-modal-simple .modal-footer {
             flex-direction: column-reverse;
             align-items: stretch;
             padding: 14px 16px 16px;
         }
 
-        #form_create .neo-btn {
+        #form_create.tag-modal-simple .modal-footer .btn {
             width: 100%;
+            min-height: 42px;
         }
     }
 </style>
 
-<div class="modal fade"
+<div class="modal fade tag-modal-simple"
      id="form_create"
      data-bs-backdrop="static"
      data-bs-keyboard="false"
      tabindex="-1"
      role="dialog"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+
+    <div class="modal-dialog modal-dialog-centered"
+         role="document">
+
         <form method="post" id="bt_submit_create">
             <div class="modal-content">
+
                 <div class="modal-header">
-                    <div class="neo-modal-title-wrap">
-                        <span class="neo-modal-title-icon">
-                            <i class="bi bi-tag-fill"></i>
-                        </span>
-                        <div>
-                            <h5 class="modal-title">Tambah Tag</h5>
-                            <p class="neo-modal-subtitle">Tambahkan tag baru untuk kelas</p>
-                        </div>
-                    </div>
+                    <h5 class="modal-title">Tambah Tag</h5>
 
                     <button type="button"
-                            class="neo-btn-close"
+                            class="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <div class="neo-section">
-                        <h6 class="neo-section-title">
-                            <i class="bi bi-tags-fill"></i>
-                            Data Tag
-                        </h6>
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <h6 class="section-title">Data Tag</h6>
 
-                        <div class="neo-field">
-                            <label class="neo-label required" for="nama">Nama Tag</label>
-                            <input type="text"
-                                   id="nama"
-                                   class="form-control form-control-sm"
-                                   maxlength="100"
-                                   placeholder="Masukkan nama tag"
-                                   required/>
-                            <div class="invalid-feedback"></div>
+                            <div class="form-field">
+                                <label class="required"
+                                       for="nama">
+                                    <span>Nama Tag</span>
+                                </label>
+
+                                <input type="text"
+                                       id="nama"
+                                       class="form-control form-control-sm fs-sm-8 fs-lg-6"
+                                       maxlength="100"
+                                       placeholder="Masukkan nama tag"
+                                       required/>
+
+                                <div class="invalid-feedback"></div>
+
+                                <div class="form-text">
+                                    Slug akan dibuat otomatis berdasarkan nama tag.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button"
-                            class="neo-btn neo-btn-light"
-                            data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle"></i>
-                        Tutup
-                    </button>
+                  
 
                     <button type="submit"
-                            class="neo-btn neo-btn-primary">
+                            class="btn btn-primary btn-sm">
                         <i class="bi bi-check-circle"></i>
                         Simpan
                     </button>
                 </div>
+
             </div>
         </form>
+
     </div>
 </div>

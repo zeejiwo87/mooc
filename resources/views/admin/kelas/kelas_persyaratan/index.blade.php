@@ -6,500 +6,1173 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/buttons.dataTables.min.css') }}">
 
     <style>
+    /* =========================================================
+       KELAS ADMIN - FLAT, SIMPLE, KONSISTEN
+       Visual only: tidak mengubah route, ID, data attribute, atau JS
+    ========================================================= */
+    .kelas-builder-page {
+        --page-primary: #074366;
+        --page-primary-dark: #052f49;
+        --page-success: #10b981;
+        --page-warning: #f59e0b;
+        --page-danger: #ef4444;
+        --page-info: #2563eb;
+        --page-text: #111827;
+        --page-muted: #64748b;
+        --page-border: #e5e7eb;
+        --page-soft: #f8fafc;
+        --page-white: #ffffff;
+        padding: 0 24px 28px;
+        color: var(--page-text);
+    }
+
+    .kelas-builder-shell {
+        max-width: 1480px;
+        margin: 0 auto;
+    }
+
+    .kelas-builder-page .neo-card,
+    .kelas-builder-page .mentor-main-card,
+    .kelas-builder-page .assistant-card,
+    .kelas-builder-page .neo-table-wrap {
+        background: var(--page-white);
+        border: 1px solid #eef2f7;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
+    }
+
+    .kelas-builder-page .neo-card {
+        overflow: hidden;
+    }
+
+    .kelas-builder-page .hero-banner {
+        min-height: 230px;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .kelas-builder-page .hero-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, .20);
+    }
+
+    .kelas-builder-page .hero-body,
+    .kelas-builder-page .content-body {
+        padding: 22px;
+        background: #ffffff;
+    }
+
+    .kelas-builder-page .hero-top,
+    .kelas-builder-page .content-header,
+    .kelas-builder-page .assistant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .kelas-builder-page .kelas-title {
+        margin: 0;
+        color: var(--page-text);
+        font-size: 24px;
+        line-height: 1.3;
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .kelas-owner,
+    .kelas-builder-page .muted-text,
+    .kelas-builder-page .assistant-subtitle,
+    .kelas-builder-page .mentor-note {
+        color: var(--page-muted) !important;
+        font-weight: 600;
+    }
+
+    .kelas-builder-page .kelas-owner span,
+    .kelas-builder-page .mentor-name {
+        color: var(--page-text);
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .stars {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        color: var(--page-warning);
+    }
+
+    .kelas-builder-page .stars .bi-star {
+        color: #cbd5e1;
+    }
+
+    .kelas-builder-page .rating-number {
+        margin-left: 8px;
+        color: var(--page-text);
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .short-desc {
+        max-width: 920px;
+        margin: 16px 0 0;
+        color: var(--page-muted);
+        line-height: 1.65;
+        font-weight: 600;
+    }
+
+    .kelas-builder-page .meta-row,
+    .kelas-builder-page .stat-row,
+    .kelas-builder-page .action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .kelas-builder-page .stat-row {
+        margin-top: 22px;
+    }
+
+    .kelas-builder-page .stat-item {
+        min-width: 185px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        background: var(--page-soft);
+        border: 1px solid var(--page-border);
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    .kelas-builder-page .stat-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--page-primary);
+        background: #ffffff;
+        border: 1px solid var(--page-border);
+        border-radius: 8px;
+        box-shadow: none;
+        font-size: 18px;
+    }
+
+    .kelas-builder-page .stat-value {
+        color: var(--page-text);
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .stat-label {
+        margin-top: 3px;
+        color: var(--page-muted);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .kelas-builder-page .badge-neo,
+    .kelas-builder-page .badge,
+    .modal .badge {
+        min-height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        color: #334155 !important;
+        background: var(--page-soft, #f8fafc) !important;
+        border: 1px solid var(--page-border, #e5e7eb) !important;
+        border-radius: 999px;
+        box-shadow: none !important;
+        font-size: 12px;
+        line-height: 1;
+        font-weight: 700;
+    }
+
+    .kelas-builder-page .badge-light-success,
+    .kelas-builder-page .badge-neo.success,
+    .modal .badge-light-success {
+        color: #047857 !important;
+        background: #ecfdf5 !important;
+        border-color: #bbf7d0 !important;
+    }
+
+    .kelas-builder-page .badge-light-warning,
+    .kelas-builder-page .badge-neo.warning,
+    .modal .badge-light-warning {
+        color: #92400e !important;
+        background: #fffbeb !important;
+        border-color: #fde68a !important;
+    }
+
+    .kelas-builder-page .badge-light-danger,
+    .kelas-builder-page .badge-neo.danger,
+    .modal .badge-light-danger {
+        color: #b91c1c !important;
+        background: #fef2f2 !important;
+        border-color: #fecaca !important;
+    }
+
+    .kelas-builder-page .badge-light-primary,
+    .kelas-builder-page .badge-light-info,
+    .modal .badge-light-primary,
+    .modal .badge-light-info {
+        color: #1d4ed8 !important;
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+    }
+
+    .kelas-builder-page .tabs-card {
+        padding: 14px 16px 0;
+        background: #ffffff;
+        border-bottom: 1px solid #eef2f7;
+    }
+
+    .kelas-builder-page .tabs-scroll {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 12px;
+    }
+
+    .kelas-builder-page .neo-tabs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: max-content;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: 0 !important;
+    }
+
+    .kelas-builder-page .neo-tabs .nav-item {
+        margin: 0 !important;
+    }
+
+    .kelas-builder-page .neo-tabs .nav-link {
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 !important;
+        padding: 9px 13px !important;
+        color: var(--page-muted) !important;
+        background: #ffffff !important;
+        border: 1px solid var(--page-border) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .kelas-builder-page .neo-tabs .nav-link:hover {
+        color: var(--page-primary) !important;
+        background: var(--page-soft) !important;
+        border-color: #cbd5e1 !important;
+        transform: none !important;
+    }
+
+    .kelas-builder-page .neo-tabs .nav-link.active {
+        color: #ffffff !important;
+        background: var(--page-primary) !important;
+        border-color: var(--page-primary) !important;
+    }
+
+    .kelas-builder-page .section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        color: var(--page-text) !important;
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .section-title i,
+    .kelas-builder-page .assistant-title i {
+        color: var(--page-primary) !important;
+    }
+
+    .kelas-builder-page .btn-neo-primary,
+    .kelas-builder-page .content-header > .btn,
+    .kelas-builder-page .btn.btn-primary,
+    .kelas-builder-page .btn.btn-sm.btn-primary {
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 8px 13px !important;
+        color: #ffffff !important;
+        background: var(--page-primary) !important;
+        border: 1px solid var(--page-primary) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 700;
+        text-decoration: none !important;
+    }
+
+    .kelas-builder-page .btn-neo-primary:hover,
+    .kelas-builder-page .content-header > .btn:hover,
+    .kelas-builder-page .btn.btn-primary:hover {
+        color: #ffffff !important;
+        background: var(--page-primary-dark) !important;
+        border-color: var(--page-primary-dark) !important;
+        transform: none !important;
+    }
+
+    .kelas-builder-page .mentor-main-card,
+    .kelas-builder-page .assistant-card {
+        padding: 18px;
+        box-shadow: none;
+        border-color: var(--page-border);
+    }
+
+    .kelas-builder-page .mentor-main-card {
+        margin-bottom: 18px;
+        background: var(--page-soft);
+    }
+
+    .kelas-builder-page .mentor-main-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--page-primary);
+        background: #ffffff;
+        border: 1px solid var(--page-border);
+        border-radius: 8px;
+        box-shadow: none;
+        font-size: 20px;
+    }
+
+    .kelas-builder-page .mentor-name {
+        font-size: 16px;
+    }
+
+    .kelas-builder-page .mentor-note,
+    .kelas-builder-page .assistant-subtitle {
+        margin: 6px 0 0;
+        line-height: 1.6;
+    }
+
+    .kelas-builder-page .assistant-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        color: var(--page-text);
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .kelas-builder-page .assistant-limit {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 10px;
+        color: #475569;
+        background: var(--page-soft);
+        border: 1px solid var(--page-border);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .kelas-builder-page .neo-table-wrap,
+    .kelas-builder-page .table-responsive {
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        background: #ffffff;
+        border: 1px solid var(--page-border) !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+    }
+
+    .kelas-builder-page .neo-table-wrap {
+        margin-top: 18px;
+        overflow: visible;
+    }
+
+    .kelas-builder-page .table-responsive {
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .kelas-builder-page table.table {
+        width: 100% !important;
+        margin: 0 !important;
+        color: var(--page-text);
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+    }
+
+    .kelas-builder-page table.table thead th {
+        padding: 13px 14px !important;
+        color: #475569 !important;
+        background: var(--page-soft) !important;
+        border-bottom: 1px solid var(--page-border) !important;
+        font-size: 12px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        white-space: nowrap;
+    }
+
+    .kelas-builder-page table.table tbody td {
+        padding: 13px 14px !important;
+        color: #334155 !important;
+        background: #ffffff !important;
+        border-bottom: 1px solid #eef2f7 !important;
+        vertical-align: middle;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .kelas-builder-page table.table tbody tr:last-child td {
+        border-bottom: 0 !important;
+    }
+
+    .kelas-builder-page table.table tbody tr:hover td {
+        background: #f8fafc !important;
+    }
+
+    .kelas-builder-page table.table .btn,
+    .kelas-builder-page .dataTables_wrapper .btn {
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 10px !important;
+        border-radius: 7px !important;
+        box-shadow: none !important;
+        font-size: 12px;
+        line-height: 1;
+        font-weight: 700;
+        transform: none !important;
+    }
+
+    .kelas-builder-page table.table .btn-primary,
+    .kelas-builder-page table.table .btn-info {
+        color: #ffffff !important;
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+    }
+
+    .kelas-builder-page table.table .btn-warning {
+        color: #ffffff !important;
+        background: var(--page-warning) !important;
+        border-color: var(--page-warning) !important;
+    }
+
+    .kelas-builder-page table.table .btn-danger {
+        color: #ffffff !important;
+        background: var(--page-danger) !important;
+        border-color: var(--page-danger) !important;
+    }
+
+    .kelas-builder-page table.table .btn-success {
+        color: #ffffff !important;
+        background: var(--page-success) !important;
+        border-color: var(--page-success) !important;
+    }
+
+    .kelas-builder-page .dataTables_wrapper {
+        padding: 16px;
+    }
+
+    .kelas-builder-page .dataTables_wrapper > .row:first-child {
+        align-items: center;
+        row-gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .dataTables_length label,
+    .kelas-builder-page .dataTables_wrapper .dataTables_filter label,
+    .kelas-builder-page .dataTables_wrapper .dataTables_info {
+        color: var(--page-muted) !important;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .dataTables_filter {
+        text-align: right;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .form-control,
+    .kelas-builder-page .dataTables_wrapper .form-select,
+    .kelas-builder-page .dataTables_wrapper input[type="search"],
+    .kelas-builder-page .dataTables_wrapper select {
+        min-height: 38px;
+        color: var(--page-text) !important;
+        background: #ffffff !important;
+        border: 1px solid var(--page-border) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 13px;
+    }
+
+    .kelas-builder-page .dataTables_wrapper input[type="search"]:focus,
+    .kelas-builder-page .dataTables_wrapper select:focus {
+        border-color: var(--page-primary) !important;
+        box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .dt-buttons .btn,
+    .kelas-builder-page .dataTables_wrapper .dt-button {
+        color: #ffffff !important;
+        background: var(--page-primary) !important;
+        border: 1px solid var(--page-primary) !important;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .pagination {
+        gap: 5px;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .page-link {
+        min-width: 34px;
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #475569 !important;
+        background: #ffffff !important;
+        border: 1px solid var(--page-border) !important;
+        border-radius: 7px !important;
+        box-shadow: none !important;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .page-item.active .page-link {
+        color: #ffffff !important;
+        background: var(--page-primary) !important;
+        border-color: var(--page-primary) !important;
+    }
+
+    .kelas-builder-page .dropdown,
+    .kelas-builder-page .btn-group,
+    .kelas-builder-page table td {
+        position: relative;
+    }
+
+    .kelas-builder-page .dropdown-menu {
+        z-index: 10000 !important;
+        padding: 8px;
+        background: #ffffff !important;
+        border: 1px solid var(--page-border) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, .14) !important;
+    }
+
+    .kelas-builder-page .dropdown-item {
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px !important;
+        color: #334155 !important;
+        background: transparent !important;
+        border-radius: 8px !important;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .kelas-builder-page .dropdown-item:hover {
+        color: #0f172a !important;
+        background: #f1f5f9 !important;
+    }
+
+    /* Modal pada halaman ini */
+    .modal-backdrop.show {
+        opacity: .34 !important;
+        background: #0f172a !important;
+    }
+
+    .modal .modal-dialog {
+        margin-top: 22px;
+        margin-bottom: 22px;
+    }
+
+    .modal .modal-content {
+        overflow: hidden;
+        color: #111827;
+        background: #ffffff !important;
+        border: 0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
+    }
+
+    .modal .modal-header {
+        min-height: auto;
+        padding: 16px 20px;
+        background: #ffffff !important;
+        border-bottom: 1px solid #eef2f7 !important;
+    }
+
+    .modal .modal-title {
+        margin: 0;
+        color: #111827 !important;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .modal .modal-body {
+        padding: 22px;
+        background: #ffffff !important;
+    }
+
+    .modal .modal-footer {
+        gap: 8px;
+        padding: 14px 20px 18px;
+        background: #ffffff !important;
+        border-top: 1px solid #eef2f7 !important;
+    }
+
+    .modal .btn-close {
+        width: 32px;
+        height: 32px;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        opacity: .78;
+    }
+
+    .modal .btn-close:hover {
+        opacity: 1;
+        transform: none !important;
+    }
+
+    .modal .form-label,
+    .modal dt {
+        margin-bottom: 8px;
+        color: #111827 !important;
+        font-size: 13px;
+        font-weight: 800 !important;
+    }
+
+    .modal dd {
+        color: #475569 !important;
+        font-weight: 600;
+    }
+
+    .modal .form-control,
+    .modal .form-select,
+    .modal textarea,
+    .modal .select2-selection {
+        min-height: 42px;
+        color: #111827 !important;
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .modal textarea.form-control,
+    .modal textarea {
+        line-height: 1.58;
+        padding: 10px 12px;
+    }
+
+    .modal .form-control:focus,
+    .modal .form-select:focus,
+    .modal textarea:focus,
+    .modal .select2-container--focus .select2-selection {
+        border-color: #074366 !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
+    }
+
+    .modal .ql-toolbar.ql-snow,
+    .modal .ql-container.ql-snow {
+        background: #ffffff !important;
+        border-color: #e5e7eb !important;
+        box-shadow: none !important;
+    }
+
+    .modal .ql-toolbar.ql-snow {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .modal .ql-container.ql-snow {
+        border-radius: 0 0 8px 8px;
+    }
+
+    .modal .btn.btn-light,
+    .modal .btn.btn-primary,
+    .modal .modal-footer .btn {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 15px;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 700;
+    }
+
+    .modal .btn.btn-light,
+    .modal .modal-footer .btn-light {
+        color: #ffffff !important;
+        background: #ef4444 !important;
+        border: 1px solid #ef4444 !important;
+    }
+
+    .modal .btn.btn-primary,
+    .modal .modal-footer .btn-primary {
+        color: #ffffff !important;
+        background: #074366 !important;
+        border: 1px solid #074366 !important;
+    }
+
+    .modal .btn:hover {
+        filter: brightness(.96);
+        transform: none !important;
+    }
+
+    .select2-container--open {
+        z-index: 1065 !important;
+    }
+
+    .select2-dropdown {
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px !important;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, .12) !important;
+        overflow: hidden;
+    }
+
+    .select2-results__option {
+        padding: 9px 11px !important;
+        color: #334155 !important;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .select2-results__option--highlighted {
+        color: #ffffff !important;
+        background: #074366 !important;
+    }
+
+    .swal2-container .swal2-popup {
+        color: #111827 !important;
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 12px !important;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
+    }
+
+    .swal2-container .swal2-title {
+        color: #111827 !important;
+        font-weight: 800 !important;
+    }
+
+    .swal2-container .swal2-html-container {
+        color: #475569 !important;
+        font-weight: 600 !important;
+    }
+
+    .swal2-container .swal2-confirm,
+    .swal2-container .swal2-cancel {
+        min-height: 40px;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-weight: 700 !important;
+    }
+
+    @media (max-width: 767.98px) {
         .kelas-builder-page {
-            --bg: #eef2f7;
-            --surface: #eef2f7;
-            --surface-soft: #f4f7fb;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --border: rgba(148, 163, 184, .2);
-            --primary: #3b82f6;
-            --warning: #f59e0b;
-            --shadow-dark: rgba(163, 177, 198, .36);
-            --shadow-light: rgba(255, 255, 255, .88);
-            padding: 0 30px 30px;
-            color: var(--text);
+            padding: 0 16px 24px;
         }
 
-        .kelas-builder-shell {
-            max-width: 1480px;
-            margin: 0 auto;
+        .kelas-builder-page .hero-top,
+        .kelas-builder-page .content-header,
+        .kelas-builder-page .assistant-header {
+            flex-direction: column;
+            align-items: stretch;
         }
 
-        .neo-card {
-            border: 0;
-            border-radius: 28px;
-            background: var(--surface);
-            box-shadow: 10px 10px 22px var(--shadow-dark), -10px -10px 22px var(--shadow-light);
-            overflow: hidden;
+        .kelas-builder-page .hero-body,
+        .kelas-builder-page .content-body,
+        .modal .modal-body {
+            padding: 16px;
         }
 
-        .hero-banner {
-            min-height: 240px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .hero-banner::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(15, 23, 42, .28);
-        }
-
-        .hero-body,
-        .content-body {
-            padding: 26px 28px 28px;
-        }
-
-        .hero-top,
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 18px;
-        }
-
-        .kelas-title {
-            margin: 0;
-            color: var(--text);
-            font-size: 1.75rem;
-            line-height: 1.25;
-            font-weight: 850;
-        }
-
-        .kelas-owner,
-        .muted-text {
-            color: var(--muted);
-            font-weight: 650;
-        }
-
-        .kelas-owner span {
-            color: var(--text);
-            font-weight: 850;
-        }
-
-        .stars {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            color: var(--warning);
-        }
-
-        .stars .bi-star {
-            color: #94a3b8;
-        }
-
-        .rating-number {
-            margin-left: 8px;
-            color: var(--text);
-            font-weight: 850;
-        }
-
-        .short-desc {
-            max-width: 920px;
-            margin: 18px 0 0;
-            color: var(--muted);
-            line-height: 1.65;
-            font-weight: 600;
-        }
-
-        .stat-row,
-        .meta-row,
-        .action-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .stat-row {
-            margin-top: 24px;
-        }
-
-        .stat-item {
-            min-width: 185px;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 15px 16px;
-            border-radius: 20px;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .82);
-        }
-
-        .stat-icon {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            color: var(--primary);
-            background: var(--surface);
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .26), -5px -5px 10px rgba(255, 255, 255, .76);
-            font-size: 1.15rem;
-        }
-
-        .stat-value {
-            color: var(--text);
-            font-size: 1rem;
-            line-height: 1.2;
-            font-weight: 850;
-        }
-
-        .stat-label {
-            margin-top: 3px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 700;
-        }
-
-        .badge-neo,
-        .kelas-builder-page .badge,
-        .kelas-builder-page .badge-light-success,
-        .kelas-builder-page .badge-light-primary,
-        .kelas-builder-page .badge-light-warning,
-        .kelas-builder-page .badge-light-danger,
-        .kelas-builder-page .badge-light-info {
-            min-height: 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 7px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, .16);
-            background: var(--surface) !important;
-            color: #475569 !important;
-            font-size: .78rem;
-            line-height: 1;
-            font-weight: 850;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .22), -5px -5px 10px rgba(255, 255, 255, .72);
-        }
-
-        .tabs-card {
-            padding: 18px 20px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tabs-scroll {
+        .kelas-builder-page .stat-item {
             width: 100%;
-            overflow-x: auto;
-            padding-bottom: 14px;
-            scrollbar-width: thin;
         }
 
-        .tabs-scroll::-webkit-scrollbar {
-            height: 6px;
+        .kelas-builder-page .content-header > .btn,
+        .kelas-builder-page .btn-neo-primary,
+        .modal .modal-footer .btn {
+            width: 100%;
         }
 
-        .tabs-scroll::-webkit-scrollbar-thumb {
-            border-radius: 999px;
-            background: rgba(148, 163, 184, .42);
-        }
-
-        .neo-tabs {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: max-content;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            border: 0 !important;
-        }
-
-        .neo-tabs .nav-item {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .neo-tabs .nav-link,
-        .kelas-builder-page .nav-line-tabs .nav-link {
-            min-height: 42px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 !important;
-            padding: 10px 15px !important;
-            border: 0 !important;
-            border-radius: 16px !important;
-            color: var(--muted) !important;
-            background: var(--surface) !important;
-            font-size: .86rem;
-            line-height: 1;
-            font-weight: 850;
-            white-space: nowrap;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .24), -5px -5px 10px rgba(255, 255, 255, .76) !important;
-            transition: .18s ease;
-        }
-
-        .neo-tabs .nav-link:hover {
-            color: #1e293b !important;
-            transform: translateY(-1px);
-            box-shadow: 6px 6px 13px rgba(163, 177, 198, .28), -6px -6px 13px rgba(255, 255, 255, .78) !important;
-        }
-
-        .neo-tabs .nav-link.active {
-            color: #fff !important;
-            background: var(--primary) !important;
-            box-shadow: inset 3px 3px 8px rgba(30, 64, 175, .22), inset -3px -3px 8px rgba(147, 197, 253, .28) !important;
-        }
-
-        .section-title,
-        .content-body h3,
-        .kelas-builder-page .text-gray-900,
-        .kelas-builder-page .text-gray-800,
-        .kelas-builder-page h2,
-        .kelas-builder-page h3 {
-            color: var(--text) !important;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin: 0;
-            font-size: 1.05rem;
-            font-weight: 900;
-        }
-
-        .section-title i {
-            color: var(--primary);
-        }
-
-        .kelas-builder-page .text-muted,
-        .kelas-builder-page .text-gray-700,
-        .kelas-builder-page .text-gray-500,
-        .kelas-builder-page .text-gray-400 {
-            color: var(--muted) !important;
-        }
-
-        .kelas-builder-page .btn,
-        .kelas-builder-page .btn.btn-primary,
-        .kelas-builder-page .btn.btn-light,
-        .kelas-builder-page .btn.btn-secondary,
-        .kelas-builder-page .dt-button,
-        .kelas-builder-page .dataTables_wrapper .btn {
-            min-height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            padding: 9px 14px !important;
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            font-weight: 850 !important;
-            line-height: 1 !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .26), -5px -5px 12px rgba(255, 255, 255, .76) !important;
-            transition: .18s ease;
-        }
-
-        .kelas-builder-page .btn:hover,
-        .kelas-builder-page .dt-button:hover {
-            transform: translateY(-1px);
-            color: #0f172a !important;
-            border-color: rgba(100, 116, 139, .28) !important;
-            box-shadow: 6px 6px 14px rgba(163, 177, 198, .3), -6px -6px 14px rgba(255, 255, 255, .8) !important;
-        }
-
-        .kelas-builder-page .table-responsive {
-            border: 0 !important;
-            border-radius: 24px !important;
-            background: var(--surface) !important;
-            padding: 18px !important;
-            box-shadow: inset 5px 5px 12px rgba(163, 177, 198, .2), inset -5px -5px 12px rgba(255, 255, 255, .76) !important;
-        }
-
-        .kelas-builder-page table.dataTable,
-        .kelas-builder-page .table {
-            border-collapse: separate !important;
-            border-spacing: 0 10px !important;
-            margin-top: 10px !important;
-        }
-
-        .kelas-builder-page .table thead tr,
-        .kelas-builder-page table.dataTable thead tr {
-            background: transparent !important;
-        }
-
-        .kelas-builder-page .table thead th,
-        .kelas-builder-page table.dataTable thead th {
-            border: 0 !important;
-            color: #64748b !important;
-            font-size: .76rem !important;
-            font-weight: 900 !important;
-            letter-spacing: .035em;
-        }
-
-        .kelas-builder-page .table tbody tr {
-            border-radius: 18px;
-            background: var(--surface-soft) !important;
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .16), -4px -4px 10px rgba(255, 255, 255, .62);
-        }
-
-        .kelas-builder-page .table tbody td {
-            border-top: 0 !important;
-            border-bottom: 0 !important;
-            color: #334155 !important;
-            vertical-align: middle !important;
-            padding-top: 14px !important;
-            padding-bottom: 14px !important;
-        }
-
-        .kelas-builder-page .dataTables_wrapper .dataTables_length select,
-        .kelas-builder-page .dataTables_wrapper .dataTables_filter input,
-        .kelas-builder-page .form-control,
-        .kelas-builder-page .form-select {
-            min-height: 40px;
-            border: 1px solid rgba(148, 163, 184, .18) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74) !important;
-        }
-
-        .kelas-builder-page .dataTables_wrapper .dataTables_info,
-        .kelas-builder-page .dataTables_wrapper .dataTables_length,
         .kelas-builder-page .dataTables_wrapper .dataTables_filter,
-        .kelas-builder-page .dataTables_wrapper .dataTables_paginate {
-            color: var(--muted) !important;
-            font-weight: 700;
+        .kelas-builder-page .dataTables_wrapper .dataTables_length {
+            text-align: left;
         }
 
-        .kelas-builder-page .paginate_button,
-        .kelas-builder-page .page-link {
-            border: 0 !important;
-            border-radius: 12px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            box-shadow: 3px 3px 7px rgba(163, 177, 198, .18), -3px -3px 7px rgba(255, 255, 255, .62) !important;
+        .modal .modal-footer {
+            flex-direction: column-reverse;
+            align-items: stretch;
+        }
+    }
+
+
+    /* =========================================================
+       ACTION BUTTONS - RAPI DAN BERWARNA
+       Detail biru, materi hijau, edit kuning, hapus merah.
+       Visual only: menggunakan atribut tombol yang sudah ada.
+    ========================================================= */
+    .kelas-builder-page {
+        --action-detail: #3b82f6;
+        --action-detail-hover: #2563eb;
+        --action-manage: #10b981;
+        --action-manage-hover: #059669;
+        --action-edit: #f59e0b;
+        --action-edit-hover: #d97706;
+        --action-delete: #ef4444;
+        --action-delete-hover: #dc2626;
+        --action-extra: #8b5cf6;
+        --action-extra-hover: #7c3aed;
+    }
+
+    /* Kolom aksi dibuat stabil agar tombol tidak berantakan atau turun baris. */
+    .kelas-builder-page #bagian_kelas_table th:first-child,
+    .kelas-builder-page #mentor_table th:first-child,
+    .kelas-builder-page #persyaratan_table th:first-child,
+    .kelas-builder-page #tag_table th:first-child,
+    .kelas-builder-page #target_table th:first-child,
+    .kelas-builder-page #tujuan_table th:first-child {
+        width: 172px !important;
+        min-width: 172px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+        text-align: center !important;
+    }
+
+    .kelas-builder-page #bagian_kelas_table td:first-child,
+    .kelas-builder-page #mentor_table td:first-child,
+    .kelas-builder-page #persyaratan_table td:first-child,
+    .kelas-builder-page #tag_table td:first-child,
+    .kelas-builder-page #target_table td:first-child,
+    .kelas-builder-page #tujuan_table td:first-child {
+        width: 172px !important;
+        min-width: 172px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        line-height: 1 !important;
+    }
+
+    /* Ukuran semua tombol aksi sama seperti halaman Admin Mentor. */
+    .kelas-builder-page table.table .action-icon-btn,
+    .kelas-builder-page table.table .btn.btn-icon.action-icon-btn {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        margin: 0 4px 0 0 !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        vertical-align: middle !important;
+        color: #ffffff !important;
+        background: var(--action-detail) !important;
+        border: 1px solid transparent !important;
+        border-radius: 9px !important;
+        box-shadow: 0 5px 12px rgba(15, 23, 42, .12) !important;
+        transition: background .18s ease, transform .18s ease, box-shadow .18s ease !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn:last-child {
+        margin-right: 0 !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn .bi,
+    .kelas-builder-page table.table .btn.btn-icon.action-icon-btn .bi {
+        color: #ffffff !important;
+        font-size: 15px !important;
+        line-height: 1 !important;
+    }
+
+    /* Detail / lihat data. */
+    .kelas-builder-page table.table .action-icon-btn[data-bs-target="#form_detail"] {
+        background: var(--action-detail) !important;
+        border-color: var(--action-detail) !important;
+    }
+
+    /* Edit data. */
+    .kelas-builder-page table.table .action-icon-btn[data-bs-target="#form_edit"] {
+        background: var(--action-edit) !important;
+        border-color: var(--action-edit) !important;
+    }
+
+    /* Hapus data. */
+    .kelas-builder-page table.table .action-icon-btn[onclick*="deleteConfirmation"] {
+        background: var(--action-delete) !important;
+        border-color: var(--action-delete) !important;
+    }
+
+    /* Link pengelolaan materi pada halaman Bagian Kelas. */
+    .kelas-builder-page table.table a.action-icon-btn[title="Materi"] {
+        background: var(--action-manage) !important;
+        border-color: var(--action-manage) !important;
+    }
+
+    /* Warna cadangan jika link Histori/Sertifikat digunakan pada tabel lain. */
+    .kelas-builder-page table.table a.action-icon-btn[title="Histori"],
+    .kelas-builder-page table.table a.action-icon-btn[title="Sertifikat"] {
+        background: var(--action-extra) !important;
+        border-color: var(--action-extra) !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn:hover {
+        color: #ffffff !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 7px 16px rgba(15, 23, 42, .16) !important;
+        filter: none !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn[data-bs-target="#form_detail"]:hover {
+        background: var(--action-detail-hover) !important;
+        border-color: var(--action-detail-hover) !important;
+    }
+
+    .kelas-builder-page table.table a.action-icon-btn[title="Materi"]:hover {
+        background: var(--action-manage-hover) !important;
+        border-color: var(--action-manage-hover) !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn[data-bs-target="#form_edit"]:hover {
+        background: var(--action-edit-hover) !important;
+        border-color: var(--action-edit-hover) !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn[onclick*="deleteConfirmation"]:hover {
+        background: var(--action-delete-hover) !important;
+        border-color: var(--action-delete-hover) !important;
+    }
+
+    .kelas-builder-page table.table a.action-icon-btn[title="Histori"]:hover,
+    .kelas-builder-page table.table a.action-icon-btn[title="Sertifikat"]:hover {
+        background: var(--action-extra-hover) !important;
+        border-color: var(--action-extra-hover) !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn:active {
+        transform: translateY(0) !important;
+        box-shadow: 0 3px 8px rgba(15, 23, 42, .12) !important;
+    }
+
+    .kelas-builder-page table.table .action-icon-btn:focus-visible {
+        outline: 3px solid rgba(59, 130, 246, .22) !important;
+        outline-offset: 2px !important;
+    }
+
+    /* Tombol Export Excel dibuat hijau agar mudah dibedakan dari Tambah. */
+    .kelas-builder-page .dataTables_wrapper .dt-buttons .buttons-excel,
+    .kelas-builder-page .dataTables_wrapper .dt-button.buttons-excel {
+        color: #ffffff !important;
+        background: var(--action-manage) !important;
+        border-color: var(--action-manage) !important;
+        box-shadow: none !important;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .dt-buttons .buttons-excel:hover,
+    .kelas-builder-page .dataTables_wrapper .dt-button.buttons-excel:hover {
+        color: #ffffff !important;
+        background: var(--action-manage-hover) !important;
+        border-color: var(--action-manage-hover) !important;
+    }
+
+    /* Toolbar tabel diberi jarak yang konsisten. */
+    .kelas-builder-page .dataTables_wrapper .dt-buttons {
+        display: inline-flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .kelas-builder-page .dataTables_wrapper .dataTables_filter,
+    .kelas-builder-page .dataTables_wrapper .dataTables_length {
+        margin-bottom: 14px !important;
+    }
+
+    @media (max-width: 767.98px) {
+        .kelas-builder-page #bagian_kelas_table th:first-child,
+        .kelas-builder-page #mentor_table th:first-child,
+        .kelas-builder-page #persyaratan_table th:first-child,
+        .kelas-builder-page #tag_table th:first-child,
+        .kelas-builder-page #target_table th:first-child,
+        .kelas-builder-page #tujuan_table th:first-child,
+        .kelas-builder-page #bagian_kelas_table td:first-child,
+        .kelas-builder-page #mentor_table td:first-child,
+        .kelas-builder-page #persyaratan_table td:first-child,
+        .kelas-builder-page #tag_table td:first-child,
+        .kelas-builder-page #target_table td:first-child,
+        .kelas-builder-page #tujuan_table td:first-child {
+            width: 156px !important;
+            min-width: 156px !important;
         }
 
-        #form_create .modal-content,
-        #form_edit .modal-content,
-        #form_detail .modal-content {
-            border: 0 !important;
-            border-radius: 26px !important;
-            background: #eef2f7 !important;
-            box-shadow: 12px 12px 28px rgba(15, 23, 42, .14) !important;
-            overflow: hidden;
+        .kelas-builder-page table.table .action-icon-btn,
+        .kelas-builder-page table.table .btn.btn-icon.action-icon-btn {
+            width: 34px !important;
+            height: 34px !important;
+            min-width: 34px !important;
+            min-height: 34px !important;
+            margin-right: 3px !important;
         }
+    }
 
-        #form_create .modal-header,
-        #form_edit .modal-header,
-        #form_detail .modal-header,
-        #form_create .modal-footer,
-        #form_edit .modal-footer,
-        #form_detail .modal-footer,
-        #form_create .modal-body,
-        #form_edit .modal-body,
-        #form_detail .modal-body {
-            border-color: rgba(148, 163, 184, .18) !important;
-            background: #eef2f7 !important;
-        }
 
-        #form_create .modal-title,
-        #form_edit .modal-title,
-        #form_detail .modal-title {
-            color: #1f2937 !important;
-            font-weight: 900 !important;
-        }
 
-        #form_create .form-control,
-        #form_create .form-select,
-        #form_edit .form-control,
-        #form_edit .form-select,
-        #form_detail .form-control,
-        #form_detail .form-select,
-        #form_create textarea,
-        #form_edit textarea,
-        #form_detail textarea {
-            min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 15px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74) !important;
-        }
+    /* =========================================================
+       FIX FINAL: TOMBOL AKSI LANGSUNG BERWARNA SEBELUM HOVER
+       Berlaku untuk tombol hasil render DataTables, meskipun class bawaan masih btn-primary/btn-bg-light.
+    ========================================================= */
+    .kelas-builder-page #persyaratan_table tbody td:first-child {
+        text-align: center !important;
+        white-space: nowrap !important;
+        vertical-align: middle !important;
+    }
 
-        #form_create .form-control:focus,
-        #form_create .form-select:focus,
-        #form_edit .form-control:focus,
-        #form_edit .form-select:focus,
-        #form_detail .form-control:focus,
-        #form_detail .form-select:focus {
-            border-color: rgba(37, 99, 235, .42) !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74), 0 0 0 3px rgba(37, 99, 235, .08) !important;
-        }
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn,
+    .kelas-builder-page #persyaratan_table tbody td:first-child a,
+    .kelas-builder-page #persyaratan_table tbody td:first-child button,
+    .kelas-builder-page #persyaratan_table .aksi-detail,
+    .kelas-builder-page #persyaratan_table .aksi-edit,
+    .kelas-builder-page #persyaratan_table .aksi-hapus {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        margin: 0 4px 0 0 !important;
+        padding: 0 !important;
+        color: #ffffff !important;
+        background-color: #3b82f6 !important;
+        background-image: none !important;
+        border: 1px solid #3b82f6 !important;
+        border-radius: 9px !important;
+        box-shadow: none !important;
+        font-size: 0 !important;
+        line-height: 1 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        vertical-align: middle !important;
+    }
 
-        #form_create .btn,
-        #form_edit .btn,
-        #form_detail .btn {
-            min-height: 38px;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            font-weight: 850 !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .24) !important;
-        }
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn:last-child,
+    .kelas-builder-page #persyaratan_table tbody td:first-child a:last-child,
+    .kelas-builder-page #persyaratan_table tbody td:first-child button:last-child {
+        margin-right: 0 !important;
+    }
 
-        #form_create .btn-close,
-        #form_edit .btn-close,
-        #form_detail .btn-close {
-            border-radius: 13px;
-            background-color: #eef2f7;
-            opacity: 1;
-            box-shadow: 4px 4px 9px rgba(163, 177, 198, .22);
-        }
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn i,
+    .kelas-builder-page #persyaratan_table tbody td:first-child a i,
+    .kelas-builder-page #persyaratan_table tbody td:first-child button i,
+    .kelas-builder-page #persyaratan_table tbody td:first-child .svg-icon,
+    .kelas-builder-page #persyaratan_table tbody td:first-child .svg-icon svg,
+    .kelas-builder-page #persyaratan_table tbody td:first-child .svg-icon svg path {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+        stroke: #ffffff !important;
+        font-size: 15px !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 1 !important;
+    }
 
-        .modal-backdrop.show {
-            opacity: .35 !important;
-        }
+    /* Detail/Lihat = biru. */
+    .kelas-builder-page #persyaratan_table tbody td:first-child .aksi-detail,
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-action-type="detail"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-bs-target="#form_detail"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [title*="Detail"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [title*="Lihat"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn:nth-of-type(1),
+    .kelas-builder-page #persyaratan_table tbody td:first-child a:nth-of-type(1),
+    .kelas-builder-page #persyaratan_table tbody td:first-child button:nth-of-type(1) {
+        color: #ffffff !important;
+        background-color: #3b82f6 !important;
+        background-image: none !important;
+        border-color: #3b82f6 !important;
+    }
 
-        .swal2-popup {
-            border-radius: 24px !important;
-            background: #eef2f7 !important;
-            color: #1f2937 !important;
-            box-shadow: 12px 12px 28px rgba(15, 23, 42, .14) !important;
-        }
+    /* Edit = kuning. */
+    .kelas-builder-page #persyaratan_table tbody td:first-child .aksi-edit,
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-action-type="edit"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-bs-target="#form_edit"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [title*="Edit"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="edit"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="Edit"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn:nth-of-type(2),
+    .kelas-builder-page #persyaratan_table tbody td:first-child a:nth-of-type(2),
+    .kelas-builder-page #persyaratan_table tbody td:first-child button:nth-of-type(2) {
+        color: #ffffff !important;
+        background-color: #f59e0b !important;
+        background-image: none !important;
+        border-color: #f59e0b !important;
+    }
 
-        .swal2-confirm,
-        .swal2-cancel {
-            border-radius: 14px !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .24) !important;
-        }
+    /* Hapus = merah. */
+    .kelas-builder-page #persyaratan_table tbody td:first-child .aksi-hapus,
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-action-type="hapus"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [data-action-type="delete"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [title*="Hapus"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [title*="Delete"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="delete"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="Delete"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="hapus"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child [onclick*="Hapus"],
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn:nth-of-type(3),
+    .kelas-builder-page #persyaratan_table tbody td:first-child a:nth-of-type(3),
+    .kelas-builder-page #persyaratan_table tbody td:first-child button:nth-of-type(3) {
+        color: #ffffff !important;
+        background-color: #ef4444 !important;
+        background-image: none !important;
+        border-color: #ef4444 !important;
+    }
 
-        @media (max-width: 767.98px) {
-            .kelas-builder-page {
-                padding: 0 18px 24px;
-            }
+    .kelas-builder-page #persyaratan_table tbody td:first-child .btn:hover,
+    .kelas-builder-page #persyaratan_table tbody td:first-child a:hover,
+    .kelas-builder-page #persyaratan_table tbody td:first-child button:hover {
+        color: #ffffff !important;
+        filter: brightness(.96) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 14px rgba(15, 23, 42, .14) !important;
+    }
+</style>
 
-            .hero-top,
-            .content-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .content-body .d-flex.justify-content-between.align-items-center.mb-5 {
-                align-items: stretch !important;
-                gap: 12px;
-                flex-direction: column;
-            }
-
-            .kelas-builder-page .btn {
-                width: 100%;
-            }
-
-            .stat-item {
-                min-width: 100%;
-            }
-        }
-    </style>
 @endsection
 
 @section('list')
@@ -721,4 +1394,79 @@
     @include('admin.kelas.kelas_persyaratan.script.edit')
     @include('admin.kelas.kelas_persyaratan.script.detail')
     @include('admin.kelas.kelas_persyaratan.script.delete')
+
+
+    <script>
+        /* =========================================================
+           FIX FINAL WARNA TOMBOL AKSI DATATABLES
+           Tidak mengubah route, AJAX, controller, atau alur CRUD.
+           Hanya menambah class visual agar tombol langsung berwarna sebelum hover.
+        ========================================================= */
+        (function () {
+            function detectActionType(element, index) {
+                const $button = $(element);
+                const text = [
+                    $button.attr('title'),
+                    $button.attr('aria-label'),
+                    $button.attr('data-bs-target'),
+                    $button.attr('data-action'),
+                    $button.attr('onclick'),
+                    $button.text(),
+                    $button.html()
+                ].filter(Boolean).join(' ').toLowerCase();
+
+                if (text.includes('hapus') || text.includes('delete') || text.includes('trash') || text.includes('fa-trash') || text.includes('bi-trash')) {
+                    return 'hapus';
+                }
+
+                if (text.includes('edit') || text.includes('ubah') || text.includes('pencil') || text.includes('fa-pen') || text.includes('bi-pencil')) {
+                    return 'edit';
+                }
+
+                if (text.includes('detail') || text.includes('lihat') || text.includes('show') || text.includes('eye') || text.includes('form_detail') || text.includes('bi-eye')) {
+                    return 'detail';
+                }
+
+                if (index === 1) {
+                    return 'edit';
+                }
+
+                if (index >= 2) {
+                    return 'hapus';
+                }
+
+                return 'detail';
+            }
+
+            function colorPersyaratanActionButtons() {
+                $('#persyaratan_table tbody tr').each(function () {
+                    const $actionCell = $(this).children('td').first();
+                    const $buttons = $actionCell.find('a, button, .btn').filter(function () {
+                        return $(this).closest('.dropdown-menu').length === 0;
+                    });
+
+                    $buttons.each(function (index) {
+                        const actionType = detectActionType(this, index);
+
+                        $(this)
+                            .removeClass('btn-primary btn-info btn-warning btn-danger btn-success btn-light btn-bg-light btn-active-light-primary btn-active-color-primary aksi-detail aksi-edit aksi-hapus')
+                            .addClass('btn action-force-color aksi-' + actionType)
+                            .attr('data-action-type', actionType);
+                    });
+                });
+            }
+
+            $(document).on('draw.dt responsive-display.dt', '#persyaratan_table', function () {
+                colorPersyaratanActionButtons();
+            });
+
+            $(function () {
+                colorPersyaratanActionButtons();
+                setTimeout(colorPersyaratanActionButtons, 150);
+                setTimeout(colorPersyaratanActionButtons, 500);
+                setTimeout(colorPersyaratanActionButtons, 1000);
+                setTimeout(colorPersyaratanActionButtons, 1800);
+            });
+        })();
+    </script>
 @endsection

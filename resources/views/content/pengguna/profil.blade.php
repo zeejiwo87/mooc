@@ -3,57 +3,37 @@
 @section('pengguna_css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --profile-primary: #009ef7;
+            --profile-primary-dark: #008bd8;
+            --profile-primary-soft: #eaf6ff;
+            --profile-bg: #f8fafc;
+            --profile-surface: #ffffff;
+            --profile-soft: #f1f5f9;
+            --profile-border: #e5e7eb;
+            --profile-text: #111827;
+            --profile-muted: #64748b;
+            --profile-success: #22c55e;
         }
 
         .neo-profile-page {
             width: 100%;
-            color: var(--neo-text);
+            color: var(--profile-text);
         }
 
         .neo-profile-shell {
             width: 100%;
-            border-radius: 32px;
-            background: var(--neo-surface);
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light);
+            border-radius: 24px;
+            background: var(--profile-surface);
+            border: 1px solid var(--profile-border);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
             overflow: hidden;
             position: relative;
         }
 
-        .neo-profile-shell::before {
-            content: "";
-            position: absolute;
-            width: 520px;
-            height: 520px;
-            right: -260px;
-            top: -260px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(0, 158, 247, .16), transparent 68%);
-            pointer-events: none;
-        }
-
+        .neo-profile-shell::before,
         .neo-profile-shell::after {
-            content: "";
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            left: -230px;
-            bottom: -240px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 255, 255, .78), transparent 66%);
-            pointer-events: none;
+            display: none !important;
+            content: none !important;
         }
 
         .neo-profile-inner {
@@ -62,17 +42,18 @@
         }
 
         .neo-profile-hero {
-            padding: 36px 38px 28px;
+            padding: 34px 36px 28px;
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 360px;
-            gap: 34px;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 32px;
             align-items: center;
+            background: #ffffff;
         }
 
         .neo-profile-main {
             display: flex;
             align-items: center;
-            gap: 26px;
+            gap: 24px;
             min-width: 0;
         }
 
@@ -81,7 +62,7 @@
         }
 
         .neo-avatar-box {
-            width: 138px;
+            width: 132px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -89,14 +70,13 @@
 
         .neo-avatar-wrap {
             position: relative;
-            width: 116px;
-            height: 116px;
+            width: 112px;
+            height: 112px;
             border-radius: 999px;
-            padding: 8px;
-            background: var(--neo-surface);
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light);
+            padding: 6px;
+            background: #ffffff;
+            border: 1px solid var(--profile-border);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
         }
 
         .neo-avatar-preview {
@@ -106,41 +86,35 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            box-shadow:
-                inset 4px 4px 10px rgba(120, 113, 108, .18),
-                inset -4px -4px 10px rgba(255, 255, 255, .72);
+            border: 1px solid var(--profile-border);
         }
 
         .neo-avatar-edit {
             position: absolute;
-            right: 6px;
-            bottom: 10px;
-            width: 29px;
-            height: 29px;
-            border: 0;
+            right: 4px;
+            bottom: 8px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--profile-border);
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #57534e;
-            background: var(--neo-surface);
-            box-shadow:
-                4px 4px 9px rgba(120, 113, 108, .22),
-                -4px -4px 9px rgba(255, 255, 255, .86);
+            color: var(--profile-primary);
+            background: #ffffff;
             cursor: pointer;
-            transition: .2s ease;
+            transition: .18s ease;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
         }
 
         .neo-avatar-edit i {
-            font-size: 11px !important;
+            font-size: 12px !important;
         }
 
         .neo-avatar-edit:hover {
-            color: #44403c;
-            background: #f1f0ef;
-            box-shadow:
-                inset 3px 3px 7px rgba(120, 113, 108, .16),
-                inset -3px -3px 7px rgba(255, 255, 255, .82);
+            color: var(--profile-primary-dark);
+            background: var(--profile-primary-soft);
+            border-color: rgba(0, 158, 247, 0.25);
             transform: translateY(-1px);
         }
 
@@ -154,7 +128,7 @@
             min-height: 32px !important;
             margin-top: 11px;
             padding: 0 10px !important;
-            border-radius: 11px !important;
+            border-radius: 999px !important;
             font-size: 11px !important;
             line-height: 1 !important;
             white-space: nowrap !important;
@@ -162,12 +136,11 @@
             align-items: center !important;
             justify-content: center !important;
             gap: 5px !important;
-            color: #57534e !important;
-            background: var(--neo-surface) !important;
-            box-shadow:
-                4px 4px 9px rgba(120, 113, 108, .18),
-                -4px -4px 9px rgba(255, 255, 255, .82) !important;
-            transition: .2s ease;
+            color: var(--profile-primary) !important;
+            background: #ffffff !important;
+            border: 1px solid var(--profile-border) !important;
+            box-shadow: none !important;
+            transition: .18s ease;
         }
 
         .neo-avatar-save i {
@@ -176,16 +149,14 @@
         }
 
         .neo-avatar-save:hover {
-            color: #44403c !important;
-            background: #f1f0ef !important;
-            box-shadow:
-                inset 3px 3px 7px rgba(120, 113, 108, .15),
-                inset -3px -3px 7px rgba(255, 255, 255, .82) !important;
+            color: var(--profile-primary-dark) !important;
+            background: var(--profile-primary-soft) !important;
+            border-color: rgba(0, 158, 247, 0.24) !important;
             transform: translateY(-1px);
         }
 
         .neo-profile-name {
-            color: var(--neo-text);
+            color: var(--profile-text);
             font-weight: 900;
             letter-spacing: -.035em;
             margin-bottom: 8px;
@@ -193,14 +164,14 @@
         }
 
         .neo-profile-email {
-            color: var(--neo-muted);
-            font-weight: 750;
+            color: var(--profile-muted);
+            font-weight: 700;
             overflow-wrap: anywhere;
             margin-bottom: 12px;
         }
 
         .neo-profile-bio {
-            color: var(--neo-muted);
+            color: var(--profile-muted);
             font-weight: 600;
             line-height: 1.72;
             max-width: 720px;
@@ -214,11 +185,9 @@
             min-height: 30px;
             padding: 0 12px;
             border-radius: 999px;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
-            box-shadow:
-                inset 3px 3px 7px var(--neo-inset-dark),
-                inset -3px -3px 7px var(--neo-inset-light);
+            color: #15803d;
+            background: #ecfdf5;
+            border: 1px solid rgba(34, 197, 94, 0.18);
             font-size: 11px;
             font-weight: 900;
             letter-spacing: .04em;
@@ -226,10 +195,14 @@
             margin-bottom: 14px;
         }
 
+        .neo-profile-status i {
+            color: var(--profile-success);
+        }
+
         .neo-profile-summary {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 13px;
+            gap: 12px;
         }
 
         .neo-summary-row {
@@ -239,15 +212,13 @@
             gap: 14px;
             min-height: 58px;
             padding: 0 18px;
-            border-radius: 20px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            border-radius: 16px;
+            background: var(--profile-bg);
+            border: 1px solid var(--profile-border);
         }
 
         .neo-summary-label {
-            color: var(--neo-muted);
+            color: var(--profile-muted);
             font-size: 12px;
             font-weight: 900;
             text-transform: uppercase;
@@ -255,7 +226,7 @@
         }
 
         .neo-summary-value {
-            color: var(--neo-text);
+            color: var(--profile-text);
             font-weight: 900;
             text-align: right;
             line-height: 1.35;
@@ -263,24 +234,23 @@
 
         .neo-divider {
             height: 1px;
-            background: rgba(120, 113, 108, .15);
-            margin: 0 38px;
+            background: var(--profile-border);
+            margin: 0 36px;
         }
 
         .neo-tabs-area {
-            padding: 18px 38px 0;
+            padding: 18px 36px 0;
+            background: #ffffff;
         }
 
         .neo-tabs {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 8px;
-            border-radius: 22px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px rgba(120, 113, 108, .13),
-                inset -5px -5px 12px rgba(255, 255, 255, .76);
+            gap: 10px;
+            padding: 6px;
+            border-radius: 18px;
+            background: var(--profile-bg);
+            border: 1px solid var(--profile-border);
             overflow-x: auto;
             white-space: nowrap;
         }
@@ -294,41 +264,40 @@
         }
 
         .neo-tabs .nav-link {
-            min-height: 46px;
-            padding: 0 20px;
+            min-height: 44px;
+            padding: 0 18px;
             border: 0 !important;
-            border-radius: 16px;
-            color: var(--neo-muted);
+            border-radius: 14px;
+            color: var(--profile-muted);
             font-weight: 900;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             background: transparent;
-            transition: .22s ease;
+            transition: .18s ease;
         }
 
         .neo-tabs .nav-link:hover,
         .neo-tabs .nav-link.active {
-            color: var(--neo-primary);
-            background: var(--neo-surface);
-            box-shadow:
-                6px 6px 14px var(--neo-dark-soft),
-                -6px -6px 14px var(--neo-light);
+            color: var(--profile-primary);
+            background: #ffffff;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
         }
 
         .neo-profile-content {
-            padding: 32px 38px 38px;
+            padding: 30px 36px 36px;
+            background: #ffffff;
         }
 
         .neo-form-section {
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 34px;
+            gap: 32px;
         }
 
         .neo-section-title {
-            color: var(--neo-text);
+            color: var(--profile-text);
             font-weight: 900;
             margin-bottom: 22px;
             display: flex;
@@ -338,29 +307,33 @@
         }
 
         .neo-section-title i {
-            color: var(--neo-primary);
+            color: var(--profile-primary);
         }
 
         .neo-form-label {
-            color: var(--neo-text);
+            color: var(--profile-text);
             font-weight: 900;
             margin-bottom: 9px;
         }
 
         .neo-input-group {
-            border-radius: 18px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid var(--profile-border);
             overflow: hidden;
-            padding: 2px;
+            padding: 0;
+            transition: .18s ease;
+        }
+
+        .neo-input-group:focus-within {
+            border-color: rgba(0, 158, 247, 0.45);
+            box-shadow: 0 0 0 .2rem rgba(0, 158, 247, 0.10);
         }
 
         .neo-input-group .input-group-text {
             border: 0 !important;
             background: transparent !important;
-            color: var(--neo-primary);
+            color: var(--profile-primary);
             padding-left: 18px;
             padding-right: 10px;
         }
@@ -368,7 +341,7 @@
         .neo-input-group .form-control {
             border: 0 !important;
             background: transparent !important;
-            color: var(--neo-text);
+            color: var(--profile-text);
             box-shadow: none !important;
             min-height: 54px;
             font-weight: 700;
@@ -387,33 +360,38 @@
 
         .neo-input-group .form-control:focus {
             background: transparent !important;
+            box-shadow: none !important;
         }
 
         .neo-input-group .cursor-pointer {
-            color: var(--neo-muted);
+            color: var(--profile-muted);
             padding-right: 18px;
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .neo-input-group .cursor-pointer:hover {
+            color: var(--profile-primary);
         }
 
         .neo-form-note {
             margin-top: 16px;
-            color: var(--neo-muted);
+            color: var(--profile-muted);
             font-weight: 650;
             line-height: 1.68;
         }
 
         .neo-security-note {
-            border-radius: 24px;
+            border-radius: 18px;
             padding: 22px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            background: var(--profile-bg);
+            border: 1px solid var(--profile-border);
         }
 
         .neo-security-list {
             margin: 0;
             padding-left: 1.15rem;
-            color: var(--neo-muted);
+            color: var(--profile-muted);
             font-weight: 700;
             line-height: 1.85;
         }
@@ -432,57 +410,53 @@
             justify-content: flex-end;
         }
 
-        .neo-btn-primary,
-        .btn.btn-primary {
+        .neo-profile-page .neo-btn-primary, 
+        .neo-profile-page .btn.btn-primary {
             border: 0 !important;
-            border-radius: 17px !important;
-            background: var(--neo-primary) !important;
+            border-radius: 14px !important;
+            background: var(--profile-primary) !important;
             color: #ffffff !important;
             min-height: 50px;
             padding-left: 22px;
             padding-right: 22px;
             font-weight: 900;
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, .26),
-                -6px -6px 14px rgba(255, 255, 255, .72);
-            transition: .2s ease;
+            box-shadow: 0 12px 26px rgba(0, 158, 247, 0.20);
+            transition: .18s ease;
         }
 
-        .neo-btn-primary:hover,
-        .btn.btn-primary:hover {
-            background: var(--neo-primary-dark) !important;
+        .neo-profile-page .neo-btn-primary:hover,
+        .neo-profile-page .btn.btn-primary:hover {
+            background: var(--profile-primary-dark) !important;
             color: #ffffff !important;
             transform: translateY(-1px);
         }
 
-        .btn.btn-light-primary,
-        .btn.btn-outline-primary {
-            border: 0 !important;
-            border-radius: 17px !important;
-            background: var(--neo-surface) !important;
-            color: var(--neo-primary) !important;
+        .neo-profile-page .btn.btn-light-primary,
+        .neo-profile-page .btn.btn-outline-primary {
+            border: 1px solid var(--profile-border) !important;
+            border-radius: 14px !important;
+            background: #ffffff !important;
+            color: var(--profile-primary) !important;
             min-height: 48px;
             padding-left: 18px;
             padding-right: 18px;
             font-weight: 900;
-            box-shadow:
-                6px 6px 14px var(--neo-dark-soft),
-                -6px -6px 14px var(--neo-light);
-            transition: .2s ease;
+            box-shadow: none !important;
+            transition: .18s ease;
         }
 
-        .btn.btn-light-primary:hover,
-        .btn.btn-outline-primary:hover {
-            color: var(--neo-primary-dark) !important;
+        .neo-profile-page .btn.btn-light-primary:hover,
+        .neo-profile-page .btn.btn-outline-primary:hover {
+            color: var(--profile-primary-dark) !important;
+            background: var(--profile-primary-soft) !important;
+            border-color: rgba(0, 158, 247, 0.22) !important;
             transform: translateY(-1px);
         }
 
         .alert {
-            border: 0 !important;
-            border-radius: 20px !important;
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light);
+            border: 1px solid var(--profile-border) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
         }
 
         .invalid-feedback {
@@ -501,7 +475,7 @@
 
         @media (max-width: 991.98px) {
             .neo-profile-shell {
-                border-radius: 28px;
+                border-radius: 22px;
             }
 
             .neo-profile-hero {
@@ -529,7 +503,7 @@
 
         @media (max-width: 767.98px) {
             .neo-profile-shell {
-                border-radius: 24px;
+                border-radius: 20px;
             }
 
             .neo-profile-hero {
@@ -580,7 +554,7 @@
             .neo-tabs {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
+                gap: 8px;
                 width: 100%;
             }
 
@@ -619,7 +593,7 @@
 
         @media (max-width: 575.98px) {
             .neo-profile-shell {
-                border-radius: 22px;
+                border-radius: 18px;
             }
 
             .neo-profile-hero {
@@ -665,7 +639,7 @@
 
             .neo-tabs {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
+                gap: 8px;
             }
 
             .neo-tabs .nav-item,
@@ -688,7 +662,7 @@
 
             .neo-security-note {
                 padding: 18px;
-                border-radius: 20px;
+                border-radius: 16px;
             }
         }
 

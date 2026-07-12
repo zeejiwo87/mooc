@@ -1,24 +1,29 @@
 @extends('mentor.layouts.index')
 
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/responsive.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/buttons.dataTables.min.css') }}">
 
     <style>
+        /* =========================================================
+           TUJUAN PEMBELAJARAN - SIMPLE, FLAT, RESPONSIVE
+           Hanya tampilan. Route, ID, Blade, dan JavaScript tetap.
+        ========================================================= */
         .kelas-builder-page {
-            --bg: #eef2f7;
-            --surface: #eef2f7;
-            --surface-soft: #f4f7fb;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --border: rgba(148, 163, 184, .2);
-            --primary: #3b82f6;
-            --warning: #f59e0b;
-            --shadow-dark: rgba(163, 177, 198, .36);
-            --shadow-light: rgba(255, 255, 255, .88);
-            padding: 0 30px 30px;
-            color: var(--text);
+            --page-primary: #074366;
+            --page-primary-dark: #052f49;
+            --page-text: #111827;
+            --page-muted: #64748b;
+            --page-border: #e5e7eb;
+            --page-soft: #f8fafc;
+            --page-white: #ffffff;
+            --page-success: #10b981;
+            --page-warning: #f59e0b;
+            --page-danger: #ef4444;
+            padding: 0 24px 28px;
+            color: var(--page-text);
         }
 
         .kelas-builder-shell {
@@ -27,183 +32,173 @@
         }
 
         .neo-card {
-            border: 0;
-            border-radius: 28px;
-            background: var(--surface);
-            box-shadow: 10px 10px 22px var(--shadow-dark), -10px -10px 22px var(--shadow-light);
             overflow: hidden;
+            background: var(--page-white);
+            border: 1px solid #eef2f7;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
         }
 
+        /* Hero */
         .hero-banner {
-            min-height: 240px;
-            background-size: cover;
-            background-position: center;
+            min-height: 220px;
             position: relative;
+            background-position: center;
+            background-size: cover;
         }
 
         .hero-banner::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(15, 23, 42, .28);
+            background: rgba(15, 23, 42, .20);
         }
 
         .hero-body,
         .content-body {
-            padding: 26px 28px 28px;
+            padding: 22px;
+            background: var(--page-white);
         }
 
         .hero-top,
         .content-header {
             display: flex;
-            justify-content: space-between;
             align-items: flex-start;
-            gap: 18px;
+            justify-content: space-between;
+            gap: 16px;
         }
 
         .kelas-title {
             margin: 0;
-            color: var(--text);
-            font-size: 1.75rem;
-            line-height: 1.25;
-            font-weight: 850;
+            color: var(--page-text);
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 800;
         }
 
         .kelas-owner,
         .muted-text {
-            color: var(--muted);
-            font-weight: 650;
+            color: var(--page-muted);
+            font-weight: 600;
         }
 
         .kelas-owner span {
-            color: var(--text);
-            font-weight: 850;
+            color: var(--page-text);
+            font-weight: 800;
         }
 
         .stars {
             display: flex;
             align-items: center;
             gap: 3px;
-            color: var(--warning);
+            color: var(--page-warning);
         }
 
         .stars .bi-star {
-            color: #94a3b8;
+            color: #cbd5e1;
         }
 
         .rating-number {
             margin-left: 8px;
-            color: var(--text);
-            font-weight: 850;
+            color: var(--page-text);
+            font-weight: 800;
         }
 
         .short-desc {
             max-width: 920px;
-            margin: 18px 0 0;
-            color: var(--muted);
+            margin: 16px 0 0;
+            color: var(--page-muted);
             line-height: 1.65;
             font-weight: 600;
         }
 
+        /* Informasi ringkas */
         .stat-row,
         .meta-row,
         .action-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .stat-row {
-            margin-top: 24px;
+            margin-top: 22px;
         }
 
         .stat-item {
             min-width: 185px;
             display: flex;
             align-items: center;
-            gap: 13px;
-            padding: 15px 16px;
-            border-radius: 20px;
-            background: var(--surface);
-            box-shadow: inset 5px 5px 10px rgba(163, 177, 198, .22), inset -5px -5px 10px rgba(255, 255, 255, .82);
+            gap: 12px;
+            padding: 14px;
+            background: var(--page-soft);
+            border: 1px solid var(--page-border);
+            border-radius: 10px;
         }
 
         .stat-icon {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
-            color: var(--primary);
-            background: var(--surface);
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .26), -5px -5px 10px rgba(255, 255, 255, .76);
-            font-size: 1.15rem;
+            color: var(--page-primary);
+            background: var(--page-white);
+            border: 1px solid var(--page-border);
+            border-radius: 8px;
+            font-size: 18px;
         }
 
         .stat-value {
-            color: var(--text);
-            font-size: 1rem;
+            color: var(--page-text);
+            font-size: 15px;
             line-height: 1.2;
-            font-weight: 850;
+            font-weight: 800;
         }
 
         .stat-label {
             margin-top: 3px;
-            color: var(--muted);
-            font-size: .78rem;
-            font-weight: 700;
+            color: var(--page-muted);
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .badge-neo,
-        .kelas-builder-page .badge,
-        .kelas-builder-page .badge-light-success,
-        .kelas-builder-page .badge-light-primary,
-        .kelas-builder-page .badge-light-warning,
-        .kelas-builder-page .badge-light-danger,
-        .kelas-builder-page .badge-light-info {
-            min-height: 30px;
+        .kelas-builder-page .badge {
+            min-height: 28px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 7px 12px;
+            padding: 6px 10px;
+            color: #334155 !important;
+            background: var(--page-soft) !important;
+            border: 1px solid var(--page-border) !important;
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, .16);
-            background: var(--surface) !important;
-            color: #475569 !important;
-            font-size: .78rem;
+            box-shadow: none !important;
+            font-size: 12px;
             line-height: 1;
-            font-weight: 850;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .22), -5px -5px 10px rgba(255, 255, 255, .72);
+            font-weight: 700;
         }
 
+        /* Navigasi tab */
         .tabs-card {
-            padding: 18px 20px 0;
-            border-bottom: 1px solid var(--border);
+            padding: 14px 16px 0;
+            background: var(--page-white);
+            border-bottom: 1px solid #eef2f7;
         }
 
         .tabs-scroll {
             width: 100%;
             overflow-x: auto;
-            padding-bottom: 14px;
-            scrollbar-width: thin;
-        }
-
-        .tabs-scroll::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .tabs-scroll::-webkit-scrollbar-thumb {
-            border-radius: 999px;
-            background: rgba(148, 163, 184, .42);
+            padding-bottom: 12px;
         }
 
         .neo-tabs {
+            min-width: max-content;
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-width: max-content;
+            gap: 8px;
             margin: 0;
             padding: 0;
             list-style: none;
@@ -212,201 +207,305 @@
 
         .neo-tabs .nav-item {
             margin: 0 !important;
-            padding: 0 !important;
         }
 
-        .neo-tabs .nav-link,
-        .kelas-builder-page .nav-line-tabs .nav-link {
-            min-height: 42px;
+        .neo-tabs .nav-link {
+            min-height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin: 0 !important;
-            padding: 10px 15px !important;
-            border: 0 !important;
-            border-radius: 16px !important;
-            color: var(--muted) !important;
-            background: var(--surface) !important;
-            font-size: .86rem;
+            padding: 9px 13px !important;
+            color: var(--page-muted) !important;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 13px;
             line-height: 1;
-            font-weight: 850;
+            font-weight: 700;
             white-space: nowrap;
-            box-shadow: 5px 5px 10px rgba(163, 177, 198, .24), -5px -5px 10px rgba(255, 255, 255, .76) !important;
-            transition: .18s ease;
         }
 
         .neo-tabs .nav-link:hover {
-            color: #1e293b !important;
-            transform: translateY(-1px);
-            box-shadow: 6px 6px 13px rgba(163, 177, 198, .28), -6px -6px 13px rgba(255, 255, 255, .78) !important;
+            color: var(--page-primary) !important;
+            background: var(--page-soft) !important;
+            border-color: #cbd5e1 !important;
         }
 
         .neo-tabs .nav-link.active {
-            color: #fff !important;
-            background: var(--primary) !important;
-            box-shadow: inset 3px 3px 8px rgba(30, 64, 175, .22), inset -3px -3px 8px rgba(147, 197, 253, .28) !important;
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
         }
 
-        .section-title,
-        .content-body h3,
-        .kelas-builder-page .text-gray-900,
-        .kelas-builder-page .text-gray-800,
-        .kelas-builder-page h2,
-        .kelas-builder-page h3 {
-            color: var(--text) !important;
-        }
-
+        /* Judul isi */
         .section-title {
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 8px;
             margin: 0;
-            font-size: 1.05rem;
-            font-weight: 900;
+            color: var(--page-text);
+            font-size: 16px;
+            font-weight: 800;
         }
 
         .section-title i {
-            color: var(--primary);
+            color: var(--page-primary);
+        }
+
+        .kelas-builder-page h2,
+        .kelas-builder-page h3,
+        .kelas-builder-page .text-gray-900,
+        .kelas-builder-page .text-gray-800 {
+            color: var(--page-text) !important;
         }
 
         .kelas-builder-page .text-muted,
         .kelas-builder-page .text-gray-700,
         .kelas-builder-page .text-gray-500,
         .kelas-builder-page .text-gray-400 {
-            color: var(--muted) !important;
+            color: var(--page-muted) !important;
         }
 
+        /* Tombol */
         .kelas-builder-page .btn,
-        .kelas-builder-page .btn.btn-primary,
-        .kelas-builder-page .btn.btn-light,
-        .kelas-builder-page .btn.btn-secondary,
         .kelas-builder-page .dt-button,
         .kelas-builder-page .dataTables_wrapper .btn {
             min-height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 7px;
-            padding: 9px 14px !important;
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            font-weight: 850 !important;
-            line-height: 1 !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .26), -5px -5px 12px rgba(255, 255, 255, .76) !important;
-            transition: .18s ease;
+            gap: 6px;
+            padding: 8px 14px !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 13px;
+            line-height: 1;
+            font-weight: 700 !important;
+            transition: background .18s ease, border-color .18s ease;
         }
 
-        .kelas-builder-page .btn:hover,
-        .kelas-builder-page .dt-button:hover {
-            transform: translateY(-1px);
-            color: #0f172a !important;
-            border-color: rgba(100, 116, 139, .28) !important;
-            box-shadow: 6px 6px 14px rgba(163, 177, 198, .3), -6px -6px 14px rgba(255, 255, 255, .8) !important;
+        .kelas-builder-page .btn-primary,
+        .kelas-builder-page .btn.btn-primary {
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border: 1px solid var(--page-primary) !important;
         }
 
+        .kelas-builder-page .btn-primary:hover,
+        .kelas-builder-page .btn-primary:focus {
+            color: #ffffff !important;
+            background: var(--page-primary-dark) !important;
+            border-color: var(--page-primary-dark) !important;
+        }
+
+        .kelas-builder-page .btn-light,
+        .kelas-builder-page .btn-secondary {
+            color: #475569 !important;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+        }
+
+        .kelas-builder-page .btn-light:hover,
+        .kelas-builder-page .btn-secondary:hover {
+            color: var(--page-text) !important;
+            background: var(--page-soft) !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        /* Tabel */
         .kelas-builder-page .table-responsive {
-            border: 0 !important;
-            border-radius: 24px !important;
-            background: var(--surface) !important;
-            padding: 18px !important;
-            box-shadow: inset 5px 5px 12px rgba(163, 177, 198, .2), inset -5px -5px 12px rgba(255, 255, 255, .76) !important;
+            width: 100%;
+            padding: 0 !important;
+            overflow-x: auto;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
         }
 
         .kelas-builder-page table.dataTable,
         .kelas-builder-page .table {
-            border-collapse: separate !important;
-            border-spacing: 0 10px !important;
-            margin-top: 10px !important;
-        }
-
-        .kelas-builder-page .table thead tr,
-        .kelas-builder-page table.dataTable thead tr {
-            background: transparent !important;
+            width: 100% !important;
+            margin: 0 !important;
+            border-collapse: collapse !important;
+            border-spacing: 0 !important;
         }
 
         .kelas-builder-page .table thead th,
         .kelas-builder-page table.dataTable thead th {
-            border: 0 !important;
-            color: #64748b !important;
-            font-size: .76rem !important;
-            font-weight: 900 !important;
-            letter-spacing: .035em;
+            padding: 12px 14px !important;
+            color: var(--page-muted) !important;
+            background: var(--page-soft) !important;
+            border-top: 0 !important;
+            border-bottom: 1px solid var(--page-border) !important;
+            font-size: 12px !important;
+            font-weight: 800 !important;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .kelas-builder-page .table tbody tr {
-            border-radius: 18px;
-            background: var(--surface-soft) !important;
-            box-shadow: 4px 4px 10px rgba(163, 177, 198, .16), -4px -4px 10px rgba(255, 255, 255, .62);
+            background: var(--page-white) !important;
+        }
+
+        .kelas-builder-page .table tbody tr:hover td {
+            background: var(--page-soft) !important;
         }
 
         .kelas-builder-page .table tbody td {
+            padding: 12px 14px !important;
+            color: var(--page-text) !important;
+            background: var(--page-white);
             border-top: 0 !important;
-            border-bottom: 0 !important;
-            color: #334155 !important;
+            border-bottom: 1px solid #eef2f7 !important;
             vertical-align: middle !important;
-            padding-top: 14px !important;
-            padding-bottom: 14px !important;
+        }
+
+        .kelas-builder-page .table tbody tr:last-child td {
+            border-bottom: 0 !important;
+        }
+
+        /* DataTables */
+        .kelas-builder-page .dataTables_wrapper {
+            padding: 16px;
+            color: var(--page-text);
+        }
+
+        .kelas-builder-page .dataTables_wrapper .dataTables_length,
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter,
+        .kelas-builder-page .dataTables_wrapper .dataTables_info,
+        .kelas-builder-page .dataTables_wrapper .dataTables_paginate {
+            color: var(--page-muted) !important;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .dataTables_length label,
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .kelas-builder-page .dataTables_wrapper .dataTables_length select,
         .kelas-builder-page .dataTables_wrapper .dataTables_filter input,
         .kelas-builder-page .form-control,
         .kelas-builder-page .form-select {
-            min-height: 40px;
-            border: 1px solid rgba(148, 163, 184, .18) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74) !important;
+            min-height: 38px;
+            padding: 7px 10px !important;
+            color: var(--page-text) !important;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 13px;
+            font-weight: 600;
         }
 
-        .kelas-builder-page .dataTables_wrapper .dataTables_info,
-        .kelas-builder-page .dataTables_wrapper .dataTables_length,
-        .kelas-builder-page .dataTables_wrapper .dataTables_filter,
-        .kelas-builder-page .dataTables_wrapper .dataTables_paginate {
-            color: var(--muted) !important;
+        .kelas-builder-page .dataTables_wrapper .dataTables_length select:focus,
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter input:focus,
+        .kelas-builder-page .form-control:focus,
+        .kelas-builder-page .form-select:focus {
+            border-color: var(--page-primary) !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .pagination {
+            gap: 4px;
+            margin-bottom: 0;
+            justify-content: flex-end;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .page-link,
+        .kelas-builder-page .paginate_button {
+            min-width: 34px;
+            height: 34px;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            color: var(--page-muted) !important;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
             font-weight: 700;
         }
 
-        .kelas-builder-page .paginate_button,
-        .kelas-builder-page .page-link {
-            border: 0 !important;
-            border-radius: 12px !important;
-            color: #334155 !important;
-            background: var(--surface) !important;
-            box-shadow: 3px 3px 7px rgba(163, 177, 198, .18), -3px -3px 7px rgba(255, 255, 255, .62) !important;
+        .kelas-builder-page .dataTables_wrapper .page-item.active .page-link,
+        .kelas-builder-page .dataTables_wrapper .paginate_button.current {
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border-color: var(--page-primary) !important;
         }
 
+        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before,
+        table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control::before {
+            background: var(--page-primary) !important;
+            border: 0 !important;
+            box-shadow: none !important;
+        }
+
+        /* Modal create, edit, detail */
         #form_create .modal-content,
         #form_edit .modal-content,
         #form_detail .modal-content {
-            border: 0 !important;
-            border-radius: 26px !important;
-            background: #eef2f7 !important;
-            box-shadow: 12px 12px 28px rgba(15, 23, 42, .14) !important;
             overflow: hidden;
+            color: var(--page-text);
+            background: var(--page-white) !important;
+            border: 0 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
         #form_create .modal-header,
         #form_edit .modal-header,
-        #form_detail .modal-header,
-        #form_create .modal-footer,
-        #form_edit .modal-footer,
-        #form_detail .modal-footer,
+        #form_detail .modal-header {
+            padding: 16px 20px;
+            background: var(--page-white) !important;
+            border-bottom: 1px solid #eef2f7 !important;
+        }
+
         #form_create .modal-body,
         #form_edit .modal-body,
         #form_detail .modal-body {
-            border-color: rgba(148, 163, 184, .18) !important;
-            background: #eef2f7 !important;
+            padding: 22px;
+            background: var(--page-white) !important;
+        }
+
+        #form_create .modal-footer,
+        #form_edit .modal-footer,
+        #form_detail .modal-footer {
+            gap: 8px;
+            padding: 14px 20px 18px;
+            background: var(--page-white) !important;
+            border-top: 1px solid #eef2f7 !important;
         }
 
         #form_create .modal-title,
         #form_edit .modal-title,
         #form_detail .modal-title {
-            color: #1f2937 !important;
-            font-weight: 900 !important;
+            color: var(--page-text) !important;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+
+        #form_create .btn-close,
+        #form_edit .btn-close,
+        #form_detail .btn-close {
+            width: 32px;
+            height: 32px;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            opacity: .78;
         }
 
         #form_create .form-control,
@@ -419,11 +518,13 @@
         #form_edit textarea,
         #form_detail textarea {
             min-height: 42px;
-            border: 1px solid rgba(148, 163, 184, .2) !important;
-            border-radius: 15px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74) !important;
+            color: var(--page-text) !important;
+            background: var(--page-white) !important;
+            border: 1px solid var(--page-border) !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         #form_create .form-control:focus,
@@ -432,51 +533,73 @@
         #form_edit .form-select:focus,
         #form_detail .form-control:focus,
         #form_detail .form-select:focus {
-            border-color: rgba(37, 99, 235, .42) !important;
-            box-shadow: inset 4px 4px 9px rgba(163, 177, 198, .2), inset -4px -4px 9px rgba(255, 255, 255, .74), 0 0 0 3px rgba(37, 99, 235, .08) !important;
+            border-color: var(--page-primary) !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
         }
 
-        #form_create .btn,
-        #form_edit .btn,
-        #form_detail .btn {
-            min-height: 38px;
-            border: 1px solid rgba(148, 163, 184, .22) !important;
-            border-radius: 14px !important;
-            color: #334155 !important;
-            background: #eef2f7 !important;
-            font-weight: 850 !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .24) !important;
+        #form_create .modal-footer .btn-light,
+        #form_edit .modal-footer .btn-light,
+        #form_detail .modal-footer .btn-light {
+            color: #ffffff !important;
+            background: var(--page-danger) !important;
+            border: 1px solid var(--page-danger) !important;
         }
 
-        #form_create .btn-close,
-        #form_edit .btn-close,
-        #form_detail .btn-close {
-            border-radius: 13px;
-            background-color: #eef2f7;
-            opacity: 1;
-            box-shadow: 4px 4px 9px rgba(163, 177, 198, .22);
+        #form_create .modal-footer .btn-primary,
+        #form_edit .modal-footer .btn-primary,
+        #form_detail .modal-footer .btn-primary {
+            color: #ffffff !important;
+            background: var(--page-primary) !important;
+            border: 1px solid var(--page-primary) !important;
         }
 
         .modal-backdrop.show {
-            opacity: .35 !important;
+            opacity: .34 !important;
+            background: #0f172a !important;
         }
 
-        .swal2-popup {
-            border-radius: 24px !important;
-            background: #eef2f7 !important;
-            color: #1f2937 !important;
-            box-shadow: 12px 12px 28px rgba(15, 23, 42, .14) !important;
+        /* SweetAlert dibuat eksplisit agar tombol selalu terlihat */
+        .swal2-container .swal2-popup {
+            color: #111827 !important;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 12px !important;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .16) !important;
         }
 
-        .swal2-confirm,
-        .swal2-cancel {
-            border-radius: 14px !important;
-            box-shadow: 5px 5px 12px rgba(163, 177, 198, .24) !important;
+        .swal2-container .swal2-title {
+            color: #111827 !important;
+            font-weight: 800 !important;
+        }
+
+        .swal2-container .swal2-html-container {
+            color: #475569 !important;
+            font-weight: 600 !important;
+        }
+
+        .swal2-container .swal2-confirm,
+        .swal2-container .swal2-cancel {
+            min-height: 40px;
+            padding: 9px 18px !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-weight: 700 !important;
+        }
+
+        .swal2-container .swal2-confirm {
+            background: #074366 !important;
+            border: 1px solid #074366 !important;
+        }
+
+        .swal2-container .swal2-cancel {
+            background: #ef4444 !important;
+            border: 1px solid #ef4444 !important;
         }
 
         @media (max-width: 767.98px) {
             .kelas-builder-page {
-                padding: 0 18px 24px;
+                padding: 0 16px 24px;
             }
 
             .hero-top,
@@ -485,12 +608,12 @@
                 align-items: stretch;
             }
 
-            .content-body .d-flex.justify-content-between.align-items-center.mb-5 {
-                align-items: stretch !important;
-                gap: 12px;
-                flex-direction: column;
+            .hero-body,
+            .content-body {
+                padding: 16px;
             }
 
+            .content-header .btn,
             .kelas-builder-page .btn {
                 width: 100%;
             }
@@ -498,7 +621,226 @@
             .stat-item {
                 min-width: 100%;
             }
+
+            .kelas-builder-page .dataTables_wrapper .dataTables_length label,
+            .kelas-builder-page .dataTables_wrapper .dataTables_filter label {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .kelas-builder-page .dataTables_wrapper .dataTables_filter input {
+                width: 100% !important;
+                margin-left: 0 !important;
+            }
+
+            .kelas-builder-page .dataTables_wrapper .pagination {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            #form_create .modal-footer,
+            #form_edit .modal-footer,
+            #form_detail .modal-footer {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            #form_create .modal-footer .btn,
+            #form_edit .modal-footer .btn,
+            #form_detail .modal-footer .btn {
+                width: 100%;
+            }
         }
+
+        /* =========================================================
+           FINAL ADMIN-LIKE TABLE TOOLBAR
+           Excel di kiri, pencarian di kanan.
+        ========================================================= */
+        .kelas-builder-page .dataTables_wrapper::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .kelas-builder-page .dataTables_wrapper > .dt-buttons,
+        .kelas-builder-page .dataTables_wrapper .dt-buttons {
+            float: left !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+            margin-bottom: 14px !important;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter {
+            float: right !important;
+            margin-bottom: 14px !important;
+            text-align: right !important;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter label {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            flex-direction: row !important;
+            gap: 8px !important;
+            margin-bottom: 0 !important;
+            white-space: nowrap;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .dataTables_filter input {
+            width: 230px !important;
+            margin-left: 6px !important;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .buttons-excel,
+        .kelas-builder-page .dataTables_wrapper .buttons-excelHtml5,
+        .kelas-builder-page .dataTables_wrapper .dt-button.buttons-excel {
+            color: #ffffff !important;
+            background: #10b981 !important;
+            border: 1px solid #10b981 !important;
+            box-shadow: none !important;
+        }
+
+        .kelas-builder-page .dataTables_wrapper .buttons-excel:hover,
+        .kelas-builder-page .dataTables_wrapper .buttons-excelHtml5:hover,
+        .kelas-builder-page .dataTables_wrapper .dt-button.buttons-excel:hover {
+            color: #ffffff !important;
+            background: #059669 !important;
+            border-color: #059669 !important;
+        }
+
+        /* =========================================================
+           FINAL ACTION BUTTONS
+           Detail biru, edit kuning, hapus merah.
+        ========================================================= */
+        .kelas-builder-page #tujuan_table th:first-child,
+        .kelas-builder-page #tujuan_table td:first-child {
+            width: 150px !important;
+            min-width: 150px !important;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .btn,
+        .kelas-builder-page #tujuan_table td:first-child button,
+        .kelas-builder-page #tujuan_table td:first-child a {
+            width: 36px !important;
+            height: 36px !important;
+            min-width: 36px !important;
+            min-height: 36px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 3px !important;
+            padding: 0 !important;
+            color: #ffffff !important;
+            background: #3b82f6 !important;
+            border: 1px solid #3b82f6 !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
+            vertical-align: middle !important;
+            text-decoration: none !important;
+            transform: none !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .btn i,
+        .kelas-builder-page #tujuan_table td:first-child button i,
+        .kelas-builder-page #tujuan_table td:first-child a i,
+        .kelas-builder-page #tujuan_table td:first-child .bi,
+        .kelas-builder-page #tujuan_table td:first-child [class*="fa"],
+        .kelas-builder-page #tujuan_table td:first-child [class*="ki-"],
+        .kelas-builder-page #tujuan_table td:first-child svg {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+            font-size: 15px !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-detail {
+            color: #ffffff !important;
+            background: #3b82f6 !important;
+            border-color: #3b82f6 !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-edit {
+            color: #ffffff !important;
+            background: #f59e0b !important;
+            border-color: #f59e0b !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-delete {
+            color: #ffffff !important;
+            background: #ef4444 !important;
+            border-color: #ef4444 !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-detail:hover {
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-edit:hover {
+            background: #d97706 !important;
+            border-color: #d97706 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .kelas-builder-page #tujuan_table td:first-child .aksi-delete:hover {
+            background: #dc2626 !important;
+            border-color: #dc2626 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        @media (max-width: 767.98px) {
+            .kelas-builder-page .dataTables_wrapper > .dt-buttons,
+            .kelas-builder-page .dataTables_wrapper .dt-buttons,
+            .kelas-builder-page .dataTables_wrapper .dataTables_filter {
+                float: none !important;
+                width: 100% !important;
+                display: flex !important;
+                justify-content: flex-start !important;
+                margin-bottom: 10px !important;
+                text-align: left !important;
+            }
+
+            .kelas-builder-page .dataTables_wrapper .dataTables_filter label {
+                width: 100% !important;
+                display: flex !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                flex-direction: column !important;
+            }
+
+            .kelas-builder-page .dataTables_wrapper .dataTables_filter input {
+                width: 100% !important;
+                margin-left: 0 !important;
+            }
+
+            .kelas-builder-page #tujuan_table th:first-child,
+            .kelas-builder-page #tujuan_table td:first-child {
+                width: 140px !important;
+                min-width: 140px !important;
+            }
+
+            .kelas-builder-page #tujuan_table td:first-child .btn,
+            .kelas-builder-page #tujuan_table td:first-child button,
+            .kelas-builder-page #tujuan_table td:first-child a {
+                width: 34px !important;
+                height: 34px !important;
+                min-width: 34px !important;
+                min-height: 34px !important;
+                margin: 0 2px !important;
+            }
+        }
+
     </style>
 @endsection
 
@@ -721,4 +1063,179 @@
     @include('mentor.kelas.kelas_tujuan_pembelajaran.script.edit')
     @include('mentor.kelas.kelas_tujuan_pembelajaran.script.detail')
     @include('mentor.kelas.kelas_tujuan_pembelajaran.script.delete')
+
+    <script>
+        function mentorSetImportantStyle(element, property, value) {
+            if (!element || !element.style) {
+                return;
+            }
+
+            element.style.setProperty(property, value, 'important');
+        }
+
+        function warnaTombolAksiTujuanMentor() {
+            $('#tujuan_table tbody tr').each(function () {
+                const $buttons = $(this).find(
+                    'td:first-child .btn, td:first-child button, td:first-child a'
+                );
+
+                $buttons.each(function (index) {
+                    const button = this;
+                    const $btn = $(button);
+
+                    const identity = [
+                        String($btn.html() || ''),
+                        String($btn.text() || ''),
+                        String($btn.attr('title') || ''),
+                        String($btn.attr('aria-label') || ''),
+                        String($btn.attr('data-bs-target') || $btn.attr('data-target') || ''),
+                        String($btn.attr('onclick') || ''),
+                        String($btn.attr('href') || ''),
+                        String($btn.attr('class') || ''),
+                        String($btn.find('i').attr('class') || '')
+                    ].join(' ').toLowerCase();
+
+                    let actionClass = 'aksi-detail';
+                    let color = '#3b82f6';
+
+                    const isDelete =
+                        identity.includes('delete') ||
+                        identity.includes('hapus') ||
+                        identity.includes('destroy') ||
+                        identity.includes('remove') ||
+                        identity.includes('trash') ||
+                        identity.includes('danger');
+
+                    const isEdit =
+                        identity.includes('form_edit') ||
+                        identity.includes('edit') ||
+                        identity.includes('ubah') ||
+                        identity.includes('pencil') ||
+                        identity.includes('pen') ||
+                        identity.includes('warning');
+
+                    const isDetail =
+                        identity.includes('form_detail') ||
+                        identity.includes('detail') ||
+                        identity.includes('lihat') ||
+                        identity.includes('show') ||
+                        identity.includes('eye');
+
+                    if (isDelete) {
+                        actionClass = 'aksi-delete';
+                        color = '#ef4444';
+                    } else if (isEdit) {
+                        actionClass = 'aksi-edit';
+                        color = '#f59e0b';
+                    } else if (isDetail) {
+                        actionClass = 'aksi-detail';
+                        color = '#3b82f6';
+                    } else if ($buttons.length >= 3) {
+                        if (index === 1) {
+                            actionClass = 'aksi-edit';
+                            color = '#f59e0b';
+                        } else if (index === 2) {
+                            actionClass = 'aksi-delete';
+                            color = '#ef4444';
+                        }
+                    }
+
+                    $btn
+                        .removeClass(
+                            'btn-primary btn-info btn-warning btn-danger btn-success ' +
+                            'btn-secondary btn-light btn-dark aksi-detail aksi-edit aksi-delete'
+                        )
+                        .addClass(actionClass);
+
+                    mentorSetImportantStyle(button, 'width', '36px');
+                    mentorSetImportantStyle(button, 'height', '36px');
+                    mentorSetImportantStyle(button, 'min-width', '36px');
+                    mentorSetImportantStyle(button, 'min-height', '36px');
+                    mentorSetImportantStyle(button, 'padding', '0');
+                    mentorSetImportantStyle(button, 'margin', '0 3px');
+                    mentorSetImportantStyle(button, 'display', 'inline-flex');
+                    mentorSetImportantStyle(button, 'align-items', 'center');
+                    mentorSetImportantStyle(button, 'justify-content', 'center');
+                    mentorSetImportantStyle(button, 'color', '#ffffff');
+                    mentorSetImportantStyle(button, 'background', color);
+                    mentorSetImportantStyle(button, 'background-color', color);
+                    mentorSetImportantStyle(button, 'border-color', color);
+                    mentorSetImportantStyle(button, 'border-radius', '8px');
+                    mentorSetImportantStyle(button, 'box-shadow', 'none');
+
+                    $btn.find('i, .bi, [class*="fa"], [class*="ki-"], svg').each(function () {
+                        mentorSetImportantStyle(this, 'color', '#ffffff');
+                        mentorSetImportantStyle(this, 'fill', '#ffffff');
+                        mentorSetImportantStyle(this, 'font-size', '15px');
+                        mentorSetImportantStyle(this, 'margin', '0');
+                        mentorSetImportantStyle(this, 'padding', '0');
+                        mentorSetImportantStyle(this, 'line-height', '1');
+                    });
+                });
+            });
+        }
+
+        function rapikanToolbarTujuanMentor() {
+            const $wrapper = $('#tujuan_table_wrapper');
+
+            if (!$wrapper.length) {
+                return;
+            }
+
+            const $buttons = $wrapper.find('.dt-buttons');
+            const $filter = $wrapper.find('.dataTables_filter');
+
+            $buttons.css({
+                float: 'left'
+            });
+
+            $filter.css({
+                float: 'right',
+                textAlign: 'right'
+            });
+        }
+
+        $(document).ready(function () {
+            warnaTombolAksiTujuanMentor();
+            rapikanToolbarTujuanMentor();
+
+            $('#tujuan_table').on(
+                'draw.dt init.dt xhr.dt responsive-display.dt',
+                function () {
+                    warnaTombolAksiTujuanMentor();
+                    rapikanToolbarTujuanMentor();
+                }
+            );
+
+            const tableBody = document.querySelector('#tujuan_table tbody');
+
+            if (tableBody) {
+                const observer = new MutationObserver(function () {
+                    warnaTombolAksiTujuanMentor();
+                    rapikanToolbarTujuanMentor();
+                });
+
+                observer.observe(tableBody, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+
+            setTimeout(function () {
+                warnaTombolAksiTujuanMentor();
+                rapikanToolbarTujuanMentor();
+            }, 150);
+
+            setTimeout(function () {
+                warnaTombolAksiTujuanMentor();
+                rapikanToolbarTujuanMentor();
+            }, 500);
+
+            setTimeout(function () {
+                warnaTombolAksiTujuanMentor();
+                rapikanToolbarTujuanMentor();
+            }, 1000);
+        });
+    </script>
+
 @endsection

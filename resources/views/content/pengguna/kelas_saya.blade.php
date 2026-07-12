@@ -3,24 +3,28 @@
 @section('pengguna_css')
     <style>
         :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-success: #22c55e;
-            --neo-success-dark: #16a34a;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
+            --class-primary: #009ef7;
+            --class-primary-dark: #008bd8;
+            --class-primary-soft: #eaf6ff;
+            --class-success: #22c55e;
+            --class-success-dark: #16a34a;
+            --class-success-soft: #ecfdf5;
+            --class-warning: #f59e0b;
+            --class-warning-dark: #d97706;
+            --class-warning-soft: #fffbeb;
+            --class-danger: #ef4444;
+            --class-danger-soft: #fef2f2;
+            --class-bg: #f8fafc;
+            --class-surface: #ffffff;
+            --class-soft: #f1f5f9;
+            --class-border: #e5e7eb;
+            --class-text: #111827;
+            --class-muted: #64748b;
         }
 
         .neo-myclass-page {
             width: 100%;
-            color: var(--neo-text);
+            color: var(--class-text);
         }
 
         .neo-myclass-header {
@@ -32,70 +36,48 @@
         }
 
         .neo-myclass-title {
-            color: var(--neo-text);
+            color: var(--class-text);
             font-weight: 900;
             letter-spacing: -.035em;
             margin-bottom: 7px;
         }
 
         .neo-myclass-subtitle {
-            color: var(--neo-muted);
-            font-weight: 700;
+            color: var(--class-muted);
+            font-weight: 600;
             line-height: 1.65;
             margin-bottom: 0;
             max-width: 680px;
         }
 
         .neo-myclass-badge {
-            min-height: 42px;
+            min-height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 0 16px;
+            padding: 0 15px;
             border-radius: 999px;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
+            color: var(--class-primary);
+            background: var(--class-primary-soft);
+            border: 1px solid rgba(0, 158, 247, 0.14);
             font-weight: 900;
             white-space: nowrap;
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light);
         }
 
         .neo-empty-card {
-            border: 0;
-            border-radius: 30px;
-            background: var(--neo-surface);
-            box-shadow:
-                12px 12px 28px var(--neo-dark),
-                -12px -12px 28px var(--neo-light);
+            border: 1px solid var(--class-border);
+            border-radius: 22px;
+            background: var(--class-surface);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
             position: relative;
             overflow: hidden;
         }
 
-        .neo-empty-card::before {
-            content: "";
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            right: -220px;
-            top: -230px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(0, 158, 247, .16), transparent 68%);
-            pointer-events: none;
-        }
-
+        .neo-empty-card::before,
         .neo-empty-card::after {
-            content: "";
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            left: -180px;
-            bottom: -190px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 255, 255, .78), transparent 64%);
-            pointer-events: none;
+            display: none !important;
+            content: none !important;
         }
 
         .neo-empty-inner {
@@ -106,33 +88,31 @@
         }
 
         .neo-empty-icon {
-            width: 84px;
-            height: 84px;
+            width: 78px;
+            height: 78px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 26px;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light);
+            border-radius: 22px;
+            color: var(--class-primary);
+            background: var(--class-primary-soft);
+            border: 1px solid rgba(0, 158, 247, 0.14);
             margin-bottom: 24px;
         }
 
         .neo-empty-icon i {
-            font-size: 38px;
+            font-size: 34px;
         }
 
         .neo-empty-title {
-            color: var(--neo-text);
+            color: var(--class-text);
             font-weight: 900;
             margin-bottom: 10px;
         }
 
         .neo-empty-desc {
-            color: var(--neo-muted);
-            font-weight: 700;
+            color: var(--class-muted);
+            font-weight: 600;
             line-height: 1.7;
             max-width: 560px;
             margin: 0 auto 24px;
@@ -146,23 +126,20 @@
 
         .neo-course-card {
             height: 100%;
-            border: 0;
-            border-radius: 28px;
-            background: var(--neo-surface);
-            box-shadow:
-                9px 9px 22px var(--neo-dark),
-                -9px -9px 22px var(--neo-light);
+            border: 1px solid var(--class-border);
+            border-radius: 22px;
+            background: var(--class-surface);
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.055);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: .22s ease;
+            transition: .18s ease;
         }
 
         .neo-course-card:hover {
             transform: translateY(-3px);
-            box-shadow:
-                12px 12px 28px rgba(120, 113, 108, .26),
-                -12px -12px 28px rgba(255, 255, 255, .9);
+            box-shadow: 0 20px 46px rgba(15, 23, 42, 0.08);
+            border-color: rgba(0, 158, 247, 0.18);
         }
 
         .neo-course-image-wrap {
@@ -173,12 +150,10 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            border-radius: 22px;
+            border-radius: 18px;
             overflow: hidden;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            background: var(--class-bg);
+            border: 1px solid var(--class-border);
         }
 
         .neo-course-image {
@@ -198,20 +173,20 @@
             justify-content: center;
             padding: 0 10px;
             border-radius: 999px;
-            color: var(--neo-primary);
-            background: rgba(236, 235, 234, .94);
+            color: var(--class-primary);
+            background: rgba(255, 255, 255, .94);
             backdrop-filter: blur(8px);
             font-size: 10px;
             font-weight: 900;
             letter-spacing: .04em;
             text-transform: uppercase;
-            box-shadow:
-                4px 4px 10px rgba(0, 0, 0, .12),
-                -4px -4px 10px rgba(255, 255, 255, .52);
+            border: 1px solid rgba(255, 255, 255, .65);
         }
 
         .neo-status-badge.is-finished {
-            color: var(--neo-success-dark);
+            color: var(--class-success-dark);
+            background: rgba(236, 253, 245, .94);
+            border-color: rgba(34, 197, 94, .20);
         }
 
         .neo-course-body {
@@ -227,7 +202,7 @@
         }
 
         .neo-course-title a {
-            color: var(--neo-text);
+            color: var(--class-text);
             font-size: 15px;
             font-weight: 900;
             line-height: 1.45;
@@ -235,11 +210,12 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            transition: .2s ease;
+            transition: .18s ease;
+            text-decoration: none;
         }
 
         .neo-course-title a:hover {
-            color: var(--neo-primary);
+            color: var(--class-primary);
         }
 
         .neo-progress-info {
@@ -251,46 +227,41 @@
         }
 
         .neo-progress-label {
-            color: var(--neo-muted);
+            color: var(--class-muted);
             font-size: 12px;
             font-weight: 900;
         }
 
         .neo-progress-value {
-            color: var(--neo-text);
+            color: var(--class-text);
             font-size: 12px;
             font-weight: 900;
         }
 
         .neo-progress-track {
-            height: 12px;
+            height: 10px;
             border-radius: 999px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light);
+            background: var(--class-soft);
             overflow: hidden;
-            padding: 3px;
         }
 
         .neo-progress-bar {
             height: 100%;
             border-radius: 999px;
-            background: linear-gradient(90deg, var(--neo-primary), #38bdf8);
-            box-shadow: 0 0 10px rgba(0, 158, 247, .35);
+            background: var(--class-primary);
         }
 
         .neo-course-date {
             min-height: 42px;
-            color: var(--neo-muted);
+            color: var(--class-muted);
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 600;
             line-height: 1.6;
             margin: 16px 0 18px;
         }
 
         .neo-course-date strong {
-            color: var(--neo-text);
+            color: var(--class-text);
             font-weight: 900;
         }
 
@@ -300,114 +271,114 @@
 
         .neo-btn-course {
             width: 100%;
-            min-height: 46px;
+            min-height: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             border: 0;
-            border-radius: 17px;
+            border-radius: 14px;
             padding: 0 16px;
             font-size: 13px;
             font-weight: 900;
-            transition: .22s ease;
+            transition: .18s ease;
+            text-decoration: none;
         }
 
         .neo-btn-primary {
             color: #ffffff;
-            background: var(--neo-primary);
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, .26),
-                -6px -6px 14px rgba(255, 255, 255, .72);
+            background: var(--class-primary);
+            box-shadow: 0 12px 26px rgba(0, 158, 247, 0.20);
         }
 
         .neo-btn-primary:hover {
             color: #ffffff;
-            background: var(--neo-primary-dark);
+            background: var(--class-primary-dark);
             transform: translateY(-1px);
         }
 
         .neo-btn-success {
             color: #ffffff;
-            background: var(--neo-success);
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, .26),
-                -6px -6px 14px rgba(255, 255, 255, .72);
+            background: var(--class-success);
+            box-shadow: 0 12px 26px rgba(34, 197, 94, 0.18);
         }
 
         .neo-btn-success:hover {
             color: #ffffff;
-            background: var(--neo-success-dark);
+            background: var(--class-success-dark);
             transform: translateY(-1px);
         }
 
         .neo-btn-soft {
-            min-height: 48px;
+            min-height: 46px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             padding: 0 20px;
-            border: 0;
-            border-radius: 17px;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
+            border: 1px solid var(--class-border);
+            border-radius: 14px;
+            color: var(--class-primary);
+            background: #ffffff;
             font-weight: 900;
-            box-shadow:
-                7px 7px 16px var(--neo-dark-soft),
-                -7px -7px 16px var(--neo-light);
-            transition: .22s ease;
+            transition: .18s ease;
+            text-decoration: none;
         }
 
         .neo-btn-soft:hover {
-            color: var(--neo-primary-dark);
+            color: var(--class-primary-dark);
+            background: var(--class-primary-soft);
+            border-color: rgba(0, 158, 247, 0.24);
             transform: translateY(-1px);
         }
 
         .neo-alert {
-            border: 0;
-            border-radius: 22px;
+            border: 1px solid var(--class-border);
+            border-radius: 16px;
             padding: 14px 16px;
             margin-bottom: 18px;
             font-weight: 800;
             line-height: 1.6;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            background: #ffffff;
         }
 
         .neo-alert-success {
-            color: var(--neo-success-dark);
+            color: var(--class-success-dark);
+            background: var(--class-success-soft);
+            border-color: rgba(34, 197, 94, 0.18);
         }
 
         .neo-alert-danger {
             color: #dc2626;
+            background: var(--class-danger-soft);
+            border-color: rgba(239, 68, 68, 0.18);
         }
 
         .neo-rating-box {
             padding: 14px;
-            border-radius: 20px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
+            border-radius: 18px;
+            background: var(--class-bg);
+            border: 1px solid var(--class-border);
         }
 
         .neo-rating-title {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--neo-text);
+            color: var(--class-text);
             font-size: 13px;
             font-weight: 900;
             margin-bottom: 6px;
         }
 
+        .neo-rating-title i {
+            color: var(--class-warning);
+        }
+
         .neo-rating-help {
-            color: var(--neo-muted);
+            color: var(--class-muted);
             font-size: 11.5px;
-            font-weight: 700;
+            font-weight: 600;
             line-height: 1.55;
             margin-bottom: 12px;
         }
@@ -426,20 +397,18 @@
         }
 
         .neo-rating-stars label {
-            min-height: 38px;
+            min-height: 36px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
-            border-radius: 14px;
+            border-radius: 12px;
             color: #a16207;
-            background: var(--neo-surface);
+            background: #ffffff;
+            border: 1px solid rgba(245, 158, 11, 0.18);
             font-size: 12px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow:
-                5px 5px 11px var(--neo-dark-soft),
-                -5px -5px 11px var(--neo-light);
             transition: .18s ease;
         }
 
@@ -450,28 +419,29 @@
         .neo-rating-stars input:checked + label,
         .neo-rating-stars label:hover {
             color: #ffffff;
-            background: #f59e0b;
-            box-shadow:
-                inset 3px 3px 7px rgba(120, 70, 0, .24),
-                inset -3px -3px 7px rgba(255, 255, 255, .22);
+            background: var(--class-warning);
+            border-color: var(--class-warning);
         }
 
         .neo-rating-textarea {
             width: 100%;
             min-height: 72px;
             resize: vertical;
-            border: 0;
+            border: 1px solid var(--class-border);
             outline: none;
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 12px 14px;
-            color: var(--neo-text);
-            background: var(--neo-surface);
+            color: var(--class-text);
+            background: #ffffff;
             font-size: 12px;
             font-weight: 700;
             line-height: 1.6;
-            box-shadow:
-                inset 4px 4px 10px var(--neo-inset-dark),
-                inset -4px -4px 10px var(--neo-inset-light);
+            transition: .18s ease;
+        }
+
+        .neo-rating-textarea:focus {
+            border-color: rgba(245, 158, 11, 0.45);
+            box-shadow: 0 0 0 .2rem rgba(245, 158, 11, 0.10);
         }
 
         .neo-rating-textarea::placeholder {
@@ -481,15 +451,13 @@
         .neo-btn-rating {
             margin-top: 10px;
             color: #ffffff;
-            background: #f59e0b;
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, .26),
-                -6px -6px 14px rgba(255, 255, 255, .72);
+            background: var(--class-warning);
+            box-shadow: 0 12px 26px rgba(245, 158, 11, 0.18);
         }
 
         .neo-btn-rating:hover {
             color: #ffffff;
-            background: #d97706;
+            background: var(--class-warning-dark);
             transform: translateY(-1px);
         }
 
@@ -501,14 +469,12 @@
             margin-bottom: 10px;
             min-height: 38px;
             padding: 0 12px;
-            border-radius: 15px;
+            border-radius: 14px;
             color: #a16207;
-            background: var(--neo-surface);
+            background: var(--class-warning-soft);
+            border: 1px solid rgba(245, 158, 11, 0.18);
             font-size: 12px;
             font-weight: 900;
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light);
         }
 
         @media (max-width: 1199.98px) {
@@ -552,11 +518,11 @@
             }
 
             .neo-course-card {
-                border-radius: 24px;
+                border-radius: 20px;
             }
 
             .neo-course-image-box {
-                border-radius: 20px;
+                border-radius: 16px;
             }
 
             .neo-course-body {
@@ -568,7 +534,7 @@
             }
 
             .neo-empty-card {
-                border-radius: 24px;
+                border-radius: 20px;
             }
 
             .neo-empty-inner {

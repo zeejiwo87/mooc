@@ -1,209 +1,119 @@
 <style>
     :root {
-        --neo-dark-bg: #111827;
-        --neo-dark-surface: #151f32;
-        --neo-dark-surface-soft: #1b2740;
-        --neo-dark-border: rgba(255, 255, 255, 0.06);
-        --neo-dark-text: #e5e7eb;
-        --neo-dark-muted: #9ca3af;
-        --neo-dark-primary: #009ef7;
-        --neo-dark-primary-2: #3b82f6;
-        --neo-dark-shadow-dark: rgba(0, 0, 0, 0.45);
-        --neo-dark-shadow-light: rgba(255, 255, 255, 0.055);
-        --neo-dark-inset-dark: rgba(0, 0, 0, 0.42);
-        --neo-dark-inset-light: rgba(255, 255, 255, 0.05);
+        --admin-menu-bg: #0f172a;
+        --admin-menu-bg-2: #111827;
+        --admin-menu-surface-hover: #1e293b;
+        --admin-menu-active: #034870;
+        --admin-menu-text: #e5e7eb;
+        --admin-menu-muted: #94a3b8;
+        --admin-menu-border: rgba(255, 255, 255, .08);
+        --admin-menu-icon-bg: rgba(0, 158, 247, .16);
     }
 
     #kt_aside.aside {
-        background:
-            radial-gradient(circle at top left, rgba(0, 158, 247, 0.12), transparent 34%),
-            radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.08), transparent 32%),
-            linear-gradient(145deg, #121a2b, #0d1320) !important;
-        border-right: 1px solid var(--neo-dark-border);
-        box-shadow:
-            14px 0 35px rgba(0, 0, 0, 0.28),
-            inset -1px 0 0 rgba(255, 255, 255, 0.04) !important;
+        background: linear-gradient(180deg, var(--admin-menu-bg), var(--admin-menu-bg-2)) !important;
+        border-right: 1px solid var(--admin-menu-border) !important;
+        box-shadow: 8px 0 24px rgba(15, 23, 42, .35) !important;
     }
 
     #kt_aside_logo {
-        min-height: 74px;
-        padding: 14px 16px !important;
+        min-height: 72px;
+        padding: 14px 18px !important;
         background: transparent !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+        border-bottom: 1px solid var(--admin-menu-border) !important;
     }
 
     #kt_aside_logo p {
         width: 100%;
         margin: 0 !important;
-        padding: 14px 16px !important;
-        color: var(--neo-dark-text) !important;
-        line-height: 1.25;
+        padding: 12px 14px !important;
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid var(--admin-menu-border);
+        border-radius: 12px;
+        font-weight: 800 !important;
+        line-height: 1.35;
         text-align: center;
-        border-radius: 20px;
-        background: linear-gradient(145deg, #172238, #101827);
-        box-shadow:
-            7px 7px 16px var(--neo-dark-shadow-dark),
-            -7px -7px 16px var(--neo-dark-shadow-light),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.035);
     }
 
     #kt_aside .aside-menu {
         background: transparent !important;
     }
 
-    .neo-mentor-sidebar-wrapper {
+    .mentor-sidebar-simple {
         padding: 0 14px 18px;
     }
 
-    .neo-mentor-sidebar-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 26px;
-        padding: 14px;
-        background: linear-gradient(145deg, #151f32, #0f1726);
-        box-shadow:
-            inset 5px 5px 13px var(--neo-dark-inset-dark),
-            inset -5px -5px 13px var(--neo-dark-inset-light),
-            8px 8px 20px rgba(0, 0, 0, 0.20);
+    .mentor-simple-menu.menu {
+        width: 100%;
     }
 
-    .neo-mentor-sidebar-card::before {
-        content: "";
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        right: -78px;
-        top: -78px;
-        border-radius: 50%;
-        background: rgba(0, 158, 247, 0.11);
-        pointer-events: none;
-    }
-
-    .neo-mentor-sidebar-card::after {
-        content: "";
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        left: -70px;
-        bottom: -70px;
-        border-radius: 50%;
-        background: rgba(59, 130, 246, 0.075);
-        pointer-events: none;
-    }
-
-    .neo-mentor-menu.menu {
-        position: relative;
-        z-index: 1;
-    }
-
-    .neo-mentor-menu .menu-item {
+    .mentor-simple-menu .menu-item {
         margin: 0;
     }
 
-    .neo-menu-section-label {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 14px 4px 8px;
-        color: var(--neo-dark-muted);
-        font-size: 10px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+    .mentor-simple-menu .menu-link {
+        min-height: 46px;
+        margin: 4px 0;
+        padding: 10px 12px !important;
+        border-radius: 12px;
+        color: var(--admin-menu-text) !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        box-shadow: none !important;
+        transition: background .18s ease, border-color .18s ease, color .18s ease;
     }
 
-    .neo-menu-section-label:first-child {
-        margin-top: 2px;
-    }
-
-    .neo-menu-section-label::after {
-        content: "";
-        height: 1px;
-        flex: 1;
-        background: rgba(255, 255, 255, 0.07);
-    }
-
-    .neo-mentor-menu .menu-link {
-        position: relative;
-        min-height: 48px;
-        margin: 7px 0;
-        padding: 11px 13px !important;
-        border-radius: 17px;
-        color: var(--neo-dark-text) !important;
-        background: transparent;
-        border: 1px solid transparent;
-        transition:
-            transform 0.18s ease,
-            box-shadow 0.18s ease,
-            background 0.18s ease,
-            border-color 0.18s ease,
-            color 0.18s ease;
-    }
-
-    .neo-mentor-menu .menu-link:hover {
-        transform: translateY(-1px);
+    .mentor-simple-menu .menu-link:hover {
         color: #ffffff !important;
-        background: linear-gradient(145deg, #18243a, #111a2b);
-        border-color: rgba(255, 255, 255, 0.055);
-        box-shadow:
-            6px 6px 14px var(--neo-dark-shadow-dark),
-            -6px -6px 14px var(--neo-dark-shadow-light);
+        background: var(--admin-menu-surface-hover) !important;
+        border-color: var(--admin-menu-border) !important;
     }
 
-    .neo-mentor-menu .menu-link.active,
-    .neo-mentor-menu .menu-item.here > .menu-link,
-    .neo-mentor-menu .menu-item.show > .menu-link {
+    .mentor-simple-menu .menu-link.active,
+    .mentor-simple-menu .menu-item.here > .menu-link,
+    .mentor-simple-menu .menu-item.show > .menu-link {
         color: #ffffff !important;
-        background: linear-gradient(135deg, var(--neo-dark-primary), var(--neo-dark-primary-2)) !important;
-        border-color: rgba(255, 255, 255, 0.10);
-        box-shadow:
-            8px 8px 18px rgba(0, 0, 0, 0.38),
-            -5px -5px 14px rgba(255, 255, 255, 0.055),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.18);
+        background: var(--admin-menu-active) !important;
+        border-color: rgba(255, 255, 255, .16) !important;
+        box-shadow: 0 10px 24px rgba(0, 158, 247, .22) !important;
     }
 
-    .neo-mentor-menu .menu-title {
+    .mentor-simple-menu .menu-title {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: .65rem;
         color: inherit !important;
         font-size: 13px;
         font-weight: 800;
-        letter-spacing: 0.01em;
+        line-height: 1.2;
     }
 
-    .neo-menu-icon {
-        width: 34px;
-        height: 34px;
-        min-width: 34px;
-        display: inline-flex;
+    .mentor-simple-menu .menu-title i {
+        width: 28px;
+        min-width: 28px;
+        height: 28px;
+        display: inline-flex !important;
         align-items: center;
         justify-content: center;
-        border-radius: 13px;
-        color: var(--neo-dark-primary);
-        background: linear-gradient(145deg, #18243a, #101827);
-        box-shadow:
-            4px 4px 10px rgba(0, 0, 0, 0.38),
-            -4px -4px 10px rgba(255, 255, 255, 0.045),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.035);
-        transition: 0.18s ease;
+        border-radius: 9px;
+        background: var(--admin-menu-icon-bg);
+        color: #38bdf8 !important;
+        font-size: 1.15rem !important;
+        line-height: 1 !important;
+        opacity: 1 !important;
     }
 
-    .neo-mentor-menu .menu-link:hover .neo-menu-icon {
-        color: #ffffff;
-        background: linear-gradient(145deg, #1d2b46, #121b2d);
+    .mentor-simple-menu .menu-link:hover .menu-title i {
+        background: rgba(255, 255, 255, .10);
+        color: #ffffff !important;
     }
 
-    .neo-mentor-menu .menu-link.active .neo-menu-icon,
-    .neo-mentor-menu .menu-item.here > .menu-link .neo-menu-icon,
-    .neo-mentor-menu .menu-item.show > .menu-link .neo-menu-icon {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.17);
-        box-shadow:
-            inset 2px 2px 5px rgba(0, 0, 0, 0.18),
-            inset -2px -2px 5px rgba(255, 255, 255, 0.14);
+    .mentor-simple-menu .menu-link.active .menu-title i,
+    .mentor-simple-menu .menu-item.here > .menu-link .menu-title i,
+    .mentor-simple-menu .menu-item.show > .menu-link .menu-title i {
+        background: rgba(255, 255, 255, .20);
+        color: #ffffff !important;
     }
 
     .hover-scroll-overlay-y::-webkit-scrollbar {
@@ -212,7 +122,7 @@
 
     .hover-scroll-overlay-y::-webkit-scrollbar-thumb {
         border-radius: 999px;
-        background: rgba(0, 158, 247, 0.38);
+        background: rgba(0, 158, 247, .48);
     }
 
     .hover-scroll-overlay-y::-webkit-scrollbar-track {
@@ -223,48 +133,40 @@
         #kt_aside.aside {
             width: 280px !important;
             max-width: 86vw;
-            border-radius: 0 28px 28px 0;
         }
 
-        .neo-mentor-sidebar-wrapper {
+        .mentor-sidebar-simple {
             padding: 0 12px 16px;
         }
 
-        .neo-mentor-sidebar-card {
-            border-radius: 24px;
-        }
-
-        .neo-mentor-menu .menu-link {
-            min-height: 50px;
+        .mentor-simple-menu .menu-link {
+            min-height: 46px;
         }
     }
 
     @media (max-width: 575.98px) {
         #kt_aside_logo {
-            min-height: 68px;
+            min-height: 66px;
             padding: 12px !important;
         }
 
         #kt_aside_logo p {
             font-size: 13px !important;
-            border-radius: 18px;
-            padding: 12px !important;
         }
 
-        .neo-mentor-menu .menu-title {
+        .mentor-simple-menu .menu-title {
             font-size: 12px;
         }
 
-        .neo-menu-icon {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            border-radius: 12px;
+        .mentor-simple-menu .menu-title i {
+            width: 26px;
+            min-width: 26px;
+            height: 26px;
+            font-size: 1.05rem !important;
         }
 
-        .neo-mentor-menu .menu-link {
-            padding: 10px 11px !important;
-            border-radius: 16px;
+        .mentor-simple-menu .menu-link {
+            padding: 9px 10px !important;
         }
     }
 </style>
@@ -278,113 +180,79 @@
      data-kt-scroll-wrappers="#kt_aside_menu"
      data-kt-scroll-offset="0">
 
-    <div class="neo-mentor-sidebar-wrapper">
-        <div class="neo-mentor-sidebar-card">
+    <div class="mentor-sidebar-simple">
+        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 mentor-simple-menu"
+             id="kt_aside_menu"
+             data-kt-menu="true">
 
-            <div class="menu menu-column neo-mentor-menu"
-                 id="kt_aside_menu"
-                 data-kt-menu="true">
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
+                   href="{{ route('index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-grid-fill fs-3 me-2"></i>
+                        Dashboard
+                    </span>
+                </a>
+            </div>
 
-                <div class="neo-menu-section-label">
-                    <span>Utama</span>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.kelas.tag.*') ? 'active' : '' }}"
+                   href="{{ route('mentor.kelas.tag.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-tags-fill fs-3 me-2"></i>
+                        Tag
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
-                       href="{{ route('index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-grid-fill fs-4"></i>
-                            </span>
-                            Dashboard
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori.*') ? 'active' : '' }}"
+                   href="{{ route('mentor.kelas.kategori.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-folder-fill fs-3 me-2"></i>
+                        Kategori
+                    </span>
+                </a>
+            </div>
 
-                <div class="neo-menu-section-label">
-                    <span>Master Kelas</span>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori_sub.*') ? 'active' : '' }}"
+                   href="{{ route('mentor.kelas.kategori_sub.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-diagram-3-fill fs-3 me-2"></i>
+                        Kategori Sub
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.kelas.tag.*') ? 'active' : '' }}"
-                       href="{{ route('mentor.kelas.tag.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-tags-fill fs-4"></i>
-                            </span>
-                            Tag
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.kelas.kelas.*') ? 'active' : '' }}"
+                   href="{{ route('mentor.kelas.kelas.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-easel-fill fs-3 me-2"></i>
+                        Kelas
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori.*') ? 'active' : '' }}"
-                       href="{{ route('mentor.kelas.kategori.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-folder-fill fs-4"></i>
-                            </span>
-                            Kategori
-                        </span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.kelas.pendaftaran.*') ? 'active' : '' }}"
+                   href="{{ route('mentor.kelas.pendaftaran.index') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-person-plus-fill fs-3 me-2"></i>
+                        Pendaftaran
+                    </span>
+                </a>
+            </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori_sub.*') ? 'active' : '' }}"
-                       href="{{ route('mentor.kelas.kategori_sub.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-diagram-3-fill fs-4"></i>
-                            </span>
-                            Kategori Sub
-                        </span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.kelas.kelas.*') ? 'active' : '' }}"
-                       href="{{ route('mentor.kelas.kelas.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-easel-fill fs-4"></i>
-                            </span>
-                            Kelas
-                        </span>
-                    </a>
-                </div>
-
-                <div class="neo-menu-section-label">
-                    <span>Aktivitas</span>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.kelas.pendaftaran.*') ? 'active' : '' }}"
-                       href="{{ route('mentor.kelas.pendaftaran.index') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-person-plus-fill fs-4"></i>
-                            </span>
-                            Pendaftaran
-                        </span>
-                    </a>
-                </div>
-
-                <div class="neo-menu-section-label">
-                    <span>Akun</span>
-                </div>
-
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('mentor.profile') ? 'active' : '' }}"
-                       href="{{ route('mentor.profile') }}">
-                        <span class="menu-title">
-                            <span class="neo-menu-icon">
-                                <i class="bi bi-person-circle fs-4"></i>
-                            </span>
-                            Profile
-                        </span>
-                    </a>
-                </div>
-
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('mentor.profile') ? 'active' : '' }}"
+                   href="{{ route('mentor.profile') }}">
+                    <span class="menu-title">
+                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                        Profile
+                    </span>
+                </a>
             </div>
 
         </div>

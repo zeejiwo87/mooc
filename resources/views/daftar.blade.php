@@ -13,947 +13,896 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/plugins.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.bundle.css') }}">
 
-    <style>
-        :root {
-            --neo-bg: #e7e5e4;
-            --neo-surface: #ecebea;
-            --neo-primary: #009ef7;
-            --neo-primary-dark: #0085d1;
-            --neo-text: #1f2937;
-            --neo-muted: #6b7280;
-            --neo-light: rgba(255, 255, 255, 0.92);
-            --neo-dark: rgba(120, 113, 108, 0.22);
-            --neo-dark-soft: rgba(120, 113, 108, 0.14);
-            --neo-inset-dark: rgba(120, 113, 108, 0.16);
-            --neo-inset-light: rgba(255, 255, 255, 0.78);
-        }
+   <style>
+    :root {
+        --auth-primary: #009ef7;
+        --auth-primary-dark: #008bd8;
+        --auth-primary-soft: #eaf6ff;
+        --auth-bg: #f8fafc;
+        --auth-surface: #ffffff;
+        --auth-border: #e5e7eb;
+        --auth-text: #111827;
+        --auth-muted: #64748b;
+    }
 
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        background: var(--auth-bg) !important;
+        overflow-x: hidden;
+    }
+
+    @media (min-width: 992px) {
         html,
         body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-            background: var(--neo-bg) !important;
-            overflow-x: hidden;
+            overflow-y: auto;
         }
+    }
 
-        @media (min-width: 992px) {
-            html,
-            body {
-                min-height: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-        }
+    body#kt_body {
+        min-height: 100vh;
+        background: var(--auth-bg) !important;
+        color: var(--auth-text);
+    }
 
-        body#kt_body {
+    a {
+        text-decoration: none;
+    }
+
+    .neo-auth-page {
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at 0% 0%, rgba(0, 158, 247, 0.08), transparent 34%),
+            radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.07), transparent 36%),
+            var(--auth-bg);
+        padding: 0;
+    }
+
+    .neo-auth-shell {
+        width: 100%;
+        min-height: 100vh;
+        background: transparent;
+        overflow: hidden;
+    }
+
+    .neo-back-floating {
+        position: fixed;
+        top: 22px;
+        left: 24px;
+        z-index: 100;
+    }
+
+    .neo-back-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        color: var(--auth-text);
+        font-weight: 700;
+        background: #ffffff;
+        border: 1px solid var(--auth-border);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+        transition: .18s ease;
+    }
+
+    .neo-back-link:hover {
+        color: var(--auth-primary);
+        border-color: rgba(0, 158, 247, 0.28);
+        transform: translateY(-1px);
+    }
+
+    .neo-hero-panel,
+    .neo-form-panel {
+        min-height: 100vh;
+    }
+
+    /* LEFT HERO */
+    .neo-hero-panel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background:
+            linear-gradient(135deg, #ffffff 0%, #f2f9ff 100%);
+        overflow: hidden;
+    }
+
+    .neo-hero-panel::before {
+        content: "";
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        right: -120px;
+        top: -120px;
+        border-radius: 50%;
+        background: rgba(0, 158, 247, 0.10);
+        pointer-events: none;
+    }
+
+    .neo-hero-panel::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        left: -120px;
+        bottom: -120px;
+        border-radius: 50%;
+        background: rgba(0, 158, 247, 0.08);
+        pointer-events: none;
+    }
+
+    .neo-hero-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .neo-brand-box {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .neo-logo-box {
+        width: 68px;
+        height: 68px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 1px solid var(--auth-border);
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .neo-logo-box img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .neo-brand-title {
+        color: var(--auth-text);
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 4px;
+    }
+
+    .neo-brand-subtitle {
+        color: var(--auth-muted);
+        font-weight: 600;
+    }
+
+    .neo-title {
+        color: var(--auth-text);
+        letter-spacing: -0.035em;
+        line-height: 1.12;
+    }
+
+    .neo-title .text-primary,
+    .text-primary {
+        color: var(--auth-primary) !important;
+    }
+
+    .neo-desc {
+        color: var(--auth-muted);
+        max-width: 620px;
+        line-height: 1.8;
+    }
+
+    .neo-feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        max-width: 680px;
+    }
+
+    .neo-feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px;
+        border-radius: 18px;
+        background: #ffffff;
+        border: 1px solid var(--auth-border);
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.045);
+        transition: .18s ease;
+    }
+
+    .neo-feature-item:hover {
+        transform: translateY(-3px);
+        border-color: rgba(0, 158, 247, 0.25);
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.07);
+    }
+
+    .neo-feature-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--auth-primary);
+        background: var(--auth-primary-soft);
+        flex-shrink: 0;
+    }
+
+    .neo-feature-icon i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .neo-feature-title {
+        color: var(--auth-text);
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .neo-feature-desc {
+        color: var(--auth-muted);
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    /* RIGHT FORM */
+    .neo-form-panel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--auth-bg);
+    }
+
+    .neo-form-inner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .neo-register-card {
+        width: 100%;
+        max-width: 620px;
+        margin: 0 auto;
+        border-radius: 26px;
+        padding: 34px;
+        background: #ffffff;
+        border: 1px solid var(--auth-border);
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+    }
+
+    .neo-register-title {
+        color: var(--auth-text);
+        letter-spacing: -0.03em;
+    }
+
+    .neo-register-subtitle {
+        color: var(--auth-muted);
+    }
+
+    .neo-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .neo-form-full {
+        grid-column: 1 / -1;
+    }
+
+    .form-label {
+        color: var(--auth-text) !important;
+        margin-bottom: .55rem;
+    }
+
+    .neo-input-group {
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid var(--auth-border);
+        overflow: hidden;
+        transition: .18s ease;
+    }
+
+    .neo-input-group:focus-within {
+        border-color: rgba(0, 158, 247, 0.45);
+        box-shadow: 0 0 0 .2rem rgba(0, 158, 247, 0.10);
+    }
+
+    .neo-input-group .input-group-text {
+        border: 0 !important;
+        background: transparent !important;
+        color: var(--auth-primary);
+        padding-left: 16px;
+        padding-right: 8px;
+    }
+
+    .neo-input-group .form-control {
+        border: 0 !important;
+        background: transparent !important;
+        color: var(--auth-text);
+        box-shadow: none !important;
+        min-height: 48px;
+        font-weight: 600;
+    }
+
+    .neo-input-group .form-control::placeholder {
+        color: #94a3b8;
+        font-weight: 500;
+    }
+
+    .neo-input-group .form-control:focus {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .neo-input-group .cursor-pointer {
+        color: var(--auth-muted);
+        padding-right: 16px;
+    }
+
+    .form-check-input {
+        border: 1px solid var(--auth-border) !important;
+        background-color: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--auth-primary) !important;
+        border-color: var(--auth-primary) !important;
+    }
+
+    .link-primary {
+        color: var(--auth-primary) !important;
+    }
+
+    .link-primary:hover {
+        color: var(--auth-primary-dark) !important;
+    }
+
+    .neo-btn-primary,
+    .btn.btn-primary {
+        border: 0 !important;
+        border-radius: 16px !important;
+        background: var(--auth-primary) !important;
+        color: #ffffff !important;
+        font-weight: 800;
+        min-height: 50px;
+        box-shadow: 0 14px 30px rgba(0, 158, 247, 0.24);
+        transition: .18s ease;
+    }
+
+    .neo-btn-primary:hover,
+    .btn.btn-primary:hover,
+    .btn.btn-primary:focus {
+        background: var(--auth-primary-dark) !important;
+        color: #ffffff !important;
+        transform: translateY(-1px);
+    }
+
+    .neo-login-box {
+        border-radius: 16px;
+        padding: 14px;
+        background: var(--auth-primary-soft);
+        border: 1px solid rgba(0, 158, 247, 0.12);
+    }
+
+    .alert {
+        border: 1px solid var(--auth-border) !important;
+        border-radius: 16px !important;
+        box-shadow: none !important;
+    }
+
+    .text-danger {
+        font-weight: 600;
+    }
+
+    @media (min-width: 992px) {
+        .neo-auth-page,
+        .neo-auth-shell,
+        .neo-auth-shell > .d-flex {
             min-height: 100vh;
-            background: var(--neo-bg) !important;
-            color: var(--neo-text);
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .neo-auth-page {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 34%),
-                radial-gradient(circle at 100% 0%, rgba(0, 158, 247, 0.10), transparent 32%),
-                radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.52), transparent 38%),
-                var(--neo-bg);
-            padding: 0;
-        }
-
-        .neo-auth-shell {
-            width: 100%;
-            min-height: 100vh;
-            background: transparent;
-            overflow: hidden;
-        }
-
-        .neo-back-floating {
-            position: fixed;
-            top: 22px;
-            left: 24px;
-            z-index: 100;
-        }
-
-        .neo-back-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 44px;
-            padding: 0 18px;
-            border-radius: 16px;
-            color: var(--neo-text);
-            font-weight: 700;
-            background: var(--neo-surface);
-            box-shadow:
-                6px 6px 14px var(--neo-dark-soft),
-                -6px -6px 14px var(--neo-light);
-            transition: 0.2s ease;
-        }
-
-        .neo-back-link:hover {
-            color: var(--neo-primary);
-            transform: translateY(-1px);
+            height: auto;
+            max-height: none;
+            overflow: visible;
         }
 
         .neo-hero-panel,
         .neo-form-panel {
             min-height: 100vh;
+            height: auto;
+            max-height: none;
         }
 
         .neo-hero-panel {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.75), transparent 32%),
-                radial-gradient(circle at 90% 90%, rgba(0, 158, 247, 0.10), transparent 36%),
-                transparent;
             overflow: hidden;
-        }
-
-        .neo-hero-panel::before {
-            content: "";
-            position: absolute;
-            width: 360px;
-            height: 360px;
-            right: -160px;
-            top: -150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 158, 247, 0.14), transparent 68%);
-            pointer-events: none;
-        }
-
-        .neo-hero-panel::after {
-            content: "";
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            left: -190px;
-            bottom: -190px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.72), transparent 64%);
-            pointer-events: none;
-        }
-
-        .neo-hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .neo-brand-box {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .neo-logo-box {
-            width: 72px;
-            height: 72px;
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--neo-surface);
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .neo-logo-box img {
-            width: 52px;
-            height: 52px;
-            object-fit: contain;
-        }
-
-        .neo-brand-title {
-            color: var(--neo-text);
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 4px;
-        }
-
-        .neo-brand-subtitle {
-            color: var(--neo-muted);
-            font-weight: 600;
-        }
-
-        .neo-title {
-            color: var(--neo-text);
-            letter-spacing: -0.035em;
-            line-height: 1.12;
-        }
-
-        .neo-title .text-primary {
-            color: var(--neo-primary) !important;
-        }
-
-        .neo-desc {
-            color: var(--neo-muted);
-            max-width: 620px;
-            line-height: 1.8;
-        }
-
-        .neo-feature-list {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            max-width: 680px;
-        }
-
-        .neo-feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 18px;
-            border-radius: 22px;
-            background: var(--neo-surface);
-            box-shadow:
-                8px 8px 18px var(--neo-dark-soft),
-                -8px -8px 18px var(--neo-light);
-            transition: 0.2s ease;
-        }
-
-        .neo-feature-item:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                10px 10px 24px var(--neo-dark),
-                -10px -10px 24px var(--neo-light);
-        }
-
-        .neo-feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--neo-primary);
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 9px var(--neo-inset-dark),
-                inset -4px -4px 9px var(--neo-inset-light);
-            flex-shrink: 0;
-        }
-
-        .neo-feature-icon i {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .neo-feature-title {
-            color: var(--neo-text);
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .neo-feature-desc {
-            color: var(--neo-muted);
-            font-weight: 600;
-            font-size: 13px;
+            padding: 76px 56px 42px !important;
         }
 
         .neo-form-panel {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
+            overflow: visible;
+            padding: 52px 56px 34px !important;
         }
 
-        .neo-form-inner {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .neo-brand-box {
+            margin-bottom: 2.25rem !important;
+        }
+
+        .neo-title {
+            font-size: 2.65rem !important;
+            margin-bottom: 1.25rem !important;
+        }
+
+        .neo-desc {
+            font-size: 1.05rem !important;
+            margin-bottom: 2rem !important;
+        }
+
+        .neo-feature-list {
+            gap: 14px;
+        }
+
+        .neo-feature-item {
+            padding: 15px;
+        }
+
+        .neo-feature-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+        }
+
+        .neo-feature-title {
+            font-size: 13px;
+        }
+
+        .neo-feature-desc {
+            font-size: 11px;
         }
 
         .neo-register-card {
-            width: 100%;
-            max-width: 620px;
-            margin: 0 auto;
-            border-radius: 30px;
-            padding: 34px;
-            background: var(--neo-surface);
-            box-shadow:
-                10px 10px 24px var(--neo-dark),
-                -10px -10px 24px var(--neo-light);
+            max-height: none;
+            overflow: visible;
+        }
+
+        .neo-register-card .text-center {
+            margin-bottom: 1.6rem !important;
         }
 
         .neo-register-title {
-            color: var(--neo-text);
-            letter-spacing: -0.03em;
+            font-size: 1.8rem !important;
         }
 
         .neo-register-subtitle {
-            color: var(--neo-muted);
+            font-size: 0.95rem !important;
         }
 
-        .neo-form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .neo-form-full {
-            grid-column: 1 / -1;
-        }
-
-        .neo-input-group {
-            border-radius: 17px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 5px 5px 12px var(--neo-inset-dark),
-                inset -5px -5px 12px var(--neo-inset-light);
-            overflow: hidden;
-            padding: 2px;
-        }
-
-        .neo-input-group .input-group-text {
-            border: 0 !important;
-            background: transparent !important;
-            color: var(--neo-primary);
-            padding-left: 16px;
-            padding-right: 8px;
-        }
-
-        .neo-input-group .form-control {
-            border: 0 !important;
-            background: transparent !important;
-            color: var(--neo-text);
-            box-shadow: none !important;
-            min-height: 48px;
-            font-weight: 600;
-        }
-
-        .neo-input-group .form-control::placeholder {
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .neo-input-group .form-control:focus {
-            background: transparent !important;
-        }
-
-        .neo-input-group .cursor-pointer {
-            color: var(--neo-muted);
-            padding-right: 16px;
+        .fv-row {
+            margin-bottom: 1rem !important;
         }
 
         .form-label {
-            color: var(--neo-text) !important;
+            margin-bottom: .45rem !important;
         }
 
-        .form-check-input {
-            border: 0 !important;
-            background-color: var(--neo-surface) !important;
-            box-shadow:
-                inset 3px 3px 7px var(--neo-inset-dark),
-                inset -3px -3px 7px var(--neo-inset-light) !important;
-        }
-
-        .form-check-input:checked {
-            background-color: var(--neo-primary) !important;
-            box-shadow:
-                3px 3px 8px var(--neo-dark-soft),
-                -3px -3px 8px var(--neo-light) !important;
-        }
-
-        .link-primary {
-            color: var(--neo-primary) !important;
-        }
-
-        .link-primary:hover {
-            color: var(--neo-primary-dark) !important;
+        .neo-input-group .form-control {
+            min-height: 44px;
         }
 
         .neo-btn-primary,
         .btn.btn-primary {
-            border: 0 !important;
-            border-radius: 16px !important;
-            background: var(--neo-primary) !important;
-            color: #ffffff !important;
-            font-weight: 800;
-            min-height: 50px;
-            box-shadow:
-                6px 6px 14px rgba(120, 113, 108, 0.28),
-                -6px -6px 14px rgba(255, 255, 255, 0.72);
-            transition: 0.2s ease;
-        }
-
-        .neo-btn-primary:hover,
-        .btn.btn-primary:hover,
-        .btn.btn-primary:focus {
-            background: var(--neo-primary-dark) !important;
-            color: #ffffff !important;
-            transform: translateY(-1px);
+            min-height: 46px;
         }
 
         .neo-login-box {
-            border-radius: 18px;
+            padding: 12px;
+        }
+    }
+
+    @media (min-width: 992px) and (max-height: 760px) {
+        .neo-hero-panel {
+            padding: 64px 42px 30px !important;
+        }
+
+        .neo-form-panel {
+            padding: 34px 42px 28px !important;
+        }
+
+        .neo-brand-box {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .neo-title {
+            font-size: 2.25rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .neo-desc {
+            font-size: 0.98rem !important;
+            line-height: 1.6;
+            margin-bottom: 1.45rem !important;
+        }
+
+        .neo-feature-item {
+            padding: 13px;
+        }
+
+        .neo-register-card {
+            padding: 28px;
+            border-radius: 24px;
+        }
+
+        .neo-register-card .text-center {
+            margin-bottom: 1.25rem !important;
+        }
+
+        .neo-register-title {
+            font-size: 1.62rem !important;
+        }
+
+        .neo-register-subtitle {
+            font-size: 0.9rem !important;
+        }
+
+        .neo-form-grid {
+            gap: 14px;
+        }
+
+        .fv-row {
+            margin-bottom: 0 !important;
+        }
+
+        .form-label {
+            margin-bottom: .35rem !important;
+        }
+
+        .neo-input-group .form-control {
+            min-height: 42px;
+        }
+
+        .neo-btn-primary,
+        .btn.btn-primary {
+            min-height: 44px;
+        }
+
+        .neo-login-box {
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        html,
+        body,
+        body#kt_body {
+            background: var(--auth-bg) !important;
+        }
+
+        .neo-auth-page,
+        .neo-auth-shell {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(0, 158, 247, 0.08), transparent 34%),
+                radial-gradient(circle at 100% 100%, rgba(0, 158, 247, 0.07), transparent 36%),
+                var(--auth-bg);
+        }
+
+        .neo-auth-shell {
+            overflow: visible;
+        }
+
+        .neo-back-floating {
+            top: 18px;
+            left: 18px;
+        }
+
+        .neo-back-floating.neo-back-link,
+        .neo-back-floating .neo-back-link {
+            min-height: 42px;
+            background: #ffffff;
+            color: var(--auth-text);
+            border: 1px solid var(--auth-border);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .neo-form-panel {
+            width: 100% !important;
+            min-height: auto;
+            padding: 92px 22px 30px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            order: 1 !important;
+        }
+
+        .neo-form-inner {
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .neo-register-card {
+            max-width: 540px;
+            padding: 34px;
+            border-radius: 24px;
+        }
+
+        .neo-register-card .text-center {
+            margin-bottom: 2rem !important;
+        }
+
+        .neo-form-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .neo-form-grid .fv-row {
+            margin-bottom: 0 !important;
+        }
+
+        .form-label {
+            margin-bottom: 0.65rem !important;
+        }
+
+        .neo-input-group .form-control {
+            min-height: 54px;
+        }
+
+        .neo-input-group .input-group-text {
+            padding-left: 18px;
+            padding-right: 10px;
+        }
+
+        .neo-input-group .cursor-pointer {
+            padding-right: 18px;
+        }
+
+        .neo-hero-panel {
+            width: 100% !important;
+            min-height: auto;
+            display: flex !important;
+            padding: 16px 22px 38px !important;
+            background: transparent;
+            overflow: visible;
+            order: 2 !important;
+        }
+
+        .neo-hero-panel::before,
+        .neo-hero-panel::after {
+            display: none;
+        }
+
+        .neo-hero-content {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .neo-brand-box {
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 2rem !important;
+        }
+
+        .neo-logo-box {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+        }
+
+        .neo-logo-box img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .neo-brand-title {
+            font-size: 1rem !important;
+        }
+
+        .neo-brand-subtitle {
+            opacity: 0.85;
+        }
+
+        .neo-title {
+            font-size: 1.85rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .neo-desc {
+            font-size: 0.98rem !important;
+            line-height: 1.65;
+        }
+
+        .neo-feature-list {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            max-width: 540px;
+        }
+
+        .neo-feature-item {
+            padding: 15px;
+            border-radius: 16px;
+        }
+
+        .neo-feature-item:hover {
+            transform: none;
+        }
+
+        .neo-feature-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+        }
+
+        .neo-feature-title {
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .neo-feature-desc {
+            font-size: 11px;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .neo-form-panel {
+            padding: 88px 20px 30px !important;
+        }
+
+        .neo-hero-panel {
+            padding: 16px 20px 34px !important;
+        }
+
+        .neo-register-card {
+            padding: 30px;
+            border-radius: 22px;
+        }
+
+        .neo-form-grid {
+            gap: 19px;
+        }
+
+        .neo-feature-list {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .neo-back-floating {
+            top: 16px;
+            left: 16px;
+        }
+
+        .neo-form-panel {
+            padding: 84px 18px 28px !important;
+        }
+
+        .neo-hero-panel {
+            padding: 14px 18px 32px !important;
+        }
+
+        .neo-register-card {
+            padding: 26px 22px;
+            border-radius: 20px;
+        }
+
+        .neo-register-card .text-center {
+            margin-bottom: 1.75rem !important;
+        }
+
+        .neo-register-title {
+            font-size: 1.65rem !important;
+        }
+
+        .neo-register-subtitle {
+            font-size: 0.95rem !important;
+            line-height: 1.55;
+        }
+
+        .neo-form-grid {
+            gap: 18px;
+        }
+
+        .form-label {
+            margin-bottom: 0.6rem !important;
+        }
+
+        .neo-input-group .form-control {
+            min-height: 52px;
+        }
+
+        .neo-btn-primary,
+        .btn.btn-primary {
+            min-height: 52px;
+        }
+
+        .neo-login-box {
+            padding: 16px 14px;
+            line-height: 1.5;
+        }
+
+        .neo-brand-box {
+            align-items: flex-start;
+        }
+
+        .neo-title {
+            font-size: 1.55rem !important;
+        }
+
+        .neo-desc {
+            font-size: 0.93rem !important;
+        }
+
+        .neo-feature-list {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .neo-feature-item {
             padding: 14px;
-            background: var(--neo-surface);
-            box-shadow:
-                inset 4px 4px 10px rgba(120, 113, 108, 0.13),
-                inset -4px -4px 10px rgba(255, 255, 255, 0.76);
+        }
+    }
+
+    @media (max-width: 420px) {
+        .neo-back-floating.neo-back-link,
+        .neo-back-floating .neo-back-link {
+            min-height: 40px;
+            padding: 0 14px;
+            font-size: 13px;
+            border-radius: 999px;
         }
 
-        .alert {
-            border: 0 !important;
-            border-radius: 18px !important;
-            box-shadow:
-                5px 5px 12px var(--neo-dark-soft),
-                -5px -5px 12px var(--neo-light);
+        .neo-form-panel {
+            padding-top: 78px !important;
         }
 
-        .text-danger {
-            font-weight: 600;
+        .neo-register-card {
+            padding: 24px 18px;
         }
 
-        @media (min-width: 992px) {
-            .neo-auth-page,
-            .neo-auth-shell,
-            .neo-auth-shell > .d-flex {
-                min-height: 100vh;
-                height: auto;
-                max-height: none;
-                overflow: visible;
-            }
+        .neo-form-grid {
+            gap: 17px;
+        }
+    }
 
-            .neo-hero-panel,
-            .neo-form-panel {
-                min-height: 100vh;
-                height: auto;
-                max-height: none;
-            }
-
-            .neo-hero-panel {
-                overflow: hidden;
-                padding: 76px 56px 42px !important;
-            }
-
-            .neo-form-panel {
-                overflow: visible;
-            }
-
-            .neo-form-panel {
-                padding: 52px 56px 34px !important;
-            }
-
-            .neo-brand-box {
-                margin-bottom: 2.25rem !important;
-            }
-
-            .neo-title {
-                font-size: 2.65rem !important;
-                margin-bottom: 1.25rem !important;
-            }
-
-            .neo-desc {
-                font-size: 1.05rem !important;
-                margin-bottom: 2rem !important;
-            }
-
-            .neo-feature-list {
-                gap: 14px;
-            }
-
-            .neo-feature-item {
-                padding: 15px;
-            }
-
-            .neo-feature-icon {
-                width: 42px;
-                height: 42px;
-                border-radius: 14px;
-            }
-
-            .neo-feature-title {
-                font-size: 13px;
-            }
-
-            .neo-feature-desc {
-                font-size: 11px;
-            }
-
-            .neo-register-card {
-                max-height: none;
-                overflow: visible;
-            }
-
-            .neo-register-card .text-center {
-                margin-bottom: 1.6rem !important;
-            }
-
-            .neo-register-title {
-                font-size: 1.8rem !important;
-            }
-
-            .neo-register-subtitle {
-                font-size: 0.95rem !important;
-            }
-
-            .fv-row {
-                margin-bottom: 1rem !important;
-            }
-
-            .form-label {
-                margin-bottom: .45rem !important;
-            }
-
-            .neo-input-group .form-control {
-                min-height: 44px;
-            }
-
-            .neo-btn-primary,
-            .btn.btn-primary {
-                min-height: 46px;
-            }
-
-            .neo-login-box {
-                padding: 12px;
-            }
+    @media (max-width: 360px) {
+        .neo-back-floating {
+            top: 12px;
+            left: 12px;
         }
 
-
-
-        @media (min-width: 992px) and (max-height: 760px) {
-            .neo-hero-panel {
-                padding: 64px 42px 30px !important;
-            }
-
-            .neo-form-panel {
-                padding: 34px 42px 28px !important;
-            }
-
-            .neo-brand-box {
-                margin-bottom: 1.5rem !important;
-            }
-
-            .neo-title {
-                font-size: 2.25rem !important;
-                margin-bottom: 1rem !important;
-            }
-
-            .neo-desc {
-                font-size: 0.98rem !important;
-                line-height: 1.6;
-                margin-bottom: 1.45rem !important;
-            }
-
-            .neo-feature-list {
-                gap: 12px;
-            }
-
-            .neo-feature-item {
-                padding: 13px;
-            }
-
-            .neo-register-card {
-                padding: 28px;
-                border-radius: 26px;
-            }
-
-            .neo-register-card .text-center {
-                margin-bottom: 1.25rem !important;
-            }
-
-            .neo-register-title {
-                font-size: 1.62rem !important;
-            }
-
-            .neo-register-subtitle {
-                font-size: 0.9rem !important;
-            }
-
-            .neo-form-grid {
-                gap: 14px;
-            }
-
-            .fv-row {
-                margin-bottom: 0 !important;
-            }
-
-            .form-label {
-                margin-bottom: .35rem !important;
-            }
-
-            .neo-input-group .form-control {
-                min-height: 42px;
-            }
-
-            .neo-btn-primary,
-            .btn.btn-primary {
-                min-height: 44px;
-            }
-
-            .neo-login-box {
-                padding: 10px;
-            }
+        .neo-form-panel {
+            padding: 72px 12px 24px !important;
         }
 
-        @media (max-width: 991.98px) {
-            html,
-            body,
-            body#kt_body {
-                background: var(--neo-bg) !important;
-            }
-
-            .neo-auth-page,
-            .neo-auth-shell {
-                min-height: 100vh;
-                background:
-                    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.72), transparent 34%),
-                    radial-gradient(circle at 100% 0%, rgba(0, 158, 247, 0.10), transparent 32%),
-                    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.52), transparent 38%),
-                    var(--neo-bg);
-            }
-
-            .neo-auth-shell {
-                overflow: visible;
-            }
-
-            .neo-back-floating {
-                top: 18px;
-                left: 18px;
-            }
-
-            .neo-back-floating.neo-back-link,
-            .neo-back-floating .neo-back-link {
-                min-height: 42px;
-                background: var(--neo-surface);
-                color: var(--neo-text);
-                box-shadow:
-                    5px 5px 14px var(--neo-dark-soft),
-                    -5px -5px 14px var(--neo-light);
-            }
-
-            .neo-form-panel {
-                width: 100% !important;
-                min-height: auto;
-                padding: 92px 22px 30px !important;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: transparent;
-                order: 1 !important;
-            }
-
-            .neo-form-inner {
-                min-height: auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 0;
-            }
-
-            .neo-register-card {
-                max-width: 540px;
-                padding: 34px;
-                border-radius: 26px;
-                background: var(--neo-surface);
-                box-shadow:
-                    10px 10px 24px var(--neo-dark),
-                    -10px -10px 24px var(--neo-light);
-            }
-
-            .neo-register-card .text-center {
-                margin-bottom: 2rem !important;
-            }
-
-            .neo-form-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .neo-form-grid .fv-row {
-                margin-bottom: 0 !important;
-            }
-
-            .form-label {
-                margin-bottom: 0.65rem !important;
-            }
-
-            .neo-input-group {
-                border-radius: 18px;
-            }
-
-            .neo-input-group .form-control {
-                min-height: 54px;
-            }
-
-            .neo-input-group .input-group-text {
-                padding-left: 18px;
-                padding-right: 10px;
-            }
-
-            .neo-input-group .cursor-pointer {
-                padding-right: 18px;
-            }
-
-            .neo-hero-panel {
-                width: 100% !important;
-                min-height: auto;
-                display: flex !important;
-                padding: 16px 22px 38px !important;
-                background: transparent;
-                overflow: visible;
-                order: 2 !important;
-            }
-
-            .neo-hero-panel::before,
-            .neo-hero-panel::after {
-                display: none;
-            }
-
-            .neo-hero-content {
-                max-width: 540px;
-                margin: 0 auto;
-            }
-
-            .neo-brand-box {
-                align-items: center;
-                gap: 14px;
-                margin-bottom: 2rem !important;
-            }
-
-            .neo-logo-box {
-                width: 58px;
-                height: 58px;
-                border-radius: 20px;
-                background: var(--neo-surface);
-                box-shadow:
-                    6px 6px 16px var(--neo-dark-soft),
-                    -6px -6px 16px var(--neo-light);
-            }
-
-            .neo-logo-box img {
-                width: 42px;
-                height: 42px;
-            }
-
-            .neo-brand-title {
-                font-size: 1rem !important;
-            }
-
-            .neo-brand-subtitle {
-                opacity: 0.85;
-            }
-
-            .neo-title {
-                font-size: 1.85rem !important;
-                margin-bottom: 1rem !important;
-            }
-
-            .neo-desc {
-                font-size: 0.98rem !important;
-                line-height: 1.65;
-            }
-
-            .neo-feature-list {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 14px;
-                max-width: 540px;
-            }
-
-            .neo-feature-item {
-                padding: 15px;
-                border-radius: 18px;
-                background: var(--neo-surface);
-                box-shadow:
-                    6px 6px 16px var(--neo-dark-soft),
-                    -6px -6px 16px var(--neo-light);
-            }
-
-            .neo-feature-item:hover {
-                transform: none;
-                box-shadow:
-                    6px 6px 16px var(--neo-dark-soft),
-                    -6px -6px 16px var(--neo-light);
-            }
-
-            .neo-feature-icon {
-                width: 42px;
-                height: 42px;
-                border-radius: 14px;
-                color: var(--neo-primary);
-                background: var(--neo-surface);
-                box-shadow:
-                    inset 3px 3px 8px var(--neo-inset-dark),
-                    inset -3px -3px 8px var(--neo-inset-light);
-            }
-
-            .neo-feature-title {
-                font-size: 13px;
-                margin-bottom: 2px;
-            }
-
-            .neo-feature-desc {
-                font-size: 11px;
-            }
+        .neo-hero-panel {
+            padding: 12px 12px 28px !important;
         }
 
-        @media (max-width: 767.98px) {
-            .neo-form-panel {
-                padding: 88px 20px 30px !important;
-            }
-
-            .neo-hero-panel {
-                padding: 16px 20px 34px !important;
-            }
-
-            .neo-register-card {
-                padding: 30px;
-                border-radius: 24px;
-            }
-
-            .neo-form-grid {
-                gap: 19px;
-            }
-
-            .neo-feature-list {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
+        .neo-register-card {
+            padding: 22px 16px;
+            border-radius: 18px;
         }
 
-        @media (max-width: 575.98px) {
-            .neo-back-floating {
-                top: 16px;
-                left: 16px;
-            }
-
-            .neo-form-panel {
-                padding: 84px 18px 28px !important;
-            }
-
-            .neo-hero-panel {
-                padding: 14px 18px 32px !important;
-            }
-
-            .neo-register-card {
-                padding: 26px 22px;
-                border-radius: 22px;
-            }
-
-            .neo-register-card .text-center {
-                margin-bottom: 1.75rem !important;
-            }
-
-            .neo-register-title {
-                font-size: 1.65rem !important;
-            }
-
-            .neo-register-subtitle {
-                font-size: 0.95rem !important;
-                line-height: 1.55;
-            }
-
-            .neo-form-grid {
-                gap: 18px;
-            }
-
-            .form-label {
-                margin-bottom: 0.6rem !important;
-            }
-
-            .neo-input-group .form-control {
-                min-height: 52px;
-            }
-
-            .neo-btn-primary,
-            .btn.btn-primary {
-                min-height: 52px;
-            }
-
-            .neo-login-box {
-                padding: 16px 14px;
-                line-height: 1.5;
-            }
-
-            .neo-brand-box {
-                align-items: flex-start;
-            }
-
-            .neo-title {
-                font-size: 1.55rem !important;
-            }
-
-            .neo-desc {
-                font-size: 0.93rem !important;
-            }
-
-            .neo-feature-list {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .neo-feature-item {
-                padding: 14px;
-            }
+        .neo-back-link {
+            padding: 0 12px;
+            font-size: 12px;
         }
 
-        @media (max-width: 420px) {
-            .neo-back-floating.neo-back-link,
-            .neo-back-floating .neo-back-link {
-                min-height: 40px;
-                padding: 0 14px;
-                font-size: 13px;
-                border-radius: 14px;
-            }
-
-            .neo-form-panel {
-                padding-top: 78px !important;
-            }
-
-            .neo-register-card {
-                padding: 24px 18px;
-            }
-
-            .neo-form-grid {
-                gap: 17px;
-            }
+        .neo-input-group .form-control {
+            min-height: 50px;
         }
+    }
+</style>
 
-        @media (max-width: 360px) {
-            .neo-back-floating {
-                top: 12px;
-                left: 12px;
-            }
-
-            .neo-form-panel {
-                padding: 72px 12px 24px !important;
-            }
-
-            .neo-hero-panel {
-                padding: 12px 12px 28px !important;
-            }
-
-            .neo-register-card {
-                padding: 22px 16px;
-                border-radius: 20px;
-            }
-
-            .neo-back-link {
-                padding: 0 12px;
-                font-size: 12px;
-            }
-
-            .neo-input-group .form-control {
-                min-height: 50px;
-            }
-        }
-    </style>
 </head>
 
 <body id="kt_body" class="app-default">

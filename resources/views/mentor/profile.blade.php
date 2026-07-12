@@ -2,67 +2,81 @@
 
 @section('css')
     <style>
+        /* =========================================================
+           PROFILE MENTOR - SIMPLE & KONSISTEN
+           Visual only: tidak mengubah form, name, id, route, atau JS
+        ========================================================= */
+
         .neo-profile-page {
-            padding-bottom: 32px;
+            width: 100%;
+            padding: 0 24px 28px;
+        }
+
+        .neo-profile-page form {
+            max-width: 980px;
+            margin: 0 auto;
         }
 
         .neo-profile-card {
             overflow: hidden;
-            border: 0 !important;
-            border-radius: 30px;
-            background: #f4f7fb;
-            box-shadow:
-                10px 10px 24px rgba(148, 163, 184, 0.28),
-                -10px -10px 24px rgba(255, 255, 255, 0.95);
+            border: 1px solid #eef2f7 !important;
+            border-radius: 12px !important;
+            background: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .06) !important;
         }
 
         .neo-profile-card .card-body {
-            padding: 30px !important;
+            padding: 22px !important;
+            background: #ffffff !important;
         }
 
         .neo-profile-card .card-footer {
-            border-top: 1px solid rgba(148, 163, 184, 0.16);
-            background: transparent;
-            padding: 22px 30px !important;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 16px 22px 18px !important;
+            background: #ffffff !important;
+            border-top: 1px solid #eef2f7 !important;
         }
 
         .neo-section-title {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 28px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+            gap: 10px;
+            margin: 0 0 20px;
+            padding-bottom: 14px;
             color: #111827;
-            font-size: 19px;
-            font-weight: 900;
-            letter-spacing: -0.02em;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 18px;
+            line-height: 1.3;
+            font-weight: 800;
         }
 
         .neo-section-icon {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 18px;
-            color: #009ef7;
-            background: #f4f7fb;
-            box-shadow:
-                inset 5px 5px 10px rgba(148, 163, 184, 0.25),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.95);
+            color: #074366;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: none;
         }
 
         .neo-form-group {
-            margin-bottom: 22px;
+            margin-bottom: 16px;
         }
 
         .neo-form-label {
-            margin-bottom: 9px;
-            color: #374151;
+            display: block;
+            margin-bottom: 7px;
+            color: #111827;
             font-size: 13px;
-            font-weight: 900;
+            font-weight: 800;
         }
 
         .neo-form-label.required::after {
@@ -73,126 +87,105 @@
 
         .neo-profile-card .form-control,
         .neo-profile-card textarea {
-            border: 0 !important;
-            border-radius: 17px !important;
-            padding: 13px 16px !important;
+            width: 100%;
             color: #111827 !important;
-            background: #f4f7fb !important;
-            box-shadow:
-                inset 5px 5px 10px rgba(148, 163, 184, 0.22),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.94) !important;
-            font-size: 13px !important;
-            font-weight: 700 !important;
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
             outline: none !important;
+            transition: border-color .18s ease, box-shadow .18s ease;
         }
 
         .neo-profile-card .form-control {
-            min-height: 46px;
+            min-height: 42px;
+            padding: 9px 12px !important;
         }
 
         .neo-profile-card textarea {
+            min-height: 150px;
+            padding: 10px 12px !important;
+            line-height: 1.65;
             resize: vertical;
-            min-height: 160px;
-            line-height: 1.7;
         }
 
         .neo-profile-card .form-control::placeholder,
         .neo-profile-card textarea::placeholder {
-            color: #9ca3af;
-            font-weight: 600;
+            color: #94a3b8;
+            font-weight: 500;
         }
 
         .neo-profile-card .form-control:focus,
         .neo-profile-card textarea:focus {
-            box-shadow:
-                inset 5px 5px 10px rgba(148, 163, 184, 0.26),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.98),
-                0 0 0 3px rgba(0, 158, 247, 0.11) !important;
+            border-color: #074366 !important;
+            box-shadow: 0 0 0 .2rem rgba(7, 67, 102, .10) !important;
         }
 
         .neo-profile-card .form-control.is-invalid,
         .neo-profile-card textarea.is-invalid {
-            box-shadow:
-                inset 5px 5px 10px rgba(148, 163, 184, 0.22),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.94),
-                0 0 0 3px rgba(239, 68, 68, 0.13) !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 .2rem rgba(239, 68, 68, .10) !important;
         }
 
         .neo-profile-card .invalid-feedback {
-            margin-top: 8px;
+            margin-top: 7px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 600;
         }
 
-        .neo-btn-light {
-            border: 0 !important;
-            border-radius: 16px !important;
-            padding: 11px 18px !important;
-            color: #374151 !important;
-            background: #f4f7fb !important;
-            box-shadow:
-                6px 6px 14px rgba(148, 163, 184, 0.24),
-                -6px -6px 14px rgba(255, 255, 255, 0.94) !important;
-            font-size: 13px !important;
-            font-weight: 900 !important;
-            transition:
-                transform 0.16s ease,
-                box-shadow 0.16s ease,
-                color 0.16s ease !important;
-        }
-
-        .neo-btn-light:hover {
-            transform: translateY(-1px);
-            color: #111827 !important;
-            background: #f4f7fb !important;
-            box-shadow:
-                8px 8px 18px rgba(148, 163, 184, 0.30),
-                -8px -8px 18px rgba(255, 255, 255, 1) !important;
-        }
-
+        .neo-profile-card .btn,
+        .neo-btn-light,
         .neo-btn-primary {
-            border: 0 !important;
-            border-radius: 16px !important;
-            padding: 11px 18px !important;
-            color: #ffffff !important;
-            background: #009ef7 !important;
-            box-shadow:
-                6px 6px 14px rgba(0, 158, 247, 0.24),
-                -6px -6px 14px rgba(255, 255, 255, 0.95) !important;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 15px !important;
+            border-radius: 8px !important;
+            box-shadow: none !important;
             font-size: 13px !important;
-            font-weight: 900 !important;
-            transition:
-                transform 0.16s ease,
-                box-shadow 0.16s ease,
-                background 0.16s ease !important;
+            line-height: 1;
+            font-weight: 800 !important;
+            text-decoration: none !important;
+            transition: background .18s ease, border-color .18s ease, color .18s ease;
         }
 
-        .neo-btn-primary:hover {
-            transform: translateY(-1px);
+        .neo-btn-light,
+        .neo-profile-card .btn-light {
             color: #ffffff !important;
-            background: #008ee0 !important;
-            box-shadow:
-                8px 8px 18px rgba(0, 158, 247, 0.30),
-                -8px -8px 18px rgba(255, 255, 255, 1) !important;
+            background: #ef4444 !important;
+            border: 1px solid #ef4444 !important;
+        }
+
+        .neo-btn-light:hover,
+        .neo-profile-card .btn-light:hover {
+            color: #ffffff !important;
+            background: #dc2626 !important;
+            border-color: #dc2626 !important;
+            transform: none !important;
+        }
+
+        .neo-btn-primary,
+        .neo-profile-card .btn-primary {
+            color: #ffffff !important;
+            background: #074366 !important;
+            border: 1px solid #074366 !important;
+        }
+
+        .neo-btn-primary:hover,
+        .neo-profile-card .btn-primary:hover {
+            color: #ffffff !important;
+            background: #052f49 !important;
+            border-color: #052f49 !important;
+            transform: none !important;
         }
 
         @media (max-width: 991.98px) {
-            .neo-profile-card {
-                border-radius: 26px;
-            }
-
-            .neo-profile-card .card-body {
-                padding: 24px !important;
-            }
-
-            .neo-profile-card .card-footer {
-                padding: 20px 24px !important;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .neo-profile-card {
-                border-radius: 24px;
+            .neo-profile-page {
+                padding: 0 18px 24px;
             }
 
             .neo-profile-card .card-body {
@@ -200,8 +193,23 @@
             }
 
             .neo-profile-card .card-footer {
-                padding: 18px 20px !important;
-                flex-direction: column;
+                padding: 15px 20px 18px !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .neo-profile-page {
+                padding: 0 14px 22px;
+            }
+
+            .neo-profile-card .card-body {
+                padding: 16px !important;
+            }
+
+            .neo-profile-card .card-footer {
+                flex-direction: column-reverse;
+                align-items: stretch;
+                padding: 14px 16px 16px !important;
             }
 
             .neo-profile-card .card-footer .btn {
@@ -210,14 +218,13 @@
 
             .neo-section-title {
                 align-items: flex-start;
-                font-size: 17px;
+                font-size: 16px;
             }
 
             .neo-section-icon {
-                width: 44px;
-                height: 44px;
-                min-width: 44px;
-                border-radius: 16px;
+                width: 36px;
+                height: 36px;
+                min-width: 36px;
             }
         }
     </style>
