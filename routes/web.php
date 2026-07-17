@@ -53,4 +53,13 @@ Route::prefix('pengguna')->middleware('auth:pengguna')->group(function () {
 Route::post('log-error', [PortalController::class, 'error'])->name('log-error');
 
 Route::get('sertifikat/verifikasi/{id}', [PortalController::class, 'sertifikat_verifikasi'])->name('sertifikat.verifikasi');
-Route::get('{folder}/{filename}', [FileController::class, 'viewFile'])->name('view-file');
+Route::get('{folder}/{filename}', [FileController::class, 'viewFile'])
+    ->where(
+        'folder',
+        'banner|profil|sertifikat|sertifikat_pendaftaran|soal|dokumen|materi|lampiran'
+    )
+    ->where(
+        'filename',
+        '[A-Za-z0-9][A-Za-z0-9._-]*'
+    )
+    ->name('view-file');

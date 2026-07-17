@@ -313,7 +313,15 @@
                     </span>
                 </a>
             </div>
-
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('admin.kelas.nilai_peserta.*') ? 'active' : '' }}"
+                    href="{{ route('admin.kelas.nilai_peserta.index') }}">
+                        <span class="menu-title">
+                            <i class="bi bi-bar-chart-fill fs-3 me-2"></i>
+                            Nilai Peserta
+                        </span>
+                    </a>
+                </div>
         </div>
     </div>
 </div>

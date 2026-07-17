@@ -236,7 +236,7 @@
                                             $jenisKuisLabel  = null;
                                             $progresJawaban = collect();
 
-                                            if ($materiTipe === 'kuis' && $progresKuis->isNotEmpty()) {
+                                            if ($progresKuis->isNotEmpty()) {
                                                 $attempt      = $progresKuis->first();
                                                 $kuisTipe     = $attempt['kuis_tipe'] ?? ($attempt->kuis_tipe ?? null);
                                                 $nilai        = $attempt['nilai'] ?? ($attempt->nilai ?? null);
@@ -249,8 +249,9 @@
                                                     default => 'Kuis',
                                                 };
 
-                                                $tipeLabel = $jenisKuisLabel;
-
+                                                    if ($materiTipe === 'kuis') {
+                                                        $tipeLabel = $jenisKuisLabel;
+                                                    }
                                                 $quizMetaText = trim(
                                                     ($nilai !== null ? 'Nilai: ' . number_format((float) $nilai, 1) : '') .
                                                     ($totalSoal ? ' • ' . $soalTerjawab . '/' . $totalSoal . ' soal' : '')
@@ -277,7 +278,7 @@
                                                             {{ $materiJudul }}
                                                         </div>
 
-                                                        @if ($materiTipe === 'kuis')
+                                                        @if ($progresKuis->isNotEmpty())
                                                             <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
                                                                 @if ($jenisKuisLabel)
                                                                     <span class="badge badge-light-info">
@@ -306,12 +307,14 @@
                                                                         @foreach ($progresJawaban as $pj)
                                                                             @php
                                                                                 $pertanyaan = $pj['soal_pertanyaan'] ?? ($pj->soal_pertanyaan ?? '-');
-                                                                                $benar      = $pj['benar'] ?? ($pj->benar ?? null);
+
+                                                                                $benarRaw = $pj['benar'] ?? ($pj->benar ?? null);
+                                                                                $benar = is_null($benarRaw) ? null : (bool) $benarRaw;
 
                                                                                 [$statusLabel, $statusClass, $statusIcon] = match (true) {
-                                                                                    $benar === 1 => ['Benar', 'success', 'bi-check-circle-fill'],
-                                                                                    $benar === 0 => ['Salah', 'danger', 'bi-x-circle-fill'],
-                                                                                    default      => ['Belum dijawab', 'dark', 'bi-circle'],
+                                                                                    $benar === true  => ['Benar', 'success', 'bi-check-circle-fill'],
+                                                                                    $benar === false => ['Salah', 'danger', 'bi-x-circle-fill'],
+                                                                                    default          => ['Belum dijawab', 'dark', 'bi-circle'],
                                                                                 };
                                                                             @endphp
 

@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\Pendaftaran\NilaiPesertaController;
 use App\Http\Controllers\Admin\App\MentorController;
 use App\Http\Controllers\Admin\App\PenggunaController;
 use App\Http\Controllers\Admin\Kelas\KategoriController;
@@ -20,6 +20,22 @@ use App\Http\Controllers\Admin\Materi\SoalJawabanController as MateriSoalJawaban
 use App\Http\Controllers\Admin\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Admin\Pendaftaran\ProgresKelasController;
 use Illuminate\Support\Facades\Route;
+
+Route::prefix('nilai-peserta')->group(function () {
+    Route::get('/', [NilaiPesertaController::class, 'index'])
+        ->name('kelas.nilai_peserta.index');
+
+    Route::get('data', [NilaiPesertaController::class, 'list'])
+        ->name('kelas.nilai_peserta.list');
+
+    Route::get('detail/{id}', [NilaiPesertaController::class, 'detail'])
+        ->name('kelas.nilai_peserta.detail')
+        ->whereNumber('id');
+
+    Route::post('delete/{id}', [NilaiPesertaController::class, 'delete'])
+        ->name('kelas.nilai_peserta.delete')
+        ->whereNumber('id');
+});
 
 Route::prefix('app')->group(function () {
     Route::prefix('mentor')->group(function () {

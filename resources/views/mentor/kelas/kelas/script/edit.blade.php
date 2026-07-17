@@ -78,10 +78,7 @@
                                 });
                         });
 
-                    fetchDataDropdown("{{ route('mentor.api.kelas.mentor') }}", '#edit_id_pemilik', 'mentor',
-                        'nama', () => {
-                            $("#edit_id_pemilik").val(data.id_pemilik).trigger("change");
-                        });
+                    
 
                     if (data.banner) {
                         const bannerUrl = '{{ route('view-file', [':folder', ':filename']) }}'
@@ -118,8 +115,8 @@
                 if (result.value) {
                     DataManager.openLoading();
                     const formData = new FormData();
+                    
                     formData.append('id_kategori_sub', $('#edit_id_kategori_sub').val());
-                    formData.append('id_pemilik', $('#edit_id_pemilik').val());
                     formData.append('judul', $('#edit_judul').val());
                     formData.append('deskripsi_singkat', $('#edit_deskripsi_singkat').val());
                     if (window.Quill && quillEdit) {

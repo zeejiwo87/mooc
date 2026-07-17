@@ -269,12 +269,17 @@ final class FileUploadService
                 throw new RuntimeException('File DOCX tidak terbentuk dengan benar');
             }
 
-            $envPath = env('LIBREOFFICE_PATH');
-            if ($envPath) {
-                $tempPdfPath = $this->convertDocxToPdf($docxFullPath);
-            }else{
-                $tempPdfPath = $this->convertDocxToPdf2($docxFullPath);
+            /*
+             * Coba konversi memakai LibreOffice lokal terlebih dahulu.
+             * Sebelumnya kode hanya memakai LibreOffice jika LIBREOFFICE_PATH di .env terisi.
+             * Akibatnya, walaupun LibreOffice sudah terinstall di lokasi default Windows,
+             * aplikasi tetap melompat ke ConvertAPI dan bisa gagal saat token/internet bermasalah.
+             */
+            $tempPdfPath = $this->convertDocxToPdf($docxFullPath);
 
+            // Fallback terakhir: ConvertAPI online jika konversi lokal gagal.
+            if (! $tempPdfPath || ! file_exists($tempPdfPath) || filesize($tempPdfPath) < 1000) {
+                $tempPdfPath = $this->convertDocxToPdf2($docxFullPath);
             }
 
             if (! $tempPdfPath || ! file_exists($tempPdfPath) || filesize($tempPdfPath) < 1000) {
@@ -328,6 +333,11 @@ private function convertDocxToPdf2(string $docxPath): ?string
             return null;
         }
 
+        if (! function_exists('curl_init')) {
+            \Log::error('PHP cURL extension is not enabled. ConvertAPI cannot be used.');
+            return null;
+        }
+
         $pdfPath = preg_replace('/\.docx$/i', '.pdf', $docxPath);
         
         // Siapkan curl request ke ConvertAPI
@@ -371,19 +381,25 @@ private function convertDocxToPdf2(string $docxPath): ?string
             return null;
         }
         
-        // Ambil FileData dari response (base64 encoded) - PERBAIKAN DI SINI
-        $fileData = $responseData['Files'][0]['FileData'] ?? null;
-        
-        if (!$fileData) {
-            \Log::error('ConvertAPI response missing FileData');
-            return null;
-        }
-        
-        // Decode base64 ke binary
-        $pdfContent = base64_decode($fileData);
-        
-        if ($pdfContent === false) {
-            \Log::error('Failed to decode base64 FileData');
+        $file = $responseData['Files'][0] ?? [];
+        $pdfContent = null;
+
+        // ConvertAPI dapat mengembalikan FileData/base64 atau Url file, tergantung respons API.
+        if (! empty($file['FileData'])) {
+            $pdfContent = base64_decode($file['FileData']);
+            if ($pdfContent === false) {
+                \Log::error('Failed to decode base64 FileData');
+                return null;
+            }
+        } elseif (! empty($file['Url'])) {
+            $download = Http::timeout(60)->get($file['Url']);
+            if (! $download->successful()) {
+                \Log::error('Failed to download converted PDF from ConvertAPI URL. HTTP: '.$download->status());
+                return null;
+            }
+            $pdfContent = $download->body();
+        } else {
+            \Log::error('ConvertAPI response missing FileData/Url. Response: '.$response);
             return null;
         }
         
@@ -400,7 +416,7 @@ private function convertDocxToPdf2(string $docxPath): ?string
         
         return null;
         
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) {
         \Log::error('ConvertAPI exception: ' . $e->getMessage());
         return null;
     }
@@ -506,8 +522,16 @@ private function convertDocxToPdf2(string $docxPath): ?string
                 return $pdfPath;
             }
 
+            \Log::error('LibreOffice DOCX to PDF conversion failed', [
+                'command' => $command,
+                'return_code' => $returnCode,
+                'output' => $output,
+                'expected_pdf' => $pdfPath,
+            ]);
+
             return null;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            \Log::error('LibreOffice conversion exception: '.$e->getMessage());
             return null;
         }
     }

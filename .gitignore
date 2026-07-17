@@ -33,3 +33,7 @@ get()
 /public/profil/*
 /public/sertifikat/*
 !/public/profil/profile.png
+
+storage/backups/
+
+storage/backups/

@@ -636,19 +636,7 @@
                                     </div>
                                 </div>
 
-                                <div class="neo-field">
-                                    <label class="neo-label required" for="id_pemilik">Pemilik Mentor</label>
-                                    <select data-control="select2"
-                                            id="id_pemilik"
-                                            class="form-select form-select-sm"
-                                            data-allow-clear="true"
-                                            data-placeholder="Pilih mentor"
-                                            data-dropdown-parent="#form_create"
-                                            required>
-                                        <option></option>
-                                    </select>
-                                    <div class="invalid-feedback"></div>
-                                </div>
+                                
 
                                 <div class="neo-field">
                                     <label class="neo-label required" for="judul">Judul Kelas</label>

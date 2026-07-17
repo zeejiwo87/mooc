@@ -41,7 +41,6 @@
         }
 
         fetchDataDropdown("{{ route('mentor.api.kelas.kategori') }}", '#id_kategori', 'kategori', 'nama');
-        fetchDataDropdown("{{ route('mentor.api.kelas.mentor') }}", '#id_pemilik', 'mentor', 'nama');
 
         $('#id_kategori').on('change', function() {
             const id_kategori = $(this).val();
@@ -73,8 +72,8 @@
                 if (result.value) {
                     DataManager.openLoading();
                     const formData = new FormData();
+                    
                     formData.append('id_kategori_sub', $('#id_kategori_sub').val());
-                    formData.append('id_pemilik', $('#id_pemilik').val());
                     formData.append('judul', $('#judul').val());
                     formData.append('deskripsi_singkat', $('#deskripsi_singkat').val());
                     if (window.Quill && quillCreate) {

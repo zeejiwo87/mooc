@@ -11,7 +11,11 @@
     }
 
     #kt_aside.aside {
-        background: linear-gradient(180deg, var(--admin-menu-bg), var(--admin-menu-bg-2)) !important;
+        background: linear-gradient(
+            180deg,
+            var(--admin-menu-bg),
+            var(--admin-menu-bg-2)
+        ) !important;
         border-right: 1px solid var(--admin-menu-border) !important;
         box-shadow: 8px 0 24px rgba(15, 23, 42, .35) !important;
     }
@@ -61,7 +65,10 @@
         background: transparent !important;
         border: 1px solid transparent !important;
         box-shadow: none !important;
-        transition: background .18s ease, border-color .18s ease, color .18s ease;
+        transition:
+            background .18s ease,
+            border-color .18s ease,
+            color .18s ease;
     }
 
     .mentor-simple-menu .menu-link:hover {
@@ -171,85 +178,125 @@
     }
 </style>
 
-<div class="hover-scroll-overlay-y my-5 my-lg-5"
-     id="kt_aside_menu_wrapper"
-     data-kt-scroll="true"
-     data-kt-scroll-activate="{default: false, lg: true}"
-     data-kt-scroll-height="auto"
-     data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
-     data-kt-scroll-wrappers="#kt_aside_menu"
-     data-kt-scroll-offset="0">
-
+<div
+    class="hover-scroll-overlay-y my-5 my-lg-5"
+    id="kt_aside_menu_wrapper"
+    data-kt-scroll="true"
+    data-kt-scroll-activate="{default: false, lg: true}"
+    data-kt-scroll-height="auto"
+    data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
+    data-kt-scroll-wrappers="#kt_aside_menu"
+    data-kt-scroll-offset="0"
+>
     <div class="mentor-sidebar-simple">
-        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 mentor-simple-menu"
-             id="kt_aside_menu"
-             data-kt-menu="true">
+        <div
+            class="menu menu-column menu-title-gray-800
+                   menu-state-title-primary menu-state-icon-primary
+                   menu-state-bullet-primary menu-arrow-gray-500
+                   mentor-simple-menu"
+            id="kt_aside_menu"
+            data-kt-menu="true"
+        >
 
+            {{-- Dashboard --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
-                   href="{{ route('index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('index') ? 'active' : '' }}"
+                    href="{{ route('index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-grid-fill fs-3 me-2"></i>
+                        <i class="bi bi-grid-fill"></i>
                         Dashboard
                     </span>
                 </a>
             </div>
 
+            {{-- Tag --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.kelas.tag.*') ? 'active' : '' }}"
-                   href="{{ route('mentor.kelas.tag.index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.tag.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.tag.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-tags-fill fs-3 me-2"></i>
+                        <i class="bi bi-tags-fill"></i>
                         Tag
                     </span>
                 </a>
             </div>
 
+            {{-- Kategori --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori.*') ? 'active' : '' }}"
-                   href="{{ route('mentor.kelas.kategori.index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.kategori.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.kategori.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-folder-fill fs-3 me-2"></i>
+                        <i class="bi bi-folder-fill"></i>
                         Kategori
                     </span>
                 </a>
             </div>
 
+            {{-- Kategori Sub --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.kelas.kategori_sub.*') ? 'active' : '' }}"
-                   href="{{ route('mentor.kelas.kategori_sub.index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.kategori_sub.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.kategori_sub.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-diagram-3-fill fs-3 me-2"></i>
+                        <i class="bi bi-diagram-3-fill"></i>
                         Kategori Sub
                     </span>
                 </a>
             </div>
 
+            {{-- Kelas --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.kelas.kelas.*') ? 'active' : '' }}"
-                   href="{{ route('mentor.kelas.kelas.index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.kelas.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.kelas.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-easel-fill fs-3 me-2"></i>
+                        <i class="bi bi-easel-fill"></i>
                         Kelas
                     </span>
                 </a>
             </div>
 
+            {{-- Pendaftaran --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.kelas.pendaftaran.*') ? 'active' : '' }}"
-                   href="{{ route('mentor.kelas.pendaftaran.index') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.pendaftaran.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.pendaftaran.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-person-plus-fill fs-3 me-2"></i>
+                        <i class="bi bi-person-plus-fill"></i>
                         Pendaftaran
                     </span>
                 </a>
             </div>
 
+            {{-- Nilai Peserta --}}
             <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('mentor.profile') ? 'active' : '' }}"
-                   href="{{ route('mentor.profile') }}">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.kelas.nilai_peserta.*') ? 'active' : '' }}"
+                    href="{{ route('mentor.kelas.nilai_peserta.index') }}"
+                >
                     <span class="menu-title">
-                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Nilai Peserta
+                    </span>
+                </a>
+            </div>
+
+            {{-- Profile --}}
+            <div class="menu-item">
+                <a
+                    class="menu-link {{ request()->routeIs('mentor.profile*') ? 'active' : '' }}"
+                    href="{{ route('mentor.profile') }}"
+                >
+                    <span class="menu-title">
+                        <i class="bi bi-person-circle"></i>
                         Profile
                     </span>
                 </a>

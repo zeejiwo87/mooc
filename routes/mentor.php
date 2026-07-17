@@ -15,6 +15,7 @@ use App\Http\Controllers\Mentor\Materi\KuisController as MateriKuisController;
 use App\Http\Controllers\Mentor\Materi\MateriController as MateriMateriController;
 use App\Http\Controllers\Mentor\Materi\SoalController as MateriSoalController;
 use App\Http\Controllers\Mentor\Materi\SoalJawabanController as MateriSoalJawabanController;
+use App\Http\Controllers\Mentor\Pendaftaran\NilaiPesertaController;
 use App\Http\Controllers\Mentor\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Mentor\Pendaftaran\ProgresKelasController;
 use App\Http\Controllers\Mentor\ProfileController;
@@ -270,4 +271,16 @@ Route::prefix('api')->group(function () {
         Route::get('kelas', [KelasController::class, 'api'])
             ->name('api.pendaftaran.kelas');
     });
+});
+
+Route::prefix('nilai-peserta')->group(function () {
+    Route::get('/', [NilaiPesertaController::class, 'index'])
+        ->name('kelas.nilai_peserta.index');
+
+    Route::get('data', [NilaiPesertaController::class, 'list'])
+        ->name('kelas.nilai_peserta.list');
+
+    Route::get('detail/{id}', [NilaiPesertaController::class, 'detail'])
+        ->name('kelas.nilai_peserta.detail')
+        ->whereNumber('id');
 });
